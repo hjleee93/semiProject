@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.semi.store.model.vo.Store"%>
 <%@ page import="java.util.List" %>
+<%@ page import="com.semi.partner.model.vo.PartnerMember"%>
 	<%
 	System.out.println("header 실행");
 	
@@ -9,6 +10,20 @@
 	String cafe = "카페";
 	String restaurant = "식당";
 	String pub = "술집";
+	
+	PartnerMember loginMember = (PartnerMember)session.getAttribute("logginedMember");
+	// Member Memberloggined = (Member)session.getAttribute("Memberloggined");
+
+	Cookie[] cookie = request.getCookies();
+	String savedId = null;
+	if(cookie!=null){
+		for(Cookie c : cookie){
+			if(c.getName().equals("saveId")){
+				savedId=c.getValue();
+				break;
+			}
+		}
+	}
 	
 	%>
 <!-- 	헤더 네비게이션(서브헤더 포함 x), cdn, script/css import -->
@@ -105,7 +120,7 @@
               <a class="dropdown-item" href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=<%=pub%>">PUB/BAR</a>
             </div>
           </li>
-
+<%if(loginMember==null){ %>
           <li class="nav-item">
             <a class="nav-link " data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">LOG IN</a>
           </li>
@@ -113,6 +128,20 @@
             <a class="nav-link" data-toggle="modal" href="javascript:void(0)"
               onclick="openRegisterModal();">REGISTER</a>
           </li>
+          <%}else{ %>
+          	<li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              MY PAGE
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPages">
+              <a class="dropdown-item" href="<%=request.getContextPath()%>/views/mypage/mypage_partner.jsp">MY PAGE</a>
+              <a class="dropdown-item" href="purchase_history.html">MY BOOKING</a>
+              <a class="dropdown-item" href="./usr_review.html">MY REVIEW</a>
+              <a class="dropdown-item" href="./usr_review.html">FAQ</a>
+            </div>
+          </li>
+					<%} %>
         </ul>
 
       </div>
