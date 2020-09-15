@@ -19,6 +19,7 @@ String pub = "술집";
 
 
 PartnerMember logginedMember = (PartnerMember)session.getAttribute("logginedMember");
+
 // Member Memberloggined = (Member)session.getAttribute("Memberloggined");
 
 Cookie[] cookies = request.getCookies();
