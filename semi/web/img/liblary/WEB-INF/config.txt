@@ -1,0 +1,3 @@
+MaxRentDay	10
+내가만든든	컨피그
+MaxBookNumber	10

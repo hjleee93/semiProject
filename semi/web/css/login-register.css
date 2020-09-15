@@ -1,0 +1,315 @@
+@charset "UTF-8";
+/*
+ *
+ * login-register modal
+ * Autor: Creative Tim
+ * Web-autor: creative.tim
+ * Web script: http://creative-tim.com
+ * 
+ */
+
+/*  Shake animation  */
+
+/* 濡쒓렇�씤-�쉶�썝媛��엯 css */
+
+@charset "UTF-8";
+
+.animated {
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.animated.hinges {
+  -webkit-animation-duration: 2s;
+  -moz-animation-duration: 2s;
+  -o-animation-duration: 2s;
+  animation-duration: 2s;
+}
+
+.animated.slow {
+  -webkit-animation-duration: 3s;
+  -moz-animation-duration: 3s;
+  -o-animation-duration: 3s;
+  animation-duration: 3s;
+}
+
+.animated.snail {
+  -webkit-animation-duration: 4s;
+  -moz-animation-duration: 4s;
+  -o-animation-duration: 4s;
+  animation-duration: 4s;
+}
+
+@-webkit-keyframes shake {
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -webkit-transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    -webkit-transform: translateX(10px);
+  }
+}
+
+@-moz-keyframes shake {
+  0%,
+  100% {
+    -moz-transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -moz-transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    -moz-transform: translateX(10px);
+  }
+}
+
+@-o-keyframes shake {
+  0%,
+  100% {
+    -o-transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    -o-transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    -o-transform: translateX(10px);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(10px);
+  }
+}
+
+.shake {
+  -webkit-animation-name: shake;
+  -moz-animation-name: shake;
+  -o-animation-name: shake;
+  animation-name: shake;
+}
+
+.login .modal-dialog {
+  width: 450px;
+}
+.login .modal-footer {
+  border-top: 0;
+  margin-top: 0px;
+  padding: 10px 20px 20px;
+}
+.login .modal-header {
+  border: 0 none;
+  padding: 15px 15px 15px;
+  /*     padding: 11px 15px; */
+}
+
+.login .division {
+  float: none;
+  margin: 0 auto 18px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+.login .division .line {
+  border-top: 1px solid #dfdfdf;
+  position: absolute;
+  top: 10px;
+  width: 34%;
+}
+.login .division .line.l {
+  left: 0;
+}
+.login .division .line.r {
+  right: 0;
+}
+.login .division span {
+  color: #424242;
+  font-size: 17px;
+}
+.login .box .social {
+  float: none;
+  margin: 0 auto 30px;
+  text-align: center;
+}
+
+.login .social .circle {
+  background-color: #eeeeee;
+  color: #ffffff;
+  border-radius: 100px;
+  display: inline-block;
+  margin: 17px;
+  padding: 15px;
+}
+.login .social .circle .fa {
+  font-size: 16px;
+}
+.login .social .google {
+  background-color: white;
+}
+.login .social .kakao {
+  background-color: white;
+}
+.login .social .naver {
+  background-color: white;
+}
+.login .google:hover {
+  background-color: white;
+}
+.login .kakao:hover {
+  background-color: rgb(240, 240, 49);
+}
+.login .naver:hover {
+  background-color: green;
+}
+.login .forgot {
+  color: #797979;
+  margin-left: 0;
+  overflow: hidden;
+  text-align: center;
+  width: 100%;
+}
+.login .btn-login,
+.registerBox .btn-register {
+  background-color: #00bbff;
+  border-color: #00bbff;
+  border-width: 0;
+  color: #ffffff;
+  display: block;
+  margin: 0 auto;
+  padding: 15px 50px;
+  text-transform: uppercase;
+  width: 100%;
+}
+.login .btn-login:hover,
+.registerBox .btn-register:hover {
+  background-color: #00a4e4;
+  color: #ffffff;
+}
+.login .form-control {
+  height: 46px;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.09);
+  box-shadow: 0 1px 0px 0px rgba(0, 0, 0, 0.09) inset;
+  color: #ffffff;
+}
+.login .form-control:hover {
+  background-color: rgba(0, 0, 0, 0.16);
+}
+.login .form-control:focus {
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.04) inset;
+  background-color: rgba(0, 0, 0, 0.23);
+  color: #ffffff;
+}
+.login .box .form input[type="text"],
+.login .box .form input[type="password"],
+.login .box .form input[type="date"] {
+  border-radius: 3px;
+  border: none;
+  color: #333333;
+  font-size: 16px;
+  height: 46px;
+  margin-bottom: 5px;
+  padding: 13px 12px;
+  width: 100%;
+}
+
+/* �씠�슜�빟愿� �룞�쓽 */
+.agreement {
+  padding: 30px 0 0 0;
+}
+
+/* �씠�슜�빟愿� 踰꾪듉 */
+.agree-btn {
+  font-size: 14px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+@media (max-width: 400px) {
+  .login .modal-dialog {
+    width: 100%;
+  }
+}
+
+h2.modal-title {
+  font-family: "Kaushan Script", cursive;
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.close {
+  margin: 0;
+  float: right;
+  position: absolute;
+  right: 0;
+  border: 0 !important;
+  outline: 0 !important;
+  padding: 1rem 2rem !important;
+}
+
+
+
+#findAddress,#mem_findAddress {
+  height: 46px;
+  float: right;
+  border: 1px solid #ced4da;
+  width: 48%;
+  border-radius: 3px;
+}
+
+
+#mem_postcode, #mem_address, #mem_detailAddress, #mem_extraAddress, #postcode, #address, #detailAddress, #extraAddress {
+  background-color: #e8e8e8;
+  border: 1px solid #ced4da;
+}

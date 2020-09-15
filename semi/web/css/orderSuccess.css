@@ -1,0 +1,76 @@
+@charset "UTF-8";
+.mptitle h1 {
+    font-family: 'S-CoreDream-8Heavy', sans-serif;
+    text-align: center;
+    margin: 50px;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    content: ">";
+}
+
+.breadcrumb {
+    padding-left: 67%;
+}
+
+.breadcrumb {
+    padding-left: 67%;
+    background-color: white !important;
+    border-bottom: 3px lightgray solid;
+    margin-bottom: 10%;
+    padding-bottom: 30px;
+}
+
+.breadcrumb-item:nth-child(3) {
+    color: salmon;
+    font-weight: bolder;
+}
+.table{
+    border-top:lightgray 3px solid; 
+    border-bottom: lightgray 1px solid;
+    text-align: center;
+}
+.table tbody tr th{
+    border-right: lightgray 1px solid;
+    
+}
+.table tbody tr th:nth-child(1){
+    padding-top: 45px;
+}
+.table tbody tr:nth-child(2) td{
+    background-color: lavender;
+    font-weight: bold;
+    font-size: 20px;
+}
+.table tfoot tr th{
+    border-right: lightgray 1px solid;
+}
+.table tfoot tr button{
+    margin-left: 2%;
+}
+.ordInfo{
+    color: lightgray;
+}
+/* 踰꾪듉�씠 �쐞移섍� 諛붽뺨�꽌 �븞 諛붾�뚭쾶 �빐�뫟�뼱�슂 */
+.btn_check_area{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    text-align: center;
+}
+.btn_check_area button:nth-child(1){
+    margin-right: 5%; 
+    width:200px; 
+    height: 50px;
+}
+.btn_check_area button:nth-child(2){
+    width:200px; 
+    height: 50px;
+}
+.orderSuccess-container{
+    text-align: center;
+
+}
+h2#successOrderText {
+    font-weight: bolder;
+    margin-bottom: 10%;
+}

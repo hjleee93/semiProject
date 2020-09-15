@@ -1,0 +1,153 @@
+@charset "UTF-8";
+/*!
+ * Start Bootstrap - Modern Business (https://startbootstrap.com/templates/modern-business)
+ * Copyright 2013-2020 Start Bootstrap
+ * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-logomodern-business-nav/blob/master/LICENSE)
+ */
+
+/* 웹사이트 전체에서 공통으로 사용하는 css 
+    단일페이지에서만 사용되는건 따로 써주세요! 
+ */
+/* reset css */
+ul {
+	margin-bottom: 0;
+	padding: 0
+}
+
+ul li {
+	list-style: none;
+}
+
+@font-face {
+	font-family: 'S-CoreDream-8Heavy';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body:not(#mainbody ) {
+	margin-top: 100px;
+}
+
+.list_wrap {
+	position: absolute;
+	right: 2.5%;
+	/* top: 552px;  */
+}
+
+.list-group section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border: 1px solid rgba(0, 0, 0, .125);
+}
+
+.list-group section:not(:last-child ){
+	width: 98px;
+	height: 74px;
+}
+
+.list-group-item {
+	padding: 0;
+	border: none;
+	text-align: center;
+}
+
+.list-group {
+	font-size: 13px;
+}
+
+.lst ul li {
+	padding: .5rem
+}
+
+.carousel-item {
+	height: 65vh;
+	min-height: 300px;
+	background: no-repeat center center scroll;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.portfolio-item {
+	margin-bottom: 30px;
+}
+
+/* 서브메뉴css */
+.submenu {
+	background-color: rebeccapurple;
+	margin-top: -14px;
+}
+
+.submenu ul {
+	margin-bottom: 0px;
+	max-width: 1140px;
+	margin: 0 auto;
+	padding-left: 0;
+}
+
+.submenu ul li {
+	list-style: none;
+	display: inline-block;
+	padding: 5px 10px;
+	margin: 10px;
+	text-align: center;
+	color: rgba(255, 255, 255, 1);
+	text-shadow: 0 0 2px rgba(0, 0, 0);
+	font-weight: 500;
+}
+
+.subhome, .subhome:hover {
+	color: rgba(255, 255, 255, 1);
+	text-decoration: none;
+}
+
+/* 로고, 네비게이션 애니메이션 */
+.header .navbar-toggler {
+	transition: 0.15s linear;
+}
+
+.header .navbar-toggler.on {
+	padding: .15rem .5rem;
+	transition: 0.15s linear;
+}
+
+.header .navbar-toggler-icon {
+	transition: 0.15s linear;
+}
+
+.header .navbar-toggler-icon.on {
+	height: 1.3em;
+	transition: 0.15s linear;
+}
+
+.header.on {
+	transition: max-height 0.15s ease-out;
+	background-color: rgb(52 58 64/ 1) !important;
+	transition: 0.5s linear;
+}
+
+.header .navbar-brand {
+	transition: 0.15s linear;
+}
+
+.header .navbar-brand.on {
+	font-size: 22px;
+	padding-top: 0;
+	transition: 0.15s linear;
+}
+
+/* h1 헤더 20/09/08수정 */
+.cst-status {
+	margin: 50px;
+}
+
+.cst-status h1 {
+	font-family: 'S-CoreDream-8Heavy', sans-serif;
+	text-align: center;
+}

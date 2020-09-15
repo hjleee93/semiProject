@@ -1,0 +1,139 @@
+@charset "UTF-8";
+    .mptitle h1 {
+      font-family: 'S-CoreDream-8Heavy', sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    
+    .breadcrumb-item+.breadcrumb-item::before {
+      content: ">";
+    }
+
+
+    .breadcrumb {
+      padding-left: 67%;
+      background-color: white!important;
+    }
+
+    .breadcrumb-item:nth-child(2) {
+      color: salmon;
+      font-weight: bolder;
+    }
+
+    #productInfo {
+      margin-top: 5%;
+    }
+    .table{
+      margin-top: 2%;
+      border-top:3px solid lightgray;
+    }
+    td.mgl{
+      text-align: center;
+      border-left: lightgray 1px solid;
+    }
+    tr th:nth-child(2){
+      text-align: center;
+    }
+    tr th:nth-child(3){
+      text-align: center;
+    }
+    tr th:nth-child(4){
+      text-align: center;
+    }
+    span.int_black_big{
+      margin-left: 5%;
+    }
+    .money_sum {
+      margin-left: 83%;
+      font-weight: bold;
+    }
+    .money_tot {
+      font-size: 150%;
+      font-weight: bolder;
+      color: salmon;
+      margin-left: 75%;
+      padding-top: 10px;
+    }
+    .card {
+      margin: 5%;
+    }
+
+    .mileage {
+      margin-bottom: 5%;
+      padding: 3% 0 3% 0;
+    }
+
+    .pay {
+      margin-bottom: 5%;
+    }
+
+    .total {
+      font-size: 150%;
+      color: tomato;
+      padding:10% 0 10% 0;
+      font-weight: bolder;
+      
+    }
+    .int_orange{
+      float: right;
+    }
+      
+    .totalSum tr td {
+      font-weight: bold;
+    }
+    .totalSum tbody tr td:not(.tit) {
+      padding-left: 3%;
+
+    }
+    .totalSum tr td em{
+      float: right;
+    }
+    .totalSum tbody tr {
+      height: 30px;
+    }
+
+    .tbl_wrap{
+      margin-bottom: 5%;
+    }
+    .left_box{
+      width:70%; 
+      float: left;
+    }
+    .left_box dl{
+      padding-top:3%; 
+      padding-left: 1%;
+    }
+    .left_box dt{
+      margin-bottom: 2%;
+    }
+    
+    #checkall{
+      /* border-bottom: lightgray 1px solid; */
+      font-weight:bold; 
+      font-size: 25px;
+    }
+    .right_box{
+      width:30%; 
+      float: left; 
+      border-left: lightgray 1px solid;
+    }
+    .right_box>div{
+      margin-top: 10%; 
+      margin-left: 5%;
+    }
+    .btn_buy_area{
+      margin: 27% 30% 10% 33%;
+    }
+    .btn_buy_area button{
+      width:200px; 
+      height: 45px;
+      margin-right: 5%;
+    }
+    #truecheck{
+      border-top: lightgray 3px solid;
+      margin-top:2%; 
+    }
+    small{
+      color:lightgray;
+      margin-left: 5%;
+    }
