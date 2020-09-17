@@ -1,10 +1,83 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/views/common/header.jsp"%>
+<%-- <%@ include file="/views/common/header.jsp"%> --%>
 <%
 	String storeName = (String) request.getAttribute("storeName");
 	String storeContent = (String) request.getAttribute("storeContent");
 %>
+
+<!-- 임시 -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>HYOLO</title>
+
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<!-- 	카카오맵API추가 20/09/09 -->
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f450544bd9053c96d7b9a97ececcb59a&libraries=services,clusterer,drawing"></script>
+
+
+<!-- Bootstrap core CSS -->
+<link
+	href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/css/modern-business.css"
+	type="text/css">
+
+
+
+<!-- 커스텀 css 추가 -->
+<link href="<%=request.getContextPath()%>/css/mainCustom.css"
+	rel="stylesheet">
+
+<!-- 폰트 -->
+<link rel="stylesheet"
+	href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500;900&display=swap"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+	rel="stylesheet">
+
+<!-- datepicker -->
+
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
+
+<!-- 로그인, 회원가입  -->
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/js/login-register.js"></script>
+<link href="<%=request.getContextPath()%>/css/login-register.css"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<script src="<%=request.getContextPath()%>/js/bootstrap.js"
+	type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/js/login-register.js"
+	type="text/javascript"></script>
+<link
+	href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap"
+	rel="stylesheet">
+
+
+<!-- 다음 주소 api  -->
+<script
+	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<!-- 임시끝 -->
+
 <style>
 li[id="information"] {
 	list-style: none;
@@ -174,28 +247,38 @@ p {
 }
 </style>
 
-
+<!-- TODO:css 정리해야됨 -->
 <div class="container">
 
-	<form action="<%=request.getContextPath()%>/storeInputImg"
+	<form action="<%=request.getContextPath()%>/store/storeInfoUpdate"
 		name="uploadFile" method="post" enctype="multipart/form-data">
 
 		<div class="rsvlayout">
 			<p class="rsvtype">서비스 할 업체 상세 이미지를 업로드 해주세요.</p>
 
 			<div>
-				<p id="right">
-					<span id="abc">*</span> 필수입력사항
-				</p>
 
 				<table>
+					 <tr>
+                        <td>
+                           <p>서비스를 제공할 업체를 선택하세요</p>
+                        </td>
+                        <td>
+                            <select id="selectedStore" name="selectedStore" >
+                                <option>등록된 업체이름1</option>
+                                <option>등록된 업체이름2</option>
+                        </select>
+                        </td>
+                    </tr>
+				
+				
 					<colgroup>
 						<col style="width: 20%;">
 						<col style="width: auto;">
 						<col style="width: 13%;">
 					</colgroup>
 
-					<tr>
+					<tr id="secondRow">
 						<td class="rsvtitle">대표이미지<span id="abc">*</span>
 							<p class="imgdtl">(최대50MB,1900*1080권장)</p>
 						</td>
@@ -211,6 +294,10 @@ p {
 							</td>
 
 						<td>미리보기</td>
+					</tr>
+					<tr>
+					<td>홍보문구<br>메인페이지에 홍보 문구로 들어갑니다.</td>
+					<td><input type="text"></td>
 					</tr>
 					<tr>
 						<td class="rsvtitle">예약상품 이미지
@@ -229,6 +316,7 @@ p {
 								
 							</div>
 						</td>
+						<td>미리보기</td>
 					</tr>
 					<tr>
 						<td class="rsvtitle">상세페이지 이미지
@@ -244,6 +332,7 @@ p {
 								
 							</div>
 							</td>
+							<td><a href="">미리보기</a></td>
 					</tr>
 
 				</table>
@@ -254,13 +343,42 @@ p {
 		</div>
 		<div class="board-view-btn">
 			<input type="reset" class="gray" value="이전" title="previous"
-				onclick="cancel_event()"> <input type="submit" class="blue"
-				value="신청" title="complete">
+				onclick="cancel_event()">
+			<input type="submit" class="blue" value="다음" title="next" id="nextBtn">
 		</div>
 	</form>
 </div>
 
 <script type="text/javascript">
+
+
+$('#nextBtn').click(function(){
+	$.ajax({
+		url:"<%=request.getContextPath()%>/store/storeInfoUpdate",
+		type:"post",
+		dataType:"html",
+		success: data => {
+			console.log("ajax 서버 연결"); 
+			//$("#secondRow").html(data);
+		}
+	});
+	
+	
+});
+
+// 		$.ajax({
+<%-- 			url:"<%=request.getContextPath()%>/store/storeInfoUpdate", --%>
+// 			type:"post",
+// 			dataType:"html",
+// 			success: data => {
+// 				console.log("ajax 서버 연결"); //TODO:데이터는 controller에서 받아오기
+// 				//$("#secondRow").html(data);
+// 			}
+// 		});
+
+
+
+
 	function counter() {
 		document.getElementById("counting").innerHTML = document
 				.getElementById("naming").value.length;

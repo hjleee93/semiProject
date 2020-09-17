@@ -168,8 +168,6 @@ public class StoreDao {
 			pstmt.setString(10, s.getStoreProfit());
 			pstmt.setString(11, s.getStoreTarget());
 			
-			//pstmt.setString(10, s.getStoreProfit());			
-			
 			result=pstmt.executeUpdate();
 			
 			System.out.println("dao: " + result);

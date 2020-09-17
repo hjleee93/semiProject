@@ -18,7 +18,7 @@ public class EncryptorWrapper extends HttpServletRequestWrapper {
 	@Override
 	public String getParameter(String name) {
 		String returnValue="";
-		if(name.equals("partner_pw")||(name.equals("member_pw"))) {
+		if(name.equals("pw")) {
 			//암호화처리 후 반환
 			String pw = super.getParameter(name);
 			System.out.println(pw);

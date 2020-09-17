@@ -1,5 +1,4 @@
-package com.semi.rsv.controller;
-//view�� db ����
+package com.semi.store.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,16 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class RsvServlet
+ * Servlet implementation class StoreInfoUpdateServlet
  */
-@WebServlet("/reservation")
-public class RsvServlet extends HttpServlet {
+@WebServlet("/store/storeInfoUpdate")
+public class StoreInfoUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public RsvServlet() {
+    public StoreInfoUpdateServlet() {
+        super();
         // TODO Auto-generated constructor stub
     }
 
@@ -26,10 +26,8 @@ public class RsvServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("서버에서 요청을 받음!");
-		
-		request.getRequestDispatcher("/views/store/cal.jsp")
-		.forward(request,response);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

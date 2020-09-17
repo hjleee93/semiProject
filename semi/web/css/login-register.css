@@ -10,9 +10,13 @@
 
 /*  Shake animation  */
 
-/* 濡쒓렇�씤-�쉶�썝媛��엯 css */
+
 
 @charset "UTF-8";
+
+#saveId{
+	margin-right:5px;
+}
 
 .animated {
   -webkit-animation-duration: 1s;
@@ -245,6 +249,7 @@
   background-color: rgba(0, 0, 0, 0.23);
   color: #ffffff;
 }
+
 .login .box .form input[type="text"],
 .login .box .form input[type="password"],
 .login .box .form input[type="date"] {

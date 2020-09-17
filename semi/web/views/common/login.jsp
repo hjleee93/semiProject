@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>\
-	
+	pageEncoding="UTF-8" %>
+		
 <!-- 로그인이벤트는 따로 분리했습니다. 아마 일부게시판에만 사용될 것 같아요
 	사용해야된다면 푸터 include 한 부분 위쪽편으로 써주시면 됩니다. 그리고 include 하고 다서 </div>로 닫아주세요-->
  <!-- 로그인 modal html -->
@@ -40,10 +40,10 @@
                 
                 <div class="form loginBox">
                 
-                  <form method="post" action="<%=request.getContextPath()%>/partner/login" accept-charset="UTF-8">
-                    <input id="partner_id" class="form-control" type="text" placeholder="Email" name="partner_id">
-                    <input id="partner_pw" class="form-control" type="password" placeholder="Password" name="partner_pw">
-                    <input class="btn btn-default btn-login" type="submit" value="Login">
+                  <form method="post" action="<%=request.getContextPath()%>/login" accept-charset="UTF-8">
+                    <input id="partner_id" class="form-control" type="text" placeholder="Email" name="id">
+                    <input id="partner_pw" class="form-control" type="password" placeholder="Password" name="pw">
+                    <input class="btn btn-default btn-login" id="loginBtn" type="submit" value="Login" >
                   </form>
                   
                 </div>
@@ -391,6 +391,8 @@
         }
           </script>
             </div> 
+            
+           
          
               <!-- 전송 버튼 -->
               <div class="btn_wrap d-flex justify-content-center">
@@ -405,6 +407,7 @@
           </div>
           <div class="modal-footer">
             <div class="forgot login-footer">
+            <div><label for="saveId"><input id="saveId" type="checkbox" name="saveId">Stay signed in</label></div>
               <span>Looking to
                 <a href="javascript: showRegisterForm();">create an account</a>
                 ?</span>
@@ -417,3 +420,5 @@
         </div>
       </div>
     </div>
+    
+   \

@@ -11,7 +11,7 @@
 </style>
 <div class=submenu>
       <ul>
-          <li><a class="subhome" href="main.html">HOME</a></li>
+          <li><a class="subhome" href="<%=request.getContextPath()%>/main.jsp">HOME</a></li>
           <li><a class="subhome" href="location.html">LOCATION</a></li>
           <li><a class="subhome" href="customer_service.html">CUSTOMER SERVICE</a></li>
           

@@ -58,7 +58,7 @@
 					<tr>
 					<th scope="col">NO</th>
 						<th scope="col">업체명</th>
-						<th scope="col">승인여부</th>
+						<th scope="col" style="width:30%">승인여부</th>
 					</tr>
 			         <%
 			         
@@ -75,8 +75,8 @@
 					%>
 					<tr>
 					<td><%=s.getStoreNumber() %></td>
-						<td>
-							<%=s.getStoreName() %>
+						<td >
+							<a href="" style="display: inline-block;"><%=s.getStoreName() %></a>
 						</td>
 						<%if(s.getStoreStatus().equals("WAITING")){ %>
 						<td>
