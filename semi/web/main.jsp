@@ -254,6 +254,7 @@ if (cookies != null) {
 	</nav>
 
 	<header>
+<!-- 	회원 관심사에서 랜덤으로 추천 -->
 		<div id="carouselExampleIndicators" class="carousel slide"
 			data-ride="carousel">
 			<ol class="carousel-indicators">
@@ -368,7 +369,10 @@ if (cookies != null) {
 		<!-- Portfolio Section -->
 		<h2>위치 기반 추천</h2>
 		
+		
+		
 
+		
 
 	
 	</div>
