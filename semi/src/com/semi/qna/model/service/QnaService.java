@@ -16,6 +16,7 @@ public class QnaService {
 	private QnaDao dao = new QnaDao();
 	
 	public List<Qna> selectQnaList(int cPage, int numPerPage) {
+		System.out.println("service: " + cPage + ": " + numPerPage);
 		Connection conn = getConnection();
 		List<Qna> list = dao.selectQnaList(conn,cPage,numPerPage);
 		close(conn);

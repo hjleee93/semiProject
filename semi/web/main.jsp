@@ -7,6 +7,7 @@
 <%@ page import="com.semi.partner.model.vo.PartnerMember"%>
 
 <%
+//메인시작! 
 	List<Store> list = new StoreService().selectStoreList();
 
 request.setAttribute("store", list);
@@ -115,7 +116,7 @@ if (cookies != null) {
 </head>
 
 <body id="mainbody">
-
+<!-- 메인바디 -->
 	<!-- Navigation -->
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top header">
@@ -138,7 +139,7 @@ if (cookies != null) {
 							aria-labelledby="navbarDropdownPortfolio">
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/location.jsp">LOCATION</a> <a
-								class="dropdown-item" href=""<%=request.getContextPath()%>">Q&A</a>
+								class="dropdown-item" href="<%=request.getContextPath()%>/qna">Q&A</a>
 						</div></li>
 
 

@@ -4,10 +4,10 @@
 <%@ include file="/views/common/header.jsp"%>
 <%@ include file="/views/common/adminmenubar.jsp"%>
 <%
-	List<Qna> list =(List)request.getAttribute("list");
+	List<Qna> listQna =(List)request.getAttribute("list"); 
+System.out.println("listQna in jsp: " + listQna);
 	List<Qna> search = (List)request.getAttribute("search");
-	Member Memberloggined = (Member)session.getAttribute("Memberloggined");
-	Member Partnerloggined = (Member)session.getAttribute("Memberloggined");
+	Member MemberlogginedQna = (Member)session.getAttribute("Memberloggined");
 	int data = (Integer)request.getAttribute("totalData");
 	
 %>
@@ -113,7 +113,7 @@
 		
             <div class="tbl-box">
                 <table class="tbl-list">
-                <span>총게시글 : <strong><%=data %></strong></span>
+<%--                 <span>총게시글 : <strong><%=data %></strong></span> --%>
                     <caption>Q&A</caption>
                     <thead>
                         <tr>
@@ -121,11 +121,14 @@
                             <th scope="col">분류</th>
                             <th scope="col">제목</th>
                             <th scope="col">작성자</th>
+                            <th scope="col">첨부파일</th>
                             <th scope="col">작성일</th>
                             <th scope="col">조회수</th>
                         </tr>
                     </thead>
-                    <%for(Qna n : list){ %>
+                    <%for(Qna n : listQna){ 
+                   
+                    %>
                     <tbody>
                         <tr>
                             <td><%=n.getQnaNo() %></td>
@@ -143,7 +146,9 @@
                             <td>
 								<%if(n.getQnaOriginalFileName()!=null) {%>
 								<img src="<%=request.getContextPath() %>/images/file.png" width="20" height="20"> 
-								<%} %>
+								<%}else{%> 
+								<p>첨부파일x</p>
+								<%}%>
 							</td>
                             <td><%=n.getQnaDate() %></td>
                             <td><%=n.getQnaCount() %></td>                            
@@ -152,7 +157,7 @@
                     <%} %>
                 </table>
             </div>
-            <%if(Memberloggined!=null && Memberloggined.getMember_id().equals("admin")){ %>
+            <%if(MemberlogginedQna!=null && MemberlogginedQna.getMemberId().equals("admin")){ %>
             <div id="writebtn">
                 <a type="button" class="meple" id="movewrite" onclick="location.assign('<%=request.getContextPath()%>/qna/writeQna');">글작성</a>
               
