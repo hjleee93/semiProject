@@ -58,7 +58,7 @@
 					<tr>
 					<th scope="col">NO</th>
 						<th scope="col">업체명</th>
-						<th scope="col">승인여부</th>
+						<th scope="col" style="width:30%">승인여부</th>
 					</tr>
 			         <%
 			         
@@ -71,12 +71,14 @@
 						</tr>
 					<%}else{
 						for(Store s : listStore){ 
+							
+							System.out.println("s in list jsp: " + s);
 						
 					%>
 					<tr>
 					<td><%=s.getStoreNumber() %></td>
-						<td>
-							<%=s.getStoreName() %>
+						<td >
+							<a href="" style="display: inline-block;"><%=s.getStoreName() %></a>
 						</td>
 						<%if(s.getStoreStatus().equals("WAITING")){ %>
 						<td>
@@ -84,7 +86,7 @@
 						</td>
 						<%}else if(s.getStoreStatus().equals("ACCEPT")){ %>
 						<td>
-							<p class="btn btn-success"><%=s.getStoreStatus() %></p>
+							<p class="btn btn-success" onclick="location='<%=request.getContextPath()%>/store/storeInfoUpdate?storeId=<%=s.getStoreId() %>'" ><%=s.getStoreStatus() %></p>
 						</td>
 						<%}else if(s.getStoreStatus().equals("DECLINE")){ %>
 						<td>

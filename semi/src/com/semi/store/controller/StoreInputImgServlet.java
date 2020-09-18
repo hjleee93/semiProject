@@ -14,7 +14,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.semi.store.model.vo.Store;
 import com.semi.store.service.StoreService;
 
-@WebServlet("/storeInputImg")
+@WebServlet("/store/storeInputImg")
 public class StoreInputImgServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,7 +31,8 @@ public class StoreInputImgServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
+		System.out.println("storeId= " + request.getParameter("storeId"));
+		int storeId = Integer.parseInt(request.getParameter("storeId"));
 		
 		//이미지저장
 	//	PrintWriter out = response.getWriter();

@@ -1,5 +1,5 @@
 package com.semi.rsv.controller;
-//view¶û db ¿¬°á
+//viewï¿½ï¿½ db ï¿½ï¿½ï¿½ï¿½
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class RsvServlet
  */
-@WebServlet("/RsvServlet")
+@WebServlet("/reservation")
 public class RsvServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -26,7 +26,10 @@ public class RsvServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("ì„œë²„ì—ì„œ ìš”ì²­ì„ ë°›ìŒ!");
 		
+		request.getRequestDispatcher("/views/store/cal.jsp")
+		.forward(request,response);
 	}
 
 	/**

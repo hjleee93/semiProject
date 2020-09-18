@@ -57,6 +57,7 @@ public class StoreDao {
 				store.setStorePage(rs.getString(11));
 				store.setStoreProfit(rs.getString(12));
 				store.setStoreTarget(rs.getString(13));
+				store.setPtnNum(rs.getInt(14));
 				//TODO:파트너 아이디 추가해야됨
 				
 				list.add(store);
@@ -167,8 +168,7 @@ public class StoreDao {
 			pstmt.setString(9, s.getStorePage());
 			pstmt.setString(10, s.getStoreProfit());
 			pstmt.setString(11, s.getStoreTarget());
-			
-			//pstmt.setString(10, s.getStoreProfit());			
+			pstmt.setInt(12, s.getPtnNum());
 			
 			result=pstmt.executeUpdate();
 			
@@ -206,7 +206,7 @@ public class StoreDao {
 				store.setStorePage(rs.getString(11));
 				store.setStoreProfit(rs.getString(12));
 				store.setStoreTarget(rs.getString(13));
-		//		store.setPtn_num(rs.getInt(12));
+				store.setPtnNum(rs.getInt(17));
 			}
 			
 		}catch(SQLException e) {
@@ -226,11 +226,17 @@ public class StoreDao {
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("updateStoreImg"));
+			System.out.println("s.getStoreMainImg(): " + s.getStoreMainImg());
+			System.out.println("s.getStoreId(): " + s.getStoreId());
 			pstmt.setString(1, s.getStoreMainImg());
 			pstmt.setString(2, s.getStorePostImg());
 			pstmt.setString(3, s.getStoreDtlImg());
-			pstmt.setInt(4, s.getStoreId());
+			pstmt.setString(4, s.getPromoText());
+			pstmt.setInt(5, s.getStoreId());
+			
+			
 			result=pstmt.executeUpdate();
+			System.out.println("result in dao: " +result);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

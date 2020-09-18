@@ -33,7 +33,8 @@ public class PtnStoreListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		
 		//페이징처리해서 보내기!!!!!!!!!!
 		int cPage;
 		try {

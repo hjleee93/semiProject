@@ -11,7 +11,6 @@ import java.sql.Connection;
 
 import com.semi.member.model.dao.MemberDao;
 import com.semi.member.model.vo.Member;
-import com.semi.partner.model.vo.PartnerMember;
 
 public class MemberService {
 
@@ -19,37 +18,39 @@ public class MemberService {
 	
 	
 	public Member loginMember(String id,String pw) {
+		System.out.println("login in service: " + id + " :" + pw);
 		Connection conn= getConnection();
+		
 		Member m = dao.loginMember(conn,id,pw);
 		close(conn);
 		return m;
 	}
-	
-	public Member selectMember(String id) {
-		Connection conn=getConnection();
-		Member m = dao.selectMember(conn,id);
-		close(conn);
-		return m;
-	}
-	public int memberUpdate(Member m) {
-		Connection conn=getConnection();
-		int result = dao.memberUpdate(conn,m);
-		if(result>0) commit(conn);
-		else rollback(conn);
-		close(conn);
-		return result;
-	}
-	
-	
-	public int deleteMember(String id) {
-		// TODO Auto-generated constructor stub
-		Connection conn =getConnection();
-		int result=dao.deleteMember(conn,id);
-		if(result>0) commit(conn);
-		else rollback(conn);
-		close(conn);
-		return result;
-	}
+//	
+//	public Member selectMember(String id) {
+//		Connection conn=getConnection();
+//		Member m = dao.selectMember(conn,id);
+//		close(conn);
+//		return m;
+//	}
+//	public int memberUpdate(Member m) {
+//		Connection conn=getConnection();
+//		int result = dao.memberUpdate(conn,m);
+//		if(result>0) commit(conn);
+//		else rollback(conn);
+//		close(conn);
+//		return result;
+//	}
+//	
+//	
+//	public int deleteMember(String id) {
+//		// TODO Auto-generated constructor stub
+//		Connection conn =getConnection();
+//		int result=dao.deleteMember(conn,id);
+//		if(result>0) commit(conn);
+//		else rollback(conn);
+//		close(conn);
+//		return result;
+//	}
 		
 	
 }

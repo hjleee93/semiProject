@@ -2,10 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <%
-	String storeName = (String) request.getAttribute("storeName");
-	String storeContent = (String) request.getAttribute("storeContent");
+	Store s = (Store) request.getAttribute("store");
+
+	System.out.println("s in jsp: " + s);
 %>
+
+
+
 <style>
+#image_container2, #image_container1, #image_container3 {
+text-align:center;
+}
+
 li[id="information"] {
 	list-style: none;
 	display: inline;
@@ -150,6 +158,7 @@ table tr:not (:last-child ){
 
 table tr td {
 	padding: 10px 5px;
+	height:300px;
 }
 
 p {
@@ -172,63 +181,85 @@ p {
 	width: 100%;
 	margin-left: 0px;
 }
+
+.pre-img{
+width:450px;
+height:300px;
+}
+.pre-btn{
+margin-top: 20px;
+    width: 84.39px;
+    height: 30px;
+    border: 1px solid #747272;
+    border-radius: 2px;
+}
 </style>
 
-
+<!-- TODO:css 정리해야됨 -->
 <div class="container">
 
-	<form action="<%=request.getContextPath()%>/storeInputImg"
+	<form action="<%=request.getContextPath()%>/store/storeDetailUpdate"
 		name="uploadFile" method="post" enctype="multipart/form-data">
-
+		
+	
+<input type="hidden" name="storeId" value="<%=s.getStoreId()%>">
 		<div class="rsvlayout">
-			<p class="rsvtype">서비스 할 업체 상세 이미지를 업로드 해주세요.</p>
+			<p class="rsvtype"><%=s.getStoreName() %>의 상세 이미지를 업로드 해주세요.</p>
 
 			<div>
-				<p id="right">
-					<span id="abc">*</span> 필수입력사항
-				</p>
 
 				<table>
+					
+				
+				
 					<colgroup>
 						<col style="width: 20%;">
+						<col style="width: 20%;">
 						<col style="width: auto;">
-						<col style="width: 13%;">
 					</colgroup>
 
-					<tr>
+					<tr id="secondRow">
 						<td class="rsvtitle">대표이미지<span id="abc">*</span>
 							<p class="imgdtl">(최대50MB,1900*1080권장)</p>
 						</td>
 						<td><input type="file" name="mainImg" id="image"
-							accept="image/*" onchange="setThumbnail(event);" />
-							<div>
-								<div id="image_container1">
-									<img class="card-img-top" src="http://placehold.it/1900x1080" style="width:50% !important;">
-								</div>
-								
-							</div>
+							accept="image/*" onchange="setThumbnail(event);" required/>
+							<button class="pre-btn">preview</button>
+							
 							
 							</td>
 
-						<td>미리보기</td>
+						<td><div>
+								<div id="image_container1">
+									<img class="pre-img" src="http://placehold.it/1900x1080">
+								</div>
+								
+							</div></td>
+					</tr>
+					<tr>
+					<td>홍보 문구<br><small>메인페이지 홍보 문구로 들어갑니다.</small></td>
+					<td><textarea name="promoText" id="promoText" cols="40" rows="5" style="resize: none;"></textarea></td>
 					</tr>
 					<tr>
 						<td class="rsvtitle">예약상품 이미지
 							<p class="imgdtl">최대(20MB,700*400권장)</p>
+							
 						</td>
 
 
 						<td><input type="file" id="image2" name="postImg" accept="image/*"
 							onchange="setThumbnail2(event);" />
-						
+						<button class="pre-btn">preview</button>
 
-							<div>
+							
+						</td>
+						
+						<td><div>
 								<div id="image_container2">
-									<img class="card-img-top" src="http://placehold.it/700x400" style="width:50% !important;">
+									<img class="pre-img" src="http://placehold.it/700x400">
 								</div>
 								
-							</div>
-						</td>
+							</div></td>
 					</tr>
 					<tr>
 						<td class="rsvtitle">상세페이지 이미지
@@ -237,30 +268,38 @@ p {
 						<td><input type="file" id="image3" name="detailImg" accept="image/*"
 							onchange="setThumbnail3(event);" />
 							
-							<div>
+							<button class="pre-btn">preview</button>
+							</td>
+							<td><div>
 								<div id="image_container3">
-									<img class="card-img-top" src="http://placehold.it/750x500" style="width:50% !important;">
+									<img class="pre-img" src="http://placehold.it/750x500" >
 								</div>
 								
-							</div>
-							</td>
+							</div></td>
 					</tr>
 
 				</table>
 			</div>
+			<%
+			System.out.println("s.getStoreId() : " + s.getStoreId());
+			%>
 
 
 
 		</div>
 		<div class="board-view-btn">
-			<input type="reset" class="gray" value="이전" title="previous"
-				onclick="cancel_event()"> <input type="submit" class="blue"
-				value="신청" title="complete">
+			<input type="reset" class="gray" value="취소" title="previous"
+				onclick="cancel_event()">
+			<input type="submit" class="blue" value="확인" title="next" id="nextBtn">
 		</div>
 	</form>
 </div>
 
 <script type="text/javascript">
+
+
+
+
 	function counter() {
 		document.getElementById("counting").innerHTML = document
 				.getElementById("naming").value.length;
@@ -277,8 +316,8 @@ p {
 			var img = document.createElement("img");
 			img.setAttribute("src", event.target.result);
 			$("#image_container1 img").remove();
-			img.setAttribute("width", "1900");
-			img.setAttribute("height", "1080");
+			img.setAttribute("width", "400");
+			img.setAttribute("height", "300");
 			document.querySelector("div#image_container1").appendChild(img);
 		};
 		reader.readAsDataURL(event.target.files[0]);
@@ -290,8 +329,8 @@ p {
 			var img = document.createElement("img");
 			img.setAttribute("src", event.target.result);
 			$("#image_container2 img").remove();
-			img.setAttribute("width", "700");
-			img.setAttribute("height", "400");
+			img.setAttribute("width", "400");
+			img.setAttribute("height", "300");
 			document.querySelector("div#image_container2").appendChild(img);
 		};
 		reader.readAsDataURL(event.target.files[0]);
@@ -303,8 +342,8 @@ p {
 			var img = document.createElement("img");
 			img.setAttribute("src", event.target.result);
 			$("#image_container3 img").remove();
-			img.setAttribute("width", "750");
-			img.setAttribute("height", "500");
+			img.setAttribute("width", "400");
+			img.setAttribute("height", "300");
 			document.querySelector("div#image_container3")
 					.appendChild(img);
 		};

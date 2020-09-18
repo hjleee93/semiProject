@@ -50,6 +50,9 @@ function loginAjax(){
 }
 
 function shakeModal(){
+	
+	
+	
     $('#loginModal .modal-dialog').addClass('shake');
              $('.error').addClass('alert alert-danger').html("Invalid email/password combination");
              $('input[type="password"]').val('');
