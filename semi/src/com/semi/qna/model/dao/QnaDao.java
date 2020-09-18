@@ -22,7 +22,7 @@ public class QnaDao {
 	public QnaDao() {
 		// TODO Auto-generated constructor stub
 		try {
-			String fileName=QnaDao.class.getResource("/qna/qna_sql.properties").getPath();
+			String fileName=QnaDao.class.getResource("/sql/qna_sql.properties").getPath();
 			prop.load(new FileReader(fileName));
 		}catch(IOException e) {
 			e.printStackTrace();

@@ -112,8 +112,8 @@ if (cookie != null) {
 							aria-labelledby="navbarDropdownPortfolio">
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/location.jsp">LOCATION</a>
-							<!--       TODO:링크수정 -->
-							<a class="dropdown-item" href=""<%=request.getContextPath()%>">Q&A</a>
+							
+							<a class="dropdown-item" href="<%=request.getContextPath()%>/qna">Q&A</a>
 						</div></li>
 
 

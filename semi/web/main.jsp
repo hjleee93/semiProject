@@ -138,7 +138,7 @@ if (cookies != null) {
 							aria-labelledby="navbarDropdownPortfolio">
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/location.jsp">LOCATION</a> <a
-								class="dropdown-item" href=""<%=request.getContextPath()%>">Q&A</a>
+								class="dropdown-item" href="<%=request.getContextPath()%>/qna">Q&A</a>
 						</div></li>
 
 

@@ -16,7 +16,7 @@ import com.semi.qna.model.vo.Qna;
 /**
  * Servlet implementation class MoveNoticeServlet
  */
-@WebServlet("/Qna")
+@WebServlet("/qna")
 public class MoveQnaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,7 +32,7 @@ public class MoveQnaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("서블릿 실행");
 		int cPage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -40,11 +40,10 @@ public class MoveQnaServlet extends HttpServlet {
 			cPage=1;
 		}
 		int numPerPage=5;
-		
+		System.out.println("cpage: " + cPage);
 		List<Qna> list = new QnaService().selectQnaList(cPage,numPerPage);
-		
+		System.out.println("list in sevlet: " + list);
 		int totalData = new QnaService().selectQnaCount();
-		
 		int totalPage = (int)(Math.ceil((double)totalData/numPerPage));
 		
 		int pageBarSize=5;
