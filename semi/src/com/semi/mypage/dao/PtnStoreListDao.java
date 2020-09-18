@@ -43,6 +43,7 @@ public class PtnStoreListDao {
 				Store store = new Store();
 
 				store.setStoreNumber(rs.getInt(1));
+				store.setStoreId(rs.getInt(2));
 				store.setStoreCategory(rs.getString(3));
 				store.setStoreDtlCtgry(rs.getString(4));
 				store.setStoreName(rs.getString(5));

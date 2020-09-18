@@ -12,7 +12,7 @@ String cafe = "카페";
 String restaurant = "식당";
 String pub = "술집";
 
-Member Memberloggined = (Member) session.getAttribute("Memberloggined");
+Member Memberloggined = (Member) session.getAttribute("Memberloggined"); //로그인한 멤버 세션 저장 
 
 Cookie[] cookie = request.getCookies();
 String savedId = null;

@@ -61,6 +61,7 @@ public class StoreService {
 	}
 	
 	public int updateStoreImg(Store s) {
+		
 		Connection conn=getConnection();
 		int result=dao.updateStoreImg(conn,s);
 		if(result>0) commit(conn);

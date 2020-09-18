@@ -187,7 +187,7 @@
 <div class="parent" style="width: 100%;">
       <div class="child1" style="background-color:rgba(189, 189, 189, 0.119)">
         <img src="${pageContext.request.contextPath}/img/customer.png" width="200px" width="200px" class="mong">
-        <p class="profile1">Hello! members, <%-- <%=logginedMember.getMember_id()% --%></p>
+        <p class="profile1">Hello! members, <%=MemLoggined.getMemberId()%></p>
           <table class="profilebox">
             <tr>
               <td class="profilebox1"><a href="">회원정보수정</a></td>

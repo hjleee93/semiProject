@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.store.model.vo.Store;
+import com.semi.store.service.StoreService;
+
 /**
  * Servlet implementation class StoreInfoUpdateServlet
  */
@@ -26,8 +29,18 @@ public class StoreInfoUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		int storeId = Integer.parseInt(request.getParameter("storeId"));
+		
+		System.out.println("storeId in servlet: " + storeId);
+		
+		Store s = new StoreService().selectStoreDtl(storeId);
+		System.out.println("서블릿 store: "+ s);
+		
+		request.setAttribute("store",s);
+		
+		request.getRequestDispatcher("/views/partner/ptnRequest2.jsp")
+		.forward(request,response);
 	}
 
 	/**

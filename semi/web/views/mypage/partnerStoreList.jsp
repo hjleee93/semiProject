@@ -71,6 +71,8 @@
 						</tr>
 					<%}else{
 						for(Store s : listStore){ 
+							
+							System.out.println("s in list jsp: " + s);
 						
 					%>
 					<tr>
@@ -84,7 +86,7 @@
 						</td>
 						<%}else if(s.getStoreStatus().equals("ACCEPT")){ %>
 						<td>
-							<p class="btn btn-success"><%=s.getStoreStatus() %></p>
+							<p class="btn btn-success" onclick="location='<%=request.getContextPath()%>/store/storeInfoUpdate?storeId=<%=s.getStoreId() %>'" ><%=s.getStoreStatus() %></p>
 						</td>
 						<%}else if(s.getStoreStatus().equals("DECLINE")){ %>
 						<td>

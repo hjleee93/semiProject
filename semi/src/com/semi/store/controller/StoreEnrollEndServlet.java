@@ -44,7 +44,9 @@ public class StoreEnrollEndServlet extends HttpServlet {
 		store.setStoreExtraAddr(request.getParameter("storeExtraAddr"));
 		store.setStoreContent(request.getParameter("storeContent"));
 		store.setStorePage(request.getParameter("storePage"));
-		//store.setStoreProfit(request.getParameter("storeProfit"));
+		store.setStoreProfit(request.getParameter("storeProfit"));
+		store.setStoreTarget(request.getParameter("storeTarget"));
+		store.setPtnNum(Integer.parseInt(request.getParameter("ptnId")));
 		
 		System.out.println("store in servlet: "+ store);
 		int result=new StoreService().insertStore(store);

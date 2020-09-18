@@ -598,7 +598,11 @@ td{padding: 2% 0;}
 			</table>
 
 
-
+	<input type="hidden" name="ptnId" value="<%=Memberloggined.getMemberNum()%>">
+	<%
+	System.out.println("Memberloggined in request: " + Memberloggined.getMemberNum());
+	
+	%>
 		</div>
 
 	</div>

@@ -31,7 +31,7 @@ public class MemberViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String id =request.getParameter("member_id");
+		String id =request.getParameter("id");
 		Member m = new MemberService().selectMember(id);
 		
 		/*

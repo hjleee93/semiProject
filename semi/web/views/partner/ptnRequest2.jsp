@@ -1,84 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%@ include file="/views/common/header.jsp"%> --%>
+<%@ include file="/views/common/header.jsp"%>
 <%
-	String storeName = (String) request.getAttribute("storeName");
-	String storeContent = (String) request.getAttribute("storeContent");
+	Store s = (Store) request.getAttribute("store");
+
+	System.out.println("s in jsp: " + s);
 %>
 
-<!-- 임시 -->
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-
-<title>HYOLO</title>
-
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<!-- 	카카오맵API추가 20/09/09 -->
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f450544bd9053c96d7b9a97ececcb59a&libraries=services,clusterer,drawing"></script>
-
-
-<!-- Bootstrap core CSS -->
-<link
-	href="<%=request.getContextPath()%>/vendor/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/modern-business.css"
-	type="text/css">
-
-
-
-<!-- 커스텀 css 추가 -->
-<link href="<%=request.getContextPath()%>/css/mainCustom.css"
-	rel="stylesheet">
-
-<!-- 폰트 -->
-<link rel="stylesheet"
-	href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500;900&display=swap"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
-	rel="stylesheet">
-
-<!-- datepicker -->
-
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
-
-
-<!-- 로그인, 회원가입  -->
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/js/login-register.js"></script>
-<link href="<%=request.getContextPath()%>/css/login-register.css"
-	rel="stylesheet" />
-<link rel="stylesheet"
-	href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-<script src="<%=request.getContextPath()%>/js/bootstrap.js"
-	type="text/javascript"></script>
-<script src="<%=request.getContextPath()%>/js/login-register.js"
-	type="text/javascript"></script>
-<link
-	href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap"
-	rel="stylesheet">
-
-
-<!-- 다음 주소 api  -->
-<script
-	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-<!-- 임시끝 -->
 
 <style>
+#image_container2, #image_container1, #image_container3 {
+text-align:center;
+}
+
 li[id="information"] {
 	list-style: none;
 	display: inline;
@@ -223,6 +158,7 @@ table tr:not (:last-child ){
 
 table tr td {
 	padding: 10px 5px;
+	height:300px;
 }
 
 p {
@@ -245,37 +181,41 @@ p {
 	width: 100%;
 	margin-left: 0px;
 }
+
+.pre-img{
+width:450px;
+height:300px;
+}
+.pre-btn{
+margin-top: 20px;
+    width: 84.39px;
+    height: 30px;
+    border: 1px solid #747272;
+    border-radius: 2px;
+}
 </style>
 
 <!-- TODO:css 정리해야됨 -->
 <div class="container">
 
-	<form action="<%=request.getContextPath()%>/store/storeInfoUpdate"
+	<form action="<%=request.getContextPath()%>/store/storeDetailUpdate"
 		name="uploadFile" method="post" enctype="multipart/form-data">
-
+		
+	
+<input type="hidden" name="storeId" value="<%=s.getStoreId()%>">
 		<div class="rsvlayout">
-			<p class="rsvtype">서비스 할 업체 상세 이미지를 업로드 해주세요.</p>
+			<p class="rsvtype"><%=s.getStoreName() %>의 상세 이미지를 업로드 해주세요.</p>
 
 			<div>
 
 				<table>
-					 <tr>
-                        <td>
-                           <p>서비스를 제공할 업체를 선택하세요</p>
-                        </td>
-                        <td>
-                            <select id="selectedStore" name="selectedStore" >
-                                <option>등록된 업체이름1</option>
-                                <option>등록된 업체이름2</option>
-                        </select>
-                        </td>
-                    </tr>
+					
 				
 				
 					<colgroup>
 						<col style="width: 20%;">
+						<col style="width: 20%;">
 						<col style="width: auto;">
-						<col style="width: 13%;">
 					</colgroup>
 
 					<tr id="secondRow">
@@ -283,40 +223,43 @@ p {
 							<p class="imgdtl">(최대50MB,1900*1080권장)</p>
 						</td>
 						<td><input type="file" name="mainImg" id="image"
-							accept="image/*" onchange="setThumbnail(event);" />
-							<div>
-								<div id="image_container1">
-									<img class="card-img-top" src="http://placehold.it/1900x1080" style="width:50% !important;">
-								</div>
-								
-							</div>
+							accept="image/*" onchange="setThumbnail(event);" required/>
+							<button class="pre-btn">preview</button>
+							
 							
 							</td>
 
-						<td>미리보기</td>
+						<td><div>
+								<div id="image_container1">
+									<img class="pre-img" src="http://placehold.it/1900x1080">
+								</div>
+								
+							</div></td>
 					</tr>
 					<tr>
-					<td>홍보문구<br>메인페이지에 홍보 문구로 들어갑니다.</td>
-					<td><input type="text"></td>
+					<td>홍보 문구<br><small>메인페이지 홍보 문구로 들어갑니다.</small></td>
+					<td><textarea name="promoText" id="promoText" cols="40" rows="5" style="resize: none;"></textarea></td>
 					</tr>
 					<tr>
 						<td class="rsvtitle">예약상품 이미지
 							<p class="imgdtl">최대(20MB,700*400권장)</p>
+							
 						</td>
 
 
 						<td><input type="file" id="image2" name="postImg" accept="image/*"
 							onchange="setThumbnail2(event);" />
-						
+						<button class="pre-btn">preview</button>
 
-							<div>
+							
+						</td>
+						
+						<td><div>
 								<div id="image_container2">
-									<img class="card-img-top" src="http://placehold.it/700x400" style="width:50% !important;">
+									<img class="pre-img" src="http://placehold.it/700x400">
 								</div>
 								
-							</div>
-						</td>
-						<td>미리보기</td>
+							</div></td>
 					</tr>
 					<tr>
 						<td class="rsvtitle">상세페이지 이미지
@@ -325,56 +268,34 @@ p {
 						<td><input type="file" id="image3" name="detailImg" accept="image/*"
 							onchange="setThumbnail3(event);" />
 							
-							<div>
+							<button class="pre-btn">preview</button>
+							</td>
+							<td><div>
 								<div id="image_container3">
-									<img class="card-img-top" src="http://placehold.it/750x500" style="width:50% !important;">
+									<img class="pre-img" src="http://placehold.it/750x500" >
 								</div>
 								
-							</div>
-							</td>
-							<td><a href="">미리보기</a></td>
+							</div></td>
 					</tr>
 
 				</table>
 			</div>
+			<%
+			System.out.println("s.getStoreId() : " + s.getStoreId());
+			%>
 
 
 
 		</div>
 		<div class="board-view-btn">
-			<input type="reset" class="gray" value="이전" title="previous"
+			<input type="reset" class="gray" value="취소" title="previous"
 				onclick="cancel_event()">
-			<input type="submit" class="blue" value="다음" title="next" id="nextBtn">
+			<input type="submit" class="blue" value="확인" title="next" id="nextBtn">
 		</div>
 	</form>
 </div>
 
 <script type="text/javascript">
-
-
-$('#nextBtn').click(function(){
-	$.ajax({
-		url:"<%=request.getContextPath()%>/store/storeInfoUpdate",
-		type:"post",
-		dataType:"html",
-		success: data => {
-			console.log("ajax 서버 연결"); 
-			//$("#secondRow").html(data);
-		}
-	});
-	
-	
-});
-
-// 		$.ajax({
-<%-- 			url:"<%=request.getContextPath()%>/store/storeInfoUpdate", --%>
-// 			type:"post",
-// 			dataType:"html",
-// 			success: data => {
-// 				console.log("ajax 서버 연결"); //TODO:데이터는 controller에서 받아오기
-// 				//$("#secondRow").html(data);
-// 			}
-// 		});
 
 
 
@@ -395,8 +316,8 @@ $('#nextBtn').click(function(){
 			var img = document.createElement("img");
 			img.setAttribute("src", event.target.result);
 			$("#image_container1 img").remove();
-			img.setAttribute("width", "1900");
-			img.setAttribute("height", "1080");
+			img.setAttribute("width", "400");
+			img.setAttribute("height", "300");
 			document.querySelector("div#image_container1").appendChild(img);
 		};
 		reader.readAsDataURL(event.target.files[0]);
@@ -408,8 +329,8 @@ $('#nextBtn').click(function(){
 			var img = document.createElement("img");
 			img.setAttribute("src", event.target.result);
 			$("#image_container2 img").remove();
-			img.setAttribute("width", "700");
-			img.setAttribute("height", "400");
+			img.setAttribute("width", "400");
+			img.setAttribute("height", "300");
 			document.querySelector("div#image_container2").appendChild(img);
 		};
 		reader.readAsDataURL(event.target.files[0]);
@@ -421,8 +342,8 @@ $('#nextBtn').click(function(){
 			var img = document.createElement("img");
 			img.setAttribute("src", event.target.result);
 			$("#image_container3 img").remove();
-			img.setAttribute("width", "750");
-			img.setAttribute("height", "500");
+			img.setAttribute("width", "400");
+			img.setAttribute("height", "300");
 			document.querySelector("div#image_container3")
 					.appendChild(img);
 		};
