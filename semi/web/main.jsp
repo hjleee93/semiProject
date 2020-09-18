@@ -116,7 +116,7 @@ if (cookies != null) {
 </head>
 
 <body id="mainbody">
-
+<!-- 메인바디 -->
 	<!-- Navigation -->
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top header">
