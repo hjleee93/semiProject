@@ -7,7 +7,7 @@
 <%@ page import="com.semi.partner.model.vo.PartnerMember"%>
 
 <%
-//메인시작!
+//메인시작! 
 	List<Store> list = new StoreService().selectStoreList();
 
 request.setAttribute("store", list);
