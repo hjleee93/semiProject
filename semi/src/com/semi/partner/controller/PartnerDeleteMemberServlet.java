@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.partner.model.service.PartnerService;
+import com.semi.member.model.service.MemberService;
 
 /**
  * Servlet implementation class PartnerDeleteMemberServlet
@@ -31,7 +31,7 @@ public class PartnerDeleteMemberServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String id = request.getParameter("partner_id");
-		int result = new PartnerService().deleteMember(id);
+		int result = new MemberService().deleteMember(id);
 		String msg="";
 		String loc="";
 		if(result>0) {

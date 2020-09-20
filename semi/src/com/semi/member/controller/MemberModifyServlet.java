@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.member.model.service.MemberService;
+import com.semi.member.model.vo.Customer;
 import com.semi.member.model.vo.Member;
 
 /**
@@ -33,20 +34,21 @@ public class MemberModifyServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		Member m = new Member();
-		m.setMember_id(request.getParameter("member_id"));
-		m.setMember_name(request.getParameter("member_name"));
-		m.setMember_pw(request.getParameter("member_pw"));
-		m.setGender(request.getParameter("gender"));
-		m.setMember_age(request.getParameter("member_age"));
-		m.setMember_email(request.getParameter("member_email"));
-		m.setMember_phone(request.getParameter("member_phone"));
-		m.setMem_postcode(request.getParameter("mem_postcode"));
-		m.setMem_address(request.getParameter("mem_address"));
-		m.setMem_detailAddress(request.getParameter("mem_detailAddress"));
-		m.setMem_extraAddress(request.getParameter("mem_extraAddress"));
-		m.setCategory(String.join(",",request.getParameterValues("category")));
+		Customer c = new Customer();
+		m.setMemberId(request.getParameter("member_id"));
+		m.setMemberName(request.getParameter("member_name"));
+		m.setMemberPw(request.getParameter("member_pw"));
+		c.setGender(request.getParameter("gender"));
+		c.setBirthday(request.getParameter("member_age"));
+		m.setMemberEmail(request.getParameter("member_email"));
+		m.setMemberPhone(request.getParameter("member_phone"));
+		m.setMemPostcode(request.getParameter("mem_postcode"));
+		m.setMemAddress(request.getParameter("mem_address"));
+		m.setMemDetailAddress(request.getParameter("mem_detailAddress"));
+		m.setMemExtraAddress(request.getParameter("mem_extraAddress"));
+		c.setCategory(String.join(",",request.getParameterValues("category")));
 		
-		int result = new MemberService().memberUpdate(m);
+		int result = new MemberService().memberUpdate(m,c);
 		//결과를 가지고 페이지를 선택하기
 		//수정이 되면 result>0 실패하면 result=0;
 		//메세지출력 메인화면

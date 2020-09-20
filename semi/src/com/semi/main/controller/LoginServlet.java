@@ -13,13 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import com.semi.member.model.service.MemberService;
 import com.semi.member.model.vo.Member;
-import com.semi.partner.model.service.PartnerService;
-import com.semi.partner.model.vo.PartnerMember;
 
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/login")
+@WebServlet(name="login", urlPatterns="/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

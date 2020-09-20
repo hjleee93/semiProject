@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.semi.store.model.vo.Store"%>
-<%@ page import="com.semi.member.model.vo.Member"%>
+<%@ page import="com.semi.member.model.vo.*"%>
 <%@ page import="com.semi.store.service.StoreService"%>
 <%@ page import="com.semi.store.model.dao.StoreDao"%>
 <%@ page import="java.util.List"%>
-<%@ page import="com.semi.partner.model.vo.PartnerMember"%>
+
 
 <%
 //메인시작! 
@@ -236,11 +236,10 @@ if (cookies != null) {
 							MY PAGE </a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownPages">
-							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/views/mypage/mypage_partner.jsp">MY
-								PAGE</a> <a class="dropdown-item" href="purchase_history.html">MY
-								BOOKING</a> <a class="dropdown-item" href="./usr_review.html">MY
-								REVIEW</a> <a class="dropdown-item" href="./usr_review.html">FAQ</a>
+							<a class="dropdown-item" href="<%=request.getContextPath()%>/adminpage">MY PAGE</a> 
+							<a class="dropdown-item" href="<%=request.getContextPath()%>/member/memberView">회원정보수정 (TEST)</a>
+							
+							
 						</div></li>
 						<li class="nav-item">
 						<a class="nav-link " data-toggle="modal"

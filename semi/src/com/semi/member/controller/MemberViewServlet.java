@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.member.model.service.MemberService;
+import com.semi.member.model.vo.Customer;
 import com.semi.member.model.vo.Member;
 
 /**
@@ -31,19 +32,15 @@ public class MemberViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String id =request.getParameter("id");
-		Member m = new MemberService().selectMember(id);
+		String id =request.getParameter("member_id");
+		int seq = Integer.parseInt(request.getParameter("seq"));
+		Member m = new MemberService().selectMemberModify(id);
+		Customer c = new MemberService().selectCustomerModify(seq);
+
 		
-		/*
-		 * String email=m.getEmail(); String phone=m.getPhone(); try {
-		 * m.setEmail(AESCrypto.decrypt(email)); m.setPhone(AESCrypto.decrypt(phone));
-		 * }catch(Exception e){ e.printStackTrace();
-		 * 
-		 * 
-		 * }
-		 */		
 		request.setAttribute("member", m);
-		request.getRequestDispatcher("/views/member/customerModify.jsp").forward(request, response);
+		request.setAttribute("customer", c);
+		request.getRequestDispatcher("/views/user/customerModify.jsp").forward(request, response);
 		
 	}
 
