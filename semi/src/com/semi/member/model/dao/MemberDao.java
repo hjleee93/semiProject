@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.semi.member.model.vo.Customer;
@@ -67,51 +69,80 @@ public class MemberDao {
 		return m;
 	}
 	
-	public Member selectMemberModify(Connection conn, String id) {
+	
+	public Member selectPartnerModify(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Member m = null;
 		try {
-			pstmt= conn.prepareStatement(prop.getProperty("selectMemberOne"));
+			pstmt= conn.prepareStatement(prop.getProperty("selectPartnerOne"));
+			
 			pstmt.setString(1, id);
+			System.out.println("id in dao: " + id);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
+				m=new Member();
+				System.out.println("membernum : "+ rs.getInt(1));
 				m.setMemberNum(rs.getInt(1));
-				m.setMemberName(rs.getString(2));
-				m.setMemberSep(rs.getString(3));
-				m.setMemberPw(rs.getString(4));
-				m.setMemberEmail(rs.getString(5));
-				m.setMemberPhone(rs.getString(6));
-				m.setMemPostcode(rs.getString(7));
-				m.setMemAddress(rs.getString(8));
-				m.setMemDetailAddress(rs.getString(9));
-				m.setMemExtraAddress(rs.getString(10));
-				m.setMemberEnrolldate(rs.getDate(11));
-				m.setMemberId(rs.getString(12));
+				m.setMemberId(rs.getString(2));
+				m.setMemberName(rs.getString(3));
+				m.setMemberSep(rs.getString(4));
+				m.setMemberPw(rs.getString(5));
+				m.setMemberEmail(rs.getString(6));
+				m.setMemberPhone(rs.getString(7));
+				m.setMemPostcode(rs.getString(8));
+				m.setMemAddress(rs.getString(9));
+				m.setMemDetailAddress(rs.getString(10));
+				m.setMemExtraAddress(rs.getString(11));
+				m.setMemberEnrolldate(rs.getDate(12));
+				
+				
+				System.out.println("m in dao: " + m);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		return m;
 	}
-	public Customer selectCustomerModify(Connection conn, int seq) {
+	public Member selectCustomerModify(Connection conn, int seq) {
+		Customer c = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		Customer c = null;
+		Member m = null;
 		try {
-			pstmt= conn.prepareStatement(prop.getProperty("selectcustomerOne"));
+			pstmt= conn.prepareStatement(prop.getProperty("selectCustomerOne"));
 			pstmt.setInt(1, seq);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				c.setCustomerNum(rs.getInt(1));
-				c.setGender(rs.getString(2));
-				c.setBirthday(rs.getString(3));
-				c.setCategory(rs.getString(4));
+				m =new Member();
+				c= new Customer();
+				System.out.println("rs.getInt(1): " + rs.getInt(1));
+				
+				m.setMemberNum(rs.getInt(1));
+				m.setMemberId(rs.getString(2));
+				m.setMemberName(rs.getString(3));
+				m.setMemberSep(rs.getString(4));
+				m.setMemberPw(rs.getString(5));
+				m.setMemberEmail(rs.getString(6));
+				m.setMemberPhone(rs.getString(7));
+				m.setMemPostcode(rs.getString(8));
+				m.setMemAddress(rs.getString(9));
+				m.setMemDetailAddress(rs.getString(10));
+				m.setMemExtraAddress(rs.getString(11));
+				m.setMemberEnrolldate(rs.getDate(12));
+				c.setCustomerNum(rs.getInt(13));
+				c.setGender(rs.getString(14));
+				c.setBirthday(rs.getString(15));
+				c.setCategory(rs.getString(16));
+				
+				m.customer = c;
+				
+				System.out.println("c in dao: " + m.customer);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return c;
+		return m;
 	}
 //	private Member inputData(ResultSet rs) {
 //		Member m=new Member();
@@ -171,23 +202,23 @@ public class MemberDao {
 		}return result;
 	}
 	
-	public int memberUpdate(Connection conn, Member m,Customer c) {
+	public int memberUpdate(Connection conn, Customer c) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("updateMember"));
-			pstmt.setString(1, m.getMemberName());
-			pstmt.setString(2, m.getMemberPw());
-			pstmt.setString(3, m.getMemberEmail());
-			pstmt.setString(4, m.getMemberPhone());
-			pstmt.setString(5, m.getMemPostcode());
-			pstmt.setString(6, m.getMemAddress());
-			pstmt.setString(7, m.getMemDetailAddress());
-			pstmt.setString(8, m.getMemExtraAddress());
+			pstmt.setString(1, c.getMember().getMemberName());
+			pstmt.setString(2, c.getMember().getMemberPw());
+			pstmt.setString(3, c.getMember().getMemberEmail());
+			pstmt.setString(4, c.getMember().getMemberPhone());
+			pstmt.setString(5, c.getMember().getMemPostcode());
+			pstmt.setString(6, c.getMember().getMemAddress());
+			pstmt.setString(7, c.getMember().getMemDetailAddress());
+			pstmt.setString(8, c.getMember().getMemExtraAddress());
 			pstmt.setString(9, c.getGender());
 			pstmt.setString(10, c.getBirthday());
 			pstmt.setString(11, c.getCategory());
-			pstmt.setString(12, m.getMemberId());
+			pstmt.setInt(12, c.getCustomerNum());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();

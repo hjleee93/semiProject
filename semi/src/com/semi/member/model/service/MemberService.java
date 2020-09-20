@@ -1,11 +1,12 @@
 package com.semi.member.model.service;
 
-import static com.semi.common.JDBCTemplate.commit;
-import static com.semi.common.JDBCTemplate.rollback;
 import static com.semi.common.JDBCTemplate.close;
+import static com.semi.common.JDBCTemplate.commit;
 import static com.semi.common.JDBCTemplate.getConnection;
+import static com.semi.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.semi.member.model.dao.MemberDao;
 import com.semi.member.model.vo.Customer;
@@ -25,21 +26,23 @@ public class MemberService {
 		return m;
 	}
 	
-	public Member selectMemberModify(String id) {
+	public Member selectPartnerModify(String id) {
 		Connection conn=getConnection();
-		Member m = dao.selectMemberModify(conn,id);
+		System.out.println("id in service : " + id);
+		Member m = dao.selectPartnerModify(conn,id);
 		close(conn);
 		return m;
 	}
-	public Customer selectCustomerModify(int seq) {
+
+	public Member selectCustomerModify(int seq) {
 		Connection conn=getConnection();
-		Customer c = dao.selectCustomerModify(conn,seq);
+		Member m = dao.selectCustomerModify(conn,seq);
 		close(conn);
-		return c;
+		return m; 
 	}
-	public int memberUpdate(Member m,Customer c) {
+	public int memberUpdate(Customer c) {
 		Connection conn=getConnection();
-		int result = dao.memberUpdate(conn,m,c);
+		int result = dao.memberUpdate(conn,c);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);

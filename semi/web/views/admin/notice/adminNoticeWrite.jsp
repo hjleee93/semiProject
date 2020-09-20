@@ -4,7 +4,7 @@
 <%@ include file="/views/common/adminmenubar.jsp" %>
 <%@ page import="com.semi.member.model.vo.Member"%>
 <%
-	Member Memberloggined = (Member)session.getAttribute("Memberloggined");
+	Member logginedMember = (Member) session.getAttribute("Memberloggined");
 %>
 <style>
         .notice {

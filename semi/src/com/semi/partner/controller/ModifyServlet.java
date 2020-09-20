@@ -14,7 +14,7 @@ import com.semi.member.model.vo.Member;
 /**
  * Servlet implementation class ModifyServlet
  */
-@WebServlet(name="modiMember", urlPatterns="/partner/memberUpdate")
+@WebServlet(name="modiPartner", urlPatterns="/partner/memberUpdate")
 public class ModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,15 +33,15 @@ public class ModifyServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
 		Member m = new Member();
-		m.setMemberId(request.getParameter("Member_id"));
-		m.setMemberName(request.getParameter("Member_name"));
-		m.setMemberPw(request.getParameter("Member_pw"));
-		m.setMemberEmail(request.getParameter("Member_email"));
-		m.setMemberPhone(request.getParameter("Member_phone"));
-		m.setMemPostcode(request.getParameter("mem_postcode"));
-		m.setMemAddress(request.getParameter("mem_address"));
-		m.setMemDetailAddress(request.getParameter("mem_detailAddress"));
-		m.setMemExtraAddress(request.getParameter("mem_extraAddress"));	
+		m.setMemberId(request.getParameter("member_id"));
+		m.setMemberName(request.getParameter("member_name"));
+		m.setMemberPw(request.getParameter("pw"));
+		m.setMemberEmail(request.getParameter("member_email"));
+		m.setMemberPhone(request.getParameter("member_phone"));
+		m.setMemPostcode(request.getParameter("postcode"));
+		m.setMemAddress(request.getParameter("address"));
+		m.setMemDetailAddress(request.getParameter("detailAddress"));
+		m.setMemExtraAddress(request.getParameter("extraAddress"));	
 		
 		int result = new MemberService().partnerUpdate(m);
 		//결과를 가지고 페이지를 선택하기

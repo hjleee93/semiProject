@@ -189,7 +189,7 @@
         <p class="profile1">Hello! members, <%=MemLoggined.getMemberId()%></p>
           <table class="profilebox">
             <tr>
-              <td class="profilebox1"><a href="<%=request.getContextPath() %>/member/memberView">회원정보수정</a></td>
+              <td class="profilebox1"><a href="<%=request.getContextPath() %>/member/memberView?id=<%=MemLoggined.getMemberNum()%>">회원정보수정</a></td>
               <td class="profilebox2"><a href="">주문내역 조회</a></td>
             </tr>
             <tr>

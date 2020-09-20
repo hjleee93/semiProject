@@ -71,7 +71,7 @@ public class MoveNoticeServlet extends HttpServlet {
 		}
 	
 		request.setAttribute("totalData", totalData);
-		request.setAttribute("list", list);
+		request.setAttribute("noticelist", list);
 		request.setAttribute("pageBar", pageBar);
 		
 		request.getRequestDispatcher("/views/admin/notice/adminNoticeBoard.jsp").forward(request, response);

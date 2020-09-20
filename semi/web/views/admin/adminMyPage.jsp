@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page
-	import="com.semi.common.listener.LoginCheckCountListener,
-	com.semi.member.model.vo.*,
-	com.semi.partner.model.vo.*,
+	<%@ page import="com.semi.common.listner.*" %>
+<%@ page import="
 	java.util.List,
+	com.semi.member.model.vo.*,
 	com.semi.admin.store.vo.*"%>
 <%@ include file="/views/common/header.jsp"%>
 <%@ include file="/views/common/adminmenubar.jsp"%>
@@ -12,8 +11,8 @@
 <link href="<%=request.getContextPath()%>/css/adminpage.css" rel="stylesheet">
 
 <%
-	int connectCount = LoginCheckCountListener.getConnectCount();
-	List<Store> list = (List) request.getAttribute("list");
+	int connectCount = AdminLoginCheckCountListener.getConnectCount();
+	List<Store> storelist= (List) request.getAttribute("storelist");
 	int count = (Integer)request.getAttribute("waitingCount");
 
 %>
@@ -102,7 +101,7 @@
 								<a href="rsvstatus.html">
 									<div class="minibox3">75</div>
 								</a>
-								<div class="minibox2">예약율(%)</div>
+								<div class="minibox3">예약율(%)</div>
 							</div>
 						</td>
 					</tr>
@@ -113,7 +112,7 @@
 								<a href="usr_qna.html"> <!-- 문의삭제/댓글달 수있게 관리자권한 -->
 									<div class="minibox4">0</div>
 								</a>
-								<div class="minibox2">신규 등록</div>
+								<div class="minibox4">신규 등록</div>
 							</div>
 						</td>
 					</tr>
@@ -158,7 +157,7 @@
 								</tr>
 								<%} else {
 									  for (Store s : list) {
-									    if (s.getJoinStatus().equals("WAITING")) {
+									    if (s.getStoreStatus().equals("WAITING")) {
 								%>
 								<tr>
 									<td>
@@ -170,12 +169,12 @@
 										</a>
 									</td>
 									<td><%=s.getStoreName() %></td>
-									<td><%=s.getDetailCategory() %></td>
-									<td><%=s.getPhone() %></td>
-									<td><%=s.getStoreAddr() %></td>
+									<td><%=s.getStoreDtlCtgry()%></td>
+									<td><%=s.getStorePhone()%></td>
+									<td><%=s.getStoreAddress() %></td>
 									<td><%=s.getStoreContent() %></td>
-									<td><%=s.getHomepage() %></td>
-									<td><%=s.getJoinStatus() %></td>
+									<td><%=s.getStorePage() %></td>
+									<td><%=s.getStoreStatus() %></td>
 								</tr>
 								<%}
 								 }
@@ -211,17 +210,17 @@
 								</tr>
 								<%} else {
 									  for (Store s : list) {
-									    if (s.getJoinStatus().equals("ACCEPT")) {
+									    if (s.getStoreStatus().equals("ACCEPT")) {
 								%>
 								<tr>
 									<td><a class="movestatus_1">✔</a></td>
 									<td><%=s.getStoreName() %></td>
-									<td><%=s.getDetailCategory() %></td>
-									<td><%=s.getPhone() %></td>
-									<td><%=s.getStoreAddr() %></td>
+									<td><%=s.getStoreDtlCtgry()%></td>
+									<td><%=s.getStorePhone()%></td>
+									<td><%=s.getStoreAddress() %></td>
 									<td><%=s.getStoreContent() %></td>
-									<td><%=s.getHomepage() %></td>
-									<td><%=s.getJoinStatus() %></td>
+									<td><%=s.getStorePage() %></td>
+									<td><%=s.getStoreStatus() %></td>
 								</tr>
 								<%}
 								 }
@@ -261,17 +260,17 @@
 								</tr>
 								<%} else {
 									  for (Store s : list) {
-									    if (s.getJoinStatus().equals("HOLD")) {
+									    if (s.getStoreStatus().equals("HOLD")) {
 								%>
 								<tr>
 									<td><a class="movestatus_2">↩</a></td>
 									<td><%=s.getStoreName() %></td>
-									<td><%=s.getDetailCategory() %></td>
-									<td><%=s.getPhone() %></td>
-									<td><%=s.getStoreAddr() %></td>
+									<td><%=s.getStoreDtlCtgry()%></td>
+									<td><%=s.getStorePhone()%></td>
+									<td><%=s.getStoreAddress() %></td>
 									<td><%=s.getStoreContent() %></td>
-									<td><%=s.getHomepage() %></td>
-									<td><%=s.getJoinStatus() %></td>
+									<td><%=s.getStorePage() %></td>
+									<td><%=s.getStoreStatus() %></td>
 								</tr>
 								<%}
 								 }
@@ -310,17 +309,17 @@
 								</tr>
 								<%} else {
 									  for (Store s : list) {
-									    if (s.getJoinStatus().equals("DECLINE")) {
+									    if (s.getStoreStatus().equals("DECLINE")) {
 								%>
 								<tr>
 									<td><a class="movestatus_3">✖</a></td>
 									<td><%=s.getStoreName() %></td>
-									<td><%=s.getDetailCategory() %></td>
-									<td><%=s.getPhone() %></td>
-									<td><%=s.getStoreAddr() %></td>
+									<td><%=s.getStoreDtlCtgry()%></td>
+									<td><%=s.getStorePhone()%></td>
+									<td><%=s.getStoreAddress() %></td>
 									<td><%=s.getStoreContent() %></td>
-									<td><%=s.getHomepage() %></td>
-									<td><%=s.getJoinStatus() %></td>
+									<td><%=s.getStorePage() %></td>
+									<td><%=s.getStoreStatus() %></td>
 								</tr>
 								<%}
 								 }
@@ -343,10 +342,10 @@
  			const url = "<%=request.getContextPath()%>/admin/search/member";
  			var popupWidth = 1000;
  			var popupHeight = 400;
- 			var popupX = (window.screen.width/2)-(popupWidth/2);
+ 			var popupX = (window.screen.width/2)-500;
  			// 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
 
- 			var popupY= (window.screen.height/2) - (popupHeight/2);
+ 			var popupY= (window.screen.height/2) - 400;
  			// 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
  			window.open(url, '', 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
  		}

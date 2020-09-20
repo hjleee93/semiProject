@@ -4,7 +4,6 @@
 <%@ page import="com.semi.member.model.vo.*"  %>
 <%
 
-		Member m = (Member)request.getAttribute("member");
 		Customer c = (Customer)request.getAttribute("customer");
 		Member logginedMember = (Member) session.getAttribute("Memberloggined"); 
 		String[] category = c.getCategory().split(",");//할당
@@ -91,7 +90,7 @@
                 </th>
                 <td>
                     <input type="text" name="member_id" id="member_id_" 
-                    placeholder="영문·숫자 4~15자리" value="<%=m.getMemberId()%>" readonly
+                    placeholder="영문·숫자 4~15자리" value="<%=c.getMember().getMemberId()%>" readonly
                     pattern="^[a-z][a-zA-Z0-9]{4,15}$">
                 </td>
             </tr>
@@ -101,7 +100,7 @@
                 </th>
                 <td>
                     <input type="text" name="member_name" id="member_name"
-                    placeholder="한글 2~4글자" pattern="^[가-힣]{2,4}$" value="<%=m.getMemberName()%>">
+                    placeholder="한글 2~4글자" pattern="^[가-힣]{2,4}$" value="<%=c.getMember().getMemberName()%>">
                 </td>
             </tr>
             <tr>
@@ -109,8 +108,8 @@
                     <label for="member_pw"><em>* </em>비밀번호</label>
                 </th>
                 <td>
-                    <input type="password" name="member_pw" id="member_pw_" required
-                    value="<%=m.getMemberPw()%>">
+                    <input type="password" name="pw" id="member_pw_" required
+                    value="<%=c.getMember().getMemberPw()%>">
                     <small style="color:gray;">영문·숫자·특수문자 조합 6~15자리</small>
                 </td>
             </tr>
@@ -119,8 +118,8 @@
                     <label for="member_pwck"><em>* </em>비밀번호확인</label>
                 </th>
                 <td>
-                    <input type="password" name="member_pwck" id="member_pwck" required
-                    value="<%=m.getMemberPw()%>">
+                    <input type="password" name="pw" id="member_pwck" required
+                    value="<%=c.getMember().getMemberPw()%>">
                     <small id="labelpw">
                         <span class="alert alert-success" id="alert-success">비밀번호가 일치합니다</span>
                         <span class="alert alert-danger" id="alert-danger">비밀번호가 일치하지않습니다</span>
@@ -156,7 +155,7 @@
                 <td>
                     <input type="email" name="member_email" id="member_email" 
                     placeholder="hyolo@example.com" pattern="^[\w-]{4,}@[\w-]+(\.\w+){1,3}$"
-                    value="<%=m.getMemberEmail()%>">
+                    value="<%=c.getMember().getMemberEmail()%>">
                     <small id="labelemail"> </small>
                 </td>
             </tr>
@@ -167,7 +166,7 @@
                 <td>
                     <input type="tel" placeholder="ex) 01012341004" name="member_phone" id="member_phone" maxlength="11"
                     pattern="^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$"
-                    value="<%=m.getMemberPhone()%>">
+                    value="<%=c.getMember().getMemberPhone()%>">
                     <small id="labelphone"> </small>
                 </td>
             </tr>
@@ -176,11 +175,11 @@
                     <label for="address"><em>* </em>주소</label>
                 </th>
                 <td>
-                    <input type="text" name="mem_postcode" id="mem_postcode" placeholder="우편번호" value="<%=m.getMemPostcode()%>">
+                    <input type="text" name="postcode" id="postcode" placeholder="우편번호" value="<%=c.getMember().getMemPostcode()%>">
                     <input type="button" onclick="Postcode();" value="우편번호 찾기"><br>
-                    <input type="text" name="mem_address" id="mem_address" placeholder="주소" value="<%=m.getMemAddress()%>">
-                    <input type="text" name="mem_detailAddress" id="mem_detailAddress" placeholder="상세주소" value="<%=m.getMemDetailAddress()%>">
-                    <input type="text" name="mem_extraAddress" id="mem_extraAddress" placeholder="동/건물" value="<%=m.getMemExtraAddress()%>">
+                    <input type="text" name="address" id="address" placeholder="주소" value="<%=c.getMember().getMemAddress()%>">
+                    <input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소" value="<%=c.getMember().getMemDetailAddress()%>">
+                    <input type="text" name="extraAddress" id="extraAddress" placeholder="동/건물" value="<%=c.getMember().getMemExtraAddress()%>">
                 </td>
             <tr>
             	<th>
@@ -206,7 +205,7 @@
      <script>
 		function fn_delete_member(){
 			if(confirm("정말로 탈퇴하시겠습니까?")){
-				location.replace('<%=request.getContextPath()%>/member/memberDelete?member_id=<%=logginedMember.getMemberId()%>');			
+				location.replace('<%=request.getContextPath()%>/member/memberDelete?id=<%=c.getMember().getMemberId()%>');			
 			}
 		}
           function finalcheck() {
@@ -325,17 +324,17 @@
                              extraAddr = ' (' + extraAddr + ')';
                          }
                          // 조합된 참고항목을 해당 필드에 넣는다.
-                         document.getElementById("mem_extraAddress").value = extraAddr;
+                         document.getElementById("extraAddress").value = extraAddr;
 
                      } else {
-                         document.getElementById("mem_extraAddress").value = '';
+                         document.getElementById("extraAddress").value = '';
                      }
 
                      // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                     document.getElementById('mem_postcode').value = data.zonecode;
-                     document.getElementById("mem_address").value = addr;
+                     document.getElementById('postcode').value = data.zonecode;
+                     document.getElementById("address").value = addr;
                      // 커서를 상세주소 필드로 이동한다.
-                     document.getElementById("mem_detailAddress").focus();
+                     document.getElementById("detailAddress").focus();
                  }
              }).open();
          }

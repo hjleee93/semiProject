@@ -10,7 +10,6 @@ import java.util.List;
 
 import com.semi.admin.dao.AdminDao;
 import com.semi.member.model.vo.Member;
-import com.semi.partner.model.vo.PartnerMember;
 
 public class AdminService {
 
@@ -22,12 +21,7 @@ public class AdminService {
 		close(conn);
 		return list;
 	}
-	public List<PartnerMember> selectPartnerList(int cPage, int numPerPage){
-		Connection conn = getConnection();
-		List<PartnerMember> listpm = dao.selectPartnerList(conn,cPage,numPerPage);
-		close(conn);
-		return listpm;
-	}
+	
 	
 	public int selectMemberCount() {
 		Connection conn = getConnection();
@@ -35,12 +29,7 @@ public class AdminService {
 		close(conn);
 		return count;
 	}
-	public int selectPartnerCount() {
-		Connection conn = getConnection();
-		int count= dao.selectPartnerCount(conn);
-		close(conn);
-		return count;
-	}
+	
 	
 	public List<String> selectSearchId(String key){
 		Connection conn=getConnection();

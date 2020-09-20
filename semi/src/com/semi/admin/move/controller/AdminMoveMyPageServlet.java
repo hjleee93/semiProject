@@ -44,7 +44,7 @@ public class AdminMoveMyPageServlet extends HttpServlet {
 		}
 		
 		int numPerPage=5;
-		
+		//입점현황 팝업
 		List<Store> list = new StoreService().selectStoreList(page,numPerPage);
 
 		int totalData = new StoreService().selectStoreCount();
@@ -80,7 +80,7 @@ public class AdminMoveMyPageServlet extends HttpServlet {
 	
 		int count = new StoreService().selectWaitingCount();
 		request.setAttribute("waitingCount", count);
-		request.setAttribute("list", list);
+		request.setAttribute("storelist", list);
 		request.setAttribute("pageBar", pageBar);
 		
 		

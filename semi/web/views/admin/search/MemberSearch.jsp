@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
-<%@ page import="com.semi.member.model.vo.*,com.semi.partner.model.vo.*"%>
+<%@ page import="com.semi.member.model.vo.*"%>
 <script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
 <%
 	List<Member> list = (List) request.getAttribute("list");
-List<PartnerMember> listpm = (List) request.getAttribute("listpm");
 %>
 <style>
 #member, #partner {
@@ -174,12 +173,12 @@ div#base>table tr td{
 						<td><a><input type="checkbox" name="cb" class="cb"></a></td>
 						<td><%=m.getMemberId()%></td>
 						<td><%=m.getMemberName()%></td>
-						<td><%=m.getGender()%></td>
-						<td><%=m.getMemberAge()%></td>
+						<td><%=m.getCustomer().getGender()%></td>
+						<td><%=m.getCustomer().getBirthday()%></td>
 						<td><%=m.getMemberEmail()%></td>
 						<td><%=m.getMemberPhone()%></td>
 						<td><%=m.getMemAddress()%></td>
-						<td><%=m.getCategory()%></td>
+						<td><%=m.getCustomer().getCategory()%></td>
 						<td><%=m.getMemberEnrolldate()%></td>
 					</tr>
 					<%
@@ -189,55 +188,6 @@ div#base>table tr td{
 				</tbody>
 			</table>
 		</div>
-
-		<!-- membersearch end -->
-		<!-- 파트너조회테이블팝업 -->
-		<div class="table-responsive" id="partner">
-			<table class="table">
-				<thead>
-				<div id="pageBar">
-	        		<%=request.getAttribute("pageBar") %>
-	        	</div>
-					<tr>
-						<th><input type="checkbox" name="all" class="check-all">
-						</th>
-						<th>ID</th>
-						<th>NAME</th>
-						<th>EMAIL</th>
-						<th>PHONE</th>
-						<th>ADDRESS</th>
-						<th>ENROLLDATE</th>
-					</tr>
-				</thead>
-				<tbody>
-					<%
-						if (listpm.isEmpty()) {
-					%>
-					<tr>
-						<td colspan="7">조회된 회원이 없습니다.</td>
-					</tr>
-					<%
-						} else {
-						for (PartnerMember pm : listpm) {
-					%>
-					<tr>
-						<td><a><input type="checkbox" name="cb" class="cb"></a></td>
-						<td><%=pm.getPartnerId()%></td>
-						<td><%=pm.getPartnerName()%></td>
-						<td><%=pm.getPartnerEmail()%></td>
-						<td><%=pm.getPartnerPhone()%></td>
-						<td><%=pm.getAddress()%></td>
-						<td><%=pm.getPartnerEnrolldate()%></td>
-					</tr>
-					<%
-						}
-					}
-					%>
-				</tbody>
-			</table>
-		</div>
-		<!-- 파트너끝 -->
-
 	</div>
 	<script>
 		

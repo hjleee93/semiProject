@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.semi.admin.service.AdminService;
 import com.semi.member.model.service.MemberService;
 import com.semi.member.model.vo.Member;
-import com.semi.partner.model.vo.PartnerMember;
 
 /**
  * Servlet implementation class TestAdminMemberSearchServlet
@@ -46,7 +45,7 @@ public class MoveAdminMemberSearchServlet extends HttpServlet {
 		
 		
 		List<Member> list = new AdminService().selectMemberList(page,numPerPage);
-		List<PartnerMember> listpm = new AdminService().selectPartnerList(page, numPerPage);
+		
 		
 		int totalData = new AdminService().selectMemberCount();
 		int totalPage=(int)(Math.ceil((double)totalData/numPerPage));
@@ -81,7 +80,6 @@ public class MoveAdminMemberSearchServlet extends HttpServlet {
 	
 		
 		request.setAttribute("list", list);
-		request.setAttribute("listpm", listpm);
 		request.setAttribute("pageBar", pageBar);
 		
 		request.getRequestDispatcher("/views/admin/search/MemberSearch.jsp").forward(request, response);

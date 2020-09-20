@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <%@ include file="/views/common/adminmenubar.jsp" %>
-<%@ page import="com.semi.admin.notice.vo.*, com.semi.partner.model.vo.*" %>
+<%@ page import="com.semi.admin.notice.vo.*" %>
 <%
 	Notice n = (Notice)request.getAttribute("notice");
-	Member Memberloggined = (Member)session.getAttribute("Memberloggined");
-	PartnerMember Partnerloggined = (PartnerMember)session.getAttribute("Partnerloggined");
+	Member logginedMember = (Member) session.getAttribute("Memberloggined");
+	
 %>
 <style>
 	.notice{
@@ -124,7 +124,7 @@
         </tr>
         </tbody>
     </table>
-   <%if(Partnerloggined!=null&&(Partnerloggined.getPartnerId().equals("admin"))){%>
+   <%if(logginedMember!=null&&(logginedMember.getMemberId().equals("admin"))){%>
    		<div class="btn">
                 <input type="button" value="수정하기" onclick="fn_modify();">
                 <input type="button" value="삭제하기" onclick="fn_delete();">

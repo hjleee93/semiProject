@@ -9,7 +9,7 @@
 
 <script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
 <%
-	List<Store> list = (List)request.getAttribute("list");
+	List<Store> storelist = (List)request.getAttribute("list");
 %>
 <section>
 	<!-- 본문 시작-->
@@ -55,23 +55,23 @@
 						</tr>
 					</thead>
 					<tbody>
-						<%if(list.isEmpty()){ %>
+						<%if(storelist.isEmpty()){ %>
 						<tr>
 							<td colspan="9">조회된 게시글이 없습니다.</td>
 						</tr>
 						<%}else{
                 				for(Store s : list) {
-                					if(s.getJoinStatus().equals("WAITING")){
+                					if(s.getStoreStatus().equals("WAITING")){
               				%>
 						<tr>
 							<td><input type="checkbox" name="cb1" id="cb1" class="cb1"></td>
 							<td><%=s.getStoreName() %></td>
-							<td><%=s.getDetailCategory() %></td>
-							<td><%=s.getPhone() %></td>
-							<td><%=s.getStoreAddr() %></td>
-							<td><%=s.getStoreContent() %></td>
-							<td><%=s.getHomepage() %></td>
-							<td><%=s.getJoinStatus() %></td>
+							<td><%=s.getStoreDtlCtgry()%></td>
+							<td><%=s.getStorePhone()%></td>
+							<td><%=s.getStoreAddress()%></td>
+							<td><%=s.getStoreContent()%></td>
+							<td><%=s.getStorePage() %></td>
+							<td><%=s.getStoreStatus()%></td>
 							<td>
 								<input type="hidden" name="id" id="id" value="<%=s.getStoreId() %>">
 							</td>
@@ -115,17 +115,17 @@
 						</tr>
 						<%}else{
                 				for(Store s : list) {
-                					if(s.getJoinStatus().equals("ACCEPT")){
+                					if(s.getStoreStatus().equals("ACCEPT")){
               				%>
 						<tr>
 							<td><input type="checkbox" name="cb2" class="cb2"></td>
 							<td><%=s.getStoreName() %></td>
-							<td><%=s.getDetailCategory() %></td>
-							<td><%=s.getPhone() %></td>
-							<td><%=s.getStoreAddr() %></td>
+							<td><%=s.getStoreDtlCtgry() %></td>
+							<td><%=s.getStorePhone() %></td>
+							<td><%=s.getStoreAddress() %></td>
 							<td><%=s.getStoreContent() %></td>
-							<td><%=s.getHomepage() %></td>
-							<td><%=s.getJoinStatus() %></td>
+							<td><%=s.getStorePage() %></td>
+							<td><%=s.getStoreStatus() %></td>
 						</tr>
 						<%}
            				 } 
@@ -168,17 +168,17 @@
 						</tr>
 						<%}else{
                 				for(Store s : list) {
-                					if(s.getJoinStatus().equals("HOLD")){
+                					if(s.getStoreStatus().equals("HOLD")){
               				%>
 						<tr>
 							<td><input type="checkbox" name="cb3" class="cb3"></td>
 							<td><%=s.getStoreName() %></td>
-							<td><%=s.getDetailCategory() %></td>
-							<td><%=s.getPhone() %></td>
-							<td><%=s.getStoreAddr() %></td>
+							<td><%=s.getStoreDtlCtgry() %></td>
+							<td><%=s.getStorePhone() %></td>
+							<td><%=s.getStoreAddress() %></td>
 							<td><%=s.getStoreContent() %></td>
-							<td><%=s.getHomepage() %></td>
-							<td><%=s.getJoinStatus() %></td>
+							<td><%=s.getStorePage() %></td>
+							<td><%=s.getStoreStatus() %></td>
 						</tr>
 						<%}
            				 } 
@@ -221,17 +221,17 @@
 						</tr>
 						<%}else{
                 				for(Store s : list) {
-                					if(s.getJoinStatus().equals("DECLINE")){
+                					if(s.getStoreStatus().equals("DECLINE")){
               				%>
 						<tr>
 							<td><input type="checkbox" name="cb4" class="cb4"></td>
 							<td><%=s.getStoreName() %></td>
-							<td><%=s.getDetailCategory() %></td>
-							<td><%=s.getPhone() %></td>
-							<td><%=s.getStoreAddr() %></td>
+							<td><%=s.getStoreDtlCtgry() %></td>
+							<td><%=s.getStorePhone() %></td>
+							<td><%=s.getStoreAddress() %></td>
 							<td><%=s.getStoreContent() %></td>
-							<td><%=s.getHomepage() %></td>
-							<td><%=s.getJoinStatus() %></td>
+							<td><%=s.getStorePage() %></td>
+							<td><%=s.getStoreStatus() %></td>
 						</tr>
 						<%}
            				 } 

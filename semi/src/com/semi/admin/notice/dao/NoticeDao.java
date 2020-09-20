@@ -22,7 +22,7 @@ public class NoticeDao {
 	public NoticeDao() {
 		// TODO Auto-generated constructor stub
 		try {
-			String fileName=NoticeDao.class.getResource("/sql/admin/notice_sql.properties").getPath();
+			String fileName=NoticeDao.class.getResource("/sql/admin_notice_sql.properties").getPath();
 			prop.load(new FileReader(fileName));
 		}catch(IOException e) {
 			e.printStackTrace();

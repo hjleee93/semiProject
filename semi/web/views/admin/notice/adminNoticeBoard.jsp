@@ -4,10 +4,10 @@
 <%@ include file="/views/common/header.jsp"%>
 <%@ include file="/views/common/adminmenubar.jsp"%>
 <%
-	List<Notice> list =(List)request.getAttribute("list");
+	List<Notice> noticelist =(List)request.getAttribute("noticelist");
 	List<Notice> search = (List)request.getAttribute("search");
-	Member Memberloggined = (Member)session.getAttribute("Memberloggined");
-	PartnerMember Partnerloggined = (PartnerMember)session.getAttribute("Partnerloggined");
+	Member logginedMember = (Member) session.getAttribute("Memberloggined");
+	
 	int data = (Integer)request.getAttribute("totalData");
 	
 %>
@@ -126,7 +126,7 @@
                             <th scope="col">조회수</th>
                         </tr>
                     </thead>
-                    <%for(Notice n : list){ %>
+                    <%for(Notice n : noticelist){ %>
                     <tbody>
                         <tr>
                             <td><%=n.getNoticeNo() %></td>
@@ -164,7 +164,7 @@
 <script>
 	$(function(){
 		
-		$("#searchType").change(e=>{
+		$("#searchType").change(e => {
 			let member= $("#search-member");
 			let partner=$("#search-partner");
 			let title=$("#search-title");

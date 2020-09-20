@@ -32,7 +32,9 @@ public class PartnerMemberViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String id =request.getParameter("id");
-		Member m = new MemberService().selectMemberModify(id);
+		System.out.println("id in servlet " + id);
+		
+		Member m = new MemberService().selectPartnerModify(id);
 		
 
 		request.setAttribute("member", m);

@@ -33,22 +33,22 @@ public class MemberModifyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		Member m = new Member();
 		Customer c = new Customer();
-		m.setMemberId(request.getParameter("member_id"));
-		m.setMemberName(request.getParameter("member_name"));
-		m.setMemberPw(request.getParameter("member_pw"));
+		c.setCustomerNum(Integer.parseInt(request.getParameter("seq").trim()));
+		c.getMember().setMemberName(request.getParameter("member_name"));
+		c.getMember().setMemberPw(request.getParameter("pw"));
 		c.setGender(request.getParameter("gender"));
 		c.setBirthday(request.getParameter("member_age"));
-		m.setMemberEmail(request.getParameter("member_email"));
-		m.setMemberPhone(request.getParameter("member_phone"));
-		m.setMemPostcode(request.getParameter("mem_postcode"));
-		m.setMemAddress(request.getParameter("mem_address"));
-		m.setMemDetailAddress(request.getParameter("mem_detailAddress"));
-		m.setMemExtraAddress(request.getParameter("mem_extraAddress"));
+		c.getMember().setMemberEmail(request.getParameter("member_email"));
+		c.getMember().setMemberPhone(request.getParameter("member_phone"));
+		c.getMember().setMemPostcode(request.getParameter("postcode"));
+		c.getMember().setMemAddress(request.getParameter("address"));
+		c.getMember().setMemDetailAddress(request.getParameter("detailAddress"));
+		c.getMember().setMemExtraAddress(request.getParameter("extraAddress"));
 		c.setCategory(String.join(",",request.getParameterValues("category")));
 		
-		int result = new MemberService().memberUpdate(m,c);
+		System.out.println("modimem : "+c);
+		int result = new MemberService().memberUpdate(c);
 		//결과를 가지고 페이지를 선택하기
 		//수정이 되면 result>0 실패하면 result=0;
 		//메세지출력 메인화면

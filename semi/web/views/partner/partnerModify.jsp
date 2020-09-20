@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.semi.member.model.vo.*" %>
 <%@ include file="/views/common/header.jsp"%>
+<script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
 <%
 	//서버에서 보낸 데이터
 	Member logginedmember = (Member) session.getAttribute("memberloggined");
@@ -103,7 +104,7 @@
                   <label for="member_pw"><em>* </em>비밀번호</label>
               </th>
               <td>
-                  <input type="password" name="member_pw" id="member_pw_" 
+                  <input type="password" name="pw" id="member_pw_" 
                   value="<%=m.getMemberPw() %>" required>
                   <small id="pwterms">영문·숫자·특수문자 조합 6~15자리</small>
               </td>
@@ -113,7 +114,7 @@
                   <label for="member_pwck"><em>* </em>비밀번호확인</label>
               </th>
               <td>
-                  <input type="password" name="member_pwck" id="member_pwck" 
+                  <input type="password" name="pw" id="member_pwck" 
                   value="<%=m.getMemberPw() %>" required>
                   <small id="labelpw">
                       <span class="alert alert-success" id="alert-success">비밀번호가 일치합니다</span>
@@ -165,9 +166,10 @@
     <script>
 		function deletemember(){
 			if(confirm("정말로 탈퇴하시겠습니까?")){
-				location.replace('<%=request.getContextPath()%>/member/memberDelete?member_id=<%=logginedmember.getMemberId()%>');			
+				location.replace('<%=request.getContextPath()%>/partner/memberDelete?id=<%=m.getMemberId()%>');			
 			}
 		};
+		
         $(function () {
             $("#alert-success").hide();
             $("#alert-danger").hide();

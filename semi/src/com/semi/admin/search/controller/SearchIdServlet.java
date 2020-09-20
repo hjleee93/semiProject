@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.semi.admin.service.AdminService;
 import com.semi.member.model.vo.Member;
-import com.semi.partner.model.vo.PartnerMember;
 
 /**
  * Servlet implementation class SearchIdServlet
@@ -36,7 +35,7 @@ public class SearchIdServlet extends HttpServlet {
 		String keyword = request.getParameter("keyword");
 		
 //		Member m = new AdminService().selectOneMemId(keyword);
-//		PartnerMember pm= new AdminService().selectOnePmId(keyword);
+//		
 	}
 
 	/**

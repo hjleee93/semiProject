@@ -9,6 +9,16 @@ public class Customer {
 	private String birthday;
 	private String category;
 	
+	public Member member;
+	
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
@@ -19,6 +29,7 @@ public class Customer {
 		this.gender = gender;
 		this.birthday = birthday;
 		this.category = category;
+		
 	}
 
 	public int getCustomerNum() {

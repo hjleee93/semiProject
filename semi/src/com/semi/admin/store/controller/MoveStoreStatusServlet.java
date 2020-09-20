@@ -71,7 +71,7 @@ public class MoveStoreStatusServlet extends HttpServlet {
 			pageBar+="<a href='"+request.getContextPath()+"/admin/StoreRequestStatus?page="+(pageNo)+"'> ▶ </a>";
 		}
 		
-		request.setAttribute("list", list);
+		request.setAttribute("storelist", list);
 		request.setAttribute("pageBar", pageBar);
 		request.getRequestDispatcher("/views/admin/store/adminStoreRequestStatus.jsp").forward(request, response);
 	}

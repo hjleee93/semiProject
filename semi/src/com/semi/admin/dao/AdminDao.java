@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Properties;
 
 import com.semi.member.model.vo.Member;
-import com.semi.partner.model.vo.PartnerMember;
 public class AdminDao {
 
 	private Properties prop = new Properties();
@@ -41,18 +40,22 @@ public class AdminDao {
 				m.setMemberNum(rs.getInt("member_num"));
 				m.setMemberId(rs.getString("member_id"));
 				m.setMemberName(rs.getString("member_name"));
+				m.setMemberSep(rs.getString("member_sep"));
 				m.setMemberPw(rs.getString("member_pw"));
-				m.setGender(rs.getString("gender"));
-				m.setMemberAge(rs.getString("member_age"));
 				m.setMemberEmail(rs.getString("member_email"));
 				m.setMemberPhone(rs.getString("member_phone"));
-				m.setMemPostcode(rs.getString("mem_postcode"));
-				m.setMemAddress(rs.getString("mem_address"));
-				m.setMemDetailAddress(rs.getString("mem_detailAddress"));
-				m.setMemExtraAddress(rs.getString("mem_extraAddress"));
-				m.setCategory(rs.getString("category"));
-				m.setMemberEnrolldate(rs.getDate("member_enrolldate"));
+				m.setMemPostcode(rs.getString("postcode"));
+				m.setMemAddress(rs.getString("address"));
+				m.setMemDetailAddress(rs.getString("detailAddress"));
+				m.setMemExtraAddress(rs.getString("extraAddress"));
+				m.setMemberEnrolldate(rs.getDate("enrolldate"));
+				m.getCustomer().setCustomerNum(rs.getInt("seq_customer_num"));
+				m.getCustomer().setGender(rs.getString("gender"));
+				m.getCustomer().setBirthday(rs.getString("birthday"));
+				m.getCustomer().setCategory(rs.getString("category"));
+				
 				list.add(m);
+				System.out.println("admindao selectMemlist: "+list);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -61,36 +64,7 @@ public class AdminDao {
 			close(pstmt);
 		}return list;
 	}
-	public List<PartnerMember> selectPartnerList(Connection conn,int cPage, int numPerPage){
-		PreparedStatement pstmt=null;
-		ResultSet rs = null;
-		List<PartnerMember> listpm = new ArrayList();
-		try {
-			pstmt=conn.prepareStatement(prop.getProperty("selectPartnerList"));
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				PartnerMember pm = new PartnerMember();
-				pm.setPartnerNum(rs.getInt("partner_num"));
-				pm.setPartnerId(rs.getString("partner_id"));
-				pm.setPartnerName(rs.getString("partner_name"));
-				pm.setPartnerPw(rs.getString("partner_pw"));
-				pm.setPartnerEmail(rs.getString("partner_email"));
-				pm.setPartnerPhone(rs.getString("partner_phone"));
-				pm.setPostcode(rs.getString("postcode"));
-				pm.setAddress(rs.getString("address"));
-				pm.setDetailAddress(rs.getString("detailAddress"));
-				pm.setExtraAddress(rs.getString("extraAddress"));
-				pm.setPartnerEnrolldate(rs.getDate("partner_enrolldate"));
-				listpm.add(pm);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}return listpm;
-	}
-	
+		
 	public int selectMemberCount(Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rs= null;
