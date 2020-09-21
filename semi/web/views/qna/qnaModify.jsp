@@ -3,6 +3,8 @@
 <%@ include file="/views/common/header.jsp"%>
 <%@ include file="/views/common/adminmenubar.jsp" %>
 <%@ page import="com.semi.qna.model.vo.*" %>
+
+
 <%
 	Qna n = (Qna)request.getAttribute("qna");
 %>
@@ -78,7 +80,7 @@
 <section>
 <div class="container">
   <div id="notice-container" class="notice">
-	  <h1>QNA 수정</h1>
+	  <h1>Q&A</h1>
   </div>
   <form name="noticeFrm" id="noticeFrm" action="" method="post">
   
@@ -109,12 +111,12 @@
             <th scope="row">작성자</th>
             <td><input type="text" id="writer" name="writer" size="57" value="<%=n.getQnaWriter()%>" readonly></td>
         </tr>
-         <th>첨부파일</th>
-				<td>
+         <%--  <th>첨부파일</th> 
+				 <td>
 				 	<%if(n.getQnaOriginalFileName()!=null){ %>
 				 		<a href="javascript:fn_fileDownload('<%=n.getQnaOriginalFileName()%>','<%=n.getQnaRenamedFileName()%>');">
 					 		<img src="<%=request.getContextPath() %>/images/file.png" width="20" height="20">
-					 		<%=n.getQnaOriginalFileName() %>
+					 		
 				 		</a>
 				 		<script>
 				 			function fn_fileDownload(oriname,rename){
@@ -124,8 +126,8 @@
 				 			}
 				 		</script>
 				 	<%} %>
-				</td>
-			</tr>
+				</td>  --%>
+		
         <tr>
             <th scope="row">내 용</th>
             <td><textarea name="content" id="content" rows="5" cols="60"></textarea></td>
@@ -158,8 +160,8 @@
 			return false;
 		}
 		
-		 const frm= $("#QnaFrm");
-		 const url="<%=request.getContextPath()%>/Qna/modifySuccess?no=<%=n.getQnaNo()%>";
+		 const frm= $("#noticeFrm");
+		 const url="<%=request.getContextPath()%>/qna/modifySuccess?no=<%=n.getQnaNo()%>";
 		 frm.attr({
 			 "action":url,
 			 "method":"post",

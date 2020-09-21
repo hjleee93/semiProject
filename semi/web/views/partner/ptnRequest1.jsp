@@ -402,19 +402,19 @@ td{padding: 2% 0;}
 				
 				<label for="rsvradio1">
 				<input type="radio" name="ra"
-					class="foods" id="rsvradio1" value="식당" required>식당
+					class="foods" id="rsvradio1" value="restaurant" required>식당
 					<p class="rsvdetail">일반예약, 단체예약, 테이블예약등 다양한 예약상품을 만들어 시간 대 별과
 						인원으로 예약을 받는 식당에 적합한 예약유형입니다.</p></label>
 						
 				<label for="rsvradio6">
 				<input type="radio" name="ra"
-					class="foods" id="rsvradio6" value="술집" onclick="ctgry_fn();">술집
+					class="foods" id="rsvradio6" value="pub" onclick="ctgry_fn();">술집
 					<p class="rsvdetail">일반예약, 단체예약, 테이블예약등 다양한 예약상품을 만들어 시간 대 별과
 						인원으로 예약을 받는 술집에 적합한 예약유형입니다.</p></label>
 						
 				<label for="rsvradio7">
 				<input type="radio" name="ra"
-					class="foods" id="rsvradio7" value="카페" onclick="ctgry_fn();">카페
+					class="foods" id="rsvradio7" value="cafe" onclick="ctgry_fn();">카페
 					<p class="rsvdetail">일반예약, 단체예약, 테이블예약등 다양한 예약상품을 만들어 시간 대 별과
 						인원으로 예약을 받는 카페에 적합한 예약유형입니다.</p></label>
 			</div>
@@ -436,11 +436,11 @@ td{padding: 2% 0;}
 			
 				<h4 class="rsvheader">놀거리</h4>
 				<label for="rsvradio4"><input type="radio" name="ra"
-					class="activity" id="rsvradio4" value="레저" onclick="ctgry_fn();">레저
+					class="activity" id="rsvradio4" value="leisure" onclick="ctgry_fn();">레저
 					<p class="rsvdetail">계절별로 즐길 수 있는 일반적인 스포츠 액티비티에 적합한 예약 유형입니다.</p></label>
 
 				<label for="rsvradio5"><input type="radio" name="ra"
-					class="activity" id="rsvradio5" value="티켓" onclick="ctgry_fn();">티켓
+					class="activity" id="rsvradio5" value="ticket" onclick="ctgry_fn();">티켓
 					<p class="rsvdetail">놀이공원, 아쿠아리움등 일별 티켓을 판매하는 업체에 적합한 유형입니다.</p></label>
 
 			</div>
@@ -482,7 +482,7 @@ td{padding: 2% 0;}
 								 placeholder="우편번호" onclick="Postcode();" name="storePost" required onkeypress="return false;" > 
 								<input type="button" class="col-6"
 									id="mem_findAddress" onclick="Postcode();" value="우편번호 찾기" >
-								<input type="text" required onkeypress="return false;"  id="mem_address" required placeholder="주소" name="storeAddd"  >
+								<input type="text" required onkeypress="return false;"  id="mem_address" required placeholder="주소" name="storeAddr"  >
 								<input type="text" id="mem_detailAddress" placeholder="상세주소" name="storeDtlAddr"> 
 									<input type="text" id="mem_extraAddress" name="storeExtraAddr"
 								placeholder="참고항목" readonly>

@@ -37,35 +37,47 @@ public class WriteQnaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		if(!ServletFileUpload.isMultipartContent(request)) {
-			request.setAttribute("msg", "[※enctype※], 관리자에게 문의하세요.");
+			request.setAttribute("msg", " 작성 실패! 관리자에게 문의하세요.");
 			request.setAttribute("loc", "/Qna");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
 		}
-		String path=getServletContext().getRealPath("/upload/Qna");
+		
+		System.out.println(getServletContext().getRealPath("/"));
+		
+		String path=getServletContext().getRealPath("/")+"upload/qna";		
+		//String path=getServletContext().getRealPath("/upload/qna");
 		int maxSize=1024*1024*10;
-
-		MultipartRequest mr = new MultipartRequest(request,path,maxSize,"UTF-8",new DefaultFileRenamePolicy());
+		String encode="UTF-8";
+		
+		//MultipartRequest mr = new MultipartRequest(request,path,maxSize,"UTF-8",new DefaultFileRenamePolicy());
+		MultipartRequest mr=new MultipartRequest(request, path, maxSize
+				,encode,new DefaultFileRenamePolicy());
+			
+		
+		
 		
 		Qna n = new Qna();
 		n.setQnaTitle(mr.getParameter("title"));
 		n.setQnaSep(mr.getParameter("sep"));
 		n.setQnaWriter(mr.getParameter("writer"));
 		n.setQnaContent(mr.getParameter("content"));
-		n.setQnaOriginalFileName(mr.getOriginalFileName("upfile"));
-		n.setQnaRenamedFileName(mr.getFilesystemName("upfile"));
+//		n.setQnaOriginalFileName(mr.getOriginalFileName("upfile"));
+//		n.setQnaRenamedFileName(mr.getFilesystemName("upfile"));
 		
 		
-//		System.out.println("list in servlet: "+n);
+		System.out.println("list in servlet: "+n);
 		
 		int result = new QnaService().insertQna(n);
 		
 		String msg="";
-		String loc="/Qna";
+		String loc="";
 		if(result>0) {
 			msg="QNA 등록 완료되었습니다.";
+			loc="/qna";
 		}else {
 			msg="QNA 등록이 수행되지 않았습니다.";
+			loc="/qna/writeQna";
 		}
 		
 		request.setAttribute("msg", msg);

@@ -39,38 +39,51 @@ public class MoveQnaServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			cPage=1;
 		}
-		int numPerPage=5;
-		System.out.println("cpage: " + cPage);
-		List<Qna> list = new QnaService().selectQnaList(cPage,numPerPage);
-		System.out.println("list in sevlet: " + list);
-		int totalData = new QnaService().selectQnaCount();
-		int totalPage = (int)(Math.ceil((double)totalData/numPerPage));
+		int numPerPage;
+//		System.out.println("cpage: " + cPage);
+		try {
+			numPerPage=Integer.parseInt(request.getParameter("numPerPage"));
+		}catch(NumberFormatException e) {
+			//보여줄 페이지 갯수
+			numPerPage=10;
+		}
 		
-		int pageBarSize=5;
+		
+		List<Qna> list = new QnaService().selectQnaList(cPage,numPerPage);		
+		System.out.println("list in sevlet: " + list);				
+		int pageBarSize=5;		
+		int totalData = new QnaService().selectQnaCount();	
+		int totalPage = (int)(Math.ceil((double)totalData/numPerPage));
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
-		int pageEnd=pageNo+pageBarSize-1;
+		int pageEnd=pageNo+pageBarSize-1;	
 		
 		String pageBar = "";
+		//이전
 		if(pageNo==1) {
-			pageBar="<span> < </span>";
+			pageBar="<span>  </span>";
 		}else {
-			pageBar="<a href='"+request.getContextPath()+"/qna?page="+(pageNo-1)+"'> < </a>";
+			pageBar="<a href='"+request.getContextPath()
+			+"/qna?page="+(pageNo-1)+"&numPerPage="+numPerPage+"'></a>";		
 		}
+		//연결되는 페이지 번호 출력
 		while(!(pageNo>pageEnd||pageNo>totalPage)){
-			if(pageNo==cPage) {
-				pageBar+="<span class='num'>"+pageNo+"</span>";
+			if(cPage==pageNo) {
+				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a class='num' href='"+request.getContextPath()+"/qna?page="+(pageNo)+"'>"+pageNo+"</a>";
+				pageBar+="<a href='"+request.getContextPath()+
+						"/qna?cPage="+pageNo+"&numPerPage="+numPerPage+"'>"+pageNo+"</a>";			
 			}
 			pageNo++;
 		}
+		//다음
 		if(pageNo>totalPage) {
-				pageBar+="<span> > </span>";
+				pageBar+="<span> </span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/qna?page="+(pageNo)+"'> > </a>";
+			pageBar+="<a href='"+request.getContextPath()+
+					"/qna?cPage="+pageNo+"&numPerPage="+numPerPage+"'>  </a>";
 		}
 	
-		request.setAttribute("totalData", totalData);
+	//	request.setAttribute("totalData", totalData);
 		request.setAttribute("list", list);
 		request.setAttribute("pageBar", pageBar);
 		

@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.semi.qna.model.vo.*, java.util.List" %>
+<%@ page import="com.semi.qna.model.vo.Qna, java.util.List" %>
+<%-- <%@ page import="com.semi.qna.model.vo.*, java.util.List" %> --%>
 <%@ include file="/views/common/header.jsp"%>
 <%@ include file="/views/common/adminmenubar.jsp"%>
 <%
 	List<Qna> listQna =(List)request.getAttribute("list"); 
-System.out.println("listQna in jsp: " + listQna);
+//System.out.println("listQna in jsp: " + listQna);
 	List<Qna> search = (List)request.getAttribute("search");
 	Member MemberlogginedQna = (Member)session.getAttribute("Memberloggined");
 	int data = (Integer)request.getAttribute("totalData");
-	
+	String type=request.getParameter("searchType");
+	String keyword=request.getParameter("searchkeyword");
+	String numPerPage=request.getParameter("numPerPage");
 %>
 
 <style>
@@ -21,15 +24,17 @@ System.out.println("listQna in jsp: " + listQna);
             background-color: #107bb3;
             border: #107bb3 3px solid;
         }
+        .cst-status{
+		margin:5%;
+		}
       
-        .cst-status {
-            margin: 50px;
-        }
 
         .cst-status h1 {
             font-family: 'S-CoreDream-8Heavy', sans-serif;
             text-align: center;
+             margin-bottom:7%;
         }
+   
         #pageBar{
         	text-align:center;
         	margin:10%;
@@ -45,8 +50,9 @@ System.out.println("listQna in jsp: " + listQna);
         div.board-header{
         	margin-bottom:5%;
         }
-        div#writebtn a.meple {
-            background: mediumpurple;
+
+        div#writebtn a.meple {                      
+           background: mediumpurple;
             color: #fff;
             margin-left: 5px;
             -ms-display: flexbox;
@@ -63,7 +69,7 @@ System.out.println("listQna in jsp: " + listQna);
             font-size: 16px;
             color: white;
             border: 1px solid #ddd;
-            border-radius:7px;
+            border-radius:1px; */
             
         }
         strong{
@@ -82,29 +88,32 @@ System.out.println("listQna in jsp: " + listQna);
             <div class="board-header">
                 <div class="board-search-form">
                     <label for="searchType" class="hidden">검색 구분</label>
-                    <select id="searchType" name="searchType" class="select">
-                        <option value="member">제목</option>
-                        <option value="partner">내용</option>
-                        <option value="title">제목+내용</option>
-                    </select>
-                    <div id="search-member">
-	                   	<form action="<%=request.getContextPath()%>/qns/qna/search">
-		                    <input type="hidden" name="searchType" value="member">
-		                    <input type="text" class="inp" name="searchkeyword" id="member" placeholder="제목">
-		                    <button type="submit" onclick="javascript:fn_se();return false;">검색버튼</button>
-	                    </form>
-                    </div>
-                    <div id="search-partner">
-	                    <form action="<%=request.getContextPath()%>/qna/qna/search">
-		                    <input type="hidden" name="searchType" value="partner">
-		                    <input type="text" class="inp" name="searchkeyword" id="partner" placeholder="내용">
-		                    <button type="submit" onclick="javascript:fn_se();return false;">검색버튼</button>
-	                    </form>
-                    </div>
+                    
+          
+                   <select id="searchType" name="searchType" class="select">
+                        <option value="title">제목</option>
+                        <option value="content">내용</option>
+                        <option value="all">제목+내용</option>
+                    </select> 
                     <div id="search-title">
-	                    <form action="<%=request.getContextPath()%>/qna/qna/search">
+	                   	<form action="<%=request.getContextPath()%>qna/search">
 		                    <input type="hidden" name="searchType" value="title">
-		                    <input type="text" class="inp" name="searchkeyword" id="title" placeholder="제목+내용">
+		                    <input type="text" class="inp" name="searchkeyword" id="title" placeholder="제목"
+		                    value="<%=type!=null&&type.equals("QnaCount")?keyword:""%>">
+		                    <button type="submit" onclick="javascript:fn_se();return false;">검색버튼</button>
+	                    </form>
+                    </div>
+                    <div id="search-content">
+	                    <form action="<%=request.getContextPath()%>qna/search">
+		                    <input type="hidden" name="searchType" value="content">
+		                    <input type="text" class="inp" name="searchkeyword" id="content" placeholder="내용">
+		                    <button type="submit" onclick="javascript:fn_se();return false;">검색버튼</button>
+	                    </form>
+                    </div>
+                    <div id="search-all">
+	                    <form action="<%=request.getContextPath()%>qna/search">
+		                    <input type="hidden" name="searchType" value="all">
+		                    <input type="text" class="inp" name="searchkeyword" id="all" placeholder="제목+내용">
 		                    <button type="submit" onclick="javascript:fn_se();return false;">검색버튼</button>
 	                    </form>
                     </div>
@@ -121,13 +130,12 @@ System.out.println("listQna in jsp: " + listQna);
                             <th scope="col">분류</th>
                             <th scope="col">제목</th>
                             <th scope="col">작성자</th>
-                            <th scope="col">첨부파일</th>
                             <th scope="col">작성일</th>
                             <th scope="col">조회수</th>
                         </tr>
                     </thead>
                     <%for(Qna n : listQna){ 
-                   
+                   	System.out.println("n: " + n);
                     %>
                     <tbody>
                         <tr>
@@ -136,34 +144,38 @@ System.out.println("listQna in jsp: " + listQna);
                                 <span><%=n.getQnaSep() %></span>
                             </td>
                             <td class="al">
-                                <a href="<%=request.getContextPath() %>/QnaView?no=<%=n.getQnaNo() %>" onclick="fn_view('3454','21'); return false;">
+                                <a href="<%=request.getContextPath() %>/qna/qnaView?no=<%=n.getQnaNo() %>" onclick="fn_view('3454','21'); return false;">
                                     <span>
                                         <%=n.getQnaTitle() %>
                                     </span>
                                 </a>
                             </td>
+                     
+                            
+                            
                             <td><%=n.getQnaWriter() %></td>
-                            <td>
+                           <%--  <td>
 								<%if(n.getQnaOriginalFileName()!=null) {%>
 								<img src="<%=request.getContextPath() %>/images/file.png" width="20" height="20"> 
 								<%}else{%> 
 								<p>첨부파일x</p>
 								<%}%>
-							</td>
+							</td> --%>
                             <td><%=n.getQnaDate() %></td>
                             <td><%=n.getQnaCount() %></td>                            
                         </tr>
                     </tbody>
                     <%} %>
                 </table>
-            </div>
-            <%if(MemberlogginedQna!=null && MemberlogginedQna.getMemberId().equals("admin")){ %>
+            </div>              
+            <%if(MemberlogginedQna!=null && MemberlogginedQna.getMemberId().equals("ptn123")){ %>
             <div id="writebtn">
-                <a type="button" class="meple" id="movewrite" onclick="location.assign('<%=request.getContextPath()%>/qna/writeQna');">글작성</a>
-              
-            </div>
+                <a type="button" class="meple" id="movewrite" onclick="location.assign('<%=request.getContextPath()%>/qna/writeQna');">문의하기</a>
+             
+              </div>
+                        
             <%} %>
-			<div id="pageBar">
+	 	<div id="pageBar">
 				<%=request.getAttribute("pageBar") %>
 			</div>
        
@@ -172,21 +184,27 @@ System.out.println("listQna in jsp: " + listQna);
 </section>
 <script>
 	$(function(){
-		
-		$("#searchType").change(e=>{
-			let member= $("#search-member");
-			let partner=$("#search-partner");
+		$("#searchType").change(e => {
 			let title=$("#search-title");
+			let content=$("#search-content");
+			let all=$("#search-all");
 			
-			member.css("display","none");
-			partner.css("display","none");
-			title.css("display","none");
+		 /* 	title.css("display","none");
+			content.css("display","none");
+			all.css("display","none"); 
 			
-			let value=$(e.target).val();
-			$("#search-"+value).css("display","inline-block");
-		})
+			let value=$(e.target).val();//userId, userName, gender;
+			$("#search-"+value).css("display","inline-block"); */
+		});
+		$("#searchType").change();
 		
-	});
+		$("#numPerPage").change(e => {
+			
+			$("#numperPageFrm").submit();
+		});
+		
+	})
+
 </script>
 
 <%@ include file="/views/common/footer.jsp"%>

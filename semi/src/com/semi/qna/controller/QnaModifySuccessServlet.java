@@ -44,6 +44,7 @@ public class QnaModifySuccessServlet extends HttpServlet {
 		String loc="";
 		if(result>0) {
 			msg="성공적으로 수정되었습니다.";
+			loc="/qna";
 		}else {
 			msg="수정에 실패했습니다.";
 		}

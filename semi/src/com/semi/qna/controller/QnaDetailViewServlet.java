@@ -16,7 +16,7 @@ import com.semi.qna.model.vo.Qna;
 /**
  * Servlet implementation class NoticeDetailViewServlet
  */
-@WebServlet("/qnaView")
+@WebServlet("/qna/qnaView")
 public class QnaDetailViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,9 +37,11 @@ public class QnaDetailViewServlet extends HttpServlet {
 		
 		Qna n = new QnaService().selectQnaOne(no);
 		
+		System.out.println("n in service: " + n);
+		
 		request.setAttribute("qna", n);
 		
-		request.getRequestDispatcher("/views/qna/QnaView.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/qna/qnaView.jsp").forward(request, response);
 	}
 
 	/**

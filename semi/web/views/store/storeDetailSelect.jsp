@@ -62,7 +62,7 @@ h1, h2, h3, h4, h5, h6 {
 						<div class="4u">
 							<section class="special box">
 								<i class="icon fa-area-chart major"></i>
-								<h3>사이트에 사용할 이미지 등록</h3>
+								<h3><a href="<%=request.getContextPath()%>/views/partner/ptnRequest2.jsp">사이트에 사용할 이미지 등록</a></h3>
 								<p>Eu non col commodo accumsan ante mi. Commodo consectetur sed mi adipiscing accumsan ac nunc tincidunt lobortis.</p>
 							</section>
 						</div>

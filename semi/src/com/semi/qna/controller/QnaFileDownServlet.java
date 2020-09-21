@@ -29,6 +29,7 @@ public class QnaFileDownServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		
 		String path=getServletContext().getRealPath("/upload/qna");
 		String oName=req.getParameter("oName");//원본이름
 		String rName=req.getParameter("rName");//서버에 저장된 이름

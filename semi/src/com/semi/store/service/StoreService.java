@@ -35,10 +35,9 @@ public class StoreService {
 	
 	public List<Store> selectStoreCtgry(String category){
 		Connection conn = getConnection();
+		System.out.println("category in service: " + category);
 		List<Store> list = dao.selectStoreCtgry(conn,category);
-		for(Store s: list) {
-			System.out.println("list in service: " + list);
-		}
+		System.out.println("list in service: " + list);
 		close(conn);
 		return list;
 	}

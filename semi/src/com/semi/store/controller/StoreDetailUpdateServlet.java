@@ -42,6 +42,14 @@ public class StoreDetailUpdateServlet extends HttpServlet {
 			Store s = new Store();
 			
 			String promoText = multi.getParameter("promoText");
+			String storeName = multi.getParameter("storeName");
+			String storePhone = multi.getParameter("storePhone");
+			String storePost = multi.getParameter("storePost");
+			String storeAddr = multi.getParameter("storeAddr");
+			String storeDtlAddr = multi.getParameter("storeDtlAddr");
+			String storeExtraAddr = multi.getParameter("storeExtraAddr");
+			String storeContent = multi.getParameter("storeContent");
+			int ptnId = Integer.parseInt(multi.getParameter("ptnNum"));
 			String mainImg = multi.getFilesystemName("mainImg");
 			String postImg = multi.getFilesystemName("postImg");
 			String detailImg = multi.getFilesystemName("detailImg");
@@ -57,6 +65,15 @@ public class StoreDetailUpdateServlet extends HttpServlet {
 			s.setStorePostImg(detailImg);
 			s.setPromoText(promoText);
 			s.setStoreId(storeId);
+			s.setStoreName(storeName);
+			s.setStorePost(storePost);
+			s.setStoreAddress(storeAddr);
+			s.setStoreDtlAddr(storeDtlAddr);
+			s.setStoreExtraAddr(storeExtraAddr);
+			s.setStoreContent(storeContent);
+			s.setPtnNum(ptnId);
+			s.setStorePhone(storePhone);
+			
 			
 			System.out.println("S in jsp: " + s);
 			int result=new StoreService().updateStoreImg(s);
@@ -65,10 +82,11 @@ public class StoreDetailUpdateServlet extends HttpServlet {
 			
 			String msg="";
 			String loc="/";
-			
+			request.setAttribute("storeId",storeId);
+			System.out.println("s in 3" + s);
 			if(result>0) {
-				msg="이미지 업로드가 완료되었습니다. 등록된 이미지는 홈페이지에서 바로 확인가능합니다.";
-				loc="/main.jsp"; 
+				msg="이미지 업로드가 완료되었습니다. 서비스예약 설정 페이지로 이동합니다.";
+				loc="/store/storeRsvSetting?storeId=" + storeId; 
 			}else {
 				msg="이미지 업로드에 실패했습니다. 관리자에게 문의해주시거나 다시 한 번 시도해주세요.";
 				loc="/store/storeInfoUpdate?storeId=" + storeId;

@@ -2,15 +2,10 @@
 	pageEncoding="UTF-8" import="com.semi.store.model.vo.Store"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.semi.member.model.vo.Member"%>
-<%@ page import="com.semi.partner.model.vo.PartnerMember"%>
 <%
 	System.out.println("header 실행");
 
 List<Store> list = (List) request.getAttribute("stores");
-
-String cafe = "카페";
-String restaurant = "식당";
-String pub = "술집";
 
 Member Memberloggined = (Member) session.getAttribute("Memberloggined"); //로그인한 멤버 세션 저장 
 
@@ -142,11 +137,11 @@ if (cookie != null) {
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/views/store/storeCategory.jsp">ALL</a>
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=<%=cafe%>">CAFE</a>
+								href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=cafe">CAFE</a>
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=<%=restaurant%>">RESTAURANT</a>
+								href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=restaurant">RESTAURANT</a>
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=<%=pub%>">PUB/BAR</a>
+								href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=pub">PUB/BAR</a>
 						</div></li>
 					<%
 						if (Memberloggined == null) {

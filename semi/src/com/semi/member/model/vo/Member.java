@@ -17,7 +17,20 @@ public class Member {
 	private String memExtraAddress;
 	private Date memberEnrolldate;
 	
+	public Customer customer;
 	
+	
+	
+	public Customer getCustomer() {
+		return customer;
+	}
+
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}

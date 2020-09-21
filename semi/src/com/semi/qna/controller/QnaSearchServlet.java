@@ -17,7 +17,7 @@ import com.semi.qna.model.vo.Qna;
 /**
  * Servlet implementation class NoticeSearchServlet
  */
-@WebServlet("/qna/qna/search")
+@WebServlet("/qna/search")
 public class QnaSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,12 +37,70 @@ public class QnaSearchServlet extends HttpServlet {
 		String type=request.getParameter("searchType");
 		String keyword=request.getParameter("searchkeyword");
 		
-		List<Qna> list = new QnaService().selectSearch(type,keyword);
+	
+
+		int cPage;
+		try {
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) {
+			cPage=1;
+		}
+		//int numPerPage=5;
+		int numPerPage;
+		try {
+			numPerPage=Integer.parseInt(request.getParameter("numPerPage"));
+		}catch(NumberFormatException e) {
+			numPerPage=5;
+		}
+				
+		List<Qna> list=new QnaService().selectQnaSearch(type,keyword,cPage,numPerPage);
+	
+		//전체자료
+		int totalData=new QnaService().selectQnaSearchCount(type,keyword);
+		int totalPage=(int)(Math.ceil((double)totalData/numPerPage));
 		
-		request.setAttribute("search", list);
+		int pageBarSize=5;
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		String pageBar="";
 		
-		request.getRequestDispatcher("/views/qna/QnaBoard.jsp").forward(request, response);
+		if(pageNo==1) {
+			pageBar="<span>[이전]</span>";
+		}else {
+			pageBar="<a href='"+request.getContextPath()
+					+ "/qna?cPage="+(pageNo-1)
+					+"&searchType="+type+"&searchkeyword="+keyword
+					+"&numPerPage="+numPerPage+"'>[이전]</a>";
+		}
 		
+		while(!(pageNo>pageEnd||pageNo>totalPage)) {
+			if(pageNo==cPage) {
+				pageBar+="<span>"+pageNo+"</span>";
+			}else {
+				pageBar+="<a href='"+request.getContextPath()
+				+"/qna?cPage="+pageNo
+				+"&searchType="+type+"&searchkeyword="+keyword
+				+"&numPerPage="+numPerPage+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}
+		if(pageNo>totalPage) {
+			pageBar+="<span>[다음]</span>";
+		}else {
+			pageBar+="<a href='"+request.getContextPath()
+			+"/qna?cPage="+pageNo
+			+"&searchType="+type+"&searchkeyword="+keyword
+			+"&numPerPage="+numPerPage+"'>[다음]</a>";
+		}
+		
+		request.setAttribute("pageBar",pageBar);
+		
+		request.setAttribute("members",list);
+		
+		request.getRequestDispatcher("/views/qna/qnaBoard.jsp")
+		.forward(request,response);
+	
+	
 		
 	}
 

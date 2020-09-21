@@ -30,7 +30,7 @@ margin-bottom: 30px;}
       <div class="col-md-5">
         <h3>CAFE</h3>
         <p>HYOLO에 등록된 다양한 분위기의 카페를 둘러보고 예약하세요</p>
-        <a class="btn btn-primary" href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=<%=cafe%>">둘러보기
+        <a class="btn btn-primary" href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=cafe">둘러보기
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
       </div>
@@ -49,7 +49,7 @@ margin-bottom: 30px;}
       <div class="col-md-5">
         <h3>PUB/BAR</h3>
         <p>HYOLO에 등록된 다양한 술집을 둘러보고 예약하세요</p>
-        <a class="btn btn-primary" href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=<%=pub%>">둘러보기
+        <a class="btn btn-primary" href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=pub">둘러보기
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
       </div>
@@ -68,7 +68,7 @@ margin-bottom: 30px;}
       <div class="col-md-5">
         <h3>RESTAURANT</h3>
         <p>HYOLO에 등록된 다양하고 맛있는 식당을 둘러보고 예약하세요</p>
-        <a class="btn btn-primary" href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=<%=restaurant%>">둘러보기
+        <a class="btn btn-primary" href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=restaurant">둘러보기
           <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
       </div>

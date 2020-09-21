@@ -39,10 +39,10 @@ public class QnaDeleteServlet extends HttpServlet {
 		String loc="";
 		if(result>0) {
 			msg="성공적으로 삭제되었습니다.";
-			loc="/Qna";
+			loc="/qna";
 		}else {
-			msg="삭제실패하였습니다.";
-			loc="/Qna";
+			msg="삭제 실패하였습니다.";
+			loc="/qna";
 		}
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

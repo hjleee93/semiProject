@@ -10,6 +10,15 @@
 
 
 <style>
+
+.mptitle {
+	margin: 50px;
+}
+
+.mptitle h1 {
+	font-family: 'S-CoreDream-8Heavy', sans-serif;
+	text-align: center;
+}
 #image_container2, #image_container1, #image_container3 {
 text-align:center;
 }
@@ -183,7 +192,7 @@ p {
 }
 
 .pre-img{
-width:450px;
+width:400px;
 height:300px;
 }
 .pre-btn{
@@ -196,6 +205,11 @@ margin-top: 20px;
 </style>
 
 <!-- TODO:css 정리해야됨 -->
+
+
+<div class="mptitle">
+	<h1>업체 이미지 등록하기</h1>
+</div>
 <div class="container">
 
 	<form action="<%=request.getContextPath()%>/store/storeDetailUpdate"
@@ -230,6 +244,14 @@ margin-top: 20px;
 							</td>
 
 						<td><div>
+						<input type="hidden" name="storeName" value="<%=s.getStoreName()%>"/>
+						<input type="hidden" name="storePhone" value="<%=s.getStorePhone()%>">
+						<input type="hidden" name="storePost" value="<%=s.getStorePost()%>">
+						<input type="hidden" name="storeAddr" value="<%=s.getStoreAddress()%>">
+						<input type="hidden" name="storeDtlAddr" value="<%=s.getStoreDtlAddr()%>">
+						<input type="hidden" name="storeExtraAddr" value="<%=s.getStoreExtraAddr()%>">
+						<input type="hidden" name="storeContent" value="<%=s.getPtnNum()%>">
+						<input type="hidden" name="ptnNum" value="<%=Memberloggined.getMemberNum()%>">
 								<div id="image_container1">
 									<img class="pre-img" src="http://placehold.it/1900x1080">
 								</div>

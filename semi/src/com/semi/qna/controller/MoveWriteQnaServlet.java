@@ -1,6 +1,8 @@
 package com.semi.qna.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +30,11 @@ public class MoveWriteQnaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub\
 		
-		request.getRequestDispatcher("/views/qna/qnaWrite.jsp").forward(request, response);
+//		request.getRequestDispatcher("/views/qna/qnaWrite.jsp").forward(request, response);
+	
+		   RequestDispatcher rd=request.getRequestDispatcher("/views/qna/qnaWrite.jsp");
+		   rd.forward(request, response);
+
 	}
 
 	/**

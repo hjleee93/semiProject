@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
-<%@ page import="com.semi.partner.model.vo.PartnerMember"%>
 <%@ page import="com.semi.member.model.vo.Member"%>
 
 <%
@@ -67,7 +66,7 @@
               <td class="profilebox2"><a href="<%=request.getContextPath()%>/ptnstorelist">입점리스트 조회</a></td>
             </tr>
             <tr>
-              <td class="profilebox1"><a href="">파트너 정보수정</a></td>
+              <td class="profilebox1"><a href="<%=request.getContextPath()%>/partner/memberView?id=<%=MemLoggined.getMemberId()%>">파트너 정보수정</a></td>
               <td class="profilebox2"><a href="<%=request.getContextPath()%>/withdrawal">파트너 탈퇴</a></td>
             </tr>
             <tr>
@@ -190,7 +189,7 @@
         <p class="profile1">Hello! members, <%=MemLoggined.getMemberId()%></p>
           <table class="profilebox">
             <tr>
-              <td class="profilebox1"><a href="">회원정보수정</a></td>
+              <td class="profilebox1"><a href="<%=request.getContextPath() %>/member/memberView?id=<%=MemLoggined.getMemberNum()%>">회원정보수정</a></td>
               <td class="profilebox2"><a href="">주문내역 조회</a></td>
             </tr>
             <tr>

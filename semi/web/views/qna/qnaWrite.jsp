@@ -4,14 +4,15 @@
 <%@ include file="/views/common/adminmenubar.jsp" %>
 <%@ page import="com.semi.member.model.vo.Member"%>
 <%
-	Member Memberloggined = (Member)session.getAttribute("Memberloggined");
+	Member MemberlogginedQna = (Member)session.getAttribute("Memberloggined");
+
 %>
 <style>
-        . {
+        .notice{
             margin: 50px;
         }
 
-        . h1 {
+        .notice h1{
             font-family: 'S-CoreDream-8Heavy', sans-serif;
             text-align: center;
         }
@@ -223,8 +224,8 @@
         <!-- Page Heading/Breadcrumbs -->
         <div class="notice">
             <h1>Q&A</h1>
-        </div>
-	<form name="qnaWriteFrm" id="qnaWriteFrm" action="" method="post"
+        </div>        
+	<form name="qnaWriteFrm" id="qnaWriteFrm" action="<%=request.getContextPath()%>/qna/qnaWrite" method="post"
 	enctype="multipart/form-data">
         <table class="tbl-reg">
 
@@ -240,16 +241,7 @@
                     <th scope="row"><label for="title">제목</label></th>
                     <td><input type="text" name="title" id="title" class="inp full" title="제목 입력" required></td>
                 </tr>
-           <!--      <tr>
-                    <th scope="row"><label for="">분류</label></th>
-                    <td>
-                        <select id="" name="" title="공지사항" class="select" disabled>
-
-                            <option value="">공지사항</option>
-
-                        </select>
-                    </td>
-                </tr> -->
+         
                 
                 <tr>
                     <th scope="row"><label for="sep">문의</label></th>
@@ -264,15 +256,15 @@
                 </tr>
                 <tr>
                     <th scope="row"><label for="writer">작성자</label></th>
-                    <td><input type="text" name="writer" id="writer" class="inp" title="작성자 입력" value="<%=Memberloggined.getMember_id()%>"
+                    <td><input type="text" name="writer" id="writer" class="inp" title="작성자 입력" value="<%=Memberloggined.getMemberId()%>"
                              readonly></td>
                 </tr>
-                <tr>
+               <!--  <tr>
 		            <th scope="row">첨부파일</th>
 		            <td>
-		            	<input type="file" name="file" id="file">
+		            	<input type="file" name="upfile" id="file">
 		            </td>
-		        </tr>
+		        </tr> -->
                 <tr>
                     <th scope="row"><label for="content">내용</label></th>
                     <td>

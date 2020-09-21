@@ -78,6 +78,7 @@ public class StoreDao {
 		List<Store> list = new ArrayList();
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("selectStoreList"));
+			System.out.println(prop.getProperty("selectStoreList"));
 			
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -95,6 +96,9 @@ public class StoreDao {
 				store.setStorePage(rs.getString(11));
 				store.setStoreProfit(rs.getString(12));
 				store.setStoreTarget(rs.getString(13));
+				store.setStoreMainImg(rs.getString(14));
+				store.setStorePostImg(rs.getString(15));
+				store.setStoreDtlImg(rs.getString(16));
 				
 				//TODO:파트너 아이디 추가해야됨
 				
@@ -113,17 +117,19 @@ public class StoreDao {
 
 	
 	public List<Store> selectStoreCtgry(Connection conn, String category){
-		System.out.println("selectStoreCtgry실행");
+		System.out.println("selectStoreCtgry실행: " + category);
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<Store> list = new ArrayList();
+		List<Store> list = new ArrayList<Store>();
 		try {
 			pstmt = conn.prepareStatement(prop.getProperty("selectStoreCtgry"));
+			System.out.println(prop.getProperty("selectStoreCtgry"));
 			pstmt.setString(1, category);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Store store = new Store();
 				store.setStoreId(rs.getInt(1));
+				
 				store.setStoreCategory(rs.getString(2));
 				store.setStoreDtlCtgry(rs.getString(3));
 				store.setStoreName(rs.getString(4));
@@ -136,7 +142,11 @@ public class StoreDao {
 				store.setStorePage(rs.getString(11));
 				store.setStoreProfit(rs.getString(12));
 				store.setStoreTarget(rs.getString(13));
-				//store.setPtn_num(rs.getInt(12));
+				store.setStoreMainImg(rs.getString(14));
+				store.setStorePostImg(rs.getString(15));
+				store.setStoreDtlImg(rs.getString(16));
+				store.setPtnNum(rs.getInt(17));
+				store.setStoreStatus(rs.getString(18));
 				
 				list.add(store);
 			}
@@ -218,6 +228,8 @@ public class StoreDao {
 		
 		return store;
 	}
+	
+	
 
 	
 	

@@ -31,19 +31,13 @@ public class MemberViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String id =request.getParameter("id");
-		Member m = new MemberService().selectMember(id);
-		
-		/*
-		 * String email=m.getEmail(); String phone=m.getPhone(); try {
-		 * m.setEmail(AESCrypto.decrypt(email)); m.setPhone(AESCrypto.decrypt(phone));
-		 * }catch(Exception e){ e.printStackTrace();
-		 * 
-		 * 
-		 * }
-		 */		
-		request.setAttribute("member", m);
-		request.getRequestDispatcher("/views/member/customerModify.jsp").forward(request, response);
+		int seq = Integer.parseInt(request.getParameter("id"));
+		System.out.println("modimember service : "+ seq);
+		Member m = new MemberService().selectCustomerModify(seq);
+
+		request.setAttribute("customer", m);
+		System.out.println("customer in mainservlet: " + m);
+		request.getRequestDispatcher("/views/user/customerModify.jsp").forward(request, response);
 		
 	}
 

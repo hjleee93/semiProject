@@ -39,7 +39,7 @@ public class QnaModifyServlet extends HttpServlet {
 		
 		request.setAttribute("qna", n);
 		
-		request.getRequestDispatcher("/views/qna/QnaModify.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/qna/qnaModify.jsp").forward(request, response);
 	}
 
 	/**

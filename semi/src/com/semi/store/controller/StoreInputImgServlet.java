@@ -33,8 +33,7 @@ public class StoreInputImgServlet extends HttpServlet {
 		
 		System.out.println("storeId= " + request.getParameter("storeId"));
 		int storeId = Integer.parseInt(request.getParameter("storeId"));
-		
-		//이미지저장
+				//이미지저장
 	//	PrintWriter out = response.getWriter();
 		getServletContext().getRealPath("/"); 
 		
