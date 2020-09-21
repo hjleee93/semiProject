@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.member.model.service.MemberService;
+import com.semi.member.model.vo.Customer;
 import com.semi.member.model.vo.Member;
 
 /**
@@ -32,21 +33,22 @@ public class MemberModifyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		Member m = new Member();
-		m.setMember_id(request.getParameter("member_id"));
-		m.setMember_name(request.getParameter("member_name"));
-		m.setMember_pw(request.getParameter("member_pw"));
-		m.setGender(request.getParameter("gender"));
-		m.setMember_age(request.getParameter("member_age"));
-		m.setMember_email(request.getParameter("member_email"));
-		m.setMember_phone(request.getParameter("member_phone"));
-		m.setMem_postcode(request.getParameter("mem_postcode"));
-		m.setMem_address(request.getParameter("mem_address"));
-		m.setMem_detailAddress(request.getParameter("mem_detailAddress"));
-		m.setMem_extraAddress(request.getParameter("mem_extraAddress"));
-		m.setCategory(String.join(",",request.getParameterValues("category")));
+		Customer c = new Customer();
+		c.setCustomerNum(Integer.parseInt(request.getParameter("seq").trim()));
+		c.getMember().setMemberName(request.getParameter("member_name"));
+		c.getMember().setMemberPw(request.getParameter("pw"));
+		c.setGender(request.getParameter("gender"));
+		c.setBirthday(request.getParameter("member_age"));
+		c.getMember().setMemberEmail(request.getParameter("member_email"));
+		c.getMember().setMemberPhone(request.getParameter("member_phone"));
+		c.getMember().setMemPostcode(request.getParameter("postcode"));
+		c.getMember().setMemAddress(request.getParameter("address"));
+		c.getMember().setMemDetailAddress(request.getParameter("detailAddress"));
+		c.getMember().setMemExtraAddress(request.getParameter("extraAddress"));
+		c.setCategory(String.join(",",request.getParameterValues("category")));
 		
-		int result = new MemberService().memberUpdate(m);
+		System.out.println("modimem : "+c);
+		int result = new MemberService().memberUpdate(c);
 		//결과를 가지고 페이지를 선택하기
 		//수정이 되면 result>0 실패하면 result=0;
 		//메세지출력 메인화면

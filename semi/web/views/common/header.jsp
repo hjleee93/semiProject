@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8" import="com.semi.store.model.vo.Store"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.semi.member.model.vo.Member"%>
-<%@ page import="com.semi.partner.model.vo.PartnerMember"%>
 <%
 	System.out.println("header 실행");
 

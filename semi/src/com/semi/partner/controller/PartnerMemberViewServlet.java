@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.partner.model.service.PartnerService;
-import com.semi.partner.model.vo.PartnerMember;
+import com.semi.member.model.service.MemberService;
+import com.semi.member.model.vo.Member;
 
 /**
  * Servlet implementation class PartnerMemberViewServlet
@@ -31,25 +31,15 @@ public class PartnerMemberViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String id =request.getParameter("partner_id");
-//		PartnerMember pm = new PartnerService().selectMember(id);
+		String id =request.getParameter("id");
+		System.out.println("id in servlet " + id);
 		
-//		String pw = pm.getPartner_pw();
-//		try {
-//			pm.setPartner_pw(AESCrypto.decrypt(pw));
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//		}
-		/*
-		 * String email=m.getEmail(); String phone=m.getPhone(); try {
-		 * m.setEmail(AESCrypto.decrypt(email)); m.setPhone(AESCrypto.decrypt(phone));
-		 * }catch(Exception e){ e.printStackTrace();
-		 * 
-		 * 
-		 * }
-		 */		
-//		request.setAttribute("member", pm);
+		Member m = new MemberService().selectPartnerModify(id);
+		
+
+		request.setAttribute("member", m);
 		request.getRequestDispatcher("/views/partner/partnerModify.jsp").forward(request, response);
+		
 	}
 
 	/**
