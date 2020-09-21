@@ -1,4 +1,4 @@
-package com.semi.store.controller;
+package com.semi.storeservice.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.store.model.vo.Store;
+import com.semi.store.service.StoreService;
+
 /**
- * Servlet implementation class StoreRsvSettingEndServlet
+ * Servlet implementation class StoreRsvSettingServlet
  */
-@WebServlet("/store/storeRsvSettingEnd")
-public class StoreRsvSettingEndServlet extends HttpServlet {
+@WebServlet("/storeService/storeRsvSetting")
+public class StoreRsvSettingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StoreRsvSettingEndServlet() {
+    public StoreRsvSettingServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +29,17 @@ public class StoreRsvSettingEndServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		int storeId = Integer.parseInt(request.getParameter("storeId"));
+		
+		System.out.println("storeId in servlet: " + storeId);
+		
+		Store s = new StoreService().selectStoreDtl(storeId);
+		System.out.println("서블릿 store: "+ s);
+		
+		request.setAttribute("store",s);
+		
+		request.getRequestDispatcher("/views/partner/ptnRequest3.jsp")
+		.forward(request,response);
 	}
 
 	/**

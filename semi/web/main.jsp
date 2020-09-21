@@ -149,10 +149,10 @@ if (cookies != null) {
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/store/storeList">연령별 추천</a>
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/store/storeList">지역별 추천</a>
+								href="<%=request.getContextPath()%>/views/regional/RegionalList.jsp">지역별 추천</a>
 
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/store/storeList">랜덤 추천</a>
+								href="<%=request.getContextPath()%>/random">랜덤 추천</a>
 						</div></li>
 
 					<li class="nav-item dropdown"><a

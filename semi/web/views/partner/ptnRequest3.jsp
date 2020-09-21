@@ -424,7 +424,11 @@ label {
 
 	<div class="container" id="container">
 
-
+<form
+					action="<%=request.getContextPath()%>/storeService/storeRsvSettingEnd"
+					method="post" novalidate>
+						<input type="hidden" name="storeId" value="<%=s.getStoreId()%>">
+					<input type="hidden" name="ptnId" value="<%=s.getPtnNum()%>">
 		<table id="tbl" class="tbl-list tb2">
 
 
@@ -439,271 +443,299 @@ label {
 
 				</tr>
 
+				
+				
+					<tr>
+						<td scope="row" class="tbl-title"><label for="phone1"
+							class="store">1. 영업시간을 선택해주세요</label></td>
+						<td>
+							<ul class="nav nav-tabs">
+								<li class="nav-item"><a class="nav-link active"
+									data-toggle="tab" href="#mon">월</a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									href="#tue">화</a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									href="#wed">수</a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									href="#thur">목</a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									href="#fri">금</a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									href="#sat">토</a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab"
+									href="#sun">일</a></li>
 
 
-				<tr>
-					<td scope="row" class="tbl-title"><label for="phone1"
-						class="store">1. 영업시간을 선택해주세요</label></td>
-					<td>
-						<ul class="nav nav-tabs">
-							<li class="nav-item"><a class="nav-link active"
-								data-toggle="tab" href="#mon">월</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#tue">화</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#wed">수</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#thur">목</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#fri">금</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#sat">토</a></li>
-							<li class="nav-item"><a class="nav-link" data-toggle="tab"
-								href="#sun">일</a></li>
-
-
-						</ul>
-						<div class="tab-content">
-							<div class="tab-pane fade show active" id="mon">
-								<table>
-									<tr>
-										<td colspan="3"><label for="monClosed"><input
-												type="checkbox" name="monClosed" class="closed"
-												id="monClosed" value="1" onclick="clicked()">Closed</label></td>
-									</tr>
-
-									<tbody id="layer">
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane fade show active" id="mon">
+									<table>
 										<tr>
-											<td>오픈 시간</td>
-											<td><input type="text" class="timepicker2"
-												placeholder="Open time" required></td>
+											<td colspan="3"><label for="monClosed">
+											<input
+													type="checkbox" name="monClosed" class="closed"
+													id="monClosed" value="1" onclick="clicked()">Closed</label></td>
 										</tr>
+
+										<tbody id="layer">
+											<tr>
+												<td>오픈 시간</td>
+												
+												<td>
+												<input type="hidden" value="Mon" name="Mon">
+												<input type="text" name="monOpenTime"
+													class="timepicker2" placeholder="Open time" required></td>
+											</tr>
+											<tr>
+												<td>마감 시간</td>
+												<td><input type="text" name="monCloseTime"
+													class="timepicker2" placeholder="Close time" required></td>
+											</tr>
+											<tr>
+												<td>브레이크타임</td>
+												<td><input type="text" name="monBreakStart"
+													class="timepicker2" placeholder="Start"> ~ <input
+													type="text" name="monBreakEnd" class="timepicker3"
+													placeholder="Finish"></td>
+											</tr>
+											<tr>
+												<td>예약 인원수</td>
+												<td><input type="number" min="1" name="monMinPpl"
+													placeholder="최소 인원수"> ~ <input type="number"
+													name="monMaxPpl" min="1" placeholder="최대 인원수"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="tab-pane fade" id="tue">
+									<table>
 										<tr>
-											<td>마감 시간</td>
-											<td><input type="text" class="timepicker2"
-												placeholder="Close time" required></td>
+											<td><label for="tueClosed">
+											<input type="hidden" value="Tue" name="Tue">
+											<input
+													type="checkbox" name="tueClosed" class="closed"
+													id="tueClosed" value="1" onclick="clicked2()">Closed</label></td>
 										</tr>
+										<tbody id="layer2">
+											<tr>
+												<td>오픈 시간</td>
+												<td><input type="text" class="timepicker2" name="tueOpen"
+													placeholder="Open time" required></td>
+											</tr>
+											<tr>
+												<td>마감 시간</td>
+												<td><input type="text" class="timepicker2" name="tueClose"
+													placeholder="Close time" required></td>
+											</tr>
+
+											<tr>
+												<td>브레이크타임</td>
+												<td colspan="2"><input type="text" class="timepicker2" name="tueBreakStart"
+													placeholder="Start"> ~ <input type="text" name="tueBreakEnd"
+													class="timepicker3" placeholder="Finish"></td>
+											</tr>
+											<tr>
+												<td>예약 인원수</td>
+												<td><input type="number" min="1" placeholder="최소 인원수" name="tueMinPpl">
+													~ <input type="number" min="1" placeholder="최대 인원수" name="tueMaxPpl"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="tab-pane fade" id="wed">
+									<table>
 										<tr>
-											<td>브레이크타임</td>
-											<td><input type="text" class="timepicker2"
-												placeholder="Start"> ~ <input type="text"
-												class="timepicker3" placeholder="Finish"></td>
+											<td><label for="wedClosed">
+											<input type="hidden" value="Wed" name="Wed">
+											<input
+											
+													type="checkbox" name="wedClosed" class="closed"
+													id="wedClosed" value="1" onclick="clicked3()">Closed</label></td>
 										</tr>
+										<tbody id="layer3">
+											<tr>
+												<td>오픈 시간</td>
+												<td><input type="text" class="timepicker2" name="wedOpen"
+													placeholder="Open time" required></td>
+											</tr>
+											<tr>
+												<td>마감 시간</td>
+												<td><input type="text" class="timepicker2" name="wedClose"
+													placeholder="Close time" required></td>
+											</tr>
+											<tr>
+												<td>브레이크타임</td>
+												<td colspan="2"><input type="text" class="timepicker2" name="wedBreakStart"
+													placeholder="Start"> ~ <input type="text"
+													class="timepicker3" placeholder="Finish" name="wedBreakEnd"></td>
+											</tr>
+											<tr>
+												<td>예약 인원수</td>
+												<td><input type="number" min="1" placeholder="최소 인원수" name="wedMinPpl">
+													~ <input type="number" min="1" placeholder="최대 인원수" name="wedMaxPpl"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="tab-pane fade" id="thur">
+									<table>
 										<tr>
-										<td>예약 인원수</td>
-										<td><input type="number" min="1" placeholder="최소 인원수"> ~ <input type="number" min="1" placeholder="최대 인원수"></td>
+											<td><label for="thurClosed"><input
+													type="checkbox" name="thurClosed" class="closed"
+													id="thurClosed" value="1" onclick="clicked4()">Closed</label></td>
 										</tr>
-									</tbody>
-								</table>
+										<tbody id="layer4">
+											<tr>
+												<td>오픈 시간</td>
+												<td>
+												<input type="hidden" value="Thur" name="Thur">
+												<input type="text" class="timepicker2" name="thurOpen"
+													placeholder="Open time" required></td>
+											</tr>
+											<tr>
+												<td>마감 시간</td>
+												<td><input type="text" class="timepicker2" name="thurClose"
+													placeholder="Close time" required></td>
+											</tr>
+											<tr>
+												<td>브레이크타임</td>
+												<td colspan="2"><input type="text" class="timepicker2" name="thurBreakStart"
+													placeholder="Start"> ~ <input type="text"
+													class="timepicker3" placeholder="Finish" name="thurBreakEnd"></td>
+											</tr>
+											<tr>
+												<td>예약 인원수</td>
+												<td><input type="number" min="1" placeholder="최소 인원수" name="thurMinPpl">
+													~ <input type="number" min="1" placeholder="최대 인원수" name="thurMaxPpl"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="tab-pane fade" id="fri">
+									<table>
+										<tr>
+											<td><label for="friClosed">
+											<input type="hidden" name="Fri" value="Fri">
+											<input
+													type="checkbox" name="friClosed" class="closed"
+													id="friClosed" value="1" onclick="clicked5()">Closed</label></td>
+										</tr>
+										<tbody id="layer5">
+											<tr>
+												<td>오픈 시간</td>
+												<td><input type="text" class="timepicker2" name="friOpen"
+													placeholder="Open time" required></td>
+											</tr>
+											<tr>
+												<td>마감 시간</td>
+												<td><input type="text" class="timepicker2" name="friClose"
+													placeholder="Close time" required></td>
+											</tr>
+											<tr>
+												<td>브레이크타임</td>
+												<td colspan="2"><input type="text" class="timepicker2" name="friBreakStart"
+													placeholder="Start"> ~ <input type="text"
+													class="timepicker3" placeholder="Finish" name="friBreakEnd"></td>
+											</tr>
+											<tr>
+												<td>예약 인원수</td>
+												<td><input type="number" min="1" placeholder="최소 인원수" name="friMinPpl">
+													~ <input type="number" min="1" placeholder="최대 인원수" name="friMaxPpl"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="tab-pane fade" id="sat">
+									<table>
+										<tr>
+											<td><label for="satClosed"><input
+													type="checkbox" name="satClosed" class="closed"
+													id="satClosed" value="1" onclick="clicked6()">Closed</label></td>
+										</tr>
+										<tbody id="layer6">
+											<tr>
+												<td>오픈 시간</td>
+												<td>
+												<input type="hidden" value="Sat" name="Sat">
+												<input type="text" class="timepicker2" name="satOpen"
+													placeholder="Open time" required></td>
+											</tr>
+											<tr>
+												<td>마감 시간</td>
+												<td><input type="text" class="timepicker2" name="satClose"
+													placeholder="Close time" required></td>
+											</tr>
+											<tr>
+												<td>브레이크타임</td>
+												<td colspan="2"><input type="text" class="timepicker2" name="satBreakStart"
+													placeholder="Start"> ~ <input type="text"
+													class="timepicker3" placeholder="Finish" name="satBreakEnd"></td>
+											</tr>
+											<tr>
+												<td>예약 인원수</td>
+												<td><input type="number" min="1" placeholder="최소 인원수" name="satMinPpl">
+													~ <input type="number" min="1" placeholder="최대 인원수" name="satMaxPpl"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="tab-pane fade" id="sun">
+									<table>
+										<tr>
+											<td><label for="sunClosed">
+											<input type="hidden" name="Sun" value="Sun">
+											<input
+													type="checkbox" name="sunClosed" class="closed"
+													id="sunClosed" value="1" onclick="clicked7()">Closed</label></td>
+										</tr>
+										<tbody id="layer7">
+											<tr>
+												<td>오픈 시간</td>
+												<td><input type="text" class="timepicker2"  name="sunOpen"
+													placeholder="Open time" required></td>
+											</tr>
+											<tr>
+												<td>마감 시간</td>
+												<td><input type="text" class="timepicker2"  name="sunClose"
+													placeholder="Close time" required></td>
+											</tr>
+											<tr>
+												<td>브레이크타임</td>
+												<td><input type="text" class="timepicker2"  name="sunBreakStart"
+													placeholder="Start"> ~ <input type="text" name="sunBreakEnd"
+													class="timepicker3" placeholder="Finish"></td>
+											</tr>
+											<tr>
+												<td>예약 인원수</td>
+												<td><input type="number" min="1" placeholder="최소 인원수" name="sunMinPpl">
+													~ <input type="number" min="1" placeholder="최대 인원수" name="sunMaxPpl"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
 							</div>
-							<div class="tab-pane fade" id="tue">
-								<table>
-									<tr>
-										<td><label for="tueClosed"><input type="checkbox"
-												name="tueClosed" class="closed" id="tueClosed" value="1"
-												onclick="clicked2()">Closed</label></td>
-									</tr>
-									<tbody id="layer2">
-										<tr>
-											<td>오픈 시간</td>
-											<td><input type="text" class="timepicker2"
-												placeholder="Open time" required></td>
-										</tr>
-										<tr>
-											<td>마감 시간</td>
-											<td><input type="text" class="timepicker2"
-												placeholder="Close time" required></td>
-										</tr>
-
-										<tr>
-											<td>브레이크타임</td>
-											<td colspan="2"><input type="text" class="timepicker2"
-												placeholder="Start"> ~ <input type="text"
-												class="timepicker3" placeholder="Finish"></td>
-										</tr>
-										<tr>
-										<td>예약 인원수</td>
-										<td><input type="number" min="1" placeholder="최소 인원수"> ~ <input type="number" min="1" placeholder="최대 인원수"></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<div class="tab-pane fade" id="wed">
-								<table>
-									<tr>
-										<td><label for="wedClosed"><input type="checkbox"
-												name="wedClosed" class="closed" id="wedClosed" value="1"
-												onclick="clicked3()">Closed</label></td>
-									</tr>
-									<tbody id="layer3">
-										<tr>
-											<td>오픈 시간</td>
-											<td><input type="text" class="timepicker2"
-												placeholder="Open time" required></td>
-										</tr>
-										<tr>
-											<td>마감 시간</td>
-											<td><input type="text" class="timepicker2"
-												placeholder="Close time" required></td>
-										</tr>
-										<tr>
-											<td>브레이크타임</td>
-											<td colspan="2"><input type="text" class="timepicker2"
-												placeholder="Start"> ~ <input type="text"
-												class="timepicker3" placeholder="Finish"></td>
-										</tr>
-										<tr>
-										<td>예약 인원수</td>
-										<td><input type="number" min="1" placeholder="최소 인원수"> ~ <input type="number" min="1" placeholder="최대 인원수"></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<div class="tab-pane fade" id="thur">
-								<table>
-									<tr>
-										<td><label for="thurClosed"><input
-												type="checkbox" name="thurClosed" class="closed"
-												id="thurClosed" value="1" onclick="clicked4()">Closed</label></td>
-									</tr>
-									<tbody id="layer4">
-										<tr>
-											<td>오픈 시간</td>
-											<td><input type="text" class="timepicker2"
-												placeholder="Open time" required></td>
-										</tr>
-										<tr>
-											<td>마감 시간</td>
-											<td><input type="text" class="timepicker2"
-												placeholder="Close time" required></td>
-										</tr>
-										<tr>
-											<td>브레이크타임</td>
-											<td colspan="2"><input type="text" class="timepicker2"
-												placeholder="Start"> ~ <input type="text"
-												class="timepicker3" placeholder="Finish"></td>
-										</tr>
-										<tr>
-										<td>예약 인원수</td>
-										<td><input type="number" min="1" placeholder="최소 인원수"> ~ <input type="number" min="1" placeholder="최대 인원수"></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<div class="tab-pane fade" id="fri">
-								<table>
-									<tr>
-										<td><label for="friClosed"><input type="checkbox"
-												name="friClosed" class="closed" id="friClosed" value="1"
-												onclick="clicked5()">Closed</label></td>
-									</tr>
-									<tbody id="layer5">
-										<tr>
-											<td>오픈 시간</td>
-											<td><input type="text" class="timepicker2"
-												placeholder="Open time" required></td>
-										</tr>
-										<tr>
-											<td>마감 시간</td>
-											<td><input type="text" class="timepicker2"
-												placeholder="Close time" required></td>
-										</tr>
-										<tr>
-											<td>브레이크타임</td>
-											<td colspan="2"><input type="text" class="timepicker2"
-												placeholder="Start"> ~ <input type="text"
-												class="timepicker3" placeholder="Finish"></td>
-										</tr>
-										<tr>
-										<td>예약 인원수</td>
-										<td><input type="number" min="1" placeholder="최소 인원수"> ~ <input type="number" min="1" placeholder="최대 인원수"></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<div class="tab-pane fade" id="sat">
-								<table>
-									<tr>
-										<td><label for="satClosed"><input type="checkbox"
-												name="satClosed" class="closed" id="satClosed" value="1"
-												onclick="clicked6()">Closed</label></td>
-									</tr>
-									<tbody id="layer6">
-										<tr>
-											<td>오픈 시간</td>
-											<td><input type="text" class="timepicker2"
-												placeholder="Open time" required></td>
-										</tr>
-										<tr>
-											<td>마감 시간</td>
-											<td><input type="text" class="timepicker2"
-												placeholder="Close time" required></td>
-										</tr>
-										<tr>
-											<td>브레이크타임</td>
-											<td colspan="2"><input type="text" class="timepicker2"
-												placeholder="Start"> ~ <input type="text"
-												class="timepicker3" placeholder="Finish"></td>
-										</tr>
-										<tr>
-										<td>예약 인원수</td>
-										<td><input type="number" min="1" placeholder="최소 인원수"> ~ <input type="number" min="1" placeholder="최대 인원수"></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<div class="tab-pane fade" id="sun">
-								<table>
-									<tr>
-										<td><label for="sunClosed"><input type="checkbox"
-												name="sunClosed" class="closed" id="sunClosed" value="1"
-												onclick="clicked7()">Closed</label></td>
-									</tr>
-									<tbody id="layer7">
-										<tr>
-											<td>오픈 시간</td>
-											<td><input type="text" class="timepicker2"
-												placeholder="Open time" required></td>
-										</tr>
-										<tr>
-											<td>마감 시간</td>
-											<td><input type="text" class="timepicker2"
-												placeholder="Close time" required></td>
-										</tr>
-										<tr>
-											<td>브레이크타임</td>
-											<td><input type="text" class="timepicker2"
-												placeholder="Start"> ~ <input type="text"
-												class="timepicker3" placeholder="Finish"></td>
-										</tr>
-										<tr>
-										<td>예약 인원수</td>
-										<td><input type="number" min="1" placeholder="최소 인원수"> ~ <input type="number" min="1" placeholder="최대 인원수"></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</td>
-				</tr>
+						</td>
+					</tr>
 
 
-				<tr>
-					<td scope="row" class="tbl-title"><label for="locate1"
-						class="store">2. 휴무일을 지정해주세요</label></td>
-					<td>
-						<div id="mdp-demo"></div>
+					<tr>
+						<td scope="row" class="tbl-title"><label for="locate1"
+							class="store">2. 휴무일을 지정해주세요</label></td>
+						<td>
+							<div id="mdp-demo"></div>
 
-					</td>
-					<td><textarea id="altField" value=""></textarea></td>
-				</tr>
+						</td>
+						<td><textarea id="altField" value="" name="storeOff"></textarea></td>
+					</tr>
 			</tbody>
 		</table>
 		<div class="board-view-btn">
-			<a class="gray" title="previous" onclick="cancel_event()">취소</a> <a
-				class="blue" title="complete"
-				onclick="acyncMovePage('<%=request.getContextPath()%>/views/partner/ptnRequest4.jsp');">다음</a>
-		</div>
+			<input type="reset" value="취소" class="gray" title="cancel"
+				onclick="cancel_event();"> <input type="submit" value="확인"
+				class="blue" title="submit">
+		</div>	
+			</form>
+		
 	</div>
 
 
@@ -822,32 +854,32 @@ label {
 		}
 
 		$('.timepicker').timepicker({
-			timeFormat : 'h:mm p',
-			interval : 60,
+			timeFormat : 'HH:mm',
+			interval : 30,
 			dynamic : false,
 			dropdown : true,
 			scrollbar : true
 		});
 
 		$('.timepicker1').timepicker({
-			timeFormat : 'h:mm p',
-			interval : 60,
+			timeFormat : 'HH:mm',
+			interval : 30,
 			dynamic : false,
 			dropdown : true,
 			scrollbar : true
 		});
 
 		$('.timepicker2').timepicker({
-			timeFormat : 'h:mm p',
-			interval : 60,
+			timeFormat : 'HH:mm',
+			interval : 30,
 			dynamic : false,
 			dropdown : true,
 			scrollbar : true
 		});
 
 		$('.timepicker3').timepicker({
-			timeFormat : 'h:mm p',
-			interval : 60,
+			timeFormat : 'HH:mm',
+			interval : 30,
 			dynamic : false,
 			dropdown : true,
 			scrollbar : true
@@ -856,7 +888,8 @@ label {
 		$('#mdp-demo').multiDatesPicker({
 			altField : '#altField',
 			minDate : 0, // today
-			maxDate : 30
+			maxDate : 30,
+			dateFormat: "yy-mm-dd"
 		// +30 days from today
 		});
 
@@ -882,15 +915,6 @@ label {
 			});
 		});
 
-		//클릭한 td의 tr값 가져오기
-
-		jq("#our_table td").click(function() {
-			var checkBtn = jq(this);
-			var tr = checkBtn.parent().find('th'); //클릭한 th가져옴
-
-			console.log("가져오나? " + tr.text()); //가져옴 시간을 가져옴 요일은 어케가져옴?
-
-		});
 
 		var tr = document.getElementsByClassName("time");
 
@@ -922,24 +946,7 @@ label {
 			}
 		}
 
-		//selectable 구현
-		jq(function() {
-			jq("#tBody").selectable({
-				filter : "td",
-				selected : function(e, ui) {
-					jq(ui.selected).toggleClass("ui-chosen")
-					jq(this).find(".ui.chosen").addClass("ui-selected")
-				}
-			});
-			jq("#empty").selectable({
-				filter : "td",
-				selected : function(e, ui) {
-					jq(ui.selected).toggleClass("ui-chosen1")
-					jq(this).find(".ui.chosen1").addClass("ui-selected2")
-				}
-			});
-		});
-
+		
 		//공휴일 배열
 		//일단 나중에 추가...
 		var holidays = [ "2020-01-01", "03-01", "05-05", "06-06", "07-17",

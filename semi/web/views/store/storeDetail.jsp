@@ -1,10 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ page import="com.semi.storeservice.model.vo.StoreService"%>
+<%@ page import="com.semi.storeservice.service.StoreServiceService"%>
 <%
 	Store s = (Store) request.getAttribute("store");
 
-String addr = "제주특별자치도 제주시 첨단로 242";
+
+String addr = s.getStoreAddress();
+
+Member logginedMember = (Member) session.getAttribute("Memberloggined"); 
+
+
+// System.out.println("logginedMember.getMemberNum(): "+ logginedMember.getMemberNum());
+int storeId = s.getStoreId();
+int ptnNum =s.getPtnNum();
+
+
+List<StoreService> serviceList = new StoreServiceService().selectService(storeId, ptnNum);
+
+
+request.setAttribute("serviceList", serviceList);
+
+
+
+
+System.out.println("serviceList1: " + serviceList);
+
+
+
+
+
 %>
 <%@ include file="/views/common/header.jsp"%>
 <script>
@@ -64,8 +89,19 @@ String addr = "제주특별자치도 제주시 첨단로 242";
 	href="<%=request.getContextPath()%>/css/review.css">
 
 
+<script src="<%=request.getContextPath()%>/js/jquery-1.12.1-ui.js"></script>
 
 <style>
+
+.inactive-date{
+text-decoration:line-through
+
+}
+
+.active-date{
+ cursor:pointer;
+}
+
 #calendar {
 	border: none;
 	outline: 1px solid;
@@ -202,6 +238,43 @@ textarea {
 		<div class="col-md-6 d-flex flex-column">
 			<h3 class="my-3"><%=s.getStoreName()%></h3>
 			<p style="flex: 1"><%=s.getStoreContent()%></p>
+			<table>
+			<tr>
+			<p>오픈시간</p>
+			</tr>
+			
+			
+<%
+if(serviceList.size() != 0){
+	
+		for(StoreService ss : serviceList){
+		
+			String arr = String.valueOf(ss.getOpenTime());
+// 			System.out.println("arr: "+arr.substring());
+		%>
+		<tr>
+			<td><%=ss.getStoreDay()%> : </td>
+			<% if(ss.getOpenTime() == 0){%>
+			<td>Closed</td>
+			<%}else{ %>
+			<td><%=ss.getOpenTime()%>~<%=ss.getCloseTime()%></td>
+			<%} %>
+			</tr>
+			<%if(ss.getBreakStart() != 0){ %>
+			<tr>
+			
+			<td>브레이크타임</td>
+			<td><%=ss.getBreakStart()%>~<%=ss.getBreakEnd()%></td>
+			</tr>
+			<%} %>
+		<%}
+	
+}
+	
+%>
+			
+		
+			</table>
 
 
 			<div style="display: flex;">
@@ -213,7 +286,7 @@ textarea {
 							<!-- label은 마우스로 클릭을 편하게 해줌 -->
 							<td><label onclick="prevCalendar()"><</label></td>
 
-							<td align="center" id="tbCalendarYM" colspan="5">yyyy년 m월</td>
+							<td align="center" id="tbCalendarYM" colspan="5" >yyyy년 m월</td>
 							<td><label onclick="nextCalendar()">> </label></td>
 						</tr>
 						<tr>
@@ -229,7 +302,7 @@ textarea {
 				</div>
 				<div></div>
 			</div>
-			<form>
+			
 				<table>
 					<tr>
 						<td>선택한 날짜:</td>
@@ -237,28 +310,15 @@ textarea {
 							<!-- 						<input id="" type="text" readonly> -->
 						</td>
 					</tr>
-					<tr>
-						<td>선택 가능한 시간:</td>
-						<td><input type="radio" name="time">11:00 <input
-							type="radio" name="time">12:00 <input type="radio"
-							name="time">12:30 <input type="radio" name="time">13:00
-						</td>
-					</tr>
-					<tr>
-						<td>인원 수</td>
-						<td><select size="1" required>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5명 이상</option>
-						</select></td>
-
-					</tr>
-					<tr>
-						<td>기타</td>
-						<td><textarea style="resize: none;"></textarea></td>
-					</tr>
+					<%if(logginedMember != null){ %>
+					<tbody id="bookingTime">
+					<%}else{ %>
+					<tbody >
+					
+					
+					<%} %>
+					</tbody>
+					
 				</table>
 
 
@@ -270,13 +330,8 @@ textarea {
 
 
 
-				<div class="btn_wrap text-center">
-					<input type="submit" value="장바구니에 담기"> <input type="submit"
-						value="바로 구매하기">
-
-
-				</div>
-			</form>
+				
+			
 		</div>
 
 	</div>
@@ -464,8 +519,7 @@ textarea {
 														</div>
 													</li>
 												</ul>
-												<!-- 페이징 처리  -->
-
+												
 											</div>
 										</section>
 									</div>
@@ -488,6 +542,10 @@ textarea {
 
 
 <script>
+
+
+
+
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
 		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -502,9 +560,9 @@ textarea {
 	var geocoder = new kakao.maps.services.Geocoder();
 
 	// 주소로 좌표를 검색합니다
-	geocoder
-			.addressSearch(
-					'제주특별자치도 제주시 첨단로 242',
+	
+	geocoder.addressSearch(
+			'<%=s.getStoreAddress()%>',
 					function(result, status) {
 
 						// 정상적으로 검색이 완료됐으면 
@@ -522,7 +580,7 @@ textarea {
 							// 인포윈도우로 장소에 대한 설명을 표시합니다
 							var infowindow = new kakao.maps.InfoWindow(
 									{
-										content : '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+										content : '<div style="width:150px;text-align:center;padding:6px 0;"><%=s.getStoreName()%></div>'
 									});
 							infowindow.open(map, marker);
 
@@ -534,107 +592,115 @@ textarea {
 	var today = new Date();//오늘 날짜//내 컴퓨터 로컬을 기준으로 today에 Date 객체를 넣어줌
 	var date = new Date();//today의 Date를 세어주는 역할
 	function prevCalendar() {//이전 달
-		// 이전 달을 today에 값을 저장하고 달력에 today를 넣어줌
-		//today.getFullYear() 현재 년도//today.getMonth() 월  //today.getDate() 일 
-		//getMonth()는 현재 달을 받아 오므로 이전달을 출력하려면 -1을 해줘야함
+		
 		today = new Date(today.getFullYear(), today.getMonth() - 1, today
 				.getDate());
 		buildCalendar(); //달력 cell 만들어 출력 
 	}
 
 	function nextCalendar() {//다음 달
-		// 다음 달을 today에 값을 저장하고 달력에 today 넣어줌
-		//today.getFullYear() 현재 년도//today.getMonth() 월  //today.getDate() 일 
-		//getMonth()는 현재 달을 받아 오므로 다음달을 출력하려면 +1을 해줘야함
+		
 		today = new Date(today.getFullYear(), today.getMonth() + 1, today
 				.getDate());
 		buildCalendar();//달력 cell 만들어 출력
 	}
 	function buildCalendar() {//현재 달 달력 만들기
 		var doMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-		//이번 달의 첫째 날,
-		//new를 쓰는 이유 : new를 쓰면 이번달의 로컬 월을 정확하게 받아온다.     
-		//new를 쓰지 않았을때 이번달을 받아오려면 +1을 해줘야한다. 
-		//왜냐면 getMonth()는 0~11을 반환하기 때문
+	
 		var lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-		//이번 달의 마지막 날
-		//new를 써주면 정확한 월을 가져옴, getMonth()+1을 해주면 다음달로 넘어가는데
-		//day를 1부터 시작하는게 아니라 0부터 시작하기 때문에 
-		//대로 된 다음달 시작일(1일)은 못가져오고 1 전인 0, 즉 전달 마지막일 을 가져오게 된다
 		var tbCalendar = document.getElementById("calendar");
-		//날짜를 찍을 테이블 변수 만듬, 일 까지 다 찍힘
+	
 		var tbCalendarYM = document.getElementById("tbCalendarYM");
-		//테이블에 정확한 날짜 찍는 변수
-		//innerHTML : js 언어를 HTML의 권장 표준 언어로 바꾼다
-		//new를 찍지 않아서 month는 +1을 더해줘야 한다. 
 		tbCalendarYM.innerHTML = today.getFullYear() + "년 "
 				+ (today.getMonth() + 1) + "월";
 
-		/*while은 이번달이 끝나면 다음달로 넘겨주는 역할*/
+	
 		while (tbCalendar.rows.length > 2) {
 			//열을 지워줌
 			//기본 열 크기는 body 부분에서 2로 고정되어 있다.
 			tbCalendar.deleteRow(tbCalendar.rows.length - 1);
-			//테이블의 tr 갯수 만큼의 열 묶음은 -1칸 해줘야지 
-			//30일 이후로 담을달에 순서대로 열이 계속 이어진다.
-		}
+	}
 		var row = null;
 		row = tbCalendar.insertRow();
-		//테이블에 새로운 열 삽입//즉, 초기화
+
 		var cnt = 0;// count, 셀의 갯수를 세어주는 역할
-		// 1일이 시작되는 칸을 맞추어 줌
+
 		for (i = 0; i < doMonth.getDay(); i++) {
-			/*이번달의 day만큼 돌림*/
+
 			cell = row.insertCell();//열 한칸한칸 계속 만들어주는 역할
 			cnt = cnt + 1;//열의 갯수를 계속 다음으로 위치하게 해주는 역할
 		}
-		/*달력 출력*/
+
 		for (i = 1; i <= lastDate.getDate(); i++) {
-			//1일부터 마지막 일까지 돌림
+
 			cell = row.insertCell();//열 한칸한칸 계속 만들어주는 역할
 			cell.innerHTML = i;//셀을 1부터 마지막 day까지 HTML 문법에 넣어줌
 			cell.setAttribute("id", "day" + i);
 			cell.setAttribute("value", i);
 			cell.setAttribute("class", "row-day");
-			cell.setAttribute("onclick", "getDate(this);");
+
 			cnt = cnt + 1;//열의 갯수를 계속 다음으로 위치하게 해주는 역할
-			if (cnt % 7 == 1) {/*일요일 계산*/
-				//1주일이 7일 이므로 일요일 구하기
-				//월화수목금토일을 7로 나눴을때 나머지가 1이면 cnt가 1번째에 위치함을 의미한다
+			if (cnt % 7 == 1) {//일욜
 				cell.innerHTML = "<font color=#E91E63>" + i
-				//1번째의 cell에만 색칠
+
 			}
-			if (cnt % 7 == 0) {/* 1주일이 7일 이므로 토요일 구하기*/
-				//월화수목금토일을 7로 나눴을때 나머지가 0이면 cnt가 7번째에 위치함을 의미한다
+			if (cnt % 7 == 0) {//토욜
 				cell.innerHTML = "<font color=blue>" + i
-				//7번째의 cell에만 색칠
+				
 				row = calendar.insertRow();
-				//토요일 다음에 올 셀을 추가
+				
 			}
 			/*오늘의 날짜에 노란색 칠하기*/
 			if (today.getFullYear() == date.getFullYear()
 					&& today.getMonth() == date.getMonth()
 					&& i == date.getDate()) {
+				
 				//달력에 있는 년,달과 내 컴퓨터의 로컬 년,달이 같고, 일이 오늘의 일과 같으면
-				cell.bgColor = "#FAF58C";//셀의 배경색을 노랑으로 
+				cell.bgColor = "violet";//셀의 배경색을 노랑으로 
 			}
+			
+			if (today.getFullYear() >= date.getFullYear()
+					
+ 					&& today.getMonth() >= date.getMonth()
+ 					&& i >= date.getDate()
+					) {
+				console.log( date.getFullYear());
+// 				cell.bgColor = "#FAF58C";
+				cell.setAttribute("onclick", "getDate(this);  acyncMovePage('<%=request.getContextPath()%>/views/partner/ptnRequest4.jsp'); ");
+				cell.setAttribute("class","active-date");
+			}else{
+				cell.setAttribute("class","inactive-date");
+			}
+			
 		}
 	};
-
+	$(document).ready(function(){
+		$('.active-date').click(function(e){
+			var day = $(this).attr('value');
+			
+			  
+			console.log(day);
+		});
+	});
 	buildCalendar();
-
+	var inputDate;
+	var dateValue
+	//선택한 날짜 출력
 	function getDate(e) {
 		$("tr td#selectedDate input").remove();
 		var selectedDay = $(e).attr('value');
 		var selectedMonth = (today.getMonth() + 1);
 		var selectedYear = today.getFullYear();
-
-		var input = document.createElement("input");
+		
+		dateValue=selectedYear+'/'+selectedMonth+'/'+ selectedDay;
+	
+		var input = document.createElement("input");//날짜 출력 창
 
 		input.setAttribute("id", "selectedDt");
 		input.setAttribute("type", "text");
 		input.setAttribute("name", "selectedDate");
 		input.setAttribute("readonly", "readonly");
+		
 
 		if ((selectedDay + "").length < 2) {
 			selectedDay = "0" + selectedDay;
@@ -649,18 +715,70 @@ textarea {
 				+ today1.getFullYear();
 		var selectDt = selectedYear + "" + selectedMonth + "" + selectedDay;
 		var compareDt = new Date(selectDt.substring(0, 4), selectDt.substring(
-				4, 6) - 1, selectDt.substring(6, 8));
-
+				4, 6) - 1, selectDt.substring(6, 8)); //클릭한 날짜 출력
+		inputDate = new Date(selectedYear + "/" + selectedMonth + "/" + selectedDay);
+		console.log(currentD);
+		console.log(compareDt);
+		console.log(+today1.getDate());
+		
+		
 		if (compareDt < today1) {
 			alert("오늘 날짜 이후를 선택해주세요");
 		} else {
-			input.setAttribute("value", (selectedYear + "/" + selectedMonth
-					+ "/" + selectedDay));
+			input.setAttribute("value", (selectedYear + "-" + selectedMonth
+					+ "-" + selectedDay));
 
 			document.querySelector("tr td#selectedDate").appendChild(input);
 		}
 
 	};
+	$("#selectedDt").on("propertychange change keyup paste input ", function() {
+		alert("change");
+	});
+	
+	var selectedDate = $('#selectedDate').val();
+
+	var loggedin;
+	
+<%-- 	if(<%=logginedMember%> == null || <%=logginedMember.equals(null)%>){ --%>
+// 		loggedIn = 0 ;
+// 	}else{
+<%-- 		loggedin = <%=logginedMember.getMemberNum()%>; --%>
+		
+// 	}
+	function acyncMovePage(url) {
+		var week = new Array('Sun', 'Mon', 'Tue', 'Wed','Thur','Fri','Sat');
+		var getDay = new Date(dateValue).getDay();
+		
+		console.log(week[getDay]); //선택한 날짜의 요일 출력
+		
+		// ajax option
+		var ajaxOption = {
+			url : url,
+			
+			type : "POST",
+			dataType : "html",
+			
+			data:{
+				"selectedDay":week[getDay],
+				"selectedDate":dateValue,
+				"ptnNum":"<%=s.getPtnNum()%>",
+				"storeId":"<%=s.getStoreId()%>",
+				"customerId": "<%=logginedMember.getMemberNum()%>"
+<%-- 				,"serviceList":"<%=serviceList%>" --%>
+				
+				},
+			success:function(data){
+				console.log("pass data to ptnRequest4.jsp");}
+			}
+
+		$.ajax(ajaxOption).done(function(data) {
+			
+			$('#bookingTime').children().remove();
+			
+			$('#bookingTime').html(data);
+		});
+	}
 </script>
 
 
