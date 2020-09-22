@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.admin.service.AdminService;
-import com.semi.member.model.vo.Member;
+import com.semi.member.model.vo.TotalMember;
 
 /**
- * Servlet implementation class SearchIdServlet
+ * Servlet implementation class AdminMemberSearchServlet
  */
-@WebServlet("/admin/search_id")
-public class SearchIdServlet extends HttpServlet {
+@WebServlet("/admin/search")
+public class AdminPartnerSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchIdServlet() {
+    public AdminPartnerSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +32,9 @@ public class SearchIdServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String searchType = request.getParameter("searchType");
 		String keyword = request.getParameter("keyword");
-		
-//		Member m = new AdminService().selectOneMemId(keyword);
-//		
-	}
+		}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

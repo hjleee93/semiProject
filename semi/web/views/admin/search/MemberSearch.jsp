@@ -2,9 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.semi.member.model.vo.*"%>
-<script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/jquery-1.3.2.min.js"></script>
 <%
-	List<Member> list = (List) request.getAttribute("list");
+	List<TotalMember> searchmemlist = (List)request.getAttribute("searchmemlist");
+	List<TotalMember> searchptnlist = (List)request.getAttribute("searchptnlist");
 %>
 <style>
 #member, #partner {
@@ -82,18 +83,18 @@ div#base>table tr td{
 	border:1px white solid;
 	margin-left:3%
 }
-#pageBar{
+/* #pageBar{
    	text-align:center;
    	margin:10%;
    	font-size:20px;
-}
-#pageBar a{color:#000;}
+} */
+/* #pageBar a{color:#000;}
 #pageBar a:link{color:mediumpurple;}
 
 #pageBar>.num:hover{
 	color:mediumpurple;
 	font-weight:bolder;
-	text-decoration:underline;
+	text-decoration:underline; */
 }	
 </style>
 <section>
@@ -106,20 +107,18 @@ div#base>table tr td{
 					<option value="member">회원</option>
 					<option value="partner">파트너</option>
 				</select>
-			<form action="<%=request.getContextPath()%>/admin/search_id">
+			<form action="">
 				<input type="search" name="keyword" id="keyword" list="list" placeholder="아이디로 검색">
 				<datalist id="list"></datalist> 
 			</form>
 		</div>
 		
-		
-
 		<!-- </div> -->
 		<div class="table-responsive" id="base">
 			<table class="table">
 				<tbody>
 					<tr>
-						<td colspan="10">조회된 회원이 없습니다.회원을 선택해주세요.</td>
+						<td colspan="10">회원구분을 선택해주세요.</td>
 					</tr>
 				</tbody>
 			</table>
@@ -127,7 +126,7 @@ div#base>table tr td{
 		<!-- card-body -->
 
 		<div class="table-responsive" id="member">
-			<table class="table">
+			<table class="table" id="tbl-list">
 				<colgroup>
 					<col width="50px">
 					<col width="100px">
@@ -141,9 +140,9 @@ div#base>table tr td{
 					<col width="100px">
 				</colgroup>
 				<thead>
-				<div id="pageBar">
+				<%-- <div id="pageBar">
         			<%=request.getAttribute("pageBar") %>
-        		</div>
+        		</div> --%>
 					<tr>
 						<th><input type="checkbox" name="all" class="check-all">
 						</th>
@@ -160,37 +159,88 @@ div#base>table tr td{
 				</thead>
 				<tbody>
 					<%
-						if (list.isEmpty()) {
+						if (searchmemlist.isEmpty()) {
 					%>
 					<tr>
 						<td colspan="10">조회된 회원이 없습니다.</td>
 					</tr>
 					<%
 						} else {
-						for (Member m : list) {
-					%>
+						for (TotalMember t : searchmemlist) {
+							if(t.getMemberSep().equals("회원")){
+					%>					
 					<tr>
 						<td><a><input type="checkbox" name="cb" class="cb"></a></td>
-						<td><%=m.getMemberId()%></td>
-						<td><%=m.getMemberName()%></td>
-						<td><%=m.getCustomer().getGender()%></td>
-						<td><%=m.getCustomer().getBirthday()%></td>
-						<td><%=m.getMemberEmail()%></td>
-						<td><%=m.getMemberPhone()%></td>
-						<td><%=m.getMemAddress()%></td>
-						<td><%=m.getCustomer().getCategory()%></td>
-						<td><%=m.getMemberEnrolldate()%></td>
+						<td><%=t.getMemberId()%></td>
+						<td><%=t.getMemberName()%></td>
+						<td><%=t.getGender()%></td>
+						<td><%=t.getBirthday()%></td>
+						<td><%=t.getMemberEmail()%></td>
+						<td><%=t.getMemberPhone()%></td>
+						<td><%=t.getMemAddress()%></td>
+						<td><%=t.getCategory()%></td>
+						<td><%=t.getMemberEnrolldate()%></td>
 					</tr>
 					<%
 						}
+					  }
 					}
 					%>
 				</tbody>
 			</table>
 		</div>
+		<!-- membersearch end -->
+		<!-- 파트너조회테이블팝업 -->
+		<div class="table-responsive" id="partner">
+			<table class="table" id="tbl-list2">
+				<thead>
+				<%-- <div id="pageBar">
+	        		<%=request.getAttribute("pageBar") %>
+	        	</div> --%>
+					<tr>
+						<th><input type="checkbox" name="all" class="check-all">
+						</th>
+						<th>ID</th>
+						<th>NAME</th>
+						<th>EMAIL</th>
+						<th>PHONE</th>
+						<th>ADDRESS</th>
+						<th>ENROLLDATE</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						if (searchptnlist.isEmpty()) {
+					%>
+					<tr>
+						<td colspan="7">조회된 회원이 없습니다.</td>
+					</tr>
+					<%
+						} else {
+						for (TotalMember t : searchptnlist) {
+							if(t.getMemberSep().equals("파트너")){
+					%>
+					
+					<tr>
+						<td><a><input type="checkbox" name="cb" class="cb"></a></td>
+						<td><%=t.getMemberId()%></td>
+						<td><%=t.getMemberName()%></td>
+						<td><%=t.getMemberEmail()%></td>
+						<td><%=t.getMemberPhone()%></td>
+						<td><%=t.getMemAddress()%></td>
+						<td><%=t.getMemberEnrolldate()%></td>
+					</tr>
+					<%
+						}
+					  }
+					}
+					%>
+				</tbody>
+			</table>
+		</div>
+		<!-- 파트너끝 -->
 	</div>
 	<script>
-		
 		function change() {
 			if ($("#memberselect").val() == 'member') {
 				$("#member").show();
@@ -206,7 +256,18 @@ div#base>table tr td{
 		};
 
 		$(function() {
-			
+			$("input[name='keyword']").keyup(function(){
+				var k = $(this).val();
+				$("#tbl-list>tbody>tr").hide();
+				if($("#memberselect").val()=='member'){
+				var temp=$("#tbl-list>tbody>tr>td:nth-child(2):contains('"+k+"')");
+				}
+				if($("#memberselect").val()=='partner'){
+					temp=$("#tbl-list2>tbody>tr>td:nth-child(2):contains('"+k+"')");
+				}
+				$(temp).parent().show();
+				
+			})
 			
 			$("[name=keyword]").keyup(e=>{
 				$.ajax({

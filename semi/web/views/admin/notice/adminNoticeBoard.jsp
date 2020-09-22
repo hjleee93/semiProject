@@ -80,33 +80,25 @@
         <h1>공지사항</h1>
     </div>
     <div class="container">
-            <div class="board-header">
+    <div class="board-header">
                 <div class="board-search-form">
                     <label for="searchType" class="hidden">검색 구분</label>
                     <select id="searchType" name="searchType" class="select">
-                        <option value="member">회원</option>
-                        <option value="partner">파트너</option>
+                        <option value="member">구분</option>
                         <option value="title">제목</option>
                     </select>
                     <div id="search-member">
 	                   	<form action="<%=request.getContextPath()%>/admin/notice/search">
 		                    <input type="hidden" name="searchType" value="member">
-		                    <input type="text" class="inp" name="searchkeyword" id="member" placeholder="멤버">
-		                    <button type="submit" onclick="javascript:fn_se();return false;">검색버튼</button>
-	                    </form>
-                    </div>
-                    <div id="search-partner">
-	                    <form action="<%=request.getContextPath()%>/admin/notice/search">
-		                    <input type="hidden" name="searchType" value="partner">
-		                    <input type="text" class="inp" name="searchkeyword" id="partner" placeholder="파트너">
-		                    <button type="submit" onclick="javascript:fn_se();return false;">검색버튼</button>
+		                    <input type="text" class="inp" name="searchkeyword" id="member" placeholder="">
+		                    <button type="button" onclick="javascript:fn_se();return false;">검색버튼</button>
 	                    </form>
                     </div>
                     <div id="search-title">
 	                    <form action="<%=request.getContextPath()%>/admin/notice/search">
 		                    <input type="hidden" name="searchType" value="title">
-		                    <input type="text" class="inp" name="searchkeyword" id="title" placeholder="제목">
-		                    <button type="submit" onclick="javascript:fn_se();return false;">검색버튼</button>
+		                    <input type="text" class="inp" name="searchkeyword" id="title" placeholder="검색어입력">
+		                    <button type="button" onclick="javascript:fn_se();return false;">검색버튼</button>
 	                    </form>
                     </div>
                 </div>
@@ -114,7 +106,7 @@
 		
             <div class="tbl-box">
                 <table class="tbl-list">
-                <span>총게시글 : <strong><%=data %></strong></span>
+                <span>총 게시글 : <strong><%=data %></strong></span>
                     <caption>관리자 공지사항</caption>
                     <thead>
                         <tr>
@@ -162,22 +154,32 @@
 
 </section>
 <script>
-	$(function(){
+$(function(){
+	
+	$("#searchType").change(e=>{
+		let member= $("#search-member");
+		let title=$("#search-title");
 		
-		$("#searchType").change(e => {
-			let member= $("#search-member");
-			let partner=$("#search-partner");
-			let title=$("#search-title");
-			
-			member.css("display","none");
-			partner.css("display","none");
-			title.css("display","none");
-			
-			let value=$(e.target).val();
-			$("#search-"+value).css("display","inline-block");
-		})
+		member.css("display","none");
+		title.css("display","none");
 		
-	});
+		let value=$(e.target).val();
+		$("#search-"+value).css("display","inline-block");
+	})
+	
+	$("input[name='searchkeyword']").keyup(function(){
+		var k = $(this).val();
+		$(".tbl-list>tbody>tr").hide();
+		if($("#searchType").val()=='member'){
+		var temp=$(".tbl-list>tbody>tr>td:nth-child(5n+2):contains('"+k+"')");
+		}
+		if($("#searchType").val()=='title'){
+			temp=$(".tbl-list>tbody>tr>td:nth-child(5n+3):contains('"+k+"')");
+		}
+		$(temp).parent().show();
+	})
+	
+});
 </script>
 
 <%@ include file="/views/common/footer.jsp"%>

@@ -9,12 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import com.semi.member.model.vo.Customer;
 import com.semi.member.model.vo.Member;
+import com.semi.member.model.vo.TotalMember;
 
 
 
@@ -104,45 +103,41 @@ public class MemberDao {
 		}
 		return m;
 	}
-	public Member selectCustomerModify(Connection conn, int seq) {
-		Customer c = null;
+	public TotalMember selectCustomerModify(Connection conn, int seq) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		Member m = null;
+		TotalMember t = null;
 		try {
 			pstmt= conn.prepareStatement(prop.getProperty("selectCustomerOne"));
 			pstmt.setInt(1, seq);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				m =new Member();
-				c= new Customer();
+				t =new TotalMember();
 				System.out.println("rs.getInt(1): " + rs.getInt(1));
 				
-				m.setMemberNum(rs.getInt(1));
-				m.setMemberId(rs.getString(2));
-				m.setMemberName(rs.getString(3));
-				m.setMemberSep(rs.getString(4));
-				m.setMemberPw(rs.getString(5));
-				m.setMemberEmail(rs.getString(6));
-				m.setMemberPhone(rs.getString(7));
-				m.setMemPostcode(rs.getString(8));
-				m.setMemAddress(rs.getString(9));
-				m.setMemDetailAddress(rs.getString(10));
-				m.setMemExtraAddress(rs.getString(11));
-				m.setMemberEnrolldate(rs.getDate(12));
-				c.setCustomerNum(rs.getInt(13));
-				c.setGender(rs.getString(14));
-				c.setBirthday(rs.getString(15));
-				c.setCategory(rs.getString(16));
+				t.setMemberNum(rs.getInt(1));
+				t.setMemberId(rs.getString(2));
+				t.setMemberName(rs.getString(3));
+				t.setMemberSep(rs.getString(4));
+				t.setMemberPw(rs.getString(5));
+				t.setMemberEmail(rs.getString(6));
+				t.setMemberPhone(rs.getString(7));
+				t.setMemPostcode(rs.getString(8));
+				t.setMemAddress(rs.getString(9));
+				t.setMemDetailAddress(rs.getString(10));
+				t.setMemExtraAddress(rs.getString(11));
+				t.setMemberEnrolldate(rs.getDate(12));
+				t.setCustomerNum(rs.getInt(13));
+				t.setGender(rs.getString(14));
+				t.setBirthday(rs.getString(15));
+				t.setCategory(rs.getString(16));
 				
-				m.customer = c;
-				
-				System.out.println("c in dao: " + m.customer);
+				System.out.println("c in dao: " + t);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return m;
+		return t;
 	}
 //	private Member inputData(ResultSet rs) {
 //		Member m=new Member();
@@ -202,29 +197,40 @@ public class MemberDao {
 		}return result;
 	}
 	
-	public int memberUpdate(Connection conn, Customer c) {
+	public int memberUpdate(Connection conn, TotalMember t) {
 		PreparedStatement pstmt = null;
-		int result = 0;
+		int memresult = 0;
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("updateMember"));
-			pstmt.setString(1, c.getMember().getMemberName());
-			pstmt.setString(2, c.getMember().getMemberPw());
-			pstmt.setString(3, c.getMember().getMemberEmail());
-			pstmt.setString(4, c.getMember().getMemberPhone());
-			pstmt.setString(5, c.getMember().getMemPostcode());
-			pstmt.setString(6, c.getMember().getMemAddress());
-			pstmt.setString(7, c.getMember().getMemDetailAddress());
-			pstmt.setString(8, c.getMember().getMemExtraAddress());
-			pstmt.setString(9, c.getGender());
-			pstmt.setString(10, c.getBirthday());
-			pstmt.setString(11, c.getCategory());
-			pstmt.setInt(12, c.getCustomerNum());
-			result=pstmt.executeUpdate();
+			pstmt=conn.prepareStatement(prop.getProperty("updatetotalMember"));
+			pstmt.setString(1, t.getMemberName());
+			pstmt.setString(2, t.getMemberPw());
+			pstmt.setString(3, t.getMemberEmail());
+			pstmt.setString(4, t.getMemberPhone());
+			pstmt.setString(5, t.getMemPostcode());
+			pstmt.setString(6, t.getMemAddress());
+			pstmt.setString(7, t.getMemDetailAddress());
+			pstmt.setString(8, t.getMemExtraAddress());
+			pstmt.setString(9, t.getMemberId());
+			memresult=pstmt.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
-		}return result;
+		}return memresult;
+	}
+	public int customerUpdate(Connection conn, Customer c) {
+		PreparedStatement pstmt = null;
+		int ctmresult = 0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updatecustomer"));
+			pstmt.setString(1, c.getCategory());
+			pstmt.setInt(2, c.getCustomerNum());
+			ctmresult=pstmt.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return ctmresult;
 	}
 
 }

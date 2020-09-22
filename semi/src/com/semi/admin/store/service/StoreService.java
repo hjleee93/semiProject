@@ -1,23 +1,25 @@
 package com.semi.admin.store.service;
 
+import static com.semi.common.JDBCTemplate.close;
+import static com.semi.common.JDBCTemplate.commit;
+import static com.semi.common.JDBCTemplate.getConnection;
+import static com.semi.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.List;
 
 import com.semi.admin.store.dao.StoreDao;
-import com.semi.admin.store.vo.Store;
-import static com.semi.common.JDBCTemplate.getConnection;
-import static com.semi.common.JDBCTemplate.rollback;
-import static com.semi.common.JDBCTemplate.close;
-import static com.semi.common.JDBCTemplate.commit;
+import com.semi.store.model.vo.Store;
 
 public class StoreService {
 
 	private StoreDao dao = new StoreDao();
 	
-	public List<Store> selectStoreList(int cPage, int numPerPage){
+	public List<Store> selectStoreList(int page, int numPerPage){
 		Connection conn = getConnection();
-		List<Store> list = dao.selectStoreList(conn, cPage, numPerPage);
+		List<Store> list = dao.selectStoreList(conn, page, numPerPage);
 		close(conn);
+		System.out.println("storelist in dao "+list);
 		return list;	
 	}
 
@@ -34,9 +36,9 @@ public class StoreService {
 		close(conn);
 		return count;
 	}
-	public int updateStoreStatus(int id) {
+	public int updateStoreStatus(int storeId) {
 		Connection conn = getConnection();
-		int result = dao.updateStoreStatus(conn,id);
+		int result = dao.updateStoreStatus(conn,storeId);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);

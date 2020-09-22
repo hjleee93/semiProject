@@ -39,7 +39,7 @@
 				<table class="profilebox">
 					<tr>
 						<td id="reservationstate" class="profilebox1 menuchoice"
-							onclick="location.href='rsvstatus.html'">회원예약현황</td>
+							onclick="location.replace('<%=request.getContextPath()%>/admin/reservationView');">회원예약현황</td>
 						<td id="searchmember" class="profilebox2 menuchoice"
 							onclick="searchMembers();">회원조회</td>
 					</tr>
@@ -47,7 +47,7 @@
 						<td id="storestate" class="profilebox1 menuchoice"
 							onclick="location.replace('<%=request.getContextPath()%>/admin/StoreRequestStatus');">입점현황</a></td>
 						<td id="searchpartner" class="profilebox2 menuchoice"
-							onclick="location.href='usr_qna.html'">Q&A</td>
+							onclick="location.replace('<%=request.getContextPath()%>/qna/qnalist');">Q&A</td>
 					</tr>
 					<tr>
 						<td id="qna" class="profilebox3 menuchoice"
@@ -73,7 +73,7 @@
 										direction="up" behavior="alternate"><%=count %> </marquee>
 									<span class="mar3">건</span>
 								</div>
-								<img src="<%=request.getContextPath()%>/images/quick.png"
+								<img src="<%=request.getContextPath()%>/img/quick.png"
 									class="img01" width="240px" height="40px">
 								<div class="quick_box">
 									<ul>
@@ -101,7 +101,7 @@
 								<a href="rsvstatus.html">
 									<div class="minibox3">75</div>
 								</a>
-								<div class="minibox3">예약율(%)</div>
+								<div class="minibox2">예약율(%)</div>
 							</div>
 						</td>
 					</tr>
@@ -112,14 +112,14 @@
 								<a href="usr_qna.html"> <!-- 문의삭제/댓글달 수있게 관리자권한 -->
 									<div class="minibox4">0</div>
 								</a>
-								<div class="minibox4">신규 등록</div>
+								<div class="minibox2">신규 등록</div>
 							</div>
 						</td>
 					</tr>
 				</table>
 			</div>
 		</div>
-		<div class="container1" id="container1" class="margin-table">
+		<%-- <div class="container1" id="container1" class="margin-table">
 			<p></p>
 
 			<div id="storerequest" class="card margin-table">
@@ -151,12 +151,12 @@
 								</tr>
 							</thead>
 							<tbody>
-								<%if (list.isEmpty()) {%>
+								<%if (storelist.isEmpty()) {%>
 								<tr>
 									<td colspan="7">조회된 게시글이 없습니다.</td>
 								</tr>
 								<%} else {
-									  for (Store s : list) {
+									  for (Store s : storelist) {
 									    if (s.getStoreStatus().equals("WAITING")) {
 								%>
 								<tr>
@@ -204,12 +204,12 @@
 								</tr>
 							</thead>
 							<tbody>
-							<%if (list.isEmpty()) {%>
+							<%if (storelist.isEmpty()) {%>
 								<tr>
 									<td colspan="7">조회된 게시글이 없습니다.</td>
 								</tr>
 								<%} else {
-									  for (Store s : list) {
+									  for (Store s : storelist) {
 									    if (s.getStoreStatus().equals("ACCEPT")) {
 								%>
 								<tr>
@@ -254,12 +254,12 @@
 								</tr>
 							</thead>
 							<tbody>
-							<%if (list.isEmpty()) {%>
+							<%if (storelist.isEmpty()) {%>
 								<tr>
 									<td colspan="7">조회된 게시글이 없습니다.</td>
 								</tr>
 								<%} else {
-									  for (Store s : list) {
+									  for (Store s : storelist) {
 									    if (s.getStoreStatus().equals("HOLD")) {
 								%>
 								<tr>
@@ -303,12 +303,12 @@
 								</tr>
 							</thead>
 							<tbody>
-							<%if (list.isEmpty()) {%>
+							<%if (storelist.isEmpty()) {%>
 								<tr>
 									<td colspan="7">조회된 게시글이 없습니다.</td>
 								</tr>
 								<%} else {
-									  for (Store s : list) {
+									  for (Store s : storelist) {
 									    if (s.getStoreStatus().equals("DECLINE")) {
 								%>
 								<tr>
@@ -328,7 +328,7 @@
 						</table>
 					</div>
 				</div>
-			</div>
+			</div> --%>
 			<!-- 회원조회테이블팝업 -->
 
 			<!-- 파트너끝 -->
@@ -340,14 +340,12 @@
       
    	  function searchMembers(){
  			const url = "<%=request.getContextPath()%>/admin/search/member";
- 			var popupWidth = 1000;
- 			var popupHeight = 400;
- 			var popupX = (window.screen.width/2)-500;
- 			// 만들 팝업창 width 크기의 1/2 만큼 보정값으로 빼주었음
+ 			var windowW = 1000;
+ 			var windowH = 400;
+ 			var left = Math.ceil((window.screen.width - windowW)/2);
+ 	        var top = Math.ceil((window.screen.height - windowH)/2);
 
- 			var popupY= (window.screen.height/2) - 400;
- 			// 만들 팝업창 height 크기의 1/2 만큼 보정값으로 빼주었음
- 			window.open(url, '', 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+ 			window.open(url, 'Hyolo', 'status=no, height=' + windowH  + ', width=' + windowW  + ', left='+ left + ', top='+ top);
  		}
       $(document).ready(function () {
        

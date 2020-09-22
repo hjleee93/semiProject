@@ -112,7 +112,7 @@
             <td>
             <% if(n.getFile()!=null){%>
             <a href="<%=request.getContextPath()%>/notice/noticeFileDownload?file=<%=n.getFile()%>">
-            	<img src="<%=request.getContextPath()%>/images/file.png" width="20" height="20">
+            	<img src="<%=request.getContextPath()%>/img/file.png" width="20" height="20">
             
             </a>
             <%} %>

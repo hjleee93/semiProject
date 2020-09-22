@@ -1,5 +1,7 @@
 package com.semi.admin.store.dao;
 
+import static com.semi.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -10,11 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.semi.admin.store.vo.Store;
-
-import oracle.jdbc.proxy.annotation.Pre;
-
-import static com.semi.common.JDBCTemplate.close;
+import com.semi.store.model.vo.Store;
 
 
 public class StoreDao {
@@ -31,35 +29,40 @@ public class StoreDao {
 		}
 	}
 	
-	public List<Store> selectStoreList(Connection conn,int cPage,int numPerPage){
+	public List<Store> selectStoreList(Connection conn,int page,int numPerPage){
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Store> list = new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectStoreList"));
-			pstmt.setInt(1, (cPage-1)*numPerPage+1);
-			pstmt.setInt(2, cPage*numPerPage);
+			pstmt.setInt(1, (page-1)*numPerPage+1);
+			pstmt.setInt(2, page*numPerPage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				Store s = new Store();
 				s.setStoreId(rs.getInt("store_id"));
-				s.setCategory(rs.getString("category"));
-				s.setDetailCategory(rs.getString("dtl_category"));
+				s.setStoreCategory(rs.getString("category"));
+				s.setStoreDtlCtgry(rs.getString("dtl_category"));
 				s.setStoreName(rs.getString("storeName"));
-				s.setPhone(rs.getString("phone"));
+				s.setStorePhone(rs.getString("phone"));
 				s.setStorePost(rs.getString("store_post"));
-				s.setStoreAddr(rs.getString("store_addr"));
-				s.setStoreDetailAddr(rs.getString("store_dtl_addr"));
+				s.setStoreAddress(rs.getString("store_addr"));
+				s.setStoreDtlAddr(rs.getString("store_dtl_addr"));
 				s.setStoreExtraAddr(rs.getString("store_extra_addr"));
 				s.setStoreContent(rs.getString("store_content"));
-				s.setHomepage(rs.getString("homepage"));
-				s.setMainImg(rs.getString("main_img"));
-				s.setPostImg(rs.getString("post_img"));
-				s.setDetailImg(rs.getString("detail_img"));
-				s.setPartnerNum(rs.getInt("ptn_num"));
-				s.setJoinStatus(rs.getString("join_status"));
+				s.setStorePage(rs.getString("homepage"));
+				s.setStoreProfit(rs.getString("store_profit"));
+				s.setStoreTarget(rs.getString("store_target"));
+				s.setStoreMainImg(rs.getString("main_img"));
+				s.setStorePostImg(rs.getString("post_img"));
+				s.setStoreDtlImg(rs.getString("detail_img"));
+				s.setPtnNum(rs.getInt("ptn_num"));
+				s.setStoreStatus(rs.getString("join_status"));
+				s.setRequestDate(rs.getDate("request_date"));
+				s.setPromoText(rs.getString("promo_text"));
 				list.add(s);
 			}
+			System.out.println("storelist"+list);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -104,12 +107,12 @@ public class StoreDao {
 		}return count;
 	}
 	
-	public int updateStoreStatus(Connection conn, int id) {
+	public int updateStoreStatus(Connection conn, int storeId) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("updateStoreStatus"));
-			pstmt.setInt(1, id);
+			pstmt.setInt(1, storeId);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

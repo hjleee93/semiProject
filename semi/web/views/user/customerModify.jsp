@@ -4,9 +4,9 @@
 <%@ page import="com.semi.member.model.vo.*"  %>
 <%
 
-		Customer c = (Customer)request.getAttribute("customer");
+		TotalMember t = (TotalMember)request.getAttribute("customer");
 		Member logginedMember = (Member) session.getAttribute("Memberloggined"); 
-		String[] category = c.getCategory().split(",");//할당
+		String[] category = t.getCategory().split(",");//할당
 		String[] checks = new String[3];
 		if(category!=null){
 			for(String ctg : category){
@@ -90,7 +90,7 @@
                 </th>
                 <td>
                     <input type="text" name="member_id" id="member_id_" 
-                    placeholder="영문·숫자 4~15자리" value="<%=c.getMember().getMemberId()%>" readonly
+                    placeholder="영문·숫자 4~15자리" value="<%=t.getMemberId()%>" readonly
                     pattern="^[a-z][a-zA-Z0-9]{4,15}$">
                 </td>
             </tr>
@@ -100,7 +100,7 @@
                 </th>
                 <td>
                     <input type="text" name="member_name" id="member_name"
-                    placeholder="한글 2~4글자" pattern="^[가-힣]{2,4}$" value="<%=c.getMember().getMemberName()%>">
+                    placeholder="한글 2~4글자" pattern="^[가-힣]{2,4}$" value="<%=t.getMemberName()%>">
                 </td>
             </tr>
             <tr>
@@ -109,7 +109,7 @@
                 </th>
                 <td>
                     <input type="password" name="pw" id="member_pw_" required
-                    value="<%=c.getMember().getMemberPw()%>">
+                    value="<%=t.getMemberPw()%>">
                     <small style="color:gray;">영문·숫자·특수문자 조합 6~15자리</small>
                 </td>
             </tr>
@@ -119,7 +119,7 @@
                 </th>
                 <td>
                     <input type="password" name="pw" id="member_pwck" required
-                    value="<%=c.getMember().getMemberPw()%>">
+                    value="<%=t.getMemberPw()%>">
                     <small id="labelpw">
                         <span class="alert alert-success" id="alert-success">비밀번호가 일치합니다</span>
                         <span class="alert alert-danger" id="alert-danger">비밀번호가 일치하지않습니다</span>
@@ -132,10 +132,10 @@
                 </th>
                 <td>
                     <input type="radio" name="gender" id="male" value="male"
-                    <%=c.getGender().equals("male")?"checked":"" %> onclick="return(false);">
+                    <%=t.getGender().equals("male")?"checked":"" %> onclick="return(false);">
                     <label for="male">남</label>
                     <input type="radio" name="gender" id="female" value="female"
-                    <%=c.getGender().equals("female")?"checked":"" %> onclick="return(false);">
+                    <%=t.getGender().equals("female")?"checked":"" %> onclick="return(false);">
                     <label for="female">여</label>
                 </td>
             </tr>
@@ -145,7 +145,7 @@
                 </th>
                 <td>
                     <input type="text" name="member_age" id="member_age" 
-                    readonly value="<%=c.getBirthday()%>">
+                    readonly value="<%=t.getBirthday()%>">
                 </td>
             </tr>
             <tr>
@@ -155,7 +155,7 @@
                 <td>
                     <input type="email" name="member_email" id="member_email" 
                     placeholder="hyolo@example.com" pattern="^[\w-]{4,}@[\w-]+(\.\w+){1,3}$"
-                    value="<%=c.getMember().getMemberEmail()%>">
+                    value="<%=t.getMemberEmail()%>">
                     <small id="labelemail"> </small>
                 </td>
             </tr>
@@ -166,7 +166,7 @@
                 <td>
                     <input type="tel" placeholder="ex) 01012341004" name="member_phone" id="member_phone" maxlength="11"
                     pattern="^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$"
-                    value="<%=c.getMember().getMemberPhone()%>">
+                    value="<%=t.getMemberPhone()%>">
                     <small id="labelphone"> </small>
                 </td>
             </tr>
@@ -175,11 +175,11 @@
                     <label for="address"><em>* </em>주소</label>
                 </th>
                 <td>
-                    <input type="text" name="postcode" id="postcode" placeholder="우편번호" value="<%=c.getMember().getMemPostcode()%>">
+                    <input type="text" name="postcode" id="postcode" placeholder="우편번호" value="<%=t.getMemPostcode()%>">
                     <input type="button" onclick="Postcode();" value="우편번호 찾기"><br>
-                    <input type="text" name="address" id="address" placeholder="주소" value="<%=c.getMember().getMemAddress()%>">
-                    <input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소" value="<%=c.getMember().getMemDetailAddress()%>">
-                    <input type="text" name="extraAddress" id="extraAddress" placeholder="동/건물" value="<%=c.getMember().getMemExtraAddress()%>">
+                    <input type="text" name="address" id="address" placeholder="주소" value="<%=t.getMemAddress()%>">
+                    <input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소" value="<%=t.getMemDetailAddress()%>">
+                    <input type="text" name="extraAddress" id="extraAddress" placeholder="동/건물" value="<%=t.getMemExtraAddress()%>">
                 </td>
             <tr>
             	<th>
@@ -197,6 +197,7 @@
             </tbody>
         </table>
         <div class="board-view-btn">
+        	<input type="hidden" name="seq" value="<%=t.getCustomerNum()%>">
             <input type="button" onclick="fn_delete_member();" value="탈퇴">
             <input type="button" class="modifybtn" onclick="finalcheck();" value="정보수정">
         </div>
@@ -205,7 +206,7 @@
      <script>
 		function fn_delete_member(){
 			if(confirm("정말로 탈퇴하시겠습니까?")){
-				location.replace('<%=request.getContextPath()%>/member/memberDelete?id=<%=c.getMember().getMemberId()%>');			
+				location.replace('<%=request.getContextPath()%>/member/memberDelete?id=<%=t.getMemberId()%>');			
 			}
 		}
           function finalcheck() {
