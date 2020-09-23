@@ -37,7 +37,7 @@ public class StoreDtlServlet extends HttpServlet {
 		int storeId = Integer.parseInt(request.getParameter("storeId"));
 		
 		Store s = new StoreService().selectStoreDtl(storeId);
-		System.out.println("서블릿 store: "+ s);
+		System.out.println("서블릿 store in servlet: "+ s);
 		
 		request.setAttribute("store",s);
 		

@@ -7,11 +7,21 @@
 
 
 String addr = s.getStoreAddress();
+Member logginedMember =  new Member();
 
-Member logginedMember = (Member) session.getAttribute("Memberloggined"); 
+// Member logginedMember= (Member) session.getAttribute("Memberloggined");
+if(session.getAttribute("Memberloggined") != null){
+	logginedMember=(Member) session.getAttribute("Memberloggined");
+// 	System.out.println("logginedMember: " + logginedMember);
+	System.out.println("객체o");
+}
+else{
+
+System.out.println("객체x");
+	 logginedMember=new Member();
+}
 
 
-// System.out.println("logginedMember.getMemberNum(): "+ logginedMember.getMemberNum());
 int storeId = s.getStoreId();
 int ptnNum =s.getPtnNum();
 
@@ -24,7 +34,7 @@ request.setAttribute("serviceList", serviceList);
 
 
 
-System.out.println("serviceList1: " + serviceList);
+System.out.println("logginedMember: " + logginedMember);
 
 
 
@@ -249,22 +259,41 @@ if(serviceList.size() != 0){
 	
 		for(StoreService ss : serviceList){
 		
-			String arr = String.valueOf(ss.getOpenTime());
-// 			System.out.println("arr: "+arr.substring());
+			String closeArr =String.valueOf(ss.getCloseTime());
+			String openArr = String.valueOf(ss.getOpenTime());
+			String startArr =String.valueOf(ss.getBreakStart());
+			String endArr = String.valueOf(ss.getBreakEnd());
+			
+			if(closeArr.length() ==3){
+				closeArr = "0" + closeArr;
+			}
+			if(openArr.length() ==3){
+				openArr = "0" + openArr;
+				
+			}
+			if(startArr.length() ==3){
+				startArr = "0" + startArr;
+				
+			}
+			if(endArr.length() ==3){
+				endArr = "0" + endArr;
+				
+			}
+			
 		%>
 		<tr>
 			<td><%=ss.getStoreDay()%> : </td>
 			<% if(ss.getOpenTime() == 0){%>
 			<td>Closed</td>
 			<%}else{ %>
-			<td><%=ss.getOpenTime()%>~<%=ss.getCloseTime()%></td>
+			<td><%=openArr.substring(0, 2)%>:<%=openArr.substring(2, 4)%>~<%=closeArr.substring(0, 2)%>:<%=closeArr.substring(2, 4)%></td>
 			<%} %>
 			</tr>
 			<%if(ss.getBreakStart() != 0){ %>
 			<tr>
 			
 			<td>브레이크타임</td>
-			<td><%=ss.getBreakStart()%>~<%=ss.getBreakEnd()%></td>
+			<td><%=startArr.substring(0, 2)%>:<%=startArr.substring(2, 4)%>~<%=endArr.substring(0, 2)%>:<%=endArr.substring(2, 4)%></td>
 			</tr>
 			<%} %>
 		<%}
@@ -278,12 +307,13 @@ if(serviceList.size() != 0){
 
 
 			<div style="display: flex;">
+			<%if((logginedMember.getMemberId()) != null) {%>
 				<div style="width: 50%">
 					<h5 align="center">예약할 날짜를 선택하세요</h5>
 
 					<table id="calendar" border="3" align="center">
 						<tr>
-							<!-- label은 마우스로 클릭을 편하게 해줌 -->
+							
 							<td><label onclick="prevCalendar()"><</label></td>
 
 							<td align="center" id="tbCalendarYM" colspan="5" >yyyy년 m월</td>
@@ -301,8 +331,7 @@ if(serviceList.size() != 0){
 					</table>
 				</div>
 				<div></div>
-			</div>
-			
+				
 				<table>
 					<tr>
 						<td>선택한 날짜:</td>
@@ -310,28 +339,23 @@ if(serviceList.size() != 0){
 							<!-- 						<input id="" type="text" readonly> -->
 						</td>
 					</tr>
-					<%if(logginedMember != null){ %>
+					
 					<tbody id="bookingTime">
-					<%}else{ %>
+					
 					<tbody >
 					
 					
-					<%} %>
+					
 					</tbody>
 					
 				</table>
-
-
-
-
-
-
-
-
-
-
-				
-			
+					
+				<%}else{ %>
+				<div style="width: 50%">
+				<p>로그인 후 사용해주세요
+				</div>
+				<%} %>
+		</div>
 		</div>
 
 	</div>
@@ -411,7 +435,12 @@ if(serviceList.size() != 0){
 				</div>
 			</div>
 		</div>
-
+		<!-- 리뷰쓰기 -->
+		<button type="button" onclick="location.assign('<%=request.getContextPath()%>/review/reviewWrite')">리뷰쓰기</button>
+		
+		
+		
+		
 		<div class="tab-pane fade" id="review">
 			<section class="warp_deals_detail">
 				<section class="deals_container">
@@ -464,7 +493,7 @@ if(serviceList.size() != 0){
 												<div class="swiper-pagination"></div>
 											</div>
 										</section>
-
+										
 										<section class="review_user_wrap">
 											<div class="review_tit title_review_all">
 												<h2>리뷰 전체</h2>
@@ -542,8 +571,6 @@ if(serviceList.size() != 0){
 
 
 <script>
-
-
 
 
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -650,14 +677,14 @@ if(serviceList.size() != 0){
 				row = calendar.insertRow();
 				
 			}
-			/*오늘의 날짜에 노란색 칠하기*/
+			
 			if (today.getFullYear() == date.getFullYear()
 					&& today.getMonth() == date.getMonth()
 					&& i == date.getDate()) {
 				
-				//달력에 있는 년,달과 내 컴퓨터의 로컬 년,달이 같고, 일이 오늘의 일과 같으면
-				cell.bgColor = "violet";//셀의 배경색을 노랑으로 
-			}
+				
+				cell.bgColor = "violet";
+				}
 			
 			if (today.getFullYear() >= date.getFullYear()
 					
@@ -666,8 +693,18 @@ if(serviceList.size() != 0){
 					) {
 				console.log( date.getFullYear());
 // 				cell.bgColor = "#FAF58C";
-				cell.setAttribute("onclick", "getDate(this);  acyncMovePage('<%=request.getContextPath()%>/views/partner/ptnRequest4.jsp'); ");
+				cell.setAttribute("onclick", "getDate(this);");
 				cell.setAttribute("class","active-date");
+				
+				var logginedMember = '<%=logginedMember.getMemberId()%>';
+				
+				if(logginedMember!=null){
+					cell.setAttribute("onclick", "getDate(this); acyncMovePage('<%=request.getContextPath()%>/views/partner/ptnRequest4.jsp');");
+				}else{
+					
+					
+				}
+				
 			}else{
 				cell.setAttribute("class","inactive-date");
 			}
@@ -721,8 +758,11 @@ if(serviceList.size() != 0){
 		console.log(compareDt);
 		console.log(+today1.getDate());
 		
-		
-		if (compareDt < today1) {
+		console.log("compareDt: " + compareDt);
+		console.log("today1: " + today1);
+		if (compareDt.setHours(0,0,0,0) < today1.setHours(0,0,0,0)) {
+			console.log("compareDt: " + compareDt);
+			console.log("today1: " + today1);
 			alert("오늘 날짜 이후를 선택해주세요");
 		} else {
 			input.setAttribute("value", (selectedYear + "-" + selectedMonth
@@ -746,13 +786,17 @@ if(serviceList.size() != 0){
 <%-- 		loggedin = <%=logginedMember.getMemberNum()%>; --%>
 		
 // 	}
+
 	function acyncMovePage(url) {
 		var week = new Array('Sun', 'Mon', 'Tue', 'Wed','Thur','Fri','Sat');
 		var getDay = new Date(dateValue).getDay();
 		
-		console.log(week[getDay]); //선택한 날짜의 요일 출력
+		console.log("요일: " + week[getDay]); //선택한 날짜의 요일 출력
 		
-		// ajax option
+		
+		
+		
+		
 		var ajaxOption = {
 			url : url,
 			
@@ -764,6 +808,7 @@ if(serviceList.size() != 0){
 				"selectedDate":dateValue,
 				"ptnNum":"<%=s.getPtnNum()%>",
 				"storeId":"<%=s.getStoreId()%>",
+				
 				"customerId": "<%=logginedMember.getMemberNum()%>"
 <%-- 				,"serviceList":"<%=serviceList%>" --%>
 				

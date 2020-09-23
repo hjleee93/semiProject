@@ -6,7 +6,7 @@
 <%
 	List<Qna> list =(List)request.getAttribute("list");
 	List<Qna> search = (List)request.getAttribute("search");
-	Member Memberloggined = (Member)session.getAttribute("Memberloggined");
+	
 	Member Partnerloggined = (Member)session.getAttribute("Memberloggined");
 	int data = (Integer)request.getAttribute("totalData");
 	

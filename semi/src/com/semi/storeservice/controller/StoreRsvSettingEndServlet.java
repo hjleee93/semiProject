@@ -344,14 +344,8 @@ public class StoreRsvSettingEndServlet extends HttpServlet {
 		} else {
 			msg = "입력하신 데이터에 오류가 발생했습니다. 입점 신청을 다시 시도해주세요";
 			// 신청폼 다시
-			loc = "/storeService/storeRsvSetting";
+			loc = "/storeService/storeRsvSetting?storeId=" + request.getParameter("storeId");
 		}
-//		String storeName = request.getParameter("storeName");
-//		String storeContent = request.getParameter("storeContent");
-//		
-//		
-//		request.setAttribute("storeName", storeName);
-//		request.setAttribute("storeContent",storeContent);
 
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);

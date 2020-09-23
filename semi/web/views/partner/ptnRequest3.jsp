@@ -426,7 +426,7 @@ label {
 
 <form
 					action="<%=request.getContextPath()%>/storeService/storeRsvSettingEnd"
-					method="post" novalidate>
+					method="post" novalidate="novalidate" onsubmit="return checkRsv();">
 						<input type="hidden" name="storeId" value="<%=s.getStoreId()%>">
 					<input type="hidden" name="ptnId" value="<%=s.getPtnNum()%>">
 		<table id="tbl" class="tbl-list tb2">
@@ -484,12 +484,12 @@ label {
 												<td>
 												<input type="hidden" value="Mon" name="Mon">
 												<input type="text" name="monOpenTime"
-													class="timepicker2" placeholder="Open time" required></td>
+													class="timepicker2" placeholder="Open time" /><span class="span" id="monOpenTime"></td>
 											</tr>
 											<tr>
 												<td>마감 시간</td>
 												<td><input type="text" name="monCloseTime"
-													class="timepicker2" placeholder="Close time" required></td>
+													class="timepicker2" placeholder="Close time" ></td>
 											</tr>
 											<tr>
 												<td>브레이크타임</td>
@@ -520,12 +520,12 @@ label {
 											<tr>
 												<td>오픈 시간</td>
 												<td><input type="text" class="timepicker2" name="tueOpen"
-													placeholder="Open time" required></td>
+													placeholder="Open time" ></td>
 											</tr>
 											<tr>
 												<td>마감 시간</td>
 												<td><input type="text" class="timepicker2" name="tueClose"
-													placeholder="Close time" required></td>
+													placeholder="Close time" ></td>
 											</tr>
 
 											<tr>
@@ -556,12 +556,12 @@ label {
 											<tr>
 												<td>오픈 시간</td>
 												<td><input type="text" class="timepicker2" name="wedOpen"
-													placeholder="Open time" required></td>
+													placeholder="Open time" ></td>
 											</tr>
 											<tr>
 												<td>마감 시간</td>
 												<td><input type="text" class="timepicker2" name="wedClose"
-													placeholder="Close time" required></td>
+													placeholder="Close time" ></td>
 											</tr>
 											<tr>
 												<td>브레이크타임</td>
@@ -590,12 +590,12 @@ label {
 												<td>
 												<input type="hidden" value="Thur" name="Thur">
 												<input type="text" class="timepicker2" name="thurOpen"
-													placeholder="Open time" required></td>
+													placeholder="Open time" ></td>
 											</tr>
 											<tr>
 												<td>마감 시간</td>
 												<td><input type="text" class="timepicker2" name="thurClose"
-													placeholder="Close time" required></td>
+													placeholder="Close time" ></td>
 											</tr>
 											<tr>
 												<td>브레이크타임</td>
@@ -624,12 +624,12 @@ label {
 											<tr>
 												<td>오픈 시간</td>
 												<td><input type="text" class="timepicker2" name="friOpen"
-													placeholder="Open time" required></td>
+													placeholder="Open time" ></td>
 											</tr>
 											<tr>
 												<td>마감 시간</td>
 												<td><input type="text" class="timepicker2" name="friClose"
-													placeholder="Close time" required></td>
+													placeholder="Close time" ></td>
 											</tr>
 											<tr>
 												<td>브레이크타임</td>
@@ -778,6 +778,20 @@ label {
 
 			);
 
+		}
+		
+		
+		function checkRsv(){
+			
+			var monOpenTime = $('input[name="monOpenTime"]');
+			 var monOpenSpan = document.getElementById("monOpenTime");
+			 
+			 if(monOpenTime.val() == ''){
+				 monOpenSpan.innerHTML = "입력해주세요";
+				 monOpenTime.focus();
+				 return false;
+			 }
+			console.log(monOpenTime);
 		}
 
 		function clicked2() {

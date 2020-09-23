@@ -1,5 +1,4 @@
-package com.semi.rsv.model.dao;
-//자바에서 가져온 데이터 저장할 공간
+package com.semi.rsv.model.vo;
 
 import java.sql.Date;
 
