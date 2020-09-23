@@ -356,7 +356,12 @@ textarea {
 				</div>
 			</div>
 		</div>
-
+		<!-- 리뷰쓰기 -->
+		<button type="button" onclick="location.assign('<%=request.getContextPath()%>/review/reviewWrite')">리뷰쓰기</button>
+		
+		
+		
+		
 		<div class="tab-pane fade" id="review">
 			<section class="warp_deals_detail">
 				<section class="deals_container">
@@ -409,7 +414,7 @@ textarea {
 												<div class="swiper-pagination"></div>
 											</div>
 										</section>
-
+										
 										<section class="review_user_wrap">
 											<div class="review_tit title_review_all">
 												<h2>리뷰 전체</h2>
