@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.member.model.service.MemberService;
-import com.semi.member.model.vo.Member;
+import com.semi.member.model.vo.TotalMember;
 
 /**
  * Servlet implementation class MemberViewServlet
@@ -33,10 +33,10 @@ public class MemberViewServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		int seq = Integer.parseInt(request.getParameter("id"));
 		System.out.println("modimember service : "+ seq);
-		Member m = new MemberService().selectCustomerModify(seq);
+		TotalMember t = new MemberService().selectCustomerModify(seq);
 
-		request.setAttribute("customer", m);
-		System.out.println("customer in mainservlet: " + m);
+		request.setAttribute("customer", t);
+		System.out.println("customer in mainservlet: " + t);
 		request.getRequestDispatcher("/views/user/customerModify.jsp").forward(request, response);
 		
 	}

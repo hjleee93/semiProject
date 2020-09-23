@@ -30,10 +30,12 @@ public class Store {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public Store(int storeNumber, int storeId, String storeCategory, String storeDtlCtgry, String storeName,
 			String storePhone, String storePost, String storeAddress, String storeDtlAddr, String storeExtraAddr,
 			String storePage, String storeContent, String storeProfit, String storeTarget, String storeMainImg,
-			String storePostImg, String storeDtlImg, int ptnNum, String storeStatus, Date requestDate, String promoText) {
+			String storePostImg, String storeDtlImg, int ptnNum, String storeStatus, Date requestDate,
+			String promoText) {
 		super();
 		this.storeNumber = storeNumber;
 		this.storeId = storeId;
@@ -56,10 +58,8 @@ public class Store {
 		this.storeStatus = storeStatus;
 		this.requestDate = requestDate;
 		this.promoText = promoText;
-		
 	}
 
-	
 	public int getStoreNumber() {
 		return storeNumber;
 	}
@@ -67,8 +67,6 @@ public class Store {
 	public void setStoreNumber(int storeNumber) {
 		this.storeNumber = storeNumber;
 	}
-
-
 
 	public int getStoreId() {
 		return storeId;
@@ -221,12 +219,15 @@ public class Store {
 	public void setRequestDate(Date requestDate) {
 		this.requestDate = requestDate;
 	}
+
 	public String getPromoText() {
 		return promoText;
 	}
+
 	public void setPromoText(String promoText) {
 		this.promoText = promoText;
 	}
+
 	@Override
 	public String toString() {
 		return "Store [storeNumber=" + storeNumber + ", storeId=" + storeId + ", storeCategory=" + storeCategory
@@ -237,7 +238,6 @@ public class Store {
 				+ ", storePostImg=" + storePostImg + ", storeDtlImg=" + storeDtlImg + ", ptnNum=" + ptnNum
 				+ ", storeStatus=" + storeStatus + ", requestDate=" + requestDate + ", promoText=" + promoText + "]";
 	}
-	
 	
 	
 

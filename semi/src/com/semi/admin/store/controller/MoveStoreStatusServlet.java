@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.admin.notice.service.NoticeService;
 import com.semi.admin.store.service.StoreService;
-import com.semi.admin.store.vo.Store;
+import com.semi.store.model.vo.Store;
 
 /**
  * Servlet implementation class AdminStoreStatusServlet
@@ -42,7 +41,7 @@ public class MoveStoreStatusServlet extends HttpServlet {
 		int numPerPage=10;
 		
 		List<Store> list = new StoreService().selectStoreList(page,numPerPage);
-	
+	System.out.println("moveservlet storelist "+list);
 		int totalData = new StoreService().selectStoreCount();
 		
 		int totalPage = (int)(Math.ceil((double)totalData/numPerPage));

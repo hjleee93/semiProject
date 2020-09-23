@@ -6,11 +6,11 @@ import static com.semi.common.JDBCTemplate.getConnection;
 import static com.semi.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
-import java.util.List;
 
 import com.semi.member.model.dao.MemberDao;
 import com.semi.member.model.vo.Customer;
 import com.semi.member.model.vo.Member;
+import com.semi.member.model.vo.TotalMember;
 
 public class MemberService {
 
@@ -34,19 +34,28 @@ public class MemberService {
 		return m;
 	}
 
-	public Member selectCustomerModify(int seq) {
+	public TotalMember selectCustomerModify(int seq) {
 		Connection conn=getConnection();
-		Member m = dao.selectCustomerModify(conn,seq);
+		TotalMember t = dao.selectCustomerModify(conn,seq);
 		close(conn);
-		return m; 
+		return t; 
 	}
-	public int memberUpdate(Customer c) {
+	public int memberUpdate(TotalMember t) {
 		Connection conn=getConnection();
-		int result = dao.memberUpdate(conn,c);
-		if(result>0) commit(conn);
+		int memresult = dao.memberUpdate(conn,t);
+		if(memresult>0) commit(conn);
 		else rollback(conn);
 		close(conn);
-		return result;
+		return memresult;
+	}
+	public int customerUpdate(Customer c) {
+		Connection conn=getConnection();
+		int ctmresult = dao.customerUpdate(conn,c);
+		if(ctmresult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		System.out.println("ctmresult in service : "+ctmresult);
+		return ctmresult;
 	}
 	
 	public int partnerUpdate(Member m) {

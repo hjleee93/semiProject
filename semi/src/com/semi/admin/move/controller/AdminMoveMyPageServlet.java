@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.admin.store.service.StoreService;
-import com.semi.admin.store.vo.Store;
-import com.semi.admin.store.service.StoreService;
-import com.semi.admin.store.vo.Store;
+import com.semi.store.model.vo.Store;
 
 /**
  * Servlet implementation class AdminMyPageServlet

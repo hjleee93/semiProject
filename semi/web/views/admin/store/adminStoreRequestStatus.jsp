@@ -2,14 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 <%@ include file="/views/common/adminmenubar.jsp"%>
-<%@ page import="com.semi.admin.store.vo.*,java.util.List"%>
+<%@ page import="com.semi.store.model.vo.*,java.util.List"%>
 <!-- custom css -->
 <link href="<%=request.getContextPath()%>/css/storeApprovalbutton.css"
 	rel="stylesheet">
-
-<script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
 <%
-	List<Store> storelist = (List)request.getAttribute("list");
+	List<Store> storelist = (List)request.getAttribute("storelist");
 %>
 <section>
 	<!-- 본문 시작-->
@@ -39,7 +37,6 @@
 					name="취소"></button>
 			</div>
 			<div class="table-responsive">
-			<form name="requestFrm" action="" method="post">
 				<table class="table" id="tableup">
 					<thead>
 						<tr>
@@ -60,7 +57,7 @@
 							<td colspan="9">조회된 게시글이 없습니다.</td>
 						</tr>
 						<%}else{
-                				for(Store s : list) {
+                				for(Store s : storelist) {
                 					if(s.getStoreStatus().equals("WAITING")){
               				%>
 						<tr>
@@ -73,18 +70,17 @@
 							<td><%=s.getStorePage() %></td>
 							<td><%=s.getStoreStatus()%></td>
 							<td>
-								<input type="hidden" name="id" id="id" value="<%=s.getStoreId() %>">
+								<input type="hidden" name="storeId" value="<%=s.getStoreId() %>">
 							</td>
-							
-						</tr>
 						<%}
-           				 } 
+           				 }
 						}%>
 					</tbody>
 					</table>
 					<div id="pageBar">
 						<%=request.getAttribute("pageBar") %>
 					</div>
+				<form name="requestFrm" action="" method="post">
 				</form>
 			</div>
 		</div>
@@ -109,16 +105,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<%if(list.isEmpty()){ %>
+						<%if(storelist.isEmpty()){ %>
 						<tr>
 							<td colspan="9">조회된 게시글이 없습니다.</td>
 						</tr>
 						<%}else{
-                				for(Store s : list) {
+                				for(Store s : storelist) {
                 					if(s.getStoreStatus().equals("ACCEPT")){
               				%>
 						<tr>
-							<td><input type="checkbox" name="cb2" class="cb2"></td>
+							<td><input type="checkbox" name="cb" class="cb2"></td>
 							<td><%=s.getStoreName() %></td>
 							<td><%=s.getStoreDtlCtgry() %></td>
 							<td><%=s.getStorePhone() %></td>
@@ -162,16 +158,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<%if(list.isEmpty()){ %>
+						<%if(storelist.isEmpty()){ %>
 						<tr>
 							<td colspan="9">조회된 게시글이 없습니다.</td>
 						</tr>
 						<%}else{
-                				for(Store s : list) {
+                				for(Store s : storelist) {
                 					if(s.getStoreStatus().equals("HOLD")){
               				%>
 						<tr>
-							<td><input type="checkbox" name="cb3" class="cb3"></td>
+							<td><input type="checkbox" name="cb" class="cb3"></td>
 							<td><%=s.getStoreName() %></td>
 							<td><%=s.getStoreDtlCtgry() %></td>
 							<td><%=s.getStorePhone() %></td>
@@ -215,16 +211,16 @@
 						</tr>
 					</thead>
 					<tbody>
-						<%if(list.isEmpty()){ %>
+						<%if(storelist.isEmpty()){ %>
 						<tr>
 							<td colspan="9">조회된 게시글이 없습니다.</td>
 						</tr>
 						<%}else{
-                				for(Store s : list) {
+                				for(Store s : storelist) {
                 					if(s.getStoreStatus().equals("DECLINE")){
               				%>
 						<tr>
-							<td><input type="checkbox" name="cb4" class="cb4"></td>
+							<td><input type="checkbox" name="cb" class="cb4"></td>
 							<td><%=s.getStoreName() %></td>
 							<td><%=s.getStoreDtlCtgry() %></td>
 							<td><%=s.getStorePhone() %></td>
@@ -245,9 +241,6 @@
 			</div>
 		</div>
 	</div>
-		<%-- <div id="pageBar">
-			<%=request.getAttribute("pageBar") %>
-		</div> --%>
 		<!-- 입점현황 end -->
 	</div>
 	<!-- container end -->
@@ -281,32 +274,23 @@
        function acceptBtn(){
     	   const frm = $("[name=requestFrm]");
 			const url="<%=request.getContextPath()%>/admin/store/accept";
-			const check = $("input:checkbox[name=cb1]").is(":checked");
-				
-			if(check==true){
-					frm.attr({
+		
+			$("input:checkbox[class='cb1']").each(function(){
+				if(this.checked){
+					frm.append($(this).parents("tr").find("input:hidden"));	
+				}
+			});
+			console.log(frm);
+			
+			frm.attr({
 						"action":url,
 						"method":"post",
 					});
-					frm.submit();
-			}else{
-				alert("asdfasdf");
-			}
+			
 		};
        
         $(document).ready(function () {
-	
-        	/* $("#cb1").on("click", function() { 
-        		if ($(this).prop("checked",true)) { 
-        			$(this).parent().addClass("selected"); 
-       			} else { 
-       				$(this).parent().removeClass("selected"); 
-       			} 
-       		}); */
-
-        	
-        	
-        	
+    	
         // 체크박스전체선택
           $("input[type='checkbox']").each(function (i) {
             $("input[class='check-all" + i + "']").click(function () {
