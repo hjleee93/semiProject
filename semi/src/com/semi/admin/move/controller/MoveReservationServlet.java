@@ -29,7 +29,7 @@ public class MoveReservationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher rd= request.getRequestDispatcher("/views/admin/ì˜ˆì•½í˜„í™©í˜ì´ì§€.jsp");
+		RequestDispatcher rd= request.getRequestDispatcher("/views/admin/adminMyPage.jsp");//TODO:¿¹¾àÇöÈ²jsp·Î ÀÌµ¿ 
 		rd.forward(request, response);
 	}
 

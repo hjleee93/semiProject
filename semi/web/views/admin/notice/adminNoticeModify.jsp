@@ -70,7 +70,7 @@
 		#select{
 			float:left;
 		}
-		#file{
+		.file{
 			float:left;
 		}
 
@@ -80,7 +80,8 @@
   <div id="notice-container" class="notice">
 	  <h1>공지사항 수정</h1>
   </div>
-  <form name="noticeFrm" id="noticeFrm" action="" method="post">
+  <form name="noticeFrm" id="noticeFrm" action="" method="post"
+  enctype="multipart/form-data">
   
     <table class="tbl-reg">
  	 <colgroup>
@@ -95,9 +96,9 @@
         <tr>
         	<th scope="row">구분</th>
         	<td>
-	        	<select  id="select" name="search">
-	        		<option name="partner" id="partner" value="partner">파트너</option>
-	        		<option name="member" id="member" value="member">회원</option>
+	        	<select  id="select" name="sep">
+	        		<option name="sep" id="member" value="회원">회원</option>
+	        		<option name="sep" id="partner" value="파트너">파트너</option>
 	       		</select>
        		</td>
         </tr>
@@ -107,13 +108,10 @@
         </tr>
         <tr>
             <th scope="row">첨부파일</th>
-            <td>
-            <% if(n.getFile()!=null){%>
-            <a id="file" href="<%=request.getContextPath()%>/notice/noticeFileDownload?fname=<%=n.getFile()%>">
-            	<img src="<%=request.getContextPath()%>/images/file.png" width="20" height="20">
-            
-            </a>
-            <%} %>
+            <td><input type="file" name="file" class="file">
+            <%-- <% if(n.getFile()!=null){%>
+           	<img class="file" src="<%=request.getContextPath()%>/img/file.png" width="20" height="20">
+            <%} %> --%>
             </td>
         </tr>
         <tr>

@@ -6,7 +6,7 @@
 
 <%
 	PartnerMember logginedMember = (PartnerMember)session.getAttribute("logginedMember");
-	Member Memberloggined = (Member)session.getAttribute("Memberloggined");
+	Member Memberloggined1 = (Member)session.getAttribute("Memberloggined");
 
 	Cookie[] cookies = request.getCookies();
 	String saveId = null;

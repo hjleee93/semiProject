@@ -50,13 +50,6 @@ public class NoticeService {
 		return result;
 	}
 	
-	public List<Notice> selectSearch(String type, String keyword){
-		Connection conn = null;
-		List<Notice> list = dao.selectSearch(conn,type,keyword);
-		close(conn);
-		return list;
-	}
-	
 	public int deleteNoticeWrite(int no) {
 		Connection conn = getConnection();
 		int result = dao.deleteNoticeWrite(conn,no);

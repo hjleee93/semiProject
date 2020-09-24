@@ -97,8 +97,7 @@ public class QnaSearchServlet extends HttpServlet {
 		
 		request.setAttribute("members",list);
 		
-		request.getRequestDispatcher("/views/qna/qnaBoard.jsp")
-		.forward(request,response);
+		request.getRequestDispatcher("/views/qna/qnaBoard.jsp").forward(request,response);
 	
 	
 		

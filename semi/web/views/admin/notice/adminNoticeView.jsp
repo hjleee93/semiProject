@@ -82,7 +82,7 @@
 <section>
 <div class="container">
   <div id="notice-container" class="notice">
-	  <h1>공지</h1>
+	  <h1><%=n.getNoticeSep() %>공지</h1>
   </div>
   <form name="noticeFrm" id="noticeFrm" action="" method="post">
   <div id="no">

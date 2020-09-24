@@ -4,6 +4,15 @@
 <%@ include file="/views/common/header.jsp"%>
 <script src="<%=request.getContextPath()%>/js/jquery-3.5.1.min.js"></script>
 <%
+//TODO:페이지 이동 수정 
+//TODO:회원탈퇴 jsp 수정
+//TODO:입점 취소 및 해지 
+//TODO:고객예약 현황 페이지 추가해야댐
+//TODO:댓글삭제 기능
+//TODO:리뷰
+//TODO:관리자 마이페이지 qna 연결
+//TODO:관리자 마이페이지 상단바 주소 매핑
+
 	//서버에서 보낸 데이터
 	Member logginedmember = (Member) session.getAttribute("memberloggined");
 	Member m = (Member)request.getAttribute("member");
@@ -268,6 +277,7 @@
 
 
     <!-- 수정버튼누르면 alert 띄우고 메인화면으로 -->
+<!--     TODO: 페이지 이동 메인보다 마이페이지가 낫지 않은지 물어보기 -->
     <script>
         //name은 적용이 안됨;
 		function modify() {

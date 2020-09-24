@@ -36,20 +36,58 @@ public class StoreService {
 		close(conn);
 		return count;
 	}
-	public int updateStoreStatus(int storeId) {
+	public int updateStoreStatus(String[] idArr) {
 		Connection conn = getConnection();
-		int result = dao.updateStoreStatus(conn,storeId);
-		if(result>0) commit(conn);
+		 String ids="";
+		  for(int i=0;i<idArr.length;i++) {
+			  if(i==0) ids="(";
+			  ids+="'"+idArr[i]+"'";
+			  if(i!=idArr.length-1) ids+=",";
+			  else ids+=")";
+		  }
+		  System.out.println("id값 : "+ids);
+		int result = dao.updateStoreStatus(conn,ids);
+		
+		if(result>=idArr.length) commit(conn);
 		else rollback(conn);
 		close(conn);
+		System.out.println("service in store"+result);
 		return result;
 	}
-	
-	/*
-	 * public List<Store> updateListStatus(){ Connection conn = getConnection();
-	 * List<Store> updateList = dao.updateListStatus(conn);
-	 * 
-	 * }
-	 */
-
+	public int updateStoreHold(String[] idArr) {
+		Connection conn = getConnection();
+		 String ids="";
+		  for(int i=0;i<idArr.length;i++) {
+			  if(i==0) ids="(";
+			  ids+="'"+idArr[i]+"'";
+			  if(i!=idArr.length-1) ids+=",";
+			  else ids+=")";
+		  }
+		  System.out.println("id값 : "+ids);
+		int result = dao.updateStoreHold(conn,ids);
+		
+		if(result>=idArr.length) commit(conn);
+		else rollback(conn);
+		close(conn);
+		System.out.println("service in store"+result);
+		return result;
+	}
+	public int updateStoreDecline(String[] idArr) {
+		Connection conn = getConnection();
+		 String ids="";
+		  for(int i=0;i<idArr.length;i++) {
+			  if(i==0) ids="(";
+			  ids+="'"+idArr[i]+"'";
+			  if(i!=idArr.length-1) ids+=",";
+			  else ids+=")";
+		  }
+		  System.out.println("id값 : "+ids);
+		int result = dao.updateStoreDecline(conn,ids);
+		
+		if(result>=idArr.length) commit(conn);
+		else rollback(conn);
+		close(conn);
+		System.out.println("service in store"+result);
+		return result;
+	}
 }

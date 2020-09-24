@@ -6,17 +6,14 @@
 <%@ page import="java.util.List"%>
 
 <%
-//메인시작! 
-	List<Store> list = new StoreService().selectStoreList();
+	//메인시작! 
+List<Store> list = new StoreService().selectStoreList();
 
 request.setAttribute("store", list);
 
 System.out.println("list in main : " + list);
 
-
-
 Member logginedMember = (Member) session.getAttribute("Memberloggined"); //로그인한 멤버 세션
-
 
 Cookie[] cookies = request.getCookies();
 String saveId = null;
@@ -112,7 +109,7 @@ if (cookies != null) {
 </head>
 
 <body id="mainbody">
-<!-- 메인바디 -->
+	<!-- 메인바디 -->
 	<!-- Navigation -->
 	<nav
 		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top header">
@@ -149,9 +146,8 @@ if (cookies != null) {
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/store/storeList">연령별 추천</a>
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/views/regional/RegionalList.jsp">지역별 추천</a>
-
-							<a class="dropdown-item"
+								href="<%=request.getContextPath()%>/views/regional/RegionalList.jsp">지역별
+								추천</a> <a class="dropdown-item"
 								href="<%=request.getContextPath()%>/random">랜덤 추천</a>
 						</div></li>
 
@@ -164,47 +160,27 @@ if (cookies != null) {
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/views/store/storeCategory.jsp">ALL</a>
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=cafe/storeList">CAFE</a>
+								href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=cafe">CAFE</a>
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=restaurant/storeList">RESTAURANT</a>
+								href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=restaurant">RESTAURANT</a>
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=pub/storeList">PUB/BAR</a>
+								href="<%=request.getContextPath()%>/store/storeCtgry?storeDtlCtgry=pub">PUB/BAR</a>
 						</div></li>
 
 					<%
 						if (logginedMember == null) {
-							
 					%>
 					<li class="nav-item"><a class="nav-link " data-toggle="modal"
 						href="javascript:void(0)" onclick="openLoginModal();">LOG IN</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="modal"
 						href="javascript:void(0)" onclick="openRegisterModal();">REGISTER</a>
 					</li>
+
 					<%
-						} else if(logginedMember != null && logginedMember.getMemberSep().equals("파트너")){
-							//파트너인 경우
-							System.out.println("logginedMember: " + logginedMember.getMemberSep());
+						} else if (logginedMember != null && logginedMember.getMemberSep().equals("파트너")) {
+						//파트너인 경우
+						System.out.println("logginedMember: " + logginedMember.getMemberSep());
 					%>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							MY PAGE </a>
-						<div class="dropdown-menu dropdown-menu-right"
-							aria-labelledby="navbarDropdownPages">
-							<a class="dropdown-item" href="<%=request.getContextPath()%>/views/mypage/mypage_partner.jsp">MY PAGE</a> 
-							<a class="dropdown-item" href="purchase_history.html">MY BOOKING</a> 
-							<a class="dropdown-item" href="./usr_review.html">MY REVIEW</a> 
-							<a class="dropdown-item" href="./usr_review.html">FAQ</a>
-						</div></li>
-						<li class="nav-item">
-						<a class="nav-link " data-toggle="modal"
-						href="javascript:void(0)" onclick="location.replace('<%=request.getContextPath()%>/logout');">LOG OUT</a>
-						</li>
-					<%
-						}else if(logginedMember != null && logginedMember.getMemberSep().equals("회원")){
-							//회원인 경우
-					%>
-					
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -217,16 +193,16 @@ if (cookies != null) {
 								BOOKING</a> <a class="dropdown-item" href="./usr_review.html">MY
 								REVIEW</a> <a class="dropdown-item" href="./usr_review.html">FAQ</a>
 						</div></li>
-						<li class="nav-item">
-						<a class="nav-link " data-toggle="modal"
-						href="javascript:void(0)" onclick="location.replace('<%=request.getContextPath()%>/logout');">LOG OUT</a>
-						</li>
-						<%
-						}else if(logginedMember != null && logginedMember.getMemberSep().equals("관리자")){
-							//관리자인경우
-						%>
-						
-						<li class="nav-item dropdown"><a
+					<li class="nav-item"><a class="nav-link " data-toggle="modal"
+						href="javascript:void(0)"
+						onclick="location.replace('<%=request.getContextPath()%>/logout');">LOG
+							OUT</a></li>
+					<%
+						} else if (logginedMember != null && logginedMember.getMemberSep().equals("회원")) {
+						//회원인 경우
+					%>
+
+					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							MY PAGE </a>
@@ -238,11 +214,42 @@ if (cookies != null) {
 								BOOKING</a> <a class="dropdown-item" href="./usr_review.html">MY
 								REVIEW</a> <a class="dropdown-item" href="./usr_review.html">FAQ</a>
 						</div></li>
-						<li class="nav-item">
-						<a class="nav-link " data-toggle="modal"
-						href="javascript:void(0)" onclick="location.replace('<%=request.getContextPath()%>/logout');">LOG OUT</a>
-						</li>
-						<%} %>
+					<li class="nav-item"><a class="nav-link " data-toggle="modal"
+						href="javascript:void(0)"
+						onclick="location.replace('<%=request.getContextPath()%>/logout');">LOG
+							OUT</a></li>
+					<%
+						} else if (logginedMember != null && logginedMember.getMemberSep().equals("관리자")) {
+						//관리자인경우
+					%>
+
+
+
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							MY PAGE </a>
+						<div class="dropdown-menu dropdown-menu-right"
+							aria-labelledby="navbarDropdownPages">
+							<a class="dropdown-item"
+								href="<%=request.getContextPath()%>/admin/adminpage">MY PAGE</a>
+							<a class="dropdown-item"
+								href="<%=request.getContextPath()%>/admin/search/member">회원조회</a>
+							<a class="dropdown-item"
+								href="<%=request.getContextPath()%>/admin/StoreRequestStatus">입점현황</a>
+							<a class="dropdown-item"
+								href="<%=request.getContextPath()%>/notice">공지사항</a> <a
+								class="dropdown-item"
+								href="<%=request.getContextPath()%>/admin/review">BEST
+								REVIEW</a>
+						</div></li>
+					<li class="nav-item"><a class="nav-link " data-toggle="modal"
+						href="javascript:void(0)"
+						onclick="location.replace('<%=request.getContextPath()%>/logout');">LOG
+							OUT</a></li>
+					<%
+						}
+					%>
 				</ul>
 
 			</div>
@@ -251,7 +258,7 @@ if (cookies != null) {
 	</nav>
 
 	<header>
-<!-- 	회원 관심사에서 랜덤으로 추천 -->
+		<!-- 	회원 관심사에서 랜덤으로 추천 -->
 		<div id="carouselExampleIndicators" class="carousel slide"
 			data-ride="carousel">
 			<ol class="carousel-indicators">
@@ -321,7 +328,7 @@ if (cookies != null) {
 			</form>
 		</div>
 
-<h1 class="my-4">무슨 기준 추천?</h1>
+		<h1 class="my-4">무슨 기준 추천?</h1>
 
 		<!-- Marketing Icons Section -->
 		<div class="row">
@@ -365,13 +372,13 @@ if (cookies != null) {
 
 		<!-- Portfolio Section -->
 		<h2>위치 기반 추천</h2>
-		
-		
-		
 
-		
 
-	
+
+
+
+
+
 	</div>
 
 

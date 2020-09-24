@@ -410,7 +410,13 @@
             <div><label for="saveId"><input id="saveId" type="checkbox" name="saveId">Stay signed in</label></div>
               <span>Looking to
                 <a href="javascript: showRegisterForm();">create an account</a>
-                ?</span>
+                ?</span><br>
+                <span>Forgot 
+                <a href="javascript: showRegisterForm();">your ID</a>
+                </span><br>
+                <span>Forgot 
+                <a href="javascript: showRegisterForm();">your ID</a>
+                </span>
             </div>
             <div class="forgot register-footer" style="display:none">
               <span>Already have an account?</span>

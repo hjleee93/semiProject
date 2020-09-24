@@ -107,19 +107,43 @@ public class StoreDao {
 		}return count;
 	}
 	
-	public int updateStoreStatus(Connection conn, int storeId) {
+	public int updateStoreStatus(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("updateStoreStatus"));
-			pstmt.setInt(1, storeId);
+			pstmt=conn.prepareStatement(prop.getProperty("updateStoreStatus").replace("$value", id));
 			result=pstmt.executeUpdate();
+			System.out.println("storedao"+result);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}return result;
 	}
-	
-	
+	public int updateStoreHold(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateStoreHold").replace("$value", id));
+			result=pstmt.executeUpdate();
+			System.out.println("storedao"+result);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	public int updateStoreDecline(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateStoreDecline").replace("$value", id));
+			result=pstmt.executeUpdate();
+			System.out.println("storedao"+result);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
 }

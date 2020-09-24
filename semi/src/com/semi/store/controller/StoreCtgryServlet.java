@@ -34,6 +34,7 @@ public class StoreCtgryServlet extends HttpServlet {
 		
 		System.out.println("카테고리서블릿 실행");
 		String category = request.getParameter("storeDtlCtgry");
+		System.out.println("request.getParameter(\"storeDtlCtgry\"): " + request.getParameter("storeDtlCtgry"));
 		System.out.println("category: "+ category);
 		List<Store> list = new StoreService().selectStoreCtgry(category);
 		System.out.println("list in servlet! : "+ list);

@@ -4,26 +4,22 @@ import java.sql.Date;
 
 public class QnaComment {
 	private int qnaCommentNo;
-	private int qnacommentLevel;
 	private String qnaCommentWriter;
 	private String qnaCommentContent;
 	private int qnaRef;
-	private int commentRef;
 	private Date qnaCommentDate;
 	
 	public QnaComment() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public QnaComment(int qnaCommentNo, int qnacommentLevel, String qnaCommentWriter,
-			String qnaCommentContent, int qnaRef, int commentRef, Date qnaCommentDate) {
+	public QnaComment(int qnaCommentNo,String qnaCommentWriter,
+			String qnaCommentContent, int qnaRef,Date qnaCommentDate) {
 		super();
 		this.qnaCommentNo = qnaCommentNo;
-		this.qnacommentLevel = qnacommentLevel;
 		this.qnaCommentWriter = qnaCommentWriter;
 		this.qnaCommentContent = qnaCommentContent;
 		this.qnaRef = qnaRef;
-		this.commentRef = commentRef;
 		this.qnaCommentDate = qnaCommentDate;
 	}
 
@@ -35,13 +31,6 @@ public class QnaComment {
 		this.qnaCommentNo = qnaCommentNo;
 	}
 
-	public int getQnacommentLevel() {
-		return qnacommentLevel;
-	}
-
-	public void setQnacommentLevel(int qnacommentLevel) {
-		this.qnacommentLevel = qnacommentLevel;
-	}
 
 	public String getQnaCommentWriter() {
 		return qnaCommentWriter;
@@ -67,13 +56,6 @@ public class QnaComment {
 		this.qnaRef = qnaRef;
 	}
 
-	public int getCommentRef() {
-		return commentRef;
-	}
-
-	public void setCommentRef(int commentRef) {
-		this.commentRef = commentRef;
-	}
 
 	public Date getQnaCommentDate() {
 		return qnaCommentDate;
@@ -85,9 +67,8 @@ public class QnaComment {
 
 	@Override
 	public String toString() {
-		return "QnaComment [qnaCommentNo=" + qnaCommentNo + ", qnacommentLevel=" + qnacommentLevel
-				+ ", qnaCommentWriter=" + qnaCommentWriter + ", qnaCommentContent=" + qnaCommentContent + ", qnaRef="
-				+ qnaRef + ", commentRef=" + commentRef + ", qnaCommentDate=" + qnaCommentDate + "]";
+		return "QnaComment [qnaCommentNo=" + qnaCommentNo + ", qnaCommentWriter=" + qnaCommentWriter + ", qnaCommentContent=" + qnaCommentContent + ", qnaRef="
+				+ qnaRef +  ", qnaCommentDate=" + qnaCommentDate + "]";
 	}
 
 	

@@ -34,14 +34,14 @@ public class QnaCommentlnsertServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		int qnaRef=Integer.parseInt(request.getParameter("qnaRef"));
 		String qnaCommentWriter=request.getParameter("qnaCommentWriter");
-		int qnaCommentLevel=Integer.parseInt(request.getParameter("qnaCommentLevel"));
-		int qnaCommentRef=Integer.parseInt(request.getParameter("qnaCommentRef"));
 		String qnaCommentContent=request.getParameter("qnaCommentContent");
 		
-		QnaComment bc=new QnaComment(0,qnaCommentLevel,qnaCommentWriter,
-				qnaCommentContent,qnaRef,qnaCommentRef,null);
+		QnaComment bc=new QnaComment(0,qnaCommentWriter,qnaCommentContent,qnaRef,null);
 		
+		System.out.println("qnaRef: " + qnaRef);
 		int result=new QnaService().insertQnaComment(bc);
+		
+		
 		
 		String msg="";
 		String loc="/qna/qnaView?no="+qnaRef;
@@ -50,9 +50,11 @@ public class QnaCommentlnsertServlet extends HttpServlet {
 		}else {
 			msg="답변 등록 실패";
 		}
+//		loc="/qna/qnaView?no="+qnaRef;
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+
 		
 		
 	}

@@ -37,7 +37,7 @@ public class WriteQnaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		if(!ServletFileUpload.isMultipartContent(request)) {
-			request.setAttribute("msg", " 작성 실패! 관리자에게 문의하세요.");
+			request.setAttribute("msg", "문의사항이 등록되었습니다.");
 			request.setAttribute("loc", "/Qna");
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 			return;
@@ -45,7 +45,7 @@ public class WriteQnaServlet extends HttpServlet {
 		
 		System.out.println(getServletContext().getRealPath("/"));
 		
-		String path=getServletContext().getRealPath("/")+"upload/qna";		
+		String path=getServletContext().getRealPath("/")+"upload\\qna";		
 		//String path=getServletContext().getRealPath("/upload/qna");
 		int maxSize=1024*1024*10;
 		String encode="UTF-8";
@@ -53,10 +53,7 @@ public class WriteQnaServlet extends HttpServlet {
 		//MultipartRequest mr = new MultipartRequest(request,path,maxSize,"UTF-8",new DefaultFileRenamePolicy());
 		MultipartRequest mr=new MultipartRequest(request, path, maxSize
 				,encode,new DefaultFileRenamePolicy());
-			
-		
-		
-		
+					
 		Qna n = new Qna();
 		n.setQnaTitle(mr.getParameter("title"));
 		n.setQnaSep(mr.getParameter("sep"));
@@ -73,10 +70,10 @@ public class WriteQnaServlet extends HttpServlet {
 		String msg="";
 		String loc="";
 		if(result>0) {
-			msg="QNA 등록 완료되었습니다.";
+			msg="QNA 등록이 완료되었습니다.";
 			loc="/qna";
 		}else {
-			msg="QNA 등록이 수행되지 않았습니다.";
+			msg="QNA 등록에 실패하였습니다. 관리자에게 문의해주시거나 카카오톡으로 문의 해주세요";
 			loc="/qna/writeQna";
 		}
 		

@@ -85,7 +85,21 @@
         <h1>Q&A</h1>
     </div>
     <div class="container">
-            <div class="board-header">
+   
+   
+<!--     <form action="board-search" method="get">
+    <select name="searchCategory">
+        <option value="1">작성자</option>
+        <option value="2">글제목</option>
+        <option value="3">글제목 + 내용</option>
+    </select>
+    <input type="text" name="searchKeyword" 
+        placeholder="키워드" required />
+    <input type="submit" value="검색" />
+</form>
+     -->
+    
+            <%-- <div class="board-header">
                 <div class="board-search-form">
                     <label for="searchType" class="hidden">검색 구분</label>
                     
@@ -118,7 +132,7 @@
 	                    </form>
                     </div>
                 </div>
-            </div>
+            </div> --%>
 		
             <div class="tbl-box">
                 <table class="tbl-list">

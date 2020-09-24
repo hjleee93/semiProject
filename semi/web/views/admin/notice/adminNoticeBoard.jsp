@@ -166,8 +166,7 @@ $(function(){
 		let value=$(e.target).val();
 		$("#search-"+value).css("display","inline-block");
 	})
-	
-	$("input[name='searchkeyword']").keyup(function(){
+	 $("input[name='searchkeyword']").blur(function(){
 		var k = $(this).val();
 		$(".tbl-list>tbody>tr").hide();
 		if($("#searchType").val()=='member'){

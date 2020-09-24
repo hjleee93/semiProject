@@ -10,8 +10,8 @@ public class Qna {
 	private String qnaWriter;
 	private String qnaContent;
 	private Date qnaDate;
-	private String qnaOriginalFileName;
-	private String qnaRenamedFileName;
+//	private String qnaOriginalFileName;
+//	private String qnaRenamedFileName;
 	private int qnaCount;
 
 	public Qna() {
@@ -27,8 +27,8 @@ public class Qna {
 		this.qnaWriter = qnaWriter;
 		this.qnaContent = qnaContent;
 		this.qnaDate = qnaDate;
-		this.qnaOriginalFileName = qnaOriginalFileName;
-		this.qnaRenamedFileName = qnaRenamedFileName;
+//		this.qnaOriginalFileName = qnaOriginalFileName;
+//		this.qnaRenamedFileName = qnaRenamedFileName;
 		this.qnaCount = qnaCount;
 	}
 
@@ -80,21 +80,21 @@ public class Qna {
 		this.qnaDate = qnaDate;
 	}
 
-	public String getQnaOriginalFileName() {
-		return qnaOriginalFileName;
-	}
+//	public String getQnaOriginalFileName() {
+//		return qnaOriginalFileName;
+//	}
+//
+//	public void setQnaOriginalFileName(String qnaOriginalFileName) {
+//		this.qnaOriginalFileName = qnaOriginalFileName;
+//	}
 
-	public void setQnaOriginalFileName(String qnaOriginalFileName) {
-		this.qnaOriginalFileName = qnaOriginalFileName;
-	}
-
-	public String getQnaRenamedFileName() {
-		return qnaRenamedFileName;
-	}
-
-	public void setQnaRenamedFileName(String qnaRenamedFileName) {
-		this.qnaRenamedFileName = qnaRenamedFileName;
-	}
+//	public String getQnaRenamedFileName() {
+//		return qnaRenamedFileName;
+//	}
+//
+//	public void setQnaRenamedFileName(String qnaRenamedFileName) {
+//		this.qnaRenamedFileName = qnaRenamedFileName;
+//	}
 
 	public int getQnaCount() {
 		return qnaCount;
@@ -107,8 +107,7 @@ public class Qna {
 	@Override
 	public String toString() {
 		return "Qna [qnaNo=" + qnaNo + ", qnaSep=" + qnaSep + ", qnaTitle=" + qnaTitle + ", qnaWriter=" + qnaWriter
-				+ ", qnaContent=" + qnaContent + ", qnaDate=" + qnaDate + ", qnaOriginalFileName=" + qnaOriginalFileName
-				+ ", qnaRenamedFileName=" + qnaRenamedFileName + ", qnaCount=" + qnaCount + "]";
+				+ ", qnaContent=" + qnaContent + ", qnaDate=" + qnaDate + ", qnaCount=" + qnaCount + "]";
 	}
 	
 	

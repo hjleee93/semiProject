@@ -5,13 +5,44 @@
 <%@ page import="com.semi.qna.model.vo.*, com.semi.partner.model.vo.*" %>
 <%
 	Qna n = (Qna)request.getAttribute("qna");
-	Member Memberloggined = (Member)session.getAttribute("Memberloggined");
+	Member MemberlogginedQna = (Member)session.getAttribute("Memberloggined");
 	PartnerMember Partnerloggined = (PartnerMember)session.getAttribute("Partnerloggined");
+	List<QnaComment> qnaList=(List)request.getAttribute("list");
+	System.out.println("qna: " + n);
+	System.out.println("qna: " + qnaList);
+	QnaComment bc = (QnaComment)request.getAttribute("qnaComment");
+
 %>
 <style>
+   div#comment-container button#btn-insert{width:60px;height:50px; color:white;
+    background-color:#3300FF;position:relative;top:-20px;}
+    
 	.notice{
 		margin:5%;
 	}
+	
+	
+	 div#btn{
+            background: mediumpurple;
+            color: #fff;
+            margin-left: 5px;
+            -ms-display: flexbox;
+            display: flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
+            width: 88px;
+            height: 43px;
+            overflow: hidden;
+            font-size: 16px;
+            color: white;
+            border: 1px solid #ddd;
+            border-radius:7px;
+            
+        }
 	.notice h1 {
             font-family: 'S-CoreDream-8Heavy', sans-serif;
             text-align: center;
@@ -82,9 +113,8 @@
 <section>
 <div class="container">
   <div id="notice-container" class="notice">
-	  <h1>상세페이지</h1>
+	  <h1>Q&A</h1>
   </div>
-  <form name="noticeFrm" id="noticeFrm" action="" method="post">
   <div id="no">
   <span> NO: </span>
   <span><%=n.getQnaNo() %></span>
@@ -106,69 +136,115 @@
         <tr>
             <th scope="row">작성자</th>
             <td><%=n.getQnaWriter() %></td>
-        </tr>
-        <tr>
-       <th>첨부파일</th>
-				<td>
-				 	<%if(n.getQnaOriginalFileName()!=null){ %>
-				 		<a href="javascript:fn_fileDownload('<%=n.getQnaOriginalFileName()%>','<%=n.getQnaRenamedFileName()%>');">
-					 		<img src="<%=request.getContextPath() %>/images/file.png" width="20" height="20">
-					 		<%=n.getQnaOriginalFileName() %>
-				 		</a>
-				 		<script>
-				 			function fn_fileDownload(oriname,rename){
-				 				const url="<%=request.getContextPath()%>/Qna/QnaFileDown";
-				 				let oName=encodeURIComponent(oriname);
-				 				location.assign(url+'?oName='+oName+'&rName='+rename);
-				 			}
-				 		</script>
-				 	<%} %>
-				</td>
-			</tr>
+        </tr>    
         <tr class="last">
             <th scope="row">내 용</th>
             <td id="content"><%=n.getQnaContent() %></td>
         </tr>
         </tbody>
-    </table>
-   <%if(Partnerloggined!=null&&(Partnerloggined.getPartner_id().equals("admin"))){%>
-   		<div class="btn">
-                <input type="button" value="수정하기" onclick="fn_modify();">
-                <input type="button" value="삭제하기" onclick="fn_delete();">
-        </div>
-    <%}else if(Memberloggined!=null&&(Memberloggined.getMember_id().equals("admin"))){ %>
-        <div class="btn">
-                <input type="button" value="수정하기" onclick="fn_modify();">
-                <input type="button" value="삭제하기" onclick="fn_delete();">
-        </div>
-     <%} %>
-      <%--   <input type="hidden" name="file" value="<%=n.getFile() %>"> --%>
+    </table>   
+    	<tr>
+ 				<th colspan="2" class="btn">
+					<%if(MemberlogginedQna!=null&&(MemberlogginedQna.getMemberId().equals(n.getQnaWriter())
+							||MemberlogginedQna.getMemberId().equals("admin"))){ %>
+							<button type="button" onclick="fn_modify()">수정</button>
+							<button type="button" onclick="fn_delete()">삭제</button>
+					<%} %>
+					<button type="button" onclick="location.replace('<%=request.getContextPath() %>/qna')">목록</button>
+				</th>
+			</tr>
     </form>
  </div>
+ 
+ 
+ 			<form action="<%=request.getContextPath() %>/qna/qnaRe">
+		<table id="tbl-comment">
+		<div class="comment-editor">		
+			<tr>		    
+		    	<%=bc.getQnaCommentContent() %>		 
+	            <td id="qnaCommentContent">	<%=bc.getQnaCommentContent() %></td>
+	        </tr>	 
+	        <tr>		    
+		    	<%=bc.getQnaCommentContent() %>		 
+	            <td id="qnaCommentContent">	<%=bc.getQnaCommentContent() %></td>
+	        </tr>	
+	        
+	        
+	        
+	         
+	   	</div>	        			    			    		   			    		
+	    </table>
+	</form>
+   
+	    
+	    
+	 
+	    
+	   
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    </section>
 <script>
 	$(function(){
 		$("#hide").hide();
 		
 	});
+	
 	function fn_delete(){
 		if(confirm("삭제하시겠습니까?")){
 			location.replace('<%=request.getContextPath()%>/qna/deleteQna?no=<%=n.getQnaNo()%>');			
 		}	
 		
-	}
+	};
 	
 	function fn_modify(){
-		 const frm= $("#qnaFrm");
-		 const url="<%=request.getContextPath()%>/notice/modify?no=<%=n.getQnaNo()%>";
+		 const frm= $("#noticeFrm");
+		 const url="<%=request.getContextPath()%>/qna/modify?no=<%=n.getQnaNo()%>";
 		 frm.attr({
 			 "action":url,
 			 "method":"post",
 		 });
 		 frm.submit();
-	}
+	};
 	
 </script>
 
-</section>
 
 <%@ include file="/views/common/footer.jsp"%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

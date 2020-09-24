@@ -1,6 +1,7 @@
 package com.semi.admin.store.controller;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,28 +30,36 @@ public class StatusAcceptServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String[] idArr=request.getParameterValues("storeId");
+		// TODO Auto-generated method stub 
+//		int id = Integer.parseInt(request.getParameter("storeId").trim());
+
+		  String[] idArr=request.getParameterValues("storeId");
+		  
+		 
+//		  int id = 0; 
+//		  if(nums!=null) { 
+//			  for(int i=0;i<nums.length;i++) { 
+//				  id = nums[i];
+//			
+//		  } 
+//		  }
 		
-		int[] storeId = new int[idArr.length];
-		for(int i=0;i<idArr.length;i++) {
-			storeId[i]=Integer.parseInt(idArr[i]);
-			System.out.println("idArr"+storeId[i]);
+//		  String[] idArr = request.getParameterValues("storeId");
+//		  Store s = new store();
+//		  
+		int result = new StoreService().updateStoreStatus(idArr);
+		
+//////		List<Store> updateList = new storeService().updateListStatus();
+		String msg="";
+		String loc="/admin/StoreRequestStatus";
+		
+		if(result>0) {
+			msg="입점 승인되었습니다.";
+		}else {
+			msg="승인처리가 정상적으로 수행되지 않았습니다.";
 		}
-		
-//		int result = new StoreService().updateStoreStatus(storeId);
-		
-////		List<Store> updateList = new storeService().updateListStatus();
-//		String msg="";
-//		String loc="/admin/StoreRequestStatus";
-//		
-//		if(result>0) {
-//			msg="업데이트 완료";
-//		}else {
-//			msg="null";
-//		}
-//		request.setAttribute("msg", msg);
-//		request.setAttribute("loc", loc);
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
 		
 		request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
 		

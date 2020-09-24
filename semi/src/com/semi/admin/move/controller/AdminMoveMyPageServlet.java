@@ -16,7 +16,7 @@ import com.semi.store.model.vo.Store;
 /**
  * Servlet implementation class AdminMyPageServlet
  */
-@WebServlet("/adminpage")
+@WebServlet("/admin/adminpage")
 public class AdminMoveMyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,7 +41,7 @@ public class AdminMoveMyPageServlet extends HttpServlet {
 			page=1;
 		}
 		
-		int numPerPage=5;
+		int numPerPage=1000;
 		//입점현황 팝업
 		List<Store> list = new StoreService().selectStoreList(page,numPerPage);
 
@@ -55,9 +55,9 @@ public class AdminMoveMyPageServlet extends HttpServlet {
 		
 		String pageBar="";
 		if(pageNo==1) {
-			pageBar="<span>[이전]</span>";
+			pageBar="<span> ◀ </span>";
 		}else {
-			pageBar="<a href='"+request.getContextPath()+"/notice?page="+(pageNo-1)+"'>[이전]</a>";
+			pageBar="<a href='"+request.getContextPath()+"/adminpage?page="+(pageNo-1)+"'> ◀ </a>";
 			
 		}
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
@@ -65,20 +65,21 @@ public class AdminMoveMyPageServlet extends HttpServlet {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
 				pageBar+="<a href='"+request.getContextPath()
-				+"/notice?page="+(pageNo)+"'>"+pageNo+"</a>";
+				+"/adminpage?page="+(pageNo)+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}
 		if(pageNo>totalPage) {
-			pageBar+="<span>[다음]</span>";
+			pageBar+="<span> ▶ </span>";
 		}else {
 			pageBar+="<a href='"+request.getContextPath()
-			+"/notice?page="+(pageNo)+"'>[다음]</a>";
+			+"/adminpage?page="+(pageNo)+"'> ▶ </a>";
 		}
 	
 		int count = new StoreService().selectWaitingCount();
 		request.setAttribute("waitingCount", count);
 		request.setAttribute("storelist", list);
+		System.out.println("movemypage: "+list);
 		request.setAttribute("pageBar", pageBar);
 		
 		

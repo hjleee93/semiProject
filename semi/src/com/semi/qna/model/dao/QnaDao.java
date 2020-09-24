@@ -235,13 +235,12 @@ public class QnaDao {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("insertQnaComment"));
-			pstmt.setInt(1,bc.getQnacommentLevel());
-			pstmt.setNString(2,bc.getQnaCommentWriter());
-			pstmt.setNString(3, bc.getQnaCommentContent());
-			pstmt.setInt(4, bc.getQnaRef());
-			//pstmt.setInt(5, null);
-			pstmt.setString(5, bc.getCommentRef()==0?null:String.valueOf(bc.getCommentRef()));
+			pstmt=conn.prepareStatement(prop.getProperty("insertQnaComment"));		
+			pstmt.setNString(1,bc.getQnaCommentWriter());
+			pstmt.setNString(2, bc.getQnaCommentContent());
+			pstmt.setInt(3, bc.getQnaRef());
+			System.out.println(" bc.getQnaRef(): " +  bc.getQnaRef());
+			
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -250,7 +249,7 @@ public class QnaDao {
 		}return result;
 	}
 	
-	
+
 	public List<QnaComment> selectQnaCommentList(Connection conn, int no){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -262,12 +261,10 @@ public class QnaDao {
 			while(rs.next()) {
 				QnaComment bc=new QnaComment();
 				bc.setQnaCommentNo(rs.getInt(1));
-				bc.setQnacommentLevel(rs.getInt(2));
-				bc.setQnaCommentWriter(rs.getString(3));
-				bc.setQnaCommentContent(rs.getNString(4));
-				bc.setQnaRef(rs.getInt(5));
-				bc.setCommentRef(rs.getInt(6));
-				bc.setQnaCommentDate(rs.getDate(7));
+				bc.setQnaCommentWriter(rs.getString(2));
+				bc.setQnaCommentContent(rs.getNString(3));
+				bc.setQnaRef(rs.getInt(4));
+				bc.setQnaCommentDate(rs.getDate(5));
 				list.add(bc);
 			}
 		}catch(SQLException e) {

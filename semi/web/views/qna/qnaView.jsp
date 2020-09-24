@@ -7,12 +7,16 @@
 	Qna n = (Qna)request.getAttribute("qna");
 	Member MemberlogginedQna = (Member)session.getAttribute("Memberloggined");
 	PartnerMember Partnerloggined = (PartnerMember)session.getAttribute("Partnerloggined");
-	List<QnaComment> qnaList=(List)request.getAttribute("list");
-	System.out.println("qna: " + n);
-	System.out.println("qna: " + qnaList);
-
+	List<QnaComment> qnaComment=(List)request.getAttribute("list");
+	
 %>
 <style>
+
+   div#comment-container button#btn-insert{width:60px;height:50px; color:white;
+    background-color:rgba(241, 75, 241, 0.571);position:relative;top:-20px;}
+    
+
+
 	.notice{
 		margin:5%;
 	}
@@ -162,10 +166,9 @@
     
     
     	<tr>
- 
-				<th colspan="2" class="btn">
+ 				<th colspan="1" class="btn">
 					<%if(MemberlogginedQna!=null&&(MemberlogginedQna.getMemberId().equals(n.getQnaWriter())
-							||MemberlogginedQna.getMemberId().equals("ptn123"))){ %>
+							||MemberlogginedQna.getMemberId().equals("admin"))){ %>
 							<button type="button" onclick="fn_modify()">수정</button>
 							<button type="button" onclick="fn_delete()">삭제</button>
 					<%} %>
@@ -193,20 +196,21 @@
    <div id="comment-container">
 	    	<div class="comment-editor">
 	    		<form action="<%=request.getContextPath() %>/qna/qnaCommentInsert" method="post">
-	    			<input type="hidden" name="qnaRef" value="<%=n.getQnaNo() %>">
-	    			<input type="hidden" name="qnaCommentWriter" value="<%=Memberloggined!=null?Memberloggined.getMemberId():"" %>">
-					<input type="hidden" name="qnaCommentLevel" value="1">
-					<input type="hidden" name="qnaCommentRef" value="0">
-					<textarea name="qnaCommentContent" cols="55" rows="3"></textarea>
+	    			<input type="hidden" id="qnaRef"  name="qnaRef" value="<%=n.getQnaNo() %>">
+	    			<input type="hidden" id="qnaCommentWriter" name="qnaCommentWriter" value="<%=Memberloggined!=null?Memberloggined.getMemberId():"" %>">
+					<input type="hidden" id="qnaCommentLevel" name="qnaCommentLevel" value="1">
+					<input type="hidden" id="qnaCommentRef" name="qnaCommentRef" value="0">
+					<textarea id="qnaCommentContent" name="qnaCommentContent" cols="55" rows="3"></textarea>
 					<button type="submit" id="btn-insert">등록</button>	    			
 	    		</form>
 	    	</div>
-	    </div>
+	    </div>	    
+	    
 	    <table id="tbl-comment">
-	    	<%for(QnaComment bc : qnaList) {
-	    		if(bc.getQnacommentLevel()==1){
+	    	<%for(QnaComment bc : qnaComment) {
+	    		
 	    	%>
-		    	<tr class="level1">
+		    	<tr class="comment">
 		    		<td>
 		    			<sub class="comment-writer"><%=bc.getQnaCommentWriter() %></sub>
 		    			<sub class="comment-date"><%=bc.getQnaCommentDate() %></sub>
@@ -214,29 +218,20 @@
 		    			<%=bc.getQnaCommentContent() %>
 		    		</td>
 		    		<td>
-		    			<button class="btn-reply" value="<%=bc.getQnaCommentNo()%>">답글</button>
-		    			<%if(Memberloggined.getMemberId().equals(bc.getQnaCommentWriter())
-		    					||Memberloggined.getMemberId().equals("ptn123")){ %>
+		    			<%if(MemberlogginedQna.getMemberId().equals(bc.getQnaCommentWriter())
+		    					||MemberlogginedQna.getMemberId().equals("admin")){ %>
 		    				<button class="btn-delete" value="<%=bc.getQnaCommentNo()%>">삭제</button>
 		    			<%} %>
 		    		</td>
 		    	</tr>
-	    	<%}else { %>
-	    		<tr class="level2">
-		    		<td>
-		    			<sub><%=bc.getQnaCommentWriter() %></sub>
-		    			<sub><%=bc.getQnaCommentDate() %></sub>
-		    			<br>
-		    			<%=bc.getQnaCommentContent() %>
-		    		</td>
-		    		<td></td>
-		    	</tr>
-	    	<%}
-	    	} %>
+	    	<%} %>
+	    	
+	    	
 	    </table>
+
 	    
 	    
-	    
+	        
 	    
 	    <script>
 	    	$(function(){
@@ -246,7 +241,8 @@
 	    				alert("로그인 후 이용해주세요!");
 	    				$("#MemberId").focus();
 	    			}
-	    		})
+	    		});
+	    		});
 	    		//답글에 대한 클릭이벤트설정
 	    		$(".btn-reply").click(e => { 
 	    			<%if(Memberloggined!=null){%>
@@ -267,30 +263,9 @@
 	    		
 	    	
 	    </script>
-    </div>
  
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+
  
 <script>
 	$(function(){
@@ -303,6 +278,7 @@
 		}	
 		
 	}
+	
 	
 	function fn_modify(){
 		 const frm= $("#noticeFrm");

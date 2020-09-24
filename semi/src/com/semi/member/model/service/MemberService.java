@@ -26,6 +26,13 @@ public class MemberService {
 		return m;
 	}
 	
+	public TotalMember selectMemberOne(String id) {
+		Connection conn=getConnection();
+		TotalMember m1 = dao.selectMemberOne(conn,id);
+		close(conn);
+		return m1;
+	}
+	
 	public Member selectPartnerModify(String id) {
 		Connection conn=getConnection();
 		System.out.println("id in service : " + id);
@@ -33,6 +40,38 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
+	
+	public int insertMember1(TotalMember m) {
+		System.out.println("service m : "+m);
+		Connection conn=getConnection();
+		int result=dao.insertMember1(conn,m);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int insertMember2(TotalMember m1,Customer m2) {
+		System.out.println("service m2 : "+m2);
+		Connection conn=getConnection();
+		int result2=dao.insertMember2(conn,m1,m2);
+		if(result2>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result2;
+	}
+	
+	
+	public int insertPartner(TotalMember m) {
+		System.out.println("회원가입 service partner m : "+m);
+		Connection conn=getConnection();
+		int result=dao.insertPartner(conn,m);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
 
 	public TotalMember selectCustomerModify(int seq) {
 		Connection conn=getConnection();

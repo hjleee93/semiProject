@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.semi.member.model.vo.Customer;
 import com.semi.member.model.vo.Member;
+import com.semi.member.model.vo.Partner;
 import com.semi.member.model.vo.TotalMember;
 
 
@@ -67,7 +68,114 @@ public class MemberDao {
 		}
 		return m;
 	}
+	public TotalMember selectMemberOne(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		TotalMember m1 = null;
+		try {
+			pstmt= conn.prepareStatement(prop.getProperty("selectMemberOne"));
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m1 = new TotalMember();
+				System.out.println("m1         :" + m1);
+				m1.setMemberNum(rs.getInt("seq_member_num"));
+				m1.setMemberId(rs.getString("member_id"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return m1;
+	}
+	// 멤버 회원가입 
 	
+		public int insertMember1(Connection conn, TotalMember m) {
+			PreparedStatement pstmt=null;
+			int result=0;
+			try {
+				pstmt=conn.prepareStatement(prop.getProperty("insertTotalMember"));
+				pstmt.setString(1, m.getMemberId());
+				pstmt.setString(2, m.getMemberName());
+				pstmt.setString(3, m.getMemberSep());
+				pstmt.setString(4, m.getMemberPw());
+				pstmt.setString(5, m.getMemberEmail());
+				pstmt.setString(6, m.getMemberPhone());
+				pstmt.setString(7, m.getMemPostcode());
+				pstmt.setString(8, m.getMemAddress());
+				pstmt.setString(9, m.getMemDetailAddress());
+				pstmt.setString(10, m.getMemExtraAddress());
+				
+				result=pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}return result;
+		}
+		
+		public int insertMember2(Connection conn, TotalMember m1,Customer m2) {
+			PreparedStatement pstmt=null;
+			int result2=0;
+			try {
+				pstmt=conn.prepareStatement(prop.getProperty("insertCustomer"));
+				pstmt.setInt(1,m1.getMemberNum());
+				pstmt.setString(2, m2.getGender());
+				pstmt.setString(3, m2.getBirthday());
+				pstmt.setString(4, m2.getCategory());
+				
+				result2=pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}return result2;
+		}
+		
+		
+		//파트너 회원가입
+		
+		public int insertPartner(Connection conn, TotalMember m) {
+			PreparedStatement pstmt=null;
+			int result=0;
+			try {
+				pstmt=conn.prepareStatement(prop.getProperty("insertTotalMember"));
+				pstmt.setString(1, m.getMemberId());
+				pstmt.setString(2, m.getMemberName());
+				pstmt.setString(3, m.getMemberSep());
+				pstmt.setString(4, m.getMemberPw());
+				pstmt.setString(5, m.getMemberEmail());
+				pstmt.setString(6, m.getMemberPhone());
+				pstmt.setString(7, m.getMemPostcode());
+				pstmt.setString(8, m.getMemAddress());
+				pstmt.setString(9, m.getMemDetailAddress());
+				pstmt.setString(10, m.getMemExtraAddress());
+				
+				result=pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}return result;
+		}
+		
+		
+		
+		public int insertPartner2(Connection conn) {
+			PreparedStatement pstmt=null;
+			int result=0;
+			try {
+				pstmt=conn.prepareStatement(prop.getProperty("insertPartner2"));
+//				pstmt.setString(1, m2.getGender());
+//				pstmt.setString(2, m2.getBirthday());
+//				pstmt.setString(3, m2.getCategory());
+				
+				result=pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}return result;
+		}
 	
 	public Member selectPartnerModify(Connection conn, String id) {
 		PreparedStatement pstmt = null;

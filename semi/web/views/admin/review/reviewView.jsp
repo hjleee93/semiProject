@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.semi.admin.review.vo.*" %>
 <%@ include file="/views/common/header.jsp"%>
+<%
+	Review r = (Review)request.getAttribute("review");
+%>
 <style>
+
         .review {
-            margin: 50px;
+            margin:13% 0 5% 0;
         }
 
         .review h1 {
@@ -30,7 +35,6 @@
         .tbl-reg th {
             font-size: 16px;
             font-weight: 400;
-            color: #000;
             text-align: left;
             border-bottom: 1px solid #e7e7e7;
             padding: 10px 0 10px 30px;
@@ -39,8 +43,7 @@
 
         .tbl-reg th label {
             font-size: 16px;
-            color: #000;
-            font-weight: 400;
+            font-weight: bold;
         }
 
         .tbl-reg td {
@@ -54,16 +57,15 @@
         }
 
         .tbl-reg tr.first th {
-            border-top: 5px solid tomato;
+            border-top: 5px solid rgba(140, 89, 185, 0.3);
         }
 
         .tbl-reg tr.first td {
-            border-top: 5px solid tomato;
+            border-top: 5px solid rgba(140, 89, 185, 0.3);
         }
 
         .tbl-reg td .inp {
             font-size: 16px;
-            color: #000;
             width: 223px;
             border: 1px solid #ccc;
             height: 43px;
@@ -75,7 +77,6 @@
 
         .tbl-reg td .select {
             font-size: 17px;
-            color: #888;
             width: 222px;
             border: 1px solid #ccc;
             height: 45px;
@@ -88,27 +89,6 @@
             height: 160px;
             padding: 10px;
             font-size: 17px;
-            color: #888;
-        }
-
-        .radio {
-            background: url(/images/site/frt/bg/bg-radio-off.png) no-repeat;
-            width: 28px;
-            height: 28px;
-            /* overflow:hidden; */
-            appearance: none;
-            -moz-appearance: none;
-            -webkit-appearance: none;
-            -ms-display: flexbox;
-            display: flex;
-            display: -moz-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            ;
-        }
-
-        .radio:checked {
-            background: url(/images/site/frt/bg/bg-radio-on.png) no-repeat;
         }
 
         .tbl-reg td .form {
@@ -138,7 +118,6 @@
         .tbl-reg td label {
             font-weight: 400;
             font-size: 16px;
-            color: #333;
             display: inline-flex;
             margin: 0 20px 0 0px;
         }
@@ -147,13 +126,7 @@
             margin: 10px 0 5px 0;
         }
 
-        .tbl-reg mark {
-            background: transparent;
-            color: #0e83c1;
-            font-size: 16px;
-            font-weight: 400;
-        }
-
+       
         .tbl-reg td.dt {
             background: #f8f9fd;
         }
@@ -192,36 +165,50 @@
             height: 43px;
             overflow: hidden;
             font-size: 16px;
-            color: #000;
             border: 1px solid #ddd;
         }
 
         .board-view-btn a:hover {
-            text-decoration: underline;
+            font-weight:bolder;
         }
 
         .board-view-btn a.gray {
-            background: whitd;
-            border-color: tomato;
-            color: tomato;
+            background: rgba(140, 89, 185, 0.3);
+            border-color: rgba(140, 89, 185, 0.3);
+            color: white;
         }
-
-        .board-view-btn a.meple {
-            background: tomato;
-            border-color: tomato;
-            color: #fff;
-        }
+        #reviewFrm{
+			padding-left:15%;
+			padding-right:15%;
+			text-align:center;
+			margin-bottom:5%;
+		}
+		#content:link { 
+			text-decoration: none;
+			color:#646464;
+			/* box-shadow: 0 -6px rgba(75, 112, 253, 0.3) inset;  */
+		} 
+		#content:visited { 
+			text-decoration: none;
+			color:#646464; 
+		 }
+		#content:active { 
+			text-decoration: none;
+			color:#646464; 
+		}
+		#content:hover { 
+			text-decoration: none;
+			color:#646464; 
+			box-shadow: 0 -6px rgba(140, 89, 185, 0.3) inset; }		 
+		#content{ display: inline; }
        
     </style>
     <section>
 <div class="container">
-
-        <!-- Page Heading/Breadcrumbs -->
         <div class="review">
             <h1>R E V I E W</h1>
         </div>
-	<form name="adminWriteFrm" id="adminWriteFrm" action="" method="post"
-	enctype="multipart/form-data">
+	<form name="reviewFrm" id="reviewFrm" action="" method="post">
         <table class="tbl-reg">
             <caption>BEST TOP 3 REVIEW</caption>
 
@@ -232,79 +219,54 @@
 
             <tbody>
                 <tr class="first">
-                    <th scope="row"><label for="title">리뷰명</label></th>
-                    <td><input type="text" name="title" id="title" class="inp full" title="리뷰명" required
-                    placeholder="리뷰제목"></td>
-                </tr>
-                <tr>
                     <th scope="row"><label for="category">카테고리</label></th>
-                    <td>
-                        <select id="notice" name="category" title="카테고리">
-							<option value="cafe">CAFE</option>
-                            <option value="pub">PUB</option>
-                            <option value="restaurant">RESTAURANT</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-					
+                    <td><%=r.getReviewCategory() %></td>
+                    <th scope="row"><label for="title">리뷰명</label></th>
+                    <td id="title"><%=r.getReviewTitle() %></td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="writer">작성자</label></th>
-                    <td><input type="text" name="writer" id="writer" class="inp" title="작성자 입력" value=""></td>
+                    <td><%=r.getReviewWriter() %></td>
+                    <th scope="row"><label for="content">내용</label></th>
+                    <td><a  id="content" href=""><%=r.getReviewContent() %></a></td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="content">내용</label></th>
-                    <td>
-                        <textarea name="content" id="content" rows="20" cols="70" class="textarea">❤❤❤❤🤍</textarea>
-                    </td>
+                	<th></th>
+                	<td></td>
+                	<th scope="row"><label for="star">만족도</label></th>
+                	<td colspan="2"><%=r.getReviewMark() %></td>
                 </tr>
             </tbody>
         </table>
-
+		
         <div class="board-view-btn">
-            <a class="gray" title="cancel" onclick="cancel_event();">취소</a>
-            <a class="meple" title="submit" id="submit">등록</a>
-            
+        	<a class="gray" id="modi"  onclick="Fn_modi();">수정</a>
+        	<a class="gray" id="del"  onclick="Fn_delete();">삭제</a>
+            <a class="gray" id="cancel"  onclick="cancel_event();">목록으로</a>
         </div>
         </form>
     </div>
 
     <script>
         function cancel_event() {
-            if (confirm("정말 취소하시겠습니까?") == true) {
-                location.replace("<%=request.getContextPath()%>/notice");
-            }
+                location.replace("<%=request.getContextPath()%>/admin/review");
         };
-
-        $(function () {
-            $("#submit").click(function () {
-
-                if ($("#title").val() == "") {
-                    alert("제목은 필수 입력값입니다.");
-                    $("#title").focus();
-                    return;
-                }
-               
-                if ($("#content").val() == "") {
-                    alert("내용은 필수 입력값입니다.");
-                    $("#content").focus();
-                    return;
-                }
-          
-				if($("#title").val()!=null && $("#content").val()!=null){
-            	const frm = $("#adminWriteFrm");
-    			const url="<%=request.getContextPath()%>/admin/noticeWrite";
-    			frm.attr({
-    				"action":url,
-    				"method":"post",
-    			});
-    			frm.submit();
-				};
-            })
-
-
-        });
+        function Fn_delete(){
+    		if(confirm("리뷰를 삭제하시겠습니까?")){
+    			location.replace('<%=request.getContextPath()%>/admin/reviewDel?no=<%=r.getReviewNum()%>');			
+    		}	
+    		
+    	}
+    	
+    	 function Fn_modi(){
+    		 const frm= $("#reviewFrm");
+    		 const url="<%=request.getContextPath()%>/admin/reviewModi?no=<%=r.getReviewNum()%>";
+    		 frm.attr({
+    			 "action":url,
+    			 "method":"post",
+    		 });
+    		 frm.submit();
+    	}
     </script>
 </section>
 

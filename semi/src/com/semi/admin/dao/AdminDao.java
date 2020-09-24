@@ -28,38 +28,38 @@ public class AdminDao {
 	}
 	
 	
-	public List<TotalMember> selectPartnerList(Connection conn,int page, int numPerPage){
-		PreparedStatement pstmt=null;
-		ResultSet rs = null;
-		List<TotalMember> clist = new ArrayList();
-		TotalMember m = new TotalMember();
-		try {
-			pstmt=conn.prepareStatement(prop.getProperty("selectPartnerList"));
-			
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				m.setMemberNum(rs.getInt("seq_member_num"));
-				m.setMemberId(rs.getString("member_id"));
-				m.setMemberName(rs.getString("member_name"));
-				m.setMemberSep(rs.getString("member_sep"));
-				m.setMemberPw(rs.getString("member_pw"));
-				m.setMemberEmail(rs.getString("member_email"));
-				m.setMemberPhone(rs.getString("member_phone"));
-				m.setMemPostcode(rs.getString("postcode"));
-				m.setMemAddress(rs.getString("address"));
-				m.setMemDetailAddress(rs.getString("detailAddress"));
-				m.setMemExtraAddress(rs.getString("extraAddress"));
-				m.setMemberEnrolldate(rs.getDate("enrolldate"));
-				clist.add(m);
-				System.out.println("admindao selectptnlist: "+clist);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}return clist;
-	}
+//	public List<TotalMember> selectPartnerList(Connection conn,int page, int numPerPage){
+//		PreparedStatement pstmt=null;
+//		ResultSet rs = null;
+//		List<TotalMember> clist = new ArrayList();
+//		TotalMember m = new TotalMember();
+//		try {
+//			pstmt=conn.prepareStatement(prop.getProperty("selectPartnerList"));
+//			
+//			rs = pstmt.executeQuery();
+//			while(rs.next()) {
+//				m.setMemberNum(rs.getInt("seq_member_num"));
+//				m.setMemberId(rs.getString("member_id"));
+//				m.setMemberName(rs.getString("member_name"));
+//				m.setMemberSep(rs.getString("member_sep"));
+//				m.setMemberPw(rs.getString("member_pw"));
+//				m.setMemberEmail(rs.getString("member_email"));
+//				m.setMemberPhone(rs.getString("member_phone"));
+//				m.setMemPostcode(rs.getString("postcode"));
+//				m.setMemAddress(rs.getString("address"));
+//				m.setMemDetailAddress(rs.getString("detailAddress"));
+//				m.setMemExtraAddress(rs.getString("extraAddress"));
+//				m.setMemberEnrolldate(rs.getDate("enrolldate"));
+//				clist.add(m);
+//				System.out.println("admindao selectptnlist: "+clist);
+//			}
+//		}catch(SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//			close(rs);
+//			close(pstmt);
+//		}return clist;
+//	}
 	public List<TotalMember> selectTotalMemberList(Connection conn,int page, int numPerPage){
 		PreparedStatement pstmt=null;
 		ResultSet rs = null;

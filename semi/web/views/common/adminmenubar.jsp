@@ -11,12 +11,13 @@
   <div class=submenu style="background-color: mediumpurple;">
 	<%-- <%if(logginedMember!=null && logginedMember.getMember_id().equals("admin")){ %> --%>
     <ul>
-      <li><a class="subhome" href="<%=request.getContextPath()%>/adminpage">MYPAGE</a></li>
+      <li><a class="subhome" href="<%=request.getContextPath()%>/admin/adminpage">MYPAGE</a></li>
+<!--       TODO:reservation 매핑값처리-->
       <li><a class="subhome" href="<%=request.getContextPath() %>/admin/reservationView">RESERVATION</a></li>
       <li><a class="subhome" href="<%=request.getContextPath() %>/admin/StoreRequestStatus">입점현황</a></li>
       <li><a class="subhome" href="<%=request.getContextPath() %>/notice">NOTICE</a></li>
       <li><a class="subhome" href="<%=request.getContextPath() %>/qna/qnalist">Q&A</a></li>
-      <li><a class="subhome" href="<%=request.getContextPath() %>/admin/reviewPick">REVIEW</a></li>
+      <li><a class="subhome" href="<%=request.getContextPath() %>/admin/review">REVIEW</a></li>
     </ul>
   <%-- <%} %> --%>
   </div>

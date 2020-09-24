@@ -1,16 +1,20 @@
 package com.semi.admin.review.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.admin.review.service.ReviewService;
+import com.semi.admin.review.vo.Review;
+
 /**
  * Servlet implementation class ReviewViewServlet
  */
-@WebServlet("/admin/reviewPick")
+@WebServlet("/reviewView")
 public class ReviewViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,9 +31,12 @@ public class ReviewViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		int no = Integer.parseInt(request.getParameter("no"));
+		Review r = new ReviewService().selectReviewOne(no);
+		
+		request.setAttribute("review", r);
 		
 		request.getRequestDispatcher("/views/admin/review/reviewView.jsp").forward(request, response);
-		
 	}
 
 	/**

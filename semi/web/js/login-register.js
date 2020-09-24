@@ -65,10 +65,10 @@ function shakeModal(){
 
 function removeCheck() {
 
-    if (confirm("�쉶�썝媛��엯�쓣 痍⑥냼�븯�떆寃좎뒿�땲源�?") == true){   
-         //�솗�씤 
+    if (confirm("취소버튼을 누르셧습니다. 작성하신 내용은 저장되지않습니다.") == true){   
+
          location.href='main_final.html'
-    }else{ //痍⑥냼
+    }else{ 
         return false;
    
     }
@@ -78,23 +78,12 @@ function removeCheck() {
 
     function joinCheck() {
 
-        if (confirm("�쉶�썝媛��엯 �븯�떆寃좎뒿�땲源�?") == true){   
-             //�솗�씤 
+        if (confirm("회원가입이 완료되었습니다. ") == true){   
+              
             document.removefrm.submit();
-        }else{ //痍⑥냼
+        }else{
             return false;
        
         }
     }
 
-
-    function closeCheck() {
-    
-        if (confirm("痍⑥냼 �븯�떆寃좎뒿�땲源�?") == true){   
-             //�솗�씤 
-            location.href='main_final.html'
-        }else{ //痍⑥냼
-            return false;
-          
-        }
-    }

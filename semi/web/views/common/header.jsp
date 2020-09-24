@@ -106,9 +106,8 @@ if (cookie != null) {
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownPortfolio">
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/location.jsp">LOCATION</a>
-							
-							<a class="dropdown-item" href="<%=request.getContextPath()%>/qna">Q&A</a>
+								href="<%=request.getContextPath()%>/location.jsp">LOCATION</a> <a
+								class="dropdown-item" href="<%=request.getContextPath()%>/qna">Q&A</a>
 						</div></li>
 
 
@@ -122,9 +121,9 @@ if (cookie != null) {
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/store/storeList">연령별 추천</a>
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/store/storeList">지역별 추천</a>
+								href="<%=request.getContextPath()%>/views/regional/RegionalList.jsp">지역별 추천</a>
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/store/storeList">랜덤 추천</a>
+								href="<%=request.getContextPath()%>/random">랜덤 추천</a>
 						</div></li>
 
 					<li class="nav-item dropdown"><a
@@ -145,7 +144,6 @@ if (cookie != null) {
 						</div></li>
 					<%
 						if (Memberloggined == null) {
-							
 					%>
 					<li class="nav-item"><a class="nav-link " data-toggle="modal"
 						href="javascript:void(0)" onclick="openLoginModal();">LOG IN</a></li>
@@ -153,9 +151,9 @@ if (cookie != null) {
 						href="javascript:void(0)" onclick="openRegisterModal();">REGISTER</a>
 					</li>
 					<%
-						} else if(Memberloggined != null && Memberloggined.getMemberSep().equals("파트너")){
-							//파트너인 경우
-							System.out.println("logginedMember: " + Memberloggined.getMemberSep());
+						} else if (Memberloggined != null && Memberloggined.getMemberSep().equals("파트너")) {
+						//파트너인 경우
+						System.out.println("logginedMember: " + Memberloggined.getMemberSep());
 					%>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages"
@@ -163,20 +161,21 @@ if (cookie != null) {
 							MY PAGE </a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownPages">
-							<a class="dropdown-item" href="<%=request.getContextPath()%>/views/mypage/mypage_partner.jsp">MY PAGE</a> 
-							<a class="dropdown-item" href="purchase_history.html">MY BOOKING</a> 
-							<a class="dropdown-item" href="./usr_review.html">MY REVIEW</a> 
-							<a class="dropdown-item" href="./usr_review.html">FAQ</a>
+							<a class="dropdown-item"
+								href="<%=request.getContextPath()%>/views/mypage/mypage_partner.jsp">MY
+								PAGE</a> <a class="dropdown-item" href="purchase_history.html">MY
+								BOOKING</a> <a class="dropdown-item" href="./usr_review.html">MY
+								REVIEW</a> <a class="dropdown-item" href="./usr_review.html">FAQ</a>
 						</div></li>
-						<li class="nav-item">
-						<a class="nav-link " data-toggle="modal"
-						href="javascript:void(0)" onclick="location.replace('<%=request.getContextPath()%>/logout');">LOG OUT</a>
-						</li>
+					<li class="nav-item"><a class="nav-link " data-toggle="modal"
+						href="javascript:void(0)"
+						onclick="location.replace('<%=request.getContextPath()%>/logout');">LOG
+							OUT</a></li>
 					<%
-						}else if(Memberloggined != null && Memberloggined.getMemberSep().equals("회원")){
-							//회원인 경우
+						} else if (Memberloggined != null && Memberloggined.getMemberSep().equals("회원")) {
+						//회원인 경우
 					%>
-					
+
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -189,32 +188,40 @@ if (cookie != null) {
 								BOOKING</a> <a class="dropdown-item" href="./usr_review.html">MY
 								REVIEW</a> <a class="dropdown-item" href="./usr_review.html">FAQ</a>
 						</div></li>
-						<li class="nav-item">
-						<a class="nav-link " data-toggle="modal"
-						href="javascript:void(0)" onclick="location.replace('<%=request.getContextPath()%>/logout');">LOG OUT</a>
-						</li>
-						<%
-						}else if(Memberloggined != null && Memberloggined.getMemberSep().equals("관리자")){
-							//관리자인경우
-						%>
-						
-						<li class="nav-item dropdown"><a
+					<li class="nav-item"><a class="nav-link " data-toggle="modal"
+						href="javascript:void(0)"
+						onclick="location.replace('<%=request.getContextPath()%>/logout');">LOG
+							OUT</a></li>
+					<%
+						} else if (Memberloggined != null && Memberloggined.getMemberSep().equals("관리자")) {
+						//관리자인경우
+					%>
+
+					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							MY PAGE </a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownPages">
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/views/mypage/mypage_partner.jsp">MY
-								PAGE</a> <a class="dropdown-item" href="purchase_history.html">MY
-								BOOKING</a> <a class="dropdown-item" href="./usr_review.html">MY
-								REVIEW</a> <a class="dropdown-item" href="./usr_review.html">FAQ</a>
+								href="<%=request.getContextPath()%>/admin/adminpage">MY PAGE</a>
+							<a class="dropdown-item"
+								href="<%=request.getContextPath()%>/admin/search/member">회원조회</a>
+							<a class="dropdown-item"
+								href="<%=request.getContextPath()%>/admin/StoreRequestStatus">입점현황</a>
+							<a class="dropdown-item"
+								href="<%=request.getContextPath()%>/notice">공지사항</a> <a
+								class="dropdown-item"
+								href="<%=request.getContextPath()%>/admin/review">BEST
+								REVIEW</a>
 						</div></li>
-						<li class="nav-item">
-						<a class="nav-link " data-toggle="modal"
-						href="javascript:void(0)" onclick="location.replace('<%=request.getContextPath()%>/logout');">LOG OUT</a>
-						</li>
-						<%} %>
+					<li class="nav-item"><a class="nav-link " data-toggle="modal"
+						href="javascript:void(0)"
+						onclick="location.replace('<%=request.getContextPath()%>/logout');">LOG
+							OUT</a></li>
+					<%
+						}
+					%>
 				</ul>
 
 			</div>

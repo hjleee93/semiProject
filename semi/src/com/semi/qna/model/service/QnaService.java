@@ -92,8 +92,7 @@ public class QnaService {
 		return result;
 	}
 	
-	
-	
+		
 	public int insertQnaComment(QnaComment bc) {
 			Connection conn=getConnection();
 			int result=dao.insertQnaComment(conn, bc);

@@ -3,8 +3,7 @@
 	<%@ page import="com.semi.common.listner.*" %>
 <%@ page import="
 	java.util.List,
-	com.semi.member.model.vo.*,
-	com.semi.admin.store.vo.*"%>
+	com.semi.member.model.vo.*"%>
 <%@ include file="/views/common/header.jsp"%>
 <%@ include file="/views/common/adminmenubar.jsp"%>
 <!-- 전용css -->
@@ -25,8 +24,8 @@
 	<div class="container">
 
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="main.html">Home</a></li>
-			<li class="breadcrumb-item active">adminpage</li>
+			<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/main.jsp">Home</a></li>
+			<li class="breadcrumb-item active">Admin Page</li>
 		</ol>
 
 		<div class="parent" style="width: 100%;">
@@ -38,22 +37,23 @@
 				<p class="profile1">ADMIN</p>
 				<table class="profilebox">
 					<tr>
+					<!--       TODO:reservation 매핑값처리-->
 						<td id="reservationstate" class="profilebox1 menuchoice"
-							onclick="location.replace('<%=request.getContextPath()%>/admin/reservationView');">회원예약현황</td>
+							onclick="location.assign('<%=request.getContextPath()%>/admin/reservationView');">회원예약현황</td>
 						<td id="searchmember" class="profilebox2 menuchoice"
 							onclick="searchMembers();">회원조회</td>
 					</tr>
 					<tr>
 						<td id="storestate" class="profilebox1 menuchoice"
-							onclick="location.replace('<%=request.getContextPath()%>/admin/StoreRequestStatus');">입점현황</a></td>
+							onclick="location.assign('<%=request.getContextPath()%>/admin/StoreRequestStatus');">입점현황</td>
 						<td id="searchpartner" class="profilebox2 menuchoice"
-							onclick="location.replace('<%=request.getContextPath()%>/qna/qnalist');">Q&A</td>
+							onclick="location.assign('<%=request.getContextPath()%>/qna/qnalist');">Q&A</td>
 					</tr>
 					<tr>
 						<td id="qna" class="profilebox3 menuchoice"
-							onclick="location.replace('<%=request.getContextPath()%>/notice');">공지사항</a></td>
+							onclick="location.assign('<%=request.getContextPath()%>/notice');">공지사항</td>
 						<td id="searchboard" class="menuchoice"
-							onclick="location.replace('<%=request.getContextPath()%>/admin/reviewPick');">리뷰PICK!</td>
+							onclick="location.assign('<%=request.getContextPath()%>/admin/review');">BEST REVIEW</td>
 						<!-- 관리자가 게시글 삭제할 수 있게 권한 /아니면 qna게시판->에서 댓글작성하는걸로 -->
 					</tr>
 				</table>
@@ -83,12 +83,13 @@
 
 									</ul>
 								</div>
+							</div>
 						</td>
 						<td>
 							<div class="box2">
 								<p class="text3">TOTAL</p>
 								<a href="<%=request.getContextPath()%>/adminpage">
-									<div class="minibox1"><%=connectCount%></div>
+									<span class="minibox1"><%=connectCount%></span>
 								</a>
 								<div class="minibox2">접속자 수</div>
 							</div>
@@ -99,7 +100,7 @@
 							<div class="box3">
 								<p class="text3">RESERVATION</p>
 								<a href="rsvstatus.html">
-									<div class="minibox3">75</div>
+									<span class="minibox3">75</span>
 								</a>
 								<div class="minibox2">예약율(%)</div>
 							</div>
@@ -110,7 +111,7 @@
 							<div class="box3">
 								<p class="text3">Q&A</p>
 								<a href="usr_qna.html"> <!-- 문의삭제/댓글달 수있게 관리자권한 -->
-									<div class="minibox4">0</div>
+									<span class="minibox4">0</span>
 								</a>
 								<div class="minibox2">신규 등록</div>
 							</div>
@@ -119,7 +120,7 @@
 				</table>
 			</div>
 		</div>
-		<%-- <div class="container1" id="container1" class="margin-table">
+		<div class="container1" id="container1" class="margin-table">
 			<p></p>
 
 			<div id="storerequest" class="card margin-table">
@@ -153,7 +154,7 @@
 							<tbody>
 								<%if (storelist.isEmpty()) {%>
 								<tr>
-									<td colspan="7">조회된 게시글이 없습니다.</td>
+									<td colspan="8">조회된 게시글이 없습니다.</td>
 								</tr>
 								<%} else {
 									  for (Store s : storelist) {
@@ -162,8 +163,8 @@
 								<tr>
 									<td>
 										<a class="movestatus">
-										<marquee scrollamount="5" direction="down" behavior="alternate"
-										width="50" height="50">
+										<marquee scrollamount="3" direction="down" behavior="alternate"
+										width="50" height="40">
 											<small><i>NEW</i></small>
 										</marquee>
 										</a>
@@ -206,9 +207,9 @@
 							<tbody>
 							<%if (storelist.isEmpty()) {%>
 								<tr>
-									<td colspan="7">조회된 게시글이 없습니다.</td>
+									<td colspan="8">조회된 게시글이 없습니다.</td>
 								</tr>
-								<%} else {
+								<%}else {
 									  for (Store s : storelist) {
 									    if (s.getStoreStatus().equals("ACCEPT")) {
 								%>
@@ -217,10 +218,10 @@
 									<td><%=s.getStoreName() %></td>
 									<td><%=s.getStoreDtlCtgry()%></td>
 									<td><%=s.getStorePhone()%></td>
-									<td><%=s.getStoreAddress() %></td>
-									<td><%=s.getStoreContent() %></td>
-									<td><%=s.getStorePage() %></td>
-									<td><%=s.getStoreStatus() %></td>
+									<td><%=s.getStoreAddress()%></td>
+									<td><%=s.getStoreContent()%></td>
+									<td><%=s.getStorePage()%></td>
+									<td><%=s.getStoreStatus()%></td>
 								</tr>
 								<%}
 								 }
@@ -256,7 +257,7 @@
 							<tbody>
 							<%if (storelist.isEmpty()) {%>
 								<tr>
-									<td colspan="7">조회된 게시글이 없습니다.</td>
+									<td colspan="8">조회된 게시글이 없습니다.</td>
 								</tr>
 								<%} else {
 									  for (Store s : storelist) {
@@ -305,7 +306,7 @@
 							<tbody>
 							<%if (storelist.isEmpty()) {%>
 								<tr>
-									<td colspan="7">조회된 게시글이 없습니다.</td>
+									<td colspan="8">조회된 게시글이 없습니다.</td>
 								</tr>
 								<%} else {
 									  for (Store s : storelist) {
@@ -328,7 +329,7 @@
 						</table>
 					</div>
 				</div>
-			</div> --%>
+			</div>
 			<!-- 회원조회테이블팝업 -->
 
 			<!-- 파트너끝 -->
@@ -405,6 +406,5 @@
         });
 
 </script>
-	</div>
 </section>
 <%@ include file="/views/common/footer.jsp"%>

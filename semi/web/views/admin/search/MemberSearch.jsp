@@ -5,7 +5,6 @@
 <script src="<%=request.getContextPath()%>/js/jquery-1.3.2.min.js"></script>
 <%
 	List<TotalMember> searchmemlist = (List)request.getAttribute("searchmemlist");
-	List<TotalMember> searchptnlist = (List)request.getAttribute("searchptnlist");
 %>
 <style>
 #member, #partner {
@@ -83,24 +82,24 @@ div#base>table tr td{
 	border:1px white solid;
 	margin-left:3%
 }
-/* #pageBar{
+#pageBar{
    	text-align:center;
    	margin:10%;
    	font-size:20px;
-} */
-/* #pageBar a{color:#000;}
+} 
+#pageBar a{color:#000;}
 #pageBar a:link{color:mediumpurple;}
 
 #pageBar>.num:hover{
 	color:mediumpurple;
 	font-weight:bolder;
-	text-decoration:underline; */
+	text-decoration:underline;
 }	
 </style>
 <section>
 	<!-- 회원조회테이블팝업 -->
 	<div class="search-container">
-		<h3 class="card-title text-center">회원조회</h3>
+		<h3 class="card-title text-center"><span id="sep"></span>조회</h3>
 		<div class="select">
 				<select id="memberselect" onchange="change();">
 					<option value="">조회</option>
@@ -210,14 +209,14 @@ div#base>table tr td{
 				</thead>
 				<tbody>
 					<%
-						if (searchptnlist.isEmpty()) {
+						if (searchmemlist.isEmpty()) {
 					%>
 					<tr>
 						<td colspan="7">조회된 회원이 없습니다.</td>
 					</tr>
 					<%
 						} else {
-						for (TotalMember t : searchptnlist) {
+						for (TotalMember t : searchmemlist) {
 							if(t.getMemberSep().equals("파트너")){
 					%>
 					
@@ -246,10 +245,12 @@ div#base>table tr td{
 				$("#member").show();
 				$("#partner").hide();
 				$("#base").hide();
+				$("#sep").html("회원");
 			} else if ($("#memberselect").val() == 'partner') {
 				$("#partner").show();
 				$("#member").hide();
 				$("#base").hide();
+				$("#sep").html("파트너");
 			} else {
 				alert("조회하실 회원을 선택하세요");
 			}
@@ -257,10 +258,12 @@ div#base>table tr td{
 
 		$(function() {
 			$("input[name='keyword']").keyup(function(){
+				var temp="";
 				var k = $(this).val();
 				$("#tbl-list>tbody>tr").hide();
+				$("#tbl-list2>tbody>tr").hide();
 				if($("#memberselect").val()=='member'){
-				var temp=$("#tbl-list>tbody>tr>td:nth-child(2):contains('"+k+"')");
+				temp=$("#tbl-list>tbody>tr>td:nth-child(2):contains('"+k+"')");
 				}
 				if($("#memberselect").val()=='partner'){
 					temp=$("#tbl-list2>tbody>tr>td:nth-child(2):contains('"+k+"')");
@@ -269,7 +272,7 @@ div#base>table tr td{
 				
 			})
 			
-			$("[name=keyword]").keyup(e=>{
+			$("[name=keyword]").keyup(e => {
 				$.ajax({
 					url:"<%=request.getContextPath()%>/admin/search/member.do",
 					data:{"keyword":$(e.target).val()},

@@ -44,7 +44,7 @@ public class MoveAdminMemberSearchServlet extends HttpServlet {
 		
 		
 		List<TotalMember> list = new AdminService().selectTotalMemberList(page,numPerPage);
-		List<TotalMember> clist = new AdminService().selectPartnerList(page, numPerPage);
+//		List<TotalMember> clist = new AdminService().selectPartnerList(page, numPerPage);
 		
 		int totalData = new AdminService().selectMemberCount();
 		int totalPage=(int)(Math.ceil((double)totalData/numPerPage));
@@ -76,7 +76,7 @@ public class MoveAdminMemberSearchServlet extends HttpServlet {
 	
 		
 		request.setAttribute("searchmemlist", list);
-		request.setAttribute("searchptnlist", clist);
+//		request.setAttribute("searchptnlist", clist);
 		request.setAttribute("pageBar", pageBar);
 		
 		request.getRequestDispatcher("/views/admin/search/MemberSearch.jsp").forward(request, response);

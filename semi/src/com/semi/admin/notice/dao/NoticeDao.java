@@ -122,11 +122,12 @@ public class NoticeDao {
 		int result = 0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("modifyNotice"));
-//			pstmt.setString(1, n.getNoticeSep());
-			pstmt.setString(1, n.getNoticeTitle());
-			pstmt.setString(2, n.getNoticeWriter());
-			pstmt.setString(3, n.getNoticeContent());
-			pstmt.setInt(4,n.getNoticeNo());
+			pstmt.setString(1, n.getNoticeSep());
+			pstmt.setString(2, n.getNoticeTitle());
+			pstmt.setString(3, n.getNoticeWriter());
+			pstmt.setString(4, n.getNoticeContent());
+			pstmt.setString(5, n.getFile());
+			pstmt.setInt(6,n.getNoticeNo());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -135,36 +136,6 @@ public class NoticeDao {
 		}return result;
 	}
 
-	
-	public List<Notice> selectSearch(Connection conn, String type, String keyword){
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		List<Notice> list = new ArrayList();
-		try {
-			String sql=prop.getProperty("selectSearch");
-			pstmt=conn.prepareStatement(sql.replace("$type", type));
-			pstmt.setString(1, "%"+keyword+"%");
-			rs=pstmt.executeQuery();
-			while(rs.next()) {
-				Notice n = new Notice();
-				n.setNoticeNo(rs.getInt("notice_no"));
-				n.setNoticeSep(rs.getString("notice_division"));
-				n.setNoticeTitle(rs.getString("notice_title"));
-				n.setNoticeWriter(rs.getString("notice_writer"));
-				n.setNoticeContent(rs.getString("notice_content"));
-				n.setNoticeDate(rs.getDate("notice_date"));
-				n.setFile(rs.getString("filepath"));
-				n.setNoticeCount(rs.getInt("readcount"));
-				list.add(n);
-			}
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(pstmt);
-		}return list;
-		
-	}
 	public int deleteNoticeWrite(Connection conn, int no) {
 		PreparedStatement pstmt = null;
 		int result=0;

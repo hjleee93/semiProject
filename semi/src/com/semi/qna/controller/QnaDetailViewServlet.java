@@ -1,5 +1,6 @@
 package com.semi.qna.controller;
 
+import java.util.List;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.semi.qna.model.service.QnaService;
 import com.semi.qna.model.vo.Qna;
+import com.semi.qna.model.vo.QnaComment;
 
 
 
@@ -36,9 +38,11 @@ public class QnaDetailViewServlet extends HttpServlet {
 		int no = Integer.parseInt(request.getParameter("no"));
 		
 		Qna n = new QnaService().selectQnaOne(no);
+		List<QnaComment> list=new QnaService().selectQnaCommentList(no);
 		
 		System.out.println("n in service: " + n);
-		
+		System.out.println("list in service: " + list);
+		request.setAttribute("list", list);
 		request.setAttribute("qna", n);
 		
 		request.getRequestDispatcher("/views/qna/qnaView.jsp").forward(request, response);

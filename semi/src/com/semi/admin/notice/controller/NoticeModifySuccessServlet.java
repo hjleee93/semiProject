@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.semi.admin.notice.service.NoticeService;
 import com.semi.admin.notice.vo.Notice;
 
@@ -31,12 +35,25 @@ public class NoticeModifySuccessServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Notice n = new Notice();
-		n.setNoticeNo(Integer.parseInt(request.getParameter("no")));
-		n.setNoticeTitle(request.getParameter("title"));
-		n.setNoticeWriter(request.getParameter("writer"));
-		n.setNoticeContent(request.getParameter("content"));
+		if(!ServletFileUpload.isMultipartContent(request)) {
+			request.setAttribute("msg", "[※enctype※], 관리자에게 문의하세요.");
+			request.setAttribute("loc", "/notice");
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+			return;
+		}
+		String path=getServletContext().getRealPath("/upload/notice");
+		int maxSize=1024*1024*10;
 		
+		MultipartRequest mr = new MultipartRequest(request,path,maxSize,"UTF-8",new DefaultFileRenamePolicy());
+		
+		Notice n = new Notice();
+		n.setNoticeNo(Integer.parseInt(mr.getParameter("no")));
+		n.setNoticeTitle(mr.getParameter("title"));
+		n.setNoticeSep(mr.getParameter("sep"));
+		n.setNoticeWriter(mr.getParameter("writer"));
+		n.setFile(mr.getFilesystemName("file"));
+		n.setNoticeContent(mr.getParameter("content"));
+
 		int result = new NoticeService().modifyNotice(n);
 		
 		String msg="";

@@ -13,12 +13,12 @@ public class AdminService {
 
 	private AdminDao dao = new AdminDao();
 	
-	public List<TotalMember> selectPartnerList(int page, int numPerPage){
-		Connection conn = getConnection();
-		List<TotalMember> clist = dao.selectPartnerList(conn,page,numPerPage);
-		close(conn);
-		return clist;
-	}
+//	public List<TotalMember> selectPartnerList(int page, int numPerPage){
+//		Connection conn = getConnection();
+//		List<TotalMember> clist = dao.selectPartnerList(conn,page,numPerPage);
+//		close(conn);
+//		return clist;
+//	}
 	public List<TotalMember> selectTotalMemberList(int page, int numPerPage){
 		Connection conn = getConnection();
 		List<TotalMember> list = dao.selectTotalMemberList(conn,page,numPerPage);
