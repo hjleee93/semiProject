@@ -34,7 +34,7 @@
                     <input id="partner_id" class="form-control" type="text" placeholder="Email" name="id">
                     <input id="partner_pw" class="form-control" type="password" placeholder="Password" name="pw">
                     <input class="btn btn-default btn-login" id="loginBtn" type="submit" value="Login" >
-                  </form>
+                  
                   
                 </div>
                 
@@ -46,12 +46,13 @@
                
                 
                 <div class="form">
+                
+                
                   <form method="post" action="<%=request.getContextPath()%>/login" accept-charset="UTF-8">
                     <input id="search_email" class="form-control" type="text" placeholder="이메일" name="findId">
                     <input id="search_pw" class="form-control" type="password" placeholder="비밀번호" name="findPw">
                     <input class="btn btn-default btn-login" id="searchBtn" type="submit" value="찾기" >
                   </form>
-                  
                 </div>
                 
               </div>
@@ -59,10 +60,17 @@
 
 
 
-            <div class="box">
+
+
+
+
+
+           <div class="box">
               <div class="content registerBox" style="display:none;">
                 <div class="form">
-
+                  <form method="post" html="{:multipart=>true}" data-remote="true" action="<%=request.getContextPath() %>/signupmember" accept-charset="UTF-8">
+                  
+                  <input type="hidden" name="seqMember" >
 
             <ul class="nav nav-tabs">
               <li class="nav-item">
@@ -77,28 +85,56 @@
          <!--============================= Member 로그인 부분=============================-->
           <div class="tab-content">
             <div class="tab-pane fade active show" id="login_member">
-              <form action="post" method="post" onsubmit="return validate();">
-      
                 <!-- 아이디 -->
             <div class="form-group">
-              <label for="form-label">ID</label>
+              <br><label for="form-label">ID</label><br>
                <input type="text" class="form-control" placeholder="영문·숫자 4~15자리" id="member_id" name="member_id"
-                required pattern="^[a-z][a-zA-Z0-9]{4,15}$" >
+                required pattern="^[a-z][a-zA-Z0-9]{4,15}$" style="width:50%;float:left">
+                <input type="button" id="findAddress" onclick="id_duplicate();" value="아이디 중복확인" style="float:right"><br>
               <div class="" id="id_check1"></div>
             </div>
+           
             
-               <!-- 이름 -->
+            
+            <!--아이디 중복확인 함수  -->
+            <script>
+            function id_duplicate(){
+            	let id=$("#member_id").val().trim();
+            	if(id.length<4){
+            		alert("아이디는 4글자 이상 입력하세요!");
+            		return;
+            	}
+            	//중복확인창
+            	const url="<%=request.getContextPath()%>/checkIdDuplicate";
+				const title="chekcIdDuplicate";
+				const status="left=500px,top=100px,width=300px,height=300px";
+            	
+				open("",title,status);
+            	
+            	checkIdDuplicate.target=title;
+            	checkIdDuplicate.action=url;
+            	checkIdDuplicate.method="post";
+            	//input에 userId값 넣기
+            	checkIdDuplicate.member_id.value=id;
+            	//form 전송하기
+            	checkIdDuplicate.submit();
+            	
+            }
+            </script>
+            
+            
+               <!-- 이름 --><br>
           <div class="form-group">
-            <label for="form-label">name</label>
+            <label for="form-label" >name</label>
               <input type="text" class="form-control" placeholder="한글 2~4글자" id="member_name" name="member_name" 
-              required pattern="^[가-힝]{2,4}$" >
+              required pattern="^[가-힝]{2,4}$">
            <div class="" id="name_check1"></div>
           </div>
 
           <!--============================= Member 비밀번호 =============================-->
           <div class="form-group">
           <label for="psw1">Password<span class="span" id="pwCondition1"></span></label>
-            <input type="password" class="form-control" placeholder="영문·숫자 조합 6~15자리" id="pw1" name="psw1"  required="required" onchange="pwCondition1()">
+            <input type="password" class="form-control" placeholder="영문·숫자 조합 6~15자리" id="pw1" name="pw"  required="required" onchange="pwCondition1()">
           </div>
           <div class="form-group">
           <label for="pswcheck1">Repeat Password<span class="span" id="pwOk"></span></label>
@@ -144,15 +180,15 @@
 
         <!-- 성별 선택 -->
         <div class="form-group">
-          Gender  
-          <label for="female"><input type="radio" name="gender" value="female" id="female">여자</label>
+          Gender&nbsp;
+          <label for="female"><input type="radio" name="gender" value="female" id="female">여자 </label>
 
-            <label for="male"><input type="radio" name="gender" value="male" id="male" >남자</label>
+            <label for="male"><input type="radio" name="gender" value="male" id="male" >남자 </label>
         </div> 
         <!-- 나이 선택 -->
 				<div class="form-group">
 					<label for="form-label">Date of Birth</label>
-				  <input type="date" class="form-control" placeholder="Date of Birth" id="member_Age" name="member_Age" required>
+				  <input type="date" class="form-control" placeholder="Date of Birth" id="member_age" name="member_age" required>
         </div>
         <!-- 이메일 -->
 				<div class="form-group">
@@ -171,15 +207,15 @@
                  <!--============================= Member 주소 =============================-->
         <div class="form-group">
           <label style="display:block;">Address</label>
-            <input class="col-6" type="text" id="mem_postcode" placeholder="우편번호">
-            <input type="button" id="mem_findAddress" onclick="mem_postcode();" value="우편번호 찾기">
-            <input type="text" id="mem_address" placeholder="주소" required>
-            <input type="text" id="mem_detailAddress" placeholder="상세주소" required>
-            <input type="text" id="mem_extraAddress" placeholder="참고항목" >
+            <input class="col-6" type="text" id="mem_postcode" name="mem_postcode" placeholder="우편번호">
+            <input type="button" id="mem_findAddress" onclick="postcode();" value="우편번호 찾기">
+            <input type="text" id="mem_address" name="mem_address" placeholder="주소" required>
+            <input type="text" id="mem_detailAddress" name="mem_detailAddress" placeholder="상세주소" required>
+            <input type="text" id="mem_extraAddress" name="mem_extraAddress" placeholder="참고항목" >
         </div>
         
         <script>
-          function mem_postcode() {
+          function postcode() {
               new daum.Postcode({
                   oncomplete: function (data) {
                       var addr = ''; // 주소 변수
@@ -224,37 +260,44 @@
               }).open();
           }
       </script>
-     
+
+       
+           <input type="hidden" name="member_sep" value="회원">
+
       <!-- 관심사 선택   -->
       <div class="form-group">
-       <label for="form-label" >Interest</label>
-        <label for="cafeCheck"><input type="radio" name="category1" id = "cafeCheck" value="CAFE" >CAFE</label>
-         <label for="restaurantCheck"><input type="radio" name="category2" id = "restaurantCheck" value="RESTAURANT" >RESTAURANT</label>
-         <label for="pubCheck"><input type="radio" name="category3" id = "pubCheck" value="PUB" >PUB/BAR</label>
+       <label for="form-label" >Interest <small>(관심사 선택)</small></label><br>
+        <label for="cafeCheck"><input type="radio" name="interest" id = "cafeCheck" value="CAFE" > CAFE </label>
+         <label for="restaurantCheck"><input type="radio" name="interest" id = "restaurantCheck" value="RESTAURANT" > RESTAURANT </label>
+         <label for="pubCheck"><input type="radio" name="interest" id = "pubCheck" value="PUB" > PUB/BAR </label>
     </div> 
 
     <!-- Member 전송/취소 버튼 -->   
     <div class="btn_wrap d-flex justify-content-center">
-        <input type="submit" class="btn btn-outline-success" value="JOIN"  onclick="joinCheck();">&nbsp;
-        <input type="reset" class="btn btn-outline-success" value="CANCEL" onclick="removeCheck();"> 
+        <input type="submit" class="btn btn-outline-success" value="JOIN" > &nbsp;
+        <input type="reset" class="btn btn-outline-success" value="CANCEL" > 
       </div> 
-      </form>
+     </form>
        </div>
 
 
-    <!--=============================Partner 로그인 부분=============================-->       
-          <div class="tab-pane fade" id="login_partner">
-            <form action="" method="post" onsubmit="return validate();" enctype="multipart/form-data">
-			  	<div class="form-group">
-          
+    <!--=============================Partner 로그인 부분=============================-->    
+    
+    
+     <div class="tab-pane fade" id="login_partner"> 
+    <form method="post" html="{:multipart=>true}" data-remote="true" action="<%=request.getContextPath() %>/signupPartner" accept-charset="UTF-8">
+			<div class="form-group">
             <!-- 아이디 -->
             <div class="form-group">
               <label for="form-label">ID</label>
-            <input type="text" class="form-control" placeholder="영문·숫자 4~15자리" id="partner_Id" name="partner_Id"
-            required pattern="^[a-z][a-zA-Z0-9]{4,15}$" >
+              <br>
+            <input type="text" class="form-control" placeholder="영문·숫자 4~15자리" id="partner_id" name="partner_id"
+            required pattern="^[a-z][a-zA-Z0-9]{4,15}$" style="width:50%;float:left">
+            <input type="button" id="findAddress" onclick="id_duplicate();" value="아이디 중복확인" style="float:right"><br>
             <div class="" id="id_check1"></div>
             </div>
             
+            <br>
             <!-- 이름 -->
             <div class="form-group">
               <label for="form-label">name</label>
@@ -263,25 +306,31 @@
             <div class="" id="name_check1"></div>
             </div>
 
-            <!-- 업체 이름 -->
+<!--             업체 이름
             <div class="form-group">
               <label for="form-label">ShopName</label>
             <input type="text" class="form-control" placeholder="영어·한글·숫자 1~15글자" id="shopname" name="shopname" 
             required pattern="^[a-zA-Z0-9가-힝]{1,15}$" >
             <div class="" id="shopname"></div>
-            </div>
+            </div> -->
         
+        
+<!--             <form action="" name="checkIdDuplicate">
+           		<input type="hidden" name="partner_sep" value="파트너">
+            </form> -->
     
-              <!-- =========================== Partner 비밀번호======================== -->
+    <!-- =========================== Partner 비밀번호======================== -->
               <div class="form-group">
               <label for="psw">Password<span class="span" id="pwCondition2"></span></label>
-        <input type="password" class="form-control" placeholder="영문·숫자 조합 6~15자리" id="pw3" name="psw"
+        <input type="password" class="form-control" placeholder="영문·숫자 조합 6~15자리" id="pw3" name="pw"
             onchange="pwCondition2()">
           </div>
             <div class="form-group">
         <label for="pswcheck">Repeat Password<span class="span" id="pwOk1"></span></label>
         <input type="password" class="form-control" placeholder="비밀번호 확인" id="pw4" name="pswcheck" onchange="pswCheck()">
       </div>
+
+	<input type="hidden" name="partner_sep" value="파트너">
 
 
         <script>
@@ -319,7 +368,8 @@
           }
         }
       </script>
-
+      
+	        
             <!-- 이메일  -->
             <div class="form-group">
               <label for="form-label">Email</label>
@@ -335,7 +385,8 @@
             </div>
             
     
-     <!--=============================Partner 주소=============================-->    
+
+  <!--=============================Partner 주소=============================-->    
      <div class="form-group">
       <label style="display:block;">Address</label>
         <input class="col-6" type="text" id="postcode" placeholder="우편번호">
@@ -395,9 +446,8 @@
             }).open();
         }
           </script>
+          
             </div> 
-            
-           
          
               <!-- 전송 버튼 -->
               <div class="btn_wrap d-flex justify-content-center">
@@ -405,6 +455,7 @@
                 <input type="reset" class="btn btn-outline-success" value="CANCEL" onclick="removeCheck();"> 
               </div>
                </form>
+               
                
               </div>
                 </div>
@@ -416,27 +467,15 @@
             <div><label for="saveId"><input id="saveId" type="checkbox" name="saveId">Stay signed in</label></div>
               <span>Looking to
                 <a href="javascript: showRegisterForm();">create an account</a>
-                ?</span><br>
-                <span>Forgot 
-                <a href="javascript: searchIdForm();">your ID</a>
-                </span><br>
-                <span>Forgot 
-                <a href="javascript: searchIdForm();">your ID</a>
-                </span>
+                ?</span>
             </div>
-            
-            
             <div class="forgot register-footer" style="display:none">
               <span>Already have an account?</span>
               <a href="javascript: showLoginForm();">Login</a>
             </div>
-            
-           
           </div>
         </div>
       </div>
     </div>
-    
-   <script>
 
-   </script>
+    

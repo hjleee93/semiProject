@@ -91,7 +91,7 @@ public class MemberSignUpServlet extends HttpServlet {
 		}else if(result2>0){
 			msg="회원가입 성공";
 		}else {
-			msg="fail!";
+			msg="회원가입 실패";
 			loc="/enrollMember";
 		}
 		request.setAttribute("msg",msg);
