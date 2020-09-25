@@ -315,7 +315,7 @@ label {
 							aria-labelledby="navbarDropdownPortfolio">
 							<!--       TODO:링크수정 -->
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/store/storeList">연령별 추천</a>
+								href="<%=request.getContextPath()%>/views/recommand/ageStore.jsp">연령별 추천</a>
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/store/storeList">지역별 추천</a>
 							<a class="dropdown-item"
@@ -371,7 +371,7 @@ label {
 						} else if (Memberloggined != null && Memberloggined.getMemberSep().equals("회원")) {
 						//회원인 경우
 					%>
-
+<!-- TODO:여기도 헤더수정 -->
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -419,11 +419,12 @@ label {
 		</div>
 	</nav>
 	<div class="mptitle">
-		<h1>서비스 제작하기</h1>
+		<h1>업체 상세 페이지 제작하기</h1>
 	</div>
 
 	<div class="container" id="container">
 
+<!-- 매핑값 ok -->
 <form
 					action="<%=request.getContextPath()%>/storeService/storeRsvSettingEnd"
 					method="post" novalidate="novalidate" onsubmit="return checkRsv();">

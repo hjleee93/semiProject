@@ -13,7 +13,7 @@ import com.semi.store.service.StoreService;
 /**
  * Servlet implementation class StoreRsvSettingServlet
  */
-@WebServlet("/storeService/storeRsvSetting")
+@WebServlet("/storeService/storeRsvSetting") //ok
 public class StoreRsvSettingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

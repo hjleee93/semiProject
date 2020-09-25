@@ -144,7 +144,7 @@ if (cookies != null) {
 							aria-labelledby="navbarDropdownPortfolio">
 
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/store/storeList">연령별 추천</a>
+								href="<%=request.getContextPath()%>/views/recommand/ageStore.jsp">연령별 추천</a>
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/views/regional/RegionalList.jsp">지역별
 								추천</a> <a class="dropdown-item"

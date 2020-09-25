@@ -1,7 +1,6 @@
 package com.semi.store.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.store.model.vo.Store;
+import com.semi.store.model.vo.StoreMenu;
+import com.semi.store.service.StoreMenuService;
 import com.semi.store.service.StoreService;
 
 /**
@@ -37,8 +38,10 @@ public class StoreDtlServlet extends HttpServlet {
 		int storeId = Integer.parseInt(request.getParameter("storeId"));
 		
 		Store s = new StoreService().selectStoreDtl(storeId);
+//		StoreMenu sm = new StoreMenuService().selectStoreMenu(storeId);
 		System.out.println("서블릿 store in servlet: "+ s);
 		
+//		request.setAttribute("StoreMenu",sm);
 		request.setAttribute("store",s);
 		
 		request.getRequestDispatcher("/views/store/storeDetail.jsp")

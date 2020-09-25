@@ -19,7 +19,7 @@ import com.semi.storeservice.service.StoreServiceService;
 /**
  * Servlet implementation class StoreRsvSettingEndServlet
  */
-@WebServlet("/storeService/storeRsvSettingEnd")
+@WebServlet("/storeService/storeRsvSettingEnd") //ok
 public class StoreRsvSettingEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -39,6 +39,7 @@ public class StoreRsvSettingEndServlet extends HttpServlet {
 			throws ServletException, IOException {
 		StoreService ss = new StoreService();
 
+		System.out.println("여기 자체를 안가는 듯");
 		
 		int monOpenTime = 0;
 		int monCloseTime = 0;
@@ -338,13 +339,13 @@ public class StoreRsvSettingEndServlet extends HttpServlet {
 		String msg = "";
 		String loc = "/";
 		if (result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0 && result5 > 0 && result6 > 0 && result7 > 0) {
-			msg = "예약 서비스 등록이 완료되었습니다.";
-
-			loc = "/ptnstorelist";// 마이페이지로 이동
+			msg = "예약 서비스 등록이 완료되었습니다. 메뉴등록 페이지로 이동합니다.";
+//			loc = "/ptnstorelist";// 마이페이지로 이동
+			loc = "/store/menuUpload?storeId=" + request.getParameter("storeId");
 		} else {
 			msg = "입력하신 데이터에 오류가 발생했습니다. 입점 신청을 다시 시도해주세요";
 			// 신청폼 다시
-			loc = "/storeService/storeRsvSetting?storeId=" + request.getParameter("storeId");
+			loc = "/storeService/storeRsvSetting";
 		}
 
 		request.setAttribute("msg", msg);

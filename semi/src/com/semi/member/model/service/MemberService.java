@@ -10,6 +10,7 @@ import java.sql.Connection;
 import com.semi.member.model.dao.MemberDao;
 import com.semi.member.model.vo.Customer;
 import com.semi.member.model.vo.Member;
+import com.semi.member.model.vo.Partner;
 import com.semi.member.model.vo.TotalMember;
 
 public class MemberService {
@@ -32,6 +33,14 @@ public class MemberService {
 		close(conn);
 		return m1;
 	}
+	
+	public TotalMember selectMemberTwo(String id) {
+		Connection conn=getConnection();
+		TotalMember m1 = dao.selectMemberOne(conn,id);
+		close(conn);
+		return m1;
+	}
+	
 	
 	public Member selectPartnerModify(String id) {
 		Connection conn=getConnection();
@@ -63,13 +72,24 @@ public class MemberService {
 	
 	
 	public int insertPartner(TotalMember m) {
-		System.out.println("회원가입 service partner m : "+m);
+		System.out.println("service partner m : "+m);
 		Connection conn=getConnection();
 		int result=dao.insertPartner(conn,m);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);
 		return result;
+	}
+	
+	
+	public int insertPartner2(TotalMember m1, Partner m2) {
+		System.out.println("service partner m2 : "+m2);
+		Connection conn=getConnection();
+		int result2=dao.insertPartner2(conn,m1,m2);
+		if(result2>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result2;
 	}
 	
 

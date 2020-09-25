@@ -51,6 +51,7 @@ public class MemberSignUpServlet extends HttpServlet {
 		m.setMemAddress(request.getParameter("mem_address"));
 		m.setMemDetailAddress(request.getParameter("mem_detailAddress"));
 		m.setMemExtraAddress(request.getParameter("mem_extraAddress"));
+		
 		int result=new MemberService().insertMember1(m);
 		System.out.println(result);
 		
@@ -91,7 +92,7 @@ public class MemberSignUpServlet extends HttpServlet {
 		}else if(result2>0){
 			msg="회원가입 성공";
 		}else {
-			msg="fail!";
+			msg="회원가입 실패";
 			loc="/enrollMember";
 		}
 		request.setAttribute("msg",msg);

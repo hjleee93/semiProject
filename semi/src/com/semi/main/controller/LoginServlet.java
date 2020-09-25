@@ -56,6 +56,8 @@ public class LoginServlet extends HttpServlet {
 		System.out.println("서블릿 출력: " + m);
 		
 		if(m!=null) {
+		
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("Memberloggined", m);//session객체에 데이터 보관
 			response.sendRedirect(request.getContextPath());

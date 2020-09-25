@@ -1,8 +1,7 @@
 <%@page import="com.semi.recommand.service.StoreRandomService"%>
-<%@page import="com.semi.store.model.vo.Store"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%> 
-    
+    pageEncoding="UTF-8"%>     
 <%@ include file="/views/common/header.jsp" %>
 <%@ page import="com.semi.store.model.vo.Store"%>
 
@@ -12,11 +11,7 @@
 	Store randompub = new StoreRandomService().selectRandomPub();
 	Store randomres = new StoreRandomService().selectRandomRes();
 %>
-
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    
     
     <div id="top">
 	<br>
@@ -691,7 +686,7 @@ figure.snip1384.hover i {
 	  function () {
 	    $(this).removeClass("hover");
 	  }
-	);s
+	);
 	</script>
 	
 	
@@ -704,7 +699,7 @@ figure.snip1384.hover i {
 </div> <!-- wrapper div 닫음 -->
 
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+    
     <script type="text/javascript">
         $(document).ready(function() {
         	

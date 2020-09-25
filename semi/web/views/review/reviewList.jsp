@@ -2,11 +2,9 @@
     pageEncoding="UTF-8"%>
     <%@ page import="com.semi.review.model.vo.Review,java.util.List" %>
 <%@ include file="/views/common/header.jsp" %>    
- <%
- 	List<Review> listReview=(List)request.getAttribute("list");
+ <% 	List<Review> listReview=(List)request.getAttribute("list");
  %>  
     
-
 <section>
 <div id="review-container">
 			<button type="button" onclick="location.assign('<%=request.getContextPath()%>/review/reviewWrite')">리뷰쓰기</button>
@@ -16,7 +14,7 @@
 					<th>작성자</th>
 					<th>별점</th>
 					<th>작성일</th>
-				</tr>
+		
 				<%for(Review r : listReview){ %>
 					<tr>
 						<td><a href="<%=request.getContextPath()%>/review/reivewDetailView?no=<%=r.getReviewNum()%>">

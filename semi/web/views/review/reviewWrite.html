@@ -1,404 +1,31 @@
-<!-- Í≥†Í∞ù qna ÏûëÏÑ± ÌéòÏù¥ÏßÄ  -->
-<!DOCTYPE html>
-<html lang="en">
+<%@ include file="/views/common/header.jsp"%>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>HYOLO</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/modern-business.css" rel="stylesheet">
-
-    <!-- Ïª§Ïä§ÌÖÄ css Ï∂îÍ∞Ä -->
-    <link href="css/mainCustom.css" rel="stylesheet">
-
-    <!-- Ìè∞Ìä∏ -->
-    <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
-
-    <!-- datepicker -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
-
-
-    <!-- Î°úÍ∑∏Ïù∏, ÌöåÏõêÍ∞ÄÏûÖ  -->
-    <script type="text/javascript" src="./js/login-register.js"></script>
-    <link href="./css/login-register.css" rel="stylesheet" />
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-    <script src="./js/bootstrap.js" type="text/javascript"></script>
-    <script src="./js/login-register.js" type="text/javascript"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
-    <style>
-        .starR1 {
-            background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat -52px 0;
-            background-size: auto 100%;
-            width: 15px;
-            height: 30px;
-            float: left;
-            text-indent: -9999px;
-            cursor: pointer;
-        }
-
-        .starR2 {
-            background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
-            background-size: auto 100%;
-            width: 15px;
-            height: 30px;
-            float: left;
-            text-indent: -9999px;
-            cursor: pointer;
-        }
-
-        .starR1.on {
-            background-position: 0 0;
-        }
-
-        .starR2.on {
-            background-position: -15px 0;
-        }
-
-        .review {
-            margin: 50px;
-        }
-
-        .review h1 {
-            font-family: 'S-CoreDream-8Heavy', sans-serif;
-            text-align: center;
-        }
-
-        caption {
-            overflow: hidden;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 1px;
-            height: 1px;
-            font-size: 0;
-            line-height: 0
-        }
-
-        .tbl-reg {
-            width: 100%;
-            margin-top: 5px;
-        }
-
-        .tbl-reg th {
-            font-size: 16px;
-            font-weight: 400;
-            color: #000;
-            text-align: left;
-            border-bottom: 1px solid #e7e7e7;
-            padding: 10px 0 10px 30px;
-            width: 170px;
-        }
-
-        .tbl-reg th label {
-            font-size: 16px;
-            color: #000;
-            font-weight: 400;
-        }
-
-        .tbl-reg td {
-            border-bottom: 1px solid #e7e7e7;
-            padding: 10px 20px;
-            height: 43px;
-        }
-
-        .tbl-reg td.bot2 {
-            border-top: 2px solid #000;
-        }
-
-        .tbl-reg tr.first th {
-            border-top: 2px solid #000;
-        }
-
-        .tbl-reg tr.first td {
-            border-top: 2px solid #000;
-        }
-
-        .tbl-reg td .inp {
-            font-size: 16px;
-            color: #000;
-            width: 223px;
-            border: 1px solid #ccc;
-            height: 43px;
-        }
-
-        .tbl-reg td .inp.full {
-            width: calc(100% - 22px);
-        }
-
-        .tbl-reg td .select {
-            font-size: 17px;
-            color: #888;
-            width: 222px;
-            border: 1px solid #ccc;
-            height: 45px;
-        }
-
-        .tbl-reg td .textarea {
-            resize: none;
-            width: calc(100% - 22px);
-            border: 1px solid #ccc;
-            height: 160px;
-            padding: 10px;
-            font-size: 17px;
-            color: #888;
-        }
-
-        .radio {
-            background: url(/images/site/frt/bg/bg-radio-off.png) no-repeat;
-            width: 28px;
-            height: 28px;
-            /* overflow:hidden; */
-            appearance: none;
-            -moz-appearance: none;
-            -webkit-appearance: none;
-            -ms-display: flexbox;
-            display: flex;
-            display: -moz-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            ;
-        }
-
-        .radio:checked {
-            background: url(/images/site/frt/bg/bg-radio-on.png) no-repeat;
-        }
-
-        .tbl-reg td .form {
-            width: 100%;
-            height: auto;
-            -ms-display: flexbox;
-            display: flex;
-            display: -moz-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            ;
-            justify-content: flex-start;
-            align-items: center;
-        }
-
-        .tbl-reg td .form input {
-            -ms-display: flexbox;
-            display: flex;
-            display: -moz-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            ;
-            margin-right: 10px;
-        }
-
-        .tbl-reg td label {
-            font-weight: 400;
-            font-size: 16px;
-            color: #333;
-            display: inline-flex;
-            margin: 0 20px 0 0px;
-        }
-
-        .tbl-reg td label.type01 {
-            margin: 10px 0 5px 0;
-        }
-
-        .tbl-reg mark {
-            background: transparent;
-            color: #0e83c1;
-            font-size: 16px;
-            font-weight: 400;
-        }
-
-        .tbl-reg td.dt {
-            background: #f8f9fd;
-        }
-
-        .board-view-btn {
-            margin: 40px 0 80px 0;
-            -ms-display: flexbox;
-            display: flex;
-            display: -moz-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            ;
-            justify-content: flex-end;
-            align-items: center;
-            width: 100%;
-            height: auto;
-            /* overflow:hidden; */
-        }
-
-        .board-view-btn.ac {
-            justify-content: center;
-        }
-
-        .board-view-btn a {
-            margin-left: 5px;
-            -ms-display: flexbox;
-            display: flex;
-            display: -moz-box;
-            display: -ms-flexbox;
-            display: -webkit-flex;
-            cursor: pointer;
-            justify-content: center;
-            align-items: center;
-            width: 88px;
-
-            height: 43px;
-            overflow: hidden;
-            font-size: 16px;
-            color: #000;
-            border: 1px solid #ddd;
-        }
-
-        .board-view-btn a:hover {
-            text-decoration: underline;
-        }
-
-        .board-view-btn a.gray {
-            background: #666666;
-            border-color: #666666;
-            color: #fff;
-        }
-
-        .board-view-btn a.blue {
-            background: #107bb3;
-            border-color: #107bb3;
-            color: #fff;
-        }
-
-        #abc {
-            color: red;
-        }
-
-        .img-fluid {
-            cursor: pointer;
-            height:100%;
-        }
-        .rate{
-            font-size: larger;
-        }
-
-#output_image1,#output_image2,#output_image3
-{
- max-width:100%;
- max-height:100%;
-}
-    </style>
-</head>
-
-<body>
-
-    <!-- Navigation -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top header">
-        <div class="container">
-            <a class="navbar-brand" href="main.html">HYOLO</a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                aria-label="Toggle navigation" style="border-color: #d5d5d5;">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">ABOUT</a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                            <!-- <a class="dropdown-item" href="location.html">LOCATION</a> -->
-                            <a class="dropdown-item" href="./review_wirte.html">Î¶¨Î∑∞ÏûëÏÑ±</a>
-                        </div>
-                    </li>
-
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            RECOMMENDATION
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                            <!-- ÎÇòÏ§ëÏóê jsÎ°ú ÎèôÏ†ÅÏúºÎ°ú ÎßåÎì§Í±∞ÎùºÏÑú html ÌååÏùº ÌïòÎÇòÎ°ú ÌñàÏñ¥Ïöî -->
-                            <a class="dropdown-item" href="partner_list.html">Ïó∞Î†πÎ≥Ñ Ï∂îÏ≤ú</a>
-                            <a class="dropdown-item" href="partner_list.html">ÏßÄÏó≠Î≥Ñ Ï∂îÏ≤ú</a>
-                            <a class="dropdown-item" href="partner_list.html">ÎûúÎç§ Ï∂îÏ≤ú</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            RESERVATION
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                            <!-- ÎÇòÏ§ëÏóê jsÎ°ú ÎèôÏ†ÅÏúºÎ°ú ÎßåÎì§Í±∞ÎùºÏÑú html ÌååÏùº ÌïòÎÇòÎ°ú ÌñàÏñ¥Ïöî -->
-                            <a class="dropdown-item" href="partner_category.html">ALL</a>
-                            <a class="dropdown-item" href="partner_category.html">CAFE</a>
-                            <a class="dropdown-item" href="partner_category.html">RESTAURANT</a>
-                            <a class="dropdown-item" href="partner_category.html">PUB/BAR</a>
-                        </div>
-                    </li>
-
-                    <!-- Î©îÎâ¥ ÎìúÎûçÎã§Ïö¥ ÌïòÍ≥† Ïã∂ÏúºÏãúÎ©¥ Í∑∏ÎåÄÎ°ú Ïì∞ÏãúÎ©¥ ÎêòÍ≥† Ïã±Í∏ÄÌéòÏù¥ÏßÄÎ°ú ÌïòÍ≥† Ïã∂ÏúºÏãúÎ©¥ Î∞ëÏóê ÍªÑÎ°ú ÌïòÏãúÎ©¥ Îê©ÎãàÎãπ~!
-          <li class="nav-item">
-            <a class="nav-link" href="mypage.html">MY PAGE</a>
-          </li>
-        -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            MY PAGE
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPages">
-                            <a class="dropdown-item" href="#">MY BOOKING</a>
-                            <a class="dropdown-item" href="#">MY REVIEW</a>
-                            <a class="dropdown-item" href="#">FAQ</a>
-                        </div>
-                    </li>
-
-
-
-                </ul>
-
-            </div>
-
-        </div>
-        </div>
-    </nav>
-
-    <!-- ÎÑ§ÎπÑÍ≤åÏù¥ÏÖò ÎÅù -->
-    <!-- ÏÑúÎ∏åÎ©îÎâ¥ -->
+    <!-- ≥◊∫Ò∞‘¿Ãº« ≥° -->
+    <!-- º≠∫Í∏ﬁ¥∫ -->
     <div class=submenu>
         <ul>
             <li><a class="subhome" href="main_usr_login.html">HOME</a></li>
             <!-- <li><a class="subhome" href="location.html">LOCATION</a></li> -->
-            <li><a class="subhome" href="./reviewWirte.html">Î¶¨Î∑∞ÏûëÏÑ±</a></li>
+            <li><a class="subhome" href="./reviewWirte.html">∏Æ∫‰¿€º∫</a></li>
 
         </ul>
     </div>
-    <!-- ÏÑúÎ∏åÎ©îÎâ¥ ÎÅù -->
+    <!-- º≠∫Í∏ﬁ¥∫ ≥° -->
     <div class="container">
 
         <!-- Page Heading/Breadcrumbs -->
         <div class="review">
-            <h1>Î¶¨Î∑∞ÏûëÏÑ± ÌïòÍ∏∞</h1>
+            <h1>∏Æ∫‰¿€º∫ «œ±‚</h1>
         </div>
 
         <p id="right">
             <span id="abc">*</span>
-            ÌïÑÏàòÏûÖÎ†•ÏÇ¨Ìï≠
+            « ºˆ¿‘∑¬ªÁ«◊
         </p>
 
         <table class="tbl-reg">
 
-            <caption>Î¨∏ÏùòÌïòÍ∏∞ Í≤åÏãúÌåê</caption>
+            <caption>πÆ¿««œ±‚ ∞‘Ω√∆«</caption>
 
             <colgroup>
                 <col style="width:20%">
@@ -407,23 +34,23 @@
 
             <tbody>
                 <tr class="first">
-                    <th scope="row"><label for="qnatitle"> <span id="abc">*</span>Ï†úÎ™©</label></th>
-                    <td><input type="text" name="qnatitle" id="qnatitle" class="inp full" title="Ï†úÎ™© ÏûÖÎ†•" required></td>
+                    <th scope="row"><label for="qnatitle"> <span id="abc">*</span>¡¶∏Ò</label></th>
+                    <td><input type="text" name="qnatitle" id="qnatitle" class="inp full" title="¡¶∏Ò ¿‘∑¬" required></td>
                 </tr>
                 <tr>
-                    <th scope="row">ÌèâÏ†ê</th>
+                    <th scope="row">∆Ú¡°</th>
                     <td>
                         <div class="starRev">
-                            <span class="starR1 on" id="0.5" onClick="reply_click(this)">Î≥Ñ1_ÏôºÏ™Ω</span>
-                            <span class="starR2" id="1" onClick="reply_click(this)">Î≥Ñ1_Ïò§Î•∏Ï™Ω</span>
-                            <span class="starR1" id="1.5" onClick="reply_click(this)">Î≥Ñ2_ÏôºÏ™Ω</span>
-                            <span class="starR2" id="2" onClick="reply_click(this)">Î≥Ñ2_Ïò§Î•∏Ï™Ω</span>
-                            <span class="starR1" id="2.5" onClick="reply_click(this)">Î≥Ñ3_ÏôºÏ™Ω</span>
-                            <span class="starR2" id="3" onClick="reply_click(this)">Î≥Ñ3_Ïò§Î•∏Ï™Ω</span>
-                            <span class="starR1" id="3.5" onClick="reply_click(this)">Î≥Ñ4_ÏôºÏ™Ω</span>
-                            <span class="starR2" id="4" onClick="reply_click(this)">Î≥Ñ4_Ïò§Î•∏Ï™Ω</span>
-                            <span class="starR1" id="4.5" onClick="reply_click(this)">Î≥Ñ5_ÏôºÏ™Ω</span>
-                            <span class="starR2" id="5" onClick="reply_click(this)">Î≥Ñ5_Ïò§Î•∏Ï™Ω</span>
+                            <span class="starR1 on" id="0.5" onClick="reply_click(this)">∫∞1_øﬁ¬ </span>
+                            <span class="starR2" id="1" onClick="reply_click(this)">∫∞1_ø¿∏•¬ </span>
+                            <span class="starR1" id="1.5" onClick="reply_click(this)">∫∞2_øﬁ¬ </span>
+                            <span class="starR2" id="2" onClick="reply_click(this)">∫∞2_ø¿∏•¬ </span>
+                            <span class="starR1" id="2.5" onClick="reply_click(this)">∫∞3_øﬁ¬ </span>
+                            <span class="starR2" id="3" onClick="reply_click(this)">∫∞3_ø¿∏•¬ </span>
+                            <span class="starR1" id="3.5" onClick="reply_click(this)">∫∞4_øﬁ¬ </span>
+                            <span class="starR2" id="4" onClick="reply_click(this)">∫∞4_ø¿∏•¬ </span>
+                            <span class="starR1" id="4.5" onClick="reply_click(this)">∫∞5_øﬁ¬ </span>
+                            <span class="starR2" id="5" onClick="reply_click(this)">∫∞5_ø¿∏•¬ </span>
                         </div>
                         <div class="rate">
                             <span style="margin-left: 15px;font-weight:bold" id="starRate">0.5</span> / 5
@@ -433,21 +60,21 @@
                 <tr>
                     <th scope="row"><label for="ntcrNm">ID</label></th>
                     <td>
-                        <!-- ÌöåÏõêÏïÑÏù¥Îîî default -->
+                        <!-- »∏ø¯æ∆¿Ãµ default -->
                         <input type="text" name="ntcrNm" id="ntcrNm" class="inp" disabled>
-                        <input type="radio" name="idstatus" value="openId" checked>Í≥µÍ∞ú
-                        <input type="radio" name="idstatus" value="closeId">ÎπÑÍ≥µÍ∞ú
+                        <input type="radio" name="idstatus" value="openId" checked>∞¯∞≥
+                        <input type="radio" name="idstatus" value="closeId">∫Ò∞¯∞≥
 
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="nttCn">ÎÇ¥Ïö©</label></th>
+                    <th scope="row"><label for="nttCn">≥ªøÎ</label></th>
                     <td>
                         <textarea name="nttCn" id="nttCn" rows="20" cols="70" class="textarea"></textarea>
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="password">ÌõÑÍ∏∞ ÏÇ¨ÏßÑ</label></th>
+                    <th scope="row"><label for="password">»ƒ±‚ ªÁ¡¯</label></th>
                     <td>
 
                         <div class="row">
@@ -490,8 +117,8 @@
         </table>
 
         <div class="board-view-btn">
-            <a class="gray" title="cancel" onclick="cancel_event();">Ï∑®ÏÜå</a>
-            <a class="blue" title="submit" onclick="fn_pro()">Îì±Î°ù</a>
+            <a class="gray" title="cancel" onclick="cancel_event();">√Îº“</a>
+            <a class="blue" title="submit" onclick="fn_pro()">µÓ∑œ</a>
         </div>
     </div>
 
@@ -528,7 +155,7 @@ function preview_image3(event)
 }
        
 
-        // ÌèâÏ†ê
+        // ∆Ú¡°
         $('.starRev span').click(function () {
             $(this).parent().children('span').removeClass('on');
             $(this).addClass('on').prevAll('span').addClass('on');
@@ -542,21 +169,21 @@ function preview_image3(event)
         }
 
         function cancel_event() {
-            if (confirm("Ï†ïÎßê ÏÇ≠Ï†úÌïòÏãúÍ≤†ÏäµÎãàÍπå?") == true) {
+            if (confirm("¡§∏ª ªË¡¶«œΩ√∞⁄Ω¿¥œ±Ó?") == true) {
                 location.href= history.back();
-                //TODO: ÏÇ≠Ï†ú ÏΩîÎìú Ï∂îÍ∞Ä 
+                //TODO: ªË¡¶ ƒ⁄µÂ √ﬂ∞° 
             }
         }
 
 
         function fn_pro() {
             if ($("#qnatitle").val() == "") {
-                alert("Ï†úÎ™©ÏùÄ ÌïÑÏàò ÏûÖÎ†•Í∞íÏûÖÎãàÎã§.");
+                alert("¡¶∏Ò¿∫ « ºˆ ¿‘∑¬∞™¿‘¥œ¥Ÿ.");
                 $("#qnatitle").focus();
                 return;
             }
         /* else{
-    		alert("Îì±Î°ù Îê©ÎãàÍπå?");
+    		alert("µÓ∑œ µÀ¥œ±Ó?");
     		location.href="http://localhost:9090/semi/review/reviewList";
     		} 
     	 */

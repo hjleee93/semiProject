@@ -2,8 +2,22 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.semi.storeservice.model.vo.StoreService"%>
 <%@ page import="com.semi.storeservice.service.StoreServiceService"%>
+<%@ page import="com.semi.store.model.vo.*"%>
+<%@ page import="com.semi.store.service.*"%>
 <%
+
+
 	Store s = (Store) request.getAttribute("store");
+
+int storeId = s.getStoreId();
+int ptnNum =s.getPtnNum();
+
+StoreMenu sm =(StoreMenu)request.getAttribute("StoreMenu");
+List<StoreMenu> menuList = new StoreMenuService().selectStoreMenu(storeId);
+
+System.out.println("menu object: " + sm);
+
+System.out.println("menu list: " + menuList);
 
 
 String addr = s.getStoreAddress();
@@ -21,9 +35,6 @@ System.out.println("객체x");
 	 logginedMember=new Member();
 }
 
-
-int storeId = s.getStoreId();
-int ptnNum =s.getPtnNum();
 
 
 List<StoreService> serviceList = new StoreServiceService().selectService(storeId, ptnNum);
@@ -100,6 +111,11 @@ System.out.println("logginedMember: " + logginedMember);
 
 
 <script src="<%=request.getContextPath()%>/js/jquery-1.12.1-ui.js"></script>
+
+
+
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <style>
 
@@ -214,7 +230,7 @@ textarea {
 	margin: 0 auto;
 }
 
-.dtl-img, .dtl-map {
+.menu-img, .dtl-map {
 	margin-top: 50px;
 	text-align: center;
 }
@@ -307,7 +323,9 @@ if(serviceList.size() != 0){
 
 
 			<div style="display: flex;">
-			<%if((logginedMember.getMemberId()) != null) {%>
+			<%if(logginedMember.getMemberId()!= null) {
+			if(logginedMember.getMemberSep().equals("회원")){
+			%>
 				<div style="width: 50%">
 					<h5 align="center">예약할 날짜를 선택하세요</h5>
 
@@ -330,7 +348,7 @@ if(serviceList.size() != 0){
 						</tr>
 					</table>
 				</div>
-				<div></div>
+				
 				
 				<table>
 					<tr>
@@ -339,22 +357,36 @@ if(serviceList.size() != 0){
 							<!-- 						<input id="" type="text" readonly> -->
 						</td>
 					</tr>
-					
-					<tbody id="bookingTime">
-					
-					<tbody >
+				</table>	
+					<div id="bookingTime">
 					
 					
+					</div>
+				
 					
-					</tbody>
-					
-				</table>
-					
-				<%}else{ %>
+				<%}}
+			if(logginedMember.getMemberId() != null){
+				if((logginedMember.getMemberSep().equals("파트너"))){
+				%>
 				<div style="width: 50%">
-				<p>로그인 후 사용해주세요
+				<p>파트너로 가입하신 회원님들은 예약 시스템을 이용할 수 없습니다. <a class="nav-link " data-toggle="modal"
+						href="javascript:void(0)" onclick="openRegisterModal();"style="display:inline-block">회원으로 가입</a>해주세요</p>
+				
 				</div>
-				<%} %>
+				<%}}if(logginedMember.getMemberId() != null){ 
+				if((logginedMember.getMemberSep().equals("관리자"))){
+				%>
+					
+				
+				<%}}else if(logginedMember.getMemberId() ==null){%>
+					<div style="width: 50%">
+					<p><a class="nav-link " data-toggle="modal"
+							href="javascript:void(0)" onclick="openLoginModal();"style="display:inline-block">로그인</a> 후 예약 가능 합니다.</p>
+					
+					</div>
+			<%}		
+					%>
+				
 		</div>
 		</div>
 
@@ -368,7 +400,7 @@ if(serviceList.size() != 0){
 		<li class="nav-item "><a class="nav-link bottom active"
 			data-toggle="tab" href="#location">위치</a></li>
 		<li class="nav-item"><a class="nav-link bottom" data-toggle="tab"
-			href="#detailView">자세히보기</a></li>
+			href="#detailView">메뉴보기</a></li>
 		<li class="nav-item"><a class="nav-link bottom" data-toggle="tab"
 			href="#qna">문의</a></li>
 		<li class="nav-item"><a class="nav-link bottom" data-toggle="tab"
@@ -562,8 +594,14 @@ if(serviceList.size() != 0){
 		</div>
 
 		<div class="tab-pane fade" id="detailView">
+		<% for(int i = 0; i<menuList.size();i++) {%>
 
-			<img class="dtl-img" src="http://placehold.it/750x500" alt="">
+<%-- 			<img class="menu-img" src="<%=sm.getMenuImg()%>" alt=""> --%>
+			<p><%=menuList.get(i).getMenuName()%></p>
+			<p><%=menuList.get(i).getMenuPrice() %></p>
+			<p><%=menuList.get(i).getMenuDetail() %></p>
+<%-- 			<p><%=menuList.get(i).getMenuPrice() %></p> --%>
+			<%} %>
 		</div>
 	</div>
 </div>
@@ -686,7 +724,7 @@ if(serviceList.size() != 0){
 				
 				cell.bgColor = "violet";
 				}
-			
+			//TODO:날짜 비교 다시하기
 			if (today.getFullYear() >= date.getFullYear()
 					
  					&& today.getMonth() >= date.getMonth()
@@ -700,7 +738,7 @@ if(serviceList.size() != 0){
 				var logginedMember = '<%=logginedMember.getMemberId()%>';
 				
 				if(logginedMember!=null){
-					cell.setAttribute("onclick", "getDate(this); acyncMovePage('<%=request.getContextPath()%>/views/partner/ptnRequest4.jsp');");
+					cell.setAttribute("onclick", "getDate(this); acyncMovePage('<%=request.getContextPath()%>/views/store/storeDetailAjax.jsp');");
 				}else{
 					
 					
@@ -766,8 +804,8 @@ if(serviceList.size() != 0){
 			console.log("today1: " + today1);
 			alert("오늘 날짜 이후를 선택해주세요");
 		} else {
-			input.setAttribute("value", (selectedYear + "-" + selectedMonth
-					+ "-" + selectedDay));
+			input.setAttribute("value", (selectedYear + "/" + selectedMonth
+					+ "/" + selectedDay));
 
 			document.querySelector("tr td#selectedDate").appendChild(input);
 		}
@@ -793,12 +831,7 @@ if(serviceList.size() != 0){
 		var getDay = new Date(dateValue).getDay();
 		
 		console.log("요일: " + week[getDay]); //선택한 날짜의 요일 출력
-		
-		
-		
-		
-		
-		var ajaxOption = {
+			var ajaxOption = {
 			url : url,
 			
 			type : "POST",
@@ -824,12 +857,11 @@ if(serviceList.size() != 0){
 			
 			$('#bookingTime').html(data);
 		});
+		
 	}
+	
 </script>
 
-
-
-</script>
 
 
 
