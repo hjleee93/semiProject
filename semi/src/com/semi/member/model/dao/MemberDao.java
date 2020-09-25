@@ -160,7 +160,7 @@ public class MemberDao {
 		
 		
 		
-		public int insertPartner2(Connection conn) {
+		public int insertPartner2(Connection conn, Partner m) {
 			PreparedStatement pstmt=null;
 			int result=0;
 			try {
@@ -177,6 +177,7 @@ public class MemberDao {
 			}return result;
 		}
 	
+		
 	public Member selectPartnerModify(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

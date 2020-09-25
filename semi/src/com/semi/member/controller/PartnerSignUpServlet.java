@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.member.model.service.MemberService;
-import com.semi.member.model.vo.Customer;
+import com.semi.member.model.vo.Partner;
 import com.semi.member.model.vo.TotalMember;
 
 /**
  * Servlet implementation class PartnerSignUpServlet
  */
-@WebServlet(name="signup",urlPatterns="/signupPartner")
+@WebServlet(name="signup",urlPatterns="/signuppartner")
 public class PartnerSignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -39,19 +39,17 @@ public class PartnerSignUpServlet extends HttpServlet {
 		m.setMemberId(request.getParameter("partner_id"));
 		m.setMemberName(request.getParameter("partner_name"));
 		m.setMemberSep(request.getParameter("partner_sep"));
-		m.setMemberPw(request.getParameter("pw"));
+		m.setMemberPw(request.getParameter("pw2"));
 		m.setMemberEmail(request.getParameter("partner_Email"));
 		m.setMemberPhone(request.getParameter("partner_Phone"));
-		m.setMemPostcode(request.getParameter("ptn_postcode"));
-		m.setMemAddress(request.getParameter("ptn_address"));
-		m.setMemDetailAddress(request.getParameter("ptn_detailAddress"));
-		m.setMemExtraAddress(request.getParameter("ptn_extraAddress"));
+		m.setMemPostcode(request.getParameter("partner_postcode"));
+		m.setMemAddress(request.getParameter("partner_address"));
+		m.setMemDetailAddress(request.getParameter("partner_detailAddress"));
+		m.setMemExtraAddress(request.getParameter("partner_extraAddress"));
 		
 		
 		int result=new MemberService().insertPartner(m);
 		System.out.println("ptn * m : "+m);
-		
-		Customer m2=new Customer();
 		
 		
 		

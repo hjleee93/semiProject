@@ -70,8 +70,6 @@
                 <div class="form">
                   <form method="post" html="{:multipart=>true}" data-remote="true" action="<%=request.getContextPath() %>/signupmember" accept-charset="UTF-8">
                   
-                  <input type="hidden" name="seqMember" >
-
             <ul class="nav nav-tabs">
               <li class="nav-item">
                 <a class="nav-link active show" data-toggle="tab" href="#login_member">MEMBER</a>
@@ -285,7 +283,7 @@
     
     
      <div class="tab-pane fade" id="login_partner"> 
-    <form method="post" html="{:multipart=>true}" data-remote="true" action="<%=request.getContextPath() %>/signupPartner" accept-charset="UTF-8">
+    <form method="post" html="{:multipart=>true}" data-remote="true" action="<%=request.getContextPath() %>/signuppartner" accept-charset="UTF-8">
 			<div class="form-group">
             <!-- 아이디 -->
             <div class="form-group">
@@ -322,7 +320,7 @@
     <!-- =========================== Partner 비밀번호======================== -->
               <div class="form-group">
               <label for="psw">Password<span class="span" id="pwCondition2"></span></label>
-        <input type="password" class="form-control" placeholder="영문·숫자 조합 6~15자리" id="pw3" name="pw"
+        <input type="password" class="form-control" placeholder="영문·숫자 조합 6~15자리" id="pw3" name="pw2"
             onchange="pwCondition2()">
           </div>
             <div class="form-group">
@@ -331,8 +329,7 @@
       </div>
 
 	<input type="hidden" name="partner_sep" value="파트너">
-
-
+	
         <script>
         //비밀번호 확인 
         function pswCheck() {
@@ -389,11 +386,11 @@
   <!--=============================Partner 주소=============================-->    
      <div class="form-group">
       <label style="display:block;">Address</label>
-        <input class="col-6" type="text" id="postcode" placeholder="우편번호">
+        <input class="col-6" type="text" name="partner_postcode" id="postcode" placeholder="우편번호">
         <input type="button" id="findAddress" onclick="Postcode();" value="우편번호 찾기">
-        <input type="text" id="address" placeholder="주소" required>
-        <input type="text" id="detailAddress" placeholder="상세주소" required>
-        <input type="text" id="extraAddress" placeholder="참고항목" >
+        <input type="text" id="address" name="partner_address" placeholder="주소" required>
+        <input type="text" id="detailAddress" name="partner_detailAddress" placeholder="상세주소" required>
+        <input type="text" id="extraAddress" name="partner_extraAddress" placeholder="참고항목" >
     </div>
     
       <script>
