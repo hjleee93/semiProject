@@ -1,5 +1,4 @@
 package com.semi.rsv.controller;
-//view�� db ����
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.rsv.model.vo.Reservation;
+import com.semi.rsv.service.ReservationService;
 
 /**
  * Servlet implementation class RsvServlet
@@ -33,18 +33,29 @@ public class RsvServlet extends HttpServlet {
 		Reservation r = new Reservation();
 		
 		
+		
+		r.setCustomerNum(Integer.parseInt(request.getParameter("customerId")));
+		r.setStoreId(Integer.parseInt(request.getParameter("storeId")));
+		r.setRsvDate(request.getParameter("selectedDate"));
+		r.setRsvTime(Integer.parseInt(request.getParameter("rsvTime")));
+		
+		System.out.println("request.getParameter(\"rsvRequire\"): "+request.getParameter("rsvRequire"));
+		r.setRsvRequire(request.getParameter("rsvRequire"));
+		r.setRsvPpl(Integer.parseInt(request.getParameter("ppl")));
+		System.out.println("r in servlet" + r);
+		
 		int result = new ReservationService().insertReservation(r);
 		
 		String msg = "";
 		String loc = "/";
 		if (result > 0) {
-			msg = "예약 서비스 등록이 완료되었습니다.";
+			msg = "예약이 완료되었습니다. 마이페이지에서 확인 하실 수 있습니다.";
 
-			loc = "/ptnstorelist";// 마이페이지로 이동
+			loc = "/views/partner/rsvStatus.jsp";// 마이페이지로 이동
 		} else {
-			msg = "입력하신 데이터에 오류가 발생했습니다. 입점 신청을 다시 시도해주세요";
+			msg = "예약에 실패했습니다.관리자에게 문의해주세요.";
 			// 신청폼 다시
-			loc = "/storeService/storeRsvSetting?storeId=" + request.getParameter("storeId");
+			loc = "/store/storeDetail?storeId=" + request.getParameter("storeId");
 		}
 
 		request.setAttribute("msg", msg);

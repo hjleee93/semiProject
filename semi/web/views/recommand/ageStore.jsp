@@ -1,38 +1,46 @@
-<%@page import="com.semi.recommand.service.StoreRandomService"%>
-
+<%@page import="com.semi.recommand.service.AgeRecommandService"%>
+<%@page import="com.semi.store.model.vo.Store"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>     
+    pageEncoding="UTF-8"%> 
+    
 <%@ include file="/views/common/header.jsp" %>
 <%@ page import="com.semi.store.model.vo.Store"%>
 
 
 <%
-	Store randomcafe = new StoreRandomService().selectRandomStore();
-	Store randompub = new StoreRandomService().selectRandomPub();
-	Store randomres = new StoreRandomService().selectRandomRes();
+	Store Target0 = new AgeRecommandService().selectTarget0();
+	Store Target1 = new AgeRecommandService().selectTarget1();
+	Store Target2 = new AgeRecommandService().selectTarget2();
+	Store Target3= new AgeRecommandService().selectTarget3();
+	Store Target4 = new AgeRecommandService().selectTarget4();
 %>
-    
+
     
     <div id="top">
 	<br>
-    	당신의 관심사를 선택하세요
+    	연령별 추천
     <br>
-    <h2>TODAY'S RANDOM PICK !</h2> 
+    <h2>AGE RECOMMAND !</h2> 
     <br>
    	<!-- <a class="nav-link active show" -->
             <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab1"><b>ALL AGE</b></a>
+              </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab1"><b>CAFE</b></a>
+                <a class="nav-link" data-toggle="tab" href="#tab2"><b>10</b></a>
               </li>
                <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab2"><b>PUB & BAR</b></a>
+                <a class="nav-link" data-toggle="tab" href="#tab3"><b>20</b></a>
               </li>
                <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab3"><b>RESTAURANT</b></a>
-              </li>            
+                <a class="nav-link" data-toggle="tab" href="#tab4"><b>30</b></a>              
+              </li>   
+               <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab5"><b>40</b></a>              
+              </li>                     
             </ul>
     </div>
-    
     <style>
     #top {
 		 width: 100%;
@@ -54,6 +62,10 @@
 	<!-- 탭 콘텐츠 영역  -->
 		<div class="tab_container">
 	<!-- 메인 콘텐츠 영역  -->	
+<%-- 	<%if(Target0.getStoreId() != 0){ //store 아이디가 존재하거나 --%>
+ <%			if(Target0 != null){	//전연령 타켓이 null값이 아닌경우
+%>
+	
 	    <div id="tab0" class="tab_content">
 
 				<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -376,21 +388,28 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 
 
 		</div>
+		<% }else{
+ 		%> 
+		<div class="plus_content">
+		<p>데이터가 존재하지 않습니다</p>
+		</div>
+		<%} %>
+		</div>
 	    </div>
 <!-- 탭 버튼 화면 시작 -->
-    <!-- 탭1 콘텐츠 영역  -->
+    <!-- 탭 ALL 콘텐츠 영역  -->
 	    <div id="tab1" class="tab_content">
 	    	<!-- 상단 해당 스토어 설명 추가 부분-->
 	    	<div class="plus_content">
 		    	<div class="card-body">
 		    	<h6>★★★★☆</h6>
 		            <h4 class="card-title">
-		            <%=randomcafe.getStoreName()%>&nbsp;&nbsp;
+		            <%=Target0.getStoreName()%>&nbsp;&nbsp;
 			     	<button class="btn btn-primary">바로 예약하기</button>
 		            </h4>
 		            <p class="card-text">
-		           	커피전문점 카페 <%=randomcafe.getStoreName()%> 에서 잔잔한 음악과 함께 크리미한 커피로 좋은 기운을 느끼고 가세요.
-		           	<br><small>홈페이지</small> : <%=randomcafe.getStorePage() %> <small>전화번호 : <%=randomcafe.getStorePhone() %></small> 
+		           	커피전문점 카페 <%=Target0.getStoreName()%> 에서 잔잔한 음악과 함께 크리미한 커피로 좋은 기운을 느끼고 가세요.
+		           	<br><small>홈페이지</small> : <%=Target0.getStorePage() %> <small>전화번호 : <%=Target0.getStorePhone() %></small> 
 		            </p>
 	          	</div>
 	    	</div>
@@ -398,14 +417,14 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 	      		<div class="parent">
  			        <div class="first" >
  			        	<img src="https://fastly.4sqi.net/img/general/600x600/213211_WFOC4fCCjnhLe-poxWalcrB3KpBFswHVBkprDLAwkhU.jpg"
- 			        		style="width: 150%; heigh:auto; vertical-align: middle" />
+ 			        		style="width: 150%; heigh:auto; vertical-align: middle"/>
  			        </div> 
  			        <div class="second">
 							<figure class="snip1384">
 							  <img src="https://post-phinf.pstatic.net/MjAxODExMTVfNTMg/MDAxNTQyMjQ1ODk2ODM5.PVIXR7G_y8Q33q3fvGoyeH0XXqfoEp5ENl8isfUbhWQg.ysI1OYX58CepfbHSx-sTMPIoWhROTIrfytP_OIo6Gjsg.JPEG/%EC%BA%90%EC%B9%98%EC%B9%B4%ED%8E%98_%EC%82%AC%EC%A7%84015%2820181029%29.JPG?type=w1200">
 							  <figcaption>
-							    <h3><%=randomcafe.getStoreContent()%></h3>
-							    <p><%=randomcafe.getStoreAddress()%> <%=randomcafe.getStoreDtlAddr()%> <%=randomcafe.getStoreExtraAddr()%></p><i class="ion-ios-arrow-right"></i>
+							    <h3><%=Target0.getStoreContent()%></h3>
+							    <p><%=Target0.getStoreAddress()%><%=Target0.getStoreDtlAddr()%><%=Target0.getStoreExtraAddr()%></p><i class="ion-ios-arrow-right"></i>
 							  </figcaption>
 							  <a href="#"></a>
 							</figure>
@@ -417,20 +436,26 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 			    </div>
 	    </div>
 	    
-	    
-    <!-- 탭2 콘텐츠 영역  -->
+	   
+	
+    <!-- 탭2  10대 콘텐츠 영역  -->
 	    <div id="tab2" class="tab_content">
-	    	<!-- 상단 해당 스토어 설명 추가 부분-->
+	    	<!-- 상단 해당 스토어 설명 추가 부분-->  
+	    	  	
+<%-- 	    	 	<%if(Target1.getStoreId() != 0){ //store 아이디가 존재하거나 --%>
+ 			<%if(Target1 != null){	//전연령 타켓이 null값이 아닌경우
+%>
+		
 	    	<div class="plus_content">
 		    	<div class="card-body">
 		    	<h6>★★★★★</h6>
 		            <h4 class="card-title"> 
-		             <%=randompub.getStoreName()%>&nbsp;&nbsp;
+		             <%=Target1.getStoreName()%>&nbsp;&nbsp;
 		             <button class="btn btn-primary">바로 예약하기</button>
 		            </h4>
 		            <p class="card-text">
-		           	분위기를 만끽하면서 술을 마시고 싶다면 <%=randompub.getStoreName() %>를 방문하세요, 합리적인 가격과 맛을 즐길 수 있습니다.
-		           	<br><small>홈페이지</small> : <%=randompub.getStorePage() %> <small>전화번호 : <%=randompub.getStorePhone() %></small>
+		           	분위기를 만끽하면서 술을 마시고 싶다면 <%=Target1.getStoreName()%>를 방문하세요, 합리적인 가격과 맛을 즐길 수 있습니다.
+		           	<br><small>홈페이지</small>:<%=Target1.getStorePage()%><small>전화번호:<%=Target1.getStorePhone()%></small>
 		            </p>
 	          	</div>
 	    	</div>
@@ -444,8 +469,8 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 							<figure class="snip1384">
 							  <img src="https://post-phinf.pstatic.net/MjAxODExMTVfNTMg/MDAxNTQyMjQ1ODk2ODM5.PVIXR7G_y8Q33q3fvGoyeH0XXqfoEp5ENl8isfUbhWQg.ysI1OYX58CepfbHSx-sTMPIoWhROTIrfytP_OIo6Gjsg.JPEG/%EC%BA%90%EC%B9%98%EC%B9%B4%ED%8E%98_%EC%82%AC%EC%A7%84015%2820181029%29.JPG?type=w1200">
 							  <figcaption>
-							    <h3><%=randompub.getStoreContent() %></h3>
-							    <p><%=randompub.getStoreAddress()%> <%=randompub.getStoreDtlAddr()%> <%=randompub.getStoreExtraAddr()%></p><i class="ion-ios-arrow-right"></i>
+							    <h3><%=Target1.getStoreContent()%></h3>
+							    <p><%=Target1.getStoreAddress()%><%=Target1.getStoreDtlAddr()%><%=Target1.getStoreExtraAddr()%></p><i class="ion-ios-arrow-right"></i>
 							  </figcaption>
 							  <a href="#"></a>
 							</figure>
@@ -455,21 +480,78 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
  			        		style="width: 200%; heigh:auto; vertical-align: middle"/>
  			        </div> 
 			    </div>
-	    </div>
+	    </div>	    
+	    <%}else{
+ 	    	%> 
+	    	<div class="plus_content">
+	    	<p>데이터가 존재하지 않습니다</p>
+			</div>
+			<%} %>
 	    
-	<!-- 탭3 콘텐츠 영역  -->
+	<!-- 탭3 20대 콘텐츠 영역  -->
 	    <div id="tab3" class="tab_content">
+	    	<!-- 상단 해당 스토어 설명 추가 부분-->
+<%-- 	    		<%if(Target2.getStoreId() != 0){ //store 아이디가 존재하거나 --%>
+<% 			if(Target2 != null){	//전연령 타켓이 null값이 아닌경우
+	 %>
+	    	<div class="plus_content">
+		    	<div class="card-body">
+		    	<h6>★★★★☆</h6>
+					<h4 class="card-title"> 
+		            <%=Target2.getStoreName()%>&nbsp;&nbsp;
+		            <button class="btn btn-primary">바로 예약하기</button>
+		            </h4>
+		            <p class="card-text">
+		           	감각적인 인테리어와 매력적인 외관을 가진 곳 <%=Target2.getStoreName() %>에서 멋진 데이트와 식사를 제공합니다.
+		           	<br><small>홈페이지</small> : <%=Target2.getStorePage() %> <small>전화번호 : <%=Target2.getStorePhone() %></small>
+		            </p>
+	          	</div>
+	    	</div>
+	    	<!-- 스토어 이미지 영역 시작 -->
+	      		<div class="parent">
+ 			        <div class="first" >
+ 			        	<img src="https://fastly.4sqi.net/img/general/600x600/213211_WFOC4fCCjnhLe-poxWalcrB3KpBFswHVBkprDLAwkhU.jpg"
+ 			        		style="width: 150%; heigh:auto; vertical-align: middle" />
+ 			        </div> 
+ 			        <div class="second">
+							<figure class="snip1384">
+							  <img src="https://post-phinf.pstatic.net/MjAxODExMTVfNTMg/MDAxNTQyMjQ1ODk2ODM5.PVIXR7G_y8Q33q3fvGoyeH0XXqfoEp5ENl8isfUbhWQg.ysI1OYX58CepfbHSx-sTMPIoWhROTIrfytP_OIo6Gjsg.JPEG/%EC%BA%90%EC%B9%98%EC%B9%B4%ED%8E%98_%EC%82%AC%EC%A7%84015%2820181029%29.JPG?type=w1200">
+							  <figcaption>
+							  <h3><%=Target2.getStoreContent() %></h3>
+							  <p><%=Target2.getStoreAddress()%> <%=Target2.getStoreDtlAddr()%> <%=Target2.getStoreExtraAddr()%></p><i class="ion-ios-arrow-right"></i>
+							  </figcaption>
+							  <a href="#"></a>
+							</figure>
+ 			        </div>
+ 			        <div class="third">
+ 			        	<img src="https://t1.daumcdn.net/cfile/tistory/9918633E5D45467406"
+ 			        		style="width: 200%; heigh:auto; vertical-align: middle"/>
+ 			        </div> 
+			    </div>
+	    
+	    <%}else{
+ 	    	%> 
+	    	<div class="plus_content">
+	    	<p>데이터가 존재하지 않습니다</p>
+			</div>
+			<%} %>
+
+	 </div>
+		 <!-- 탭4 30대 콘텐츠 영역  -->
+	    <div id="tab4" class="tab_content" >
+	    <% 			if(Target3 != null){	//전연령 타켓이 null값이 아닌경우
+	 %>
 	    	<!-- 상단 해당 스토어 설명 추가 부분-->
 	    	<div class="plus_content">
 		    	<div class="card-body">
 		    	<h6>★★★★☆</h6>
 					<h4 class="card-title"> 
-		            <%=randomres.getStoreName()%>&nbsp;&nbsp;
+		            <%=Target3.getStoreName()%>&nbsp;&nbsp;
 		            <button class="btn btn-primary">바로 예약하기</button>
 		            </h4>
 		            <p class="card-text">
-		           	감각적인 인테리어와 매력적인 외관을 가진 곳 <%=randomres.getStoreName() %>에서 멋진 데이트와 식사를 제공합니다.
-		           	<br><small>홈페이지</small> : <%=randomres.getStorePage() %> <small>전화번호 : <%=randomres.getStorePhone() %></small>
+		           	감각적인 인테리어와 매력적인 외관을 가진 곳 <%=Target3.getStoreName() %>에서 멋진 데이트와 식사를 제공합니다.
+		           	<br><small>홈페이지</small> : <%=Target3.getStorePage() %> <small>전화번호 : <%=Target3.getStorePhone() %></small>
 		            </p>
 	          	</div>
 	    	</div>
@@ -483,8 +565,8 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 							<figure class="snip1384">
 							  <img src="https://post-phinf.pstatic.net/MjAxODExMTVfNTMg/MDAxNTQyMjQ1ODk2ODM5.PVIXR7G_y8Q33q3fvGoyeH0XXqfoEp5ENl8isfUbhWQg.ysI1OYX58CepfbHSx-sTMPIoWhROTIrfytP_OIo6Gjsg.JPEG/%EC%BA%90%EC%B9%98%EC%B9%B4%ED%8E%98_%EC%82%AC%EC%A7%84015%2820181029%29.JPG?type=w1200">
 							  <figcaption>
-							  <h3><%=randomres.getStoreContent() %></h3>
-							  <p><%=randomres.getStoreAddress()%> <%=randomres.getStoreDtlAddr()%> <%=randomres.getStoreExtraAddr()%></p><i class="ion-ios-arrow-right"></i>
+							  <h3><%=Target3.getStoreContent() %></h3>
+							  <p><%=Target3.getStoreAddress()%> <%=Target3.getStoreDtlAddr()%> <%=Target3.getStoreExtraAddr()%></p><i class="ion-ios-arrow-right"></i>
 							  </figcaption>
 							  <a href="#"></a>
 							</figure>
@@ -494,8 +576,74 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
  			        		style="width: 200%; heigh:auto; vertical-align: middle"/>
  			        </div> 
 			    </div>
-	    </div>
+			    
+	    
+	
+	<%}else{
+ 	    	%> 
+	    	<div class="plus_content">
+	    	<p>데이터가 존재하지 않습니다</p>
+			</div>
+			<%} %>
+</div>
+		<!-- 탭5 40대 콘텐츠 영역  -->
+	    <div id="tab5" class="tab_content">
+	     <% 			if(Target4 != null){	//전연령 타켓이 null값이 아닌경우
+	 %>
+	    	<!-- 상단 해당 스토어 설명 추가 부분-->
+	    	<div class="plus_content">
+		    	<div class="card-body">
+		    	<h6>★★★★☆</h6>
+					<h4 class="card-title"> 
+		            <%=Target3.getStoreName()%>&nbsp;&nbsp;
+		            <button class="btn btn-primary">바로 예약하기</button>
+		            </h4>
+		            <p class="card-text">
+		           	감각적인 인테리어와 매력적인 외관을 가진 곳 <%=Target4.getStoreName() %>에서 멋진 데이트와 식사를 제공합니다.
+		           	<br><small>홈페이지</small> : <%=Target4.getStorePage() %> <small>전화번호 : <%=Target4.getStorePhone() %></small>
+		            </p>
+	          	</div>
+	    	</div>
+	    	<!-- 스토어 이미지 영역 시작 -->
+	      		<div class="parent">
+ 			        <div class="first" >
+ 			        	<img src="https://fastly.4sqi.net/img/general/600x600/213211_WFOC4fCCjnhLe-poxWalcrB3KpBFswHVBkprDLAwkhU.jpg"
+ 			        		style="width: 150%; heigh:auto; vertical-align: middle" />
+ 			        </div> 
+ 			        <div class="second">
+							<figure class="snip1384">
+							  <img src="https://post-phinf.pstatic.net/MjAxODExMTVfNTMg/MDAxNTQyMjQ1ODk2ODM5.PVIXR7G_y8Q33q3fvGoyeH0XXqfoEp5ENl8isfUbhWQg.ysI1OYX58CepfbHSx-sTMPIoWhROTIrfytP_OIo6Gjsg.JPEG/%EC%BA%90%EC%B9%98%EC%B9%B4%ED%8E%98_%EC%82%AC%EC%A7%84015%2820181029%29.JPG?type=w1200">
+							  <figcaption>
+							  <h3><%=Target4.getStoreContent() %></h3>
+							  <p><%=Target4.getStoreAddress()%> <%=Target4.getStoreDtlAddr()%> <%=Target4.getStoreExtraAddr()%></p><i class="ion-ios-arrow-right"></i>
+							  </figcaption>
+							  <a href="#"></a>
+							</figure>
+ 			        </div>
+ 			        <div class="third">
+ 			        	<img src="https://t1.daumcdn.net/cfile/tistory/9918633E5D45467406"
+ 			        		style="width: 200%; heigh:auto; vertical-align: middle"/>
+ 			        </div> 
+			    </div>
+			    
+	    	
 
+	
+	<%}else{
+ 	    	%>
+ 	    	<div class="plus_content">
+	    	<p>데이터가 존재하지 않습니다</p>
+			</div>
+			<%} %>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	<style type="text/css">
 	
@@ -696,10 +844,9 @@ figure.snip1384.hover i {
 
     
 	</div> <!--탭 콘텐츠 영역 끝  -->
-</div> <!-- wrapper div 닫음 -->
 
 
-    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
         	

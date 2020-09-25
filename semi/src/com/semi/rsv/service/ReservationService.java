@@ -12,11 +12,12 @@ import com.semi.rsv.model.dao.ReservationDao;
 
 public class ReservationService {
 	
-	private Reservation dao = new Reservation();
+	private ReservationDao dao = new ReservationDao();
 	
 	public int insertReservation(Reservation r) {
+		System.out.println("예약 서비스 실행");
 		Connection conn=getConnection();
-		int result=dao.insertStoreService(conn,r);
+		int result=dao.insertStoreReservation(conn,r);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);

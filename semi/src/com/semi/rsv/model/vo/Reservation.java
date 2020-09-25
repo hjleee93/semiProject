@@ -3,76 +3,107 @@ package com.semi.rsv.model.vo;
 import java.sql.Date;
 
 public class Reservation {
-	private String rsvCode;
-	private String memberNum;
-	private String storeId;
-	private Date rsvDate;
-	private Date rsvTime;
-	private int rsvRequire;
-	private String paymentCode;
-	
+	private int rsvCode;
+	private int customerNum;
+	private int storeId;
+	private String rsvDate;
+	private int rsvTime;
+	private String rsvRequire;
+	private int paymentCode;
+	private int rsvPpl;
 	
 	public Reservation() {}
-	
+
+
 	@Override
 	public String toString() {
-		return "Reservation [rsvCode=" + rsvCode + ", memberNum=" + memberNum + ", storeId=" + storeId + ", rsvDate="
-				+ rsvDate + ", rsvTime=" + rsvTime + ", rsvRequire=" + rsvRequire + ", paymentCode=" + paymentCode
-				+ "]";
+		return "Reservation [rsvCode=" + rsvCode + ", customerNum=" + customerNum + ", storeId=" + storeId
+				+ ", rsvDate=" + rsvDate + ", rsvTime=" + rsvTime + ", rsvRequire=" + rsvRequire + ", paymentCode="
+				+ paymentCode + ", rsvPpl=" + rsvPpl + "]";
 	}
 
-	public Reservation(String rsvCode, String memberNum, String storeId, Date rsvDate, Date rsvTime, int rsvRequire,
-			String paymentCode) {
+
+	public int getRsvPpl() {
+		return rsvPpl;
+	}
+
+
+	public void setRsvPpl(int rsvPpl) {
+		this.rsvPpl = rsvPpl;
+	}
+
+
+	public Reservation(int rsvCode, int customerNum, int storeId, String rsvDate, int rsvTime, String rsvRequire,
+			int paymentCode, int rsvPpl) {
 		super();
 		this.rsvCode = rsvCode;
-		this.memberNum = memberNum;
+		this.customerNum = customerNum;
 		this.storeId = storeId;
 		this.rsvDate = rsvDate;
 		this.rsvTime = rsvTime;
 		this.rsvRequire = rsvRequire;
 		this.paymentCode = paymentCode;
+		this.rsvPpl = rsvPpl;
 	}
 
-	public String getRsvCode() {
+
+	public int getRsvCode() {
 		return rsvCode;
 	}
-	public void setRsvCode(String rsvCode) {
+
+	public void setRsvCode(int rsvCode) {
 		this.rsvCode = rsvCode;
 	}
-	public String getMemberNum() {
-		return memberNum;
+
+	public int getCustomerNum() {
+		return customerNum;
 	}
-	public void setMemberNum(String memberNum) {
-		this.memberNum = memberNum;
+
+	public void setCustomerNum(int memberNum) {
+		this.customerNum = memberNum;
 	}
-	public String getStoreId() {
+
+	public int getStoreId() {
 		return storeId;
 	}
-	public void setStoreId(String storeId) {
+
+	public void setStoreId(int storeId) {
 		this.storeId = storeId;
 	}
-	public Date getRsvDate() {
+
+	public String getRsvDate() {
 		return rsvDate;
 	}
-	public void setRsvDate(Date rsvDate) {
+
+	public void setRsvDate(String rsvDate) {
 		this.rsvDate = rsvDate;
 	}
-	public Date getRsvTime() {
+
+	public int getRsvTime() {
 		return rsvTime;
 	}
-	public void setRsvTime(Date rsvTime) {
+
+	public void setRsvTime(int rsvTime) {
 		this.rsvTime = rsvTime;
 	}
-	public int getRsvRequire() {
+
+	public String getRsvRequire() {
 		return rsvRequire;
 	}
-	public void setRsvRequire(int rsvRequire) {
+
+	public void setRsvRequire(String rsvRequire) {
 		this.rsvRequire = rsvRequire;
 	}
-	public String getPaymentCode() {
+
+	public int getPaymentCode() {
 		return paymentCode;
 	}
-	public void setPaymentCode(String paymentCode) {
+
+	public void setPaymentCode(int paymentCode) {
 		this.paymentCode = paymentCode;
 	}
+	
+	
+	
+	
 }

@@ -1,26 +1,27 @@
-package com.semi.storeservice.controller;
+package com.semi.recommand.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.recommand.service.AgeRecommandService;
 import com.semi.store.model.vo.Store;
-import com.semi.store.service.StoreService;
 
 /**
- * Servlet implementation class StoreRsvSettingServlet
+ * Servlet implementation class StoreRandomServlet
  */
-@WebServlet("/storeService/storeRsvSetting") //ok
-public class StoreRsvSettingServlet extends HttpServlet {
+@WebServlet("/ageRecommand")
+public class AgeRecommandServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StoreRsvSettingServlet() {
+    public AgeRecommandServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,17 +30,16 @@ public class StoreRsvSettingServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int storeId = Integer.parseInt(request.getParameter("storeId"));
+		// TODO Auto-generated method stub
 		
-		System.out.println("storeId in servlet: " + storeId);
 		
-		Store s = new StoreService().selectStoreDtl(storeId);
-		System.out.println("서블릿 store: "+ s);
+		Store r0=new AgeRecommandService().selectTarget0();
+		Store r1=new AgeRecommandService().selectTarget1();
+		Store r2=new AgeRecommandService().selectTarget2();
+		Store r3=new AgeRecommandService().selectTarget3();
+		Store r4=new AgeRecommandService().selectTarget4();
 		
-		request.setAttribute("store",s);
-		
-		request.getRequestDispatcher("/views/partner/ptnRequest3.jsp")
-		.forward(request,response);
+		request.getRequestDispatcher("/views/recommand/age_store.jsp").forward(request, response);
 	}
 
 	/**

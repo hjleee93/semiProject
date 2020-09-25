@@ -15,7 +15,7 @@ import com.semi.store.service.StoreService;
 /**
  * Servlet implementation class StoreDetailUpdateServlet
  */
-@WebServlet("/store/storeDetailUpdate")
+@WebServlet("/store/storeDetailUpdate") //ok
 public class StoreDetailUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -82,11 +82,12 @@ public class StoreDetailUpdateServlet extends HttpServlet {
 			
 			String msg="";
 			String loc="/";
+			
 			request.setAttribute("storeId",storeId);
 			System.out.println("s in 3" + s);
 			if(result>0) {
 				msg="이미지 업로드가 완료되었습니다. 서비스예약 설정 페이지로 이동합니다.";
-				loc="/storeService/storeRsvSetting?storeId=" + storeId; 
+				loc="/storeService/storeRsvSetting?storeId=" + storeId; //ok
 			}else {
 				msg="이미지 업로드에 실패했습니다. 관리자에게 문의해주시거나 다시 한 번 시도해주세요.";
 				loc="/store/storeInfoUpdate?storeId=" + storeId;

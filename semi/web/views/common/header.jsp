@@ -34,6 +34,8 @@ if (cookie != null) {
 <!-- 제이쿼리   -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	
+	
 <!-- 	카카오맵API추가 20/09/09 -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f450544bd9053c96d7b9a97ececcb59a&libraries=services,clusterer,drawing"></script>
@@ -122,7 +124,7 @@ if (cookie != null) {
 							aria-labelledby="navbarDropdownPortfolio">
 							
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/store/storeList">연령별 추천</a>
+								href="<%=request.getContextPath()%>/views/recommand/ageStore.jsp">연령별 추천</a>
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/views/regional/RegionalList.jsp">지역별 추천</a>
 							<a class="dropdown-item"
@@ -232,6 +234,3 @@ if (cookie != null) {
 		</div>
 	</nav>
 	
-	</div>
-	<%@ include file="/views/common/login.jsp"%>
-	</div>

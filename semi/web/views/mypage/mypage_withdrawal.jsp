@@ -79,7 +79,7 @@
     //패스워드 확인
       function mydelete(){
 		if(confirm("정말로 탈퇴하시겠습니까?")){
-			location.replace('<%=request.getContextPath()%>/partner/memberDelete?partner_id=<%=logginedMember.getPartner_id()%>');			
+			location.replace('<%=request.getContextPath()%>/partner/memberDelete?partner_id=<%=logginedMember.getPartnerId()%>');			
 			}
 		};
 	function mydelete2(){
