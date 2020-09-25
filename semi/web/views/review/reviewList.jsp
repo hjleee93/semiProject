@@ -3,10 +3,10 @@
     <%@ page import="com.semi.review.model.vo.Review,java.util.List" %>
     
  <%
- 	List<Review> list=(List)request.getAttribute("list");
+ 	List<Review> listr=(List)request.getAttribute("list");
  %>  
     
-<%-- <%@ include file="/views/common/header.jsp" %> --%><!--헤더추가하면 오류..?????????  -->
+<%@ include file="/views/common/header.jsp" %>
 <section>
 <div id="review-container">
 			<button type="button" onclick="location.assign('<%=request.getContextPath()%>/review/reviewWrite')">리뷰쓰기</button>
@@ -17,7 +17,7 @@
 					<th>별점</th>
 					<th>작성일</th>
 				</tr>
-				<%for(Review r : list){ %>
+				<%for(Review r : listr){ %>
 					<tr>
 						<td><a href="<%=request.getContextPath()%>/review/reivewDetailView?no=<%=r.getReviewNum()%>">
 						<%=r.getReviewTitle() %></a>
