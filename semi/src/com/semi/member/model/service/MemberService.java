@@ -34,6 +34,14 @@ public class MemberService {
 		return m1;
 	}
 	
+	public TotalMember selectMemberTwo(String id) {
+		Connection conn=getConnection();
+		TotalMember m1 = dao.selectMemberOne(conn,id);
+		close(conn);
+		return m1;
+	}
+	
+	
 	public Member selectPartnerModify(String id) {
 		Connection conn=getConnection();
 		System.out.println("id in service : " + id);
@@ -74,14 +82,14 @@ public class MemberService {
 	}
 	
 	
-	public int insertPartner2(Partner m) {
-		System.out.println("service partner m : "+m);
+	public int insertPartner2(TotalMember m1, Partner m2) {
+		System.out.println("service partner m2 : "+m2);
 		Connection conn=getConnection();
-		int result=dao.insertPartner2(conn,m);
-		if(result>0) commit(conn);
+		int result2=dao.insertPartner2(conn,m1,m2);
+		if(result2>0) commit(conn);
 		else rollback(conn);
 		close(conn);
-		return result;
+		return result2;
 	}
 	
 

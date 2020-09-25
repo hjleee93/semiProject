@@ -51,6 +51,7 @@ public class MemberSignUpServlet extends HttpServlet {
 		m.setMemAddress(request.getParameter("mem_address"));
 		m.setMemDetailAddress(request.getParameter("mem_detailAddress"));
 		m.setMemExtraAddress(request.getParameter("mem_extraAddress"));
+		
 		int result=new MemberService().insertMember1(m);
 		System.out.println(result);
 		

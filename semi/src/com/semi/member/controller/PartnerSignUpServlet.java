@@ -15,7 +15,7 @@ import com.semi.member.model.vo.TotalMember;
 /**
  * Servlet implementation class PartnerSignUpServlet
  */
-@WebServlet(name="signup",urlPatterns="/signuppartner")
+@WebServlet(name="signUpPtn",urlPatterns="/signuppartner")
 public class PartnerSignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,7 +34,7 @@ public class PartnerSignUpServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		TotalMember m=new TotalMember();
+		TotalMember m=new TotalMember(); 
 		
 		m.setMemberId(request.getParameter("partner_id"));
 		m.setMemberName(request.getParameter("partner_name"));
@@ -47,9 +47,17 @@ public class PartnerSignUpServlet extends HttpServlet {
 		m.setMemDetailAddress(request.getParameter("partner_detailAddress"));
 		m.setMemExtraAddress(request.getParameter("partner_extraAddress"));
 		
-		
 		int result=new MemberService().insertPartner(m);
-		System.out.println("ptn * m : "+m);
+		
+		TotalMember m1=new TotalMember();
+		String id = request.getParameter("partner_id");
+		
+		m1=new MemberService().selectMemberTwo(id);
+		
+		Partner m2=new Partner();
+		m2.setPartner_no(m1.getMemberNum());
+		
+		int result2=new MemberService().insertPartner2(m1,m2);
 		
 		
 		

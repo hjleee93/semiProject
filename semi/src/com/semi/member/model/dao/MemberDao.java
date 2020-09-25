@@ -68,6 +68,7 @@ public class MemberDao {
 		}
 		return m;
 	}
+	
 	public TotalMember selectMemberOne(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -80,6 +81,25 @@ public class MemberDao {
 				m1 = new TotalMember();
 				System.out.println("m1         :" + m1);
 				m1.setMemberNum(rs.getInt("seq_member_num"));
+				m1.setMemberId(rs.getString("member_id"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return m1;
+	}
+	
+	public TotalMember selectMemberTwo(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		TotalMember m1 = null;
+		try {
+			pstmt= conn.prepareStatement(prop.getProperty("selectMemberOne"));
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m1 = new TotalMember();
+				m1.setMemberNum(rs.getInt("seq_partner_num"));
 				m1.setMemberId(rs.getString("member_id"));
 			}
 		}catch(SQLException e) {
@@ -160,21 +180,19 @@ public class MemberDao {
 		
 		
 		
-		public int insertPartner2(Connection conn, Partner m) {
+		public int insertPartner2(Connection conn, TotalMember m1, Partner m2) {
 			PreparedStatement pstmt=null;
-			int result=0;
+			int result2=0;
 			try {
 				pstmt=conn.prepareStatement(prop.getProperty("insertPartner2"));
-//				pstmt.setString(1, m2.getGender());
-//				pstmt.setString(2, m2.getBirthday());
-//				pstmt.setString(3, m2.getCategory());
+				pstmt.setInt(1,m1.getMemberNum());
 				
-				result=pstmt.executeUpdate();
+				result2=pstmt.executeUpdate();
 			}catch(SQLException e) {
 				e.printStackTrace();
 			}finally {
 				close(pstmt);
-			}return result;
+			}return result2;
 		}
 	
 		
