@@ -1,6 +1,7 @@
 package com.semi.review.service;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.semi.review.model.dao.ReviewDao;
 import com.semi.review.model.vo.Review;
@@ -21,5 +22,27 @@ public class ReviewService {
 		else rollback(conn);
 		close(conn);
 		return result;
+	}
+	
+	public List<Review> selectReviewList(int cPage,int numPerPage){
+		Connection conn=getConnection();
+		List<Review> list=dao.selectReviewList(conn,cPage,numPerPage);
+		close(conn);
+		return list;
+	}
+	
+	public int selectReviewCount() {
+		Connection conn=getConnection();
+		int count=dao.selectReviewCount(conn);
+		close(conn);
+		return count;
+	}
+	
+	public Review selectReviewOne(int no) {
+		Connection conn=getConnection();
+		Review r=dao.selectReviewOne(conn,no);
+		close(conn);
+		return r;
+		
 	}
 }
