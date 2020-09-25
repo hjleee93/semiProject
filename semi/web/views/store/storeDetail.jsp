@@ -435,9 +435,7 @@ if(serviceList.size() != 0){
 				</div>
 			</div>
 		</div>
-		<!-- 리뷰쓰기 -->
-		<button type="button" onclick="location.assign('<%=request.getContextPath()%>/review/reviewWrite')">리뷰쓰기</button>
-		
+				
 		
 		
 		
@@ -451,6 +449,9 @@ if(serviceList.size() != 0){
 								style="min-height: 486px;">
 								<article class="review_wrp">
 									<div id="_reviewWrap" class="review_user">
+										<%if(logginedMember != null){ %>
+											<button type="button" onclick="location.assign('<%=request.getContextPath()%>/review/reviewWrite')">리뷰쓰기</button>
+										<%} %>
 										<div class="review_tit title_review_info"></div>
 										<!-- 사진이 포함된 리뷰만 업로드 -->
 										<section id="_photoArea" class="photo_review_warp">

@@ -211,7 +211,7 @@ if (cookies != null) {
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/views/mypage/mypage_partner.jsp">MY
 								PAGE</a> <a class="dropdown-item" href="purchase_history.html">MY
-								BOOKING</a> <a class="dropdown-item" href="./usr_review.html">MY
+								BOOKING</a> <a class="dropdown-item" href="<%=request.getContextPath()%>/review/reviewList">MY
 								REVIEW</a> <a class="dropdown-item" href="./usr_review.html">FAQ</a>
 						</div></li>
 					<li class="nav-item"><a class="nav-link " data-toggle="modal"
