@@ -135,7 +135,7 @@ if (cookies != null) {
 								class="dropdown-item" href="<%=request.getContextPath()%>/qna">Q&A</a>
 						</div></li>
 
-
+<!--       TODO:링크수정 -->
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
 						id="navbarDropdownPortfolio" data-toggle="dropdown"

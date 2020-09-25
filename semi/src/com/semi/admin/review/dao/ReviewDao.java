@@ -1,5 +1,7 @@
 package com.semi.admin.review.dao;
 
+
+//admin용 review
 import static com.semi.common.JDBCTemplate.close;
 
 import java.io.FileReader;

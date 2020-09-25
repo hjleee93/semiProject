@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8" import="com.semi.store.model.vo.Store"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.semi.member.model.vo.Member"%>
+
+
+
 <%
 	System.out.println("header 실행");
 
@@ -110,14 +113,14 @@ if (cookie != null) {
 								class="dropdown-item" href="<%=request.getContextPath()%>/qna">Q&A</a>
 						</div></li>
 
-
+<!--       TODO:링크수정 -->
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
 						id="navbarDropdownPortfolio" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"> RECOMMENDATION </a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownPortfolio">
-							<!--       TODO:링크수정 -->
+							
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/store/storeList">연령별 추천</a>
 							<a class="dropdown-item"
@@ -228,3 +231,7 @@ if (cookie != null) {
 
 		</div>
 	</nav>
+	
+	</div>
+	<%@ include file="/views/common/login.jsp"%>
+	</div>

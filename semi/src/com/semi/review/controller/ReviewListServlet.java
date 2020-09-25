@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.semi.review.model.vo.Review;
 import com.semi.review.service.ReviewService;
 
+
 /**
  * Servlet implementation class ReviewListServlet
  */
@@ -30,8 +31,7 @@ public class ReviewListServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		int cPage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));

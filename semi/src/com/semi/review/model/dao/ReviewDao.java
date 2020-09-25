@@ -57,18 +57,20 @@ public class ReviewDao {
 			pstmt.setInt(1, (cPage-1)*numPerPage+1);
 			pstmt.setInt(2, cPage*numPerPage);
 			rs=pstmt.executeQuery();
+			Review r = null;
 			while(rs.next()) {
-				Review r = new Review();
-				r.setReviewNum(rs.getInt(1));
-				r.setMemberNum(rs.getInt(2));
-				r.setStoreId(rs.getString(3));
-				r.setReviewScore(rs.getInt(4));
-				r.setReviewTitle(rs.getString(5));
-				r.setReviewContent(rs.getString(6));
-				r.setReviewPicsa(rs.getString(7));
-				r.setReviewPicsb(rs.getString(8));
-				r.setReviewPicsc(rs.getString(9));
-				r.setReviewDate(rs.getDate(10));
+				r = new Review();
+
+				r.setReviewNum(rs.getInt(2));
+				r.setMemberNum(rs.getInt(3));
+				r.setStoreId(rs.getString(4));
+				r.setReviewScore(rs.getInt(5));
+				r.setReviewTitle(rs.getString(6));
+				r.setReviewContent(rs.getString(7));
+				r.setReviewPicsa(rs.getString(8));
+				r.setReviewPicsb(rs.getString(9));
+				r.setReviewPicsc(rs.getString(10));
+				r.setReviewDate(rs.getDate(11));
 				list.add(r);
 			}
 		}catch(SQLException e) {

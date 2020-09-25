@@ -13,7 +13,7 @@ import com.semi.review.service.ReviewService;
 /**
  * Servlet implementation class ReviewDetailViewServlet
  */
-@WebServlet("/review/reviewDetailView")
+@WebServlet("/review/reivewDetailView")
 public class ReviewDetailViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,8 +29,11 @@ public class ReviewDetailViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		
+		
 		int no=Integer.parseInt(request.getParameter("no"));
+		System.out.println("no");
 		
 		Review r=new ReviewService().selectReviewOne(no);
 		String view="";

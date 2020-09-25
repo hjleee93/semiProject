@@ -103,4 +103,5 @@
 	text-align: center;
 }
 </style>
+
 <%@ include file="/views/common/footer.jsp"%>
