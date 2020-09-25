@@ -35,6 +35,7 @@ public class QnaDeleteServlet extends HttpServlet {
 		
 		int result = new QnaService().deleteQnaWrite(no);
 		
+		
 		String msg="";
 		String loc="";
 		if(result>0) {

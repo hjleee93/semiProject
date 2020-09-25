@@ -1,6 +1,5 @@
-package com.semi.qna.controller;
+package com.semi.recommand.controller;
 
-import java.util.List;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -9,23 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.qna.model.service.QnaService;
-import com.semi.qna.model.vo.Qna;
-import com.semi.qna.model.vo.QnaComment;
-
-
+import com.semi.recommand.service.AgeRecommandService;
+import com.semi.store.model.vo.Store;
 
 /**
- * Servlet implementation class NoticeDetailViewServlet
+ * Servlet implementation class StoreRandomServlet
  */
-@WebServlet("/qna/qnaView")
-public class QnaDetailViewServlet extends HttpServlet {
+@WebServlet("/ageRecommand")
+public class AgeRecommandServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaDetailViewServlet() {
+    public AgeRecommandServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,20 +31,15 @@ public class QnaDetailViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int no = Integer.parseInt(request.getParameter("no"));
 		
-		Qna n = new QnaService().selectQnaOne(no);
 		
-		System.out.println("servlet qna :"+no);
-		List<QnaComment> list=new QnaService().selectQnaCommentList(no);
+		Store r0=new AgeRecommandService().selectTarget0();
+		Store r1=new AgeRecommandService().selectTarget1();
+		Store r2=new AgeRecommandService().selectTarget2();
+		Store r3=new AgeRecommandService().selectTarget3();
+		Store r4=new AgeRecommandService().selectTarget4();
 		
-		System.out.println("n in service: " + n);
-		System.out.println("list in service: " + list);
-		request.setAttribute("list", list);
-		request.setAttribute("qna", n);
-//		request.setAttribute("",);
-	
-		request.getRequestDispatcher("/views/qna/qnaView.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/recommand/age_store.jsp").forward(request, response);
 	}
 
 	/**

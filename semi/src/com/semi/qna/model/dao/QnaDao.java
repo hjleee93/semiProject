@@ -276,7 +276,20 @@ public class QnaDao {
 	}
 	
 	
-	
+	public int deleteQnaComment(Connection conn, String writer) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteQnaComment"));
+			pstmt.setString(1, writer);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+		
+	}
 	
 	
 	
