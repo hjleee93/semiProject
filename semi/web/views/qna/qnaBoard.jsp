@@ -182,7 +182,7 @@
                     <%} %>
                 </table>
             </div>              
-            <%if(MemberlogginedQna!=null && MemberlogginedQna.getMemberId().equals("ptn123")){ %>
+            <%if(MemberlogginedQna!=null && MemberlogginedQna.getMemberSep().equals("회원")){ %>
             <div id="writebtn">
                 <a type="button" class="meple" id="movewrite" onclick="location.assign('<%=request.getContextPath()%>/qna/writeQna');">문의하기</a>
              
