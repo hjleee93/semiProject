@@ -156,6 +156,16 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+	
+	public int deleteMember(String ph, String id) {
+		// TODO Auto-generated constructor stub
+		Connection conn =getConnection();
+		int result=dao.deleteMember(conn,ph,id);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 
 	// 멤버 아이디 중복확인
 

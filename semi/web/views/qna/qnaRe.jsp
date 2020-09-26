@@ -14,6 +14,9 @@
 
 %>
 <style>
+p,input,button,tr,th,a,td{
+ font-family: 'JSDongkang-Regular';
+}
    div#comment-container button#btn-insert{width:60px;height:50px; color:white;
     background-color:#3300FF;position:relative;top:-20px;}
     
@@ -174,32 +177,7 @@
 	         
 	   	</div>	        			    			    		   			    		
 	    </table>
-	</form>
-   
-	    
-	    
-	 
-	    
-	   
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    </section>
+	</form> </section>
 <script>
 	$(function(){
 		$("#hide").hide();

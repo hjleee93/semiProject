@@ -115,7 +115,7 @@ if (cookie != null) {
 								class="dropdown-item" href="<%=request.getContextPath()%>/qna">Q&A</a>
 						</div></li>
 
-<!--       TODO:링크수정 -->
+
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
 						id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -125,8 +125,7 @@ if (cookie != null) {
 							
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/views/recommand/ageStore.jsp">연령별 추천</a>
-							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/views/regional/RegionalList.jsp">지역별 추천</a>
+							
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/random">랜덤 추천</a>
 						</div></li>
@@ -167,7 +166,7 @@ if (cookie != null) {
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownPages">
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/views/mypage/mypage_partner.jsp">MY
+								href="<%=request.getContextPath()%>/partnerpage?no=<%=Memberloggined.getMemberNum()%>">MY
 								PAGE</a> <a class="dropdown-item" href="purchase_history.html">MY
 								BOOKING</a> <a class="dropdown-item" href="./usr_review.html">MY
 								REVIEW</a> <a class="dropdown-item" href="./usr_review.html">FAQ</a>
@@ -188,7 +187,7 @@ if (cookie != null) {
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownPages">
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/views/mypage/mypage_partner.jsp">MY
+								href="<%=request.getContextPath()%>/partnerpage?no=<%=Memberloggined.getMemberNum()%>">MY
 								PAGE</a> <a class="dropdown-item" href="purchase_history.html">MY
 								BOOKING</a> <a class="dropdown-item" href="./usr_review.html">MY
 								REVIEW</a> <a class="dropdown-item" href="./usr_review.html">FAQ</a>
@@ -200,6 +199,7 @@ if (cookie != null) {
 					<%
 						} else if (Memberloggined != null && Memberloggined.getMemberSep().equals("관리자")) {
 						//관리자인경우
+						
 					%>
 
 					<li class="nav-item dropdown"><a
@@ -215,10 +215,8 @@ if (cookie != null) {
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/admin/StoreRequestStatus">입점현황</a>
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/notice">공지사항</a> <a
-								class="dropdown-item"
-								href="<%=request.getContextPath()%>/admin/review">BEST
-								REVIEW</a>
+								href="<%=request.getContextPath()%>/notice">공지사항</a> 
+						<a class="dropdown-item" href="<%=request.getContextPath() %>/admin/order">주문현황</a>
 						</div></li>
 					<li class="nav-item"><a class="nav-link " data-toggle="modal"
 						href="javascript:void(0)"
@@ -233,4 +231,6 @@ if (cookie != null) {
 
 		</div>
 	</nav>
+	
+	</body>
 	

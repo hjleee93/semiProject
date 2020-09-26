@@ -90,4 +90,22 @@ public class StoreService {
 		System.out.println("service in store"+result);
 		return result;
 	}
+	public int deleteStoreRemove(String[] idArr) {
+		Connection conn = getConnection();
+		 String ids="";
+		  for(int i=0;i<idArr.length;i++) {
+			  if(i==0) ids="(";
+			  ids+="'"+idArr[i]+"'";
+			  if(i!=idArr.length-1) ids+=",";
+			  else ids+=")";
+		  }
+		  System.out.println("id값 : "+ids);
+		int result = dao.deleteStoreRemove(conn,ids);
+		
+		if(result>=idArr.length) commit(conn);
+		else rollback(conn);
+		close(conn);
+		System.out.println("deleteservice in store"+result);
+		return result;
+	}
 }

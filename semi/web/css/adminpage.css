@@ -1,6 +1,6 @@
 
 	#tableup tbody tr td:nth-child(1){
-		table-layout:fixed;\
+		table-layout:fixed;
 	}
     #member, #partner{
       background-color: white;

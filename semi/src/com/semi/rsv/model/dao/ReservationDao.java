@@ -60,7 +60,6 @@ public class ReservationDao {
 
 	}
 
-
 	public List<Reservation> selecetReservation(Connection conn, int ptnNum,int cPage, int numPerPage) {
 		System.out.println("ptn in dao: " +ptnNum);
 		
@@ -170,9 +169,6 @@ public class ReservationDao {
 			close(pstmt);
 		}return count;
 	}
-
-
-
 	public List<Reservation> selectPtnReservation(Connection conn, int storeId, int cPage, int numPerPage) {
 System.out.println("storeId in dao: " +storeId);
 		

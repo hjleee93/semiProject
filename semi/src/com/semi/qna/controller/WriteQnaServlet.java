@@ -45,7 +45,7 @@ public class WriteQnaServlet extends HttpServlet {
 		
 		System.out.println(getServletContext().getRealPath("/"));
 		
-		String path=getServletContext().getRealPath("/")+"upload\\qna";		
+		String path=getServletContext().getRealPath("/")+"upload/qna";		
 		//String path=getServletContext().getRealPath("/upload/qna");
 		int maxSize=1024*1024*10;
 		String encode="UTF-8";

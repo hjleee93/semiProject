@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.semi.admin.service.AdminService;
 import com.semi.admin.store.service.StoreService;
+import com.semi.qna.model.service.QnaService;
+import com.semi.qna.model.vo.Qna;
 import com.semi.store.model.vo.Store;
 
 /**
@@ -75,12 +78,19 @@ public class AdminMoveMyPageServlet extends HttpServlet {
 			pageBar+="<a href='"+request.getContextPath()
 			+"/adminpage?page="+(pageNo)+"'> ▶ </a>";
 		}
-	
+//		List<Qna> qnalist = new AdminService().selectQnaList();
+		
 		int count = new StoreService().selectWaitingCount();
+		int qnacount = new AdminService().selectqnaCount();
+		int reservationcount = new AdminService().selectrsvCount();
+		//파트너 안됨.
 		request.setAttribute("waitingCount", count);
 		request.setAttribute("storelist", list);
 		System.out.println("movemypage: "+list);
 		request.setAttribute("pageBar", pageBar);
+		request.setAttribute("qnacount", qnacount);
+		request.setAttribute("reservationcount", reservationcount);
+		
 		
 		
 		RequestDispatcher rd= request.getRequestDispatcher("/views/admin/adminMyPage.jsp");

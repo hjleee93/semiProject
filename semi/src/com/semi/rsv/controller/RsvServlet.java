@@ -45,17 +45,17 @@ public class RsvServlet extends HttpServlet {
 		System.out.println("r in servlet" + r);
 		
 		int result = new ReservationService().insertReservation(r);
-		
+		int customerId = Integer.parseInt(request.getParameter("customerId"));
 		String msg = "";
 		String loc = "/";
 		if (result > 0) {
 			msg = "예약이 완료되었습니다. 마이페이지에서 확인 하실 수 있습니다.";
 
-			loc = "/views/partner/rsvStatus.jsp";// 마이페이지로 이동
+			loc = "/partnerpage?no="+customerId;// 마이페이지로 이동
 		} else {
 			msg = "예약에 실패했습니다.관리자에게 문의해주세요.";
 			// 신청폼 다시
-			loc = "/store/storeDetail?storeId=" + request.getParameter("storeId");
+			loc = "/partnerpage?no=" + customerId;
 		}
 
 		request.setAttribute("msg", msg);

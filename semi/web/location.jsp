@@ -2,15 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="views/common/header.jsp" %>
  <!-- 서브메뉴 -->
-  <div class=submenu>
+  <div class=submenu style="background-color:#5873ff75 !important;">
     <ul>
       <!-- <li><img src="https://image.flaticon.com/icons/svg/60/60775.svg" alt="뒤로가기" height="30px" width="auto" ></li> -->
 
       <!-- <li class="backbtn"><</li> -->
       <li><a class="subhome" href="<%=request.getContextPath()%>/main.jsp">HOME</a></li>
       <li><a class="subhome" href="<%=request.getContextPath()%>/location.jsp">LOCATION</a></li>
-<!--       TODO:링크수정 -->
-      <li><a class="subhome" href="<%=request.getContextPath()%>">CUSTOMER SERVICE</a></li>
+
+      <li> <a
+								class="subhome" href="<%=request.getContextPath()%>/qna">Q&A</a></li>
 
     </ul>
   </div>
@@ -40,20 +41,19 @@
       </div>
 
 
-      <div class="kakaobtn" id="kakao-talk-channel-chat-button" data-channel-public-id="_FmPqK" data-title="question"
-        data-size="small" data-color="mono" data-shape="pc" data-support-multiple-densities="true"></div>
     </div>
   </div>
+  
   <div class="col-lg-1 mb-4 list_wrap" id="list-group" style="position:absolute;">
     <div class="list-group">
       <section class="cart">
-        <a href="#" class="list-group-item">장바구니</a>
+        <a href="#" class="list-group-item">마이페이지</a>
       </section>
       <section class="my_rsv">
         <a href="#" class="list-group-item">나의 예약</a>
       </section>
       <section class="viewed">
-        <a href="#" class="list-group-item">최근 본 상품</a>
+        <a href="#" class="list-group-item">최근 본 업체</a>
         <div class="lst">
           <ul>
 
@@ -71,7 +71,9 @@
       </section>
     </div>
   </div>
+  </div>
   <%@ include file="views/common/login.jsp" %>
+  </div>
 </div>
   <!-- 카카오톡 문의 -->
   
@@ -150,7 +152,6 @@
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      //TODO:이미지변경해야됨
       js.src = 'https://developers.kakao.com/sdk/js/kakao.plusfriend.min.js';
       fjs.parentNode.insertBefore(js, fjs);
     })(document, 'script', 'kakao-js-sdk');

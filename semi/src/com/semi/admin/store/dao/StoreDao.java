@@ -146,4 +146,18 @@ public class StoreDao {
 			close(pstmt);
 		}return result;
 	}
+	public int deleteStoreRemove(Connection conn, String id) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteStoreRemove").replace("$value", id));
+			result=pstmt.executeUpdate();
+			System.out.println("delete storedao"+result);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}return result;
+	}
+	
 }

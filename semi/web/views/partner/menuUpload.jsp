@@ -7,10 +7,10 @@
 <%@ page import="com.semi.partner.model.vo.PartnerMember"%>
 
 <%
- 	Store s = (Store) request.getAttribute("StoreMenu");
+//  	Store s = (Store) request.getAttribute("StoreMenu");
 
-System.out.println("s in jsp: " + s);
-Member sessionMember = (Member) session.getAttribute("Memberloggined"); //로그인한 멤버 세션 저장
+// System.out.println("s in jsp: " + s);
+// Member sessionMember = (Member) session.getAttribute("Memberloggined"); //로그인한 멤버 세션 저장
 %>
 
 <style>
@@ -225,6 +225,13 @@ p {
 	border: 1px solid #747272;
 	border-radius: 2px;
 }
+
+.tbl-list.tb2 tr td:first-child{
+	text-align:left;
+	vertical-align:top;
+
+}
+
 </style>
 <!-- TODO:css 정리해야됨 -->
 <div class="mptitle">
@@ -232,20 +239,22 @@ p {
 </div>
 <div class="container">
 
-	<form action="<%=request.getContextPath()%>/store/menuUploadEnd"
-		name="uploadFile" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="storeId" value="<%=s.getStoreId()%>">
-		<input type="hidden" name="ptnId" value="<%=s.getPtnNum()%>">
+<%-- 	<form action="<%=request.getContextPath()%>/store/menuUploadEnd" --%>
+<!-- 		name="uploadFile" method="post" enctype="multipart/form-data"> -->
+<%-- 		<input type="hidden" name="storeId" value="<%=s.getStoreId()%>"> --%>
+<%-- 		<input type="hidden" name="ptnId" value="<%=s.getPtnNum()%>"> --%>
 		<table id="tbl" class="tbl-list tb2">
-
-
+			<colgroup>
+				<col style="width:40%"></col>
+				<col style="width:auto"></col>
+			</colgroup>
 
 			<thead>
 			
 				<tr>
-					<td colspan="3">
+					<td colspan="4">
 						<p style="text-align: center;">
-						<%=s.getStoreName()%>
+<%-- 						<%=s.getStoreName()%> --%>
 						의 메뉴를 등록해주세요
 						</p>
 					</td>
@@ -255,33 +264,33 @@ p {
 			
 				<tbody>
 				
-				<tr>
-				<td>등록할 메뉴 이름을 적어주세요 예시 1)A SET 예시 2) 산채 비빔밥</td>
-				<td><input type="text" name="menuName" placeholder="메뉴이름" required></td>
+				<tr >
+				<td colspan="3">등록할 메뉴 이름을 적어주세요<br>예시 1)A SET 예시 2) 산채 비빔밥</td>
+				<td colspan=""><input type="text" name="menuName" placeholder="메뉴이름" required></td>
 				</tr>
 				
 				<tr>
-				<td>메뉴 가격을 입력해주세요 </td>
+				<td colspan="3">메뉴 가격을 입력해주세요 </td>
 				<td><input type="number" name="menuPrice" min="0" placeholder="숫자만입력하세요" required></td>
 				</tr>
 				
 				<tr>
-				<td>수량을 선택해주세요 </td>
+				<td colspan="3">수량을 선택해주세요 </td>
 				<td><input type="number" name="menuAmount" min="0" placeholder="숫자만입력하세요" required></td>
 				</tr>
 				
 				<tr>
-				<td>메뉴 설명을 적어주세요 예시 1)아메리카노 2잔 + 치즈케이크 2) 비건이신 분들도 드실 수 있는 산채나물이 들어간 비빔밥 입니다.</td>
+				<td colspan="3">메뉴 설명을 적어주세요<br>예시 1)아메리카노 2잔 + 치즈케이크<br> 2) 비건이신 분들도 드실 수 있는 산채나물이 들어간 비빔밥 입니다.</td>
 				<td>
 				<textarea name="menuDetail" cols="100" rows="10"
-										id="menuDetail" style="resize: none"
+										id="menuDetail" style="width:100%; resize: none"
 										placeholder="메뉴설명을 입력해주세요"></textarea>
 
 				</tr>
 				
 				<tr>
-				<td>메뉴 사진을 업로드해주세요</td>
-				<td><input type="file" id="menuImg" name="menuImg" accept="image/*" onchange="setMenuImg(event);" required></td>
+				<td colspan="2" style="width:21%;">메뉴 사진을 업로드해주세요</td>
+				<td style="vertical-align:top;"><input type="file" id="menuImg" name="menuImg" accept="image/*" onchange="setMenuImg(event);" required></td>
 				<td><div>
 								<div id="image_container">
 									<img class="pre-img" src="http://placehold.it/700x400">
@@ -299,7 +308,7 @@ p {
 				onclick="cancel_event()"> <input type="submit" class="blue"
 				value="확인" title="next" id="nextBtn">
 		</div>
-		</form>
+<!-- 		</form> -->
 		
 		</div>
 		
@@ -319,3 +328,5 @@ p {
 		</script>
 		
 <%@ include file="/views/common/footer.jsp"%>
+
+

@@ -13,6 +13,9 @@
 %>
 
 <style>
+p,input,button,tr,th,a,td{
+ font-family: 'JSDongkang-Regular';
+}
         table{margin-top:2%;}
         #movewrite{
             float: right;
@@ -154,6 +157,7 @@
 
 </section>
 <script>
+
 $(function(){
 	
 	$("#searchType").change(e=>{
@@ -176,7 +180,15 @@ $(function(){
 			temp=$(".tbl-list>tbody>tr>td:nth-child(5n+3):contains('"+k+"')");
 		}
 		$(temp).parent().show();
+		
 	})
+	$("input[type='text']").keydown(function(){
+		if(event.keyCode===13){
+			event.preventDefault();
+		}
+	})
+		
+	
 	
 });
 </script>

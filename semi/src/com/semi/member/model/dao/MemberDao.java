@@ -268,28 +268,7 @@ public class MemberDao {
 		}
 		return t;
 	}
-//	private Member inputData(ResultSet rs) {
-//		Member m=new Member();
-//		try {
-//			m.setMemberNum(rs.getInt(1));
-//			m.setMemberId(rs.getString(2));
-//			m.setMemberName(rs.getString(3));
-//			m.setMemberSep(rs.getString(4));
-//			m.setMemberPw(rs.getString(5));
-//			m.setMemberEmail(rs.getString(6));
-//			m.setMemberPhone(rs.getString(7));
-//			m.setMemPostcode(rs.getString(8));
-//			m.setMemAddress(rs.getString(9));
-//			m.setMemDetailAddress(rs.getString(10));
-//			m.setMemExtraAddress(rs.getString(11));
-//			m.setMemberEnrolldate(rs.getDate(12));
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return m;
-//	}
-//	
-//	
+
 	public int deleteMember(Connection conn,String id) {
 		PreparedStatement pstmt=null;
 		int result=0;
@@ -302,6 +281,28 @@ public class MemberDao {
 		}finally {
 			close(pstmt);
 		}return result;
+	}
+	
+	
+	public int deleteMember(Connection conn,String id, String ph) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement("DELETE FROM totalMEMBER WHERE MEMBER_ID=? AND MEMBER_PHONE=?");
+			pstmt.setString(1,id);
+			pstmt.setString(2, ph);
+			
+			System.out.println("id:" + id + ": " + ph);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		
+		}
+		System.out.println("여기여???" + result);
+		
+		return result;
 	}
 	
 	public int partnerUpdate(Connection conn, Member m) {

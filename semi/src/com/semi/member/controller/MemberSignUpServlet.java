@@ -35,6 +35,7 @@ public class MemberSignUpServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		String[] interest=request.getParameterValues("interest");
+		System.out.println("inte: " + interest);
 		String interested=String.join(",", interest);
 		
 		System.out.println("inte: " + interested);

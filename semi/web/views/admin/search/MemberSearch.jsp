@@ -4,13 +4,17 @@
 <%@ page import="com.semi.member.model.vo.*"%>
 <script src="<%=request.getContextPath()%>/js/jquery-1.3.2.min.js"></script>
 <%
-	List<TotalMember> searchmemlist = (List)request.getAttribute("searchmemlist");
+	/* List<TotalMember> searchctmlist = (List)request.getAttribute("searchctmlist"); */
+	List<SearchMember> memlist = (List)request.getAttribute("memlist");
+	List<Member> ptnlist = (List)request.getAttribute("ptnlist");
 %>
 <style>
 #member, #partner {
 	display: none;
 }
-
+p,input,button,tr,th,a,td{
+ font-family: 'JSDongkang-Regular';
+}
 table {
 	position: relative;
 	font-family: futura-pt, sans-serif;
@@ -25,6 +29,7 @@ table {
 	overflow-x: scroll;
 	overflow-y: scroll;
 	margin: auto;
+	margin-bottom:5%;
 }
 
 th {
@@ -61,7 +66,9 @@ div#base>table tr td{
 	font-weight:bold;
 	text-align:center;
 	padding:10%;
-	
+}
+#base>table {
+	margin-top:7%;
 }
 #keyword{
 	margin-bottom:4%;
@@ -82,19 +89,22 @@ div#base>table tr td{
 	border:1px white solid;
 	margin-left:3%
 }
-#pageBar{
+.pageBar{
    	text-align:center;
    	margin:10%;
    	font-size:20px;
 } 
-#pageBar a{color:#000;}
-#pageBar a:link{color:mediumpurple;}
+.pageBar a{color:#000;}
+.pageBar a:link{color:mediumpurple;}
 
-#pageBar>.num:hover{
+.pageBar>.num:hover{
 	color:mediumpurple;
 	font-weight:bolder;
 	text-decoration:underline;
-}	
+}
+tr>td>a{
+	color:tomato;
+}
 </style>
 <section>
 	<!-- 회원조회테이블팝업 -->
@@ -102,7 +112,7 @@ div#base>table tr td{
 		<h3 class="card-title text-center"><span id="sep"></span>조회</h3>
 		<div class="select">
 				<select id="memberselect" onchange="change();">
-					<option value="">조회</option>
+					<option value="division">구분</option>
 					<option value="member">회원</option>
 					<option value="partner">파트너</option>
 				</select>
@@ -117,7 +127,11 @@ div#base>table tr td{
 			<table class="table">
 				<tbody>
 					<tr>
-						<td colspan="10">회원구분을 선택해주세요.</td>
+						<td colspan="10">
+						<marquee scrollamount="2" width="250" height="100" direction="right" behavior="alternate">
+						회원구분을 선택해주세요.
+						</marquee>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -143,10 +157,10 @@ div#base>table tr td{
         			<%=request.getAttribute("pageBar") %>
         		</div> --%>
 					<tr>
-						<th><input type="checkbox" name="all" class="check-all">
-						</th>
+						<th></th>
 						<th>ID</th>
 						<th>NAME</th>
+						<th>CLASSIFY</th>
 						<th>GENDER</th>
 						<th>BIRTHDAY</th>
 						<th>EMAIL</th>
@@ -158,35 +172,39 @@ div#base>table tr td{
 				</thead>
 				<tbody>
 					<%
-						if (searchmemlist.isEmpty()) {
+						if (memlist.isEmpty()) {
 					%>
 					<tr>
-						<td colspan="10">조회된 회원이 없습니다.</td>
+						<td colspan="11">조회된 회원이 없습니다.</td>
 					</tr>
 					<%
-						} else {
-						for (TotalMember t : searchmemlist) {
-							if(t.getMemberSep().equals("회원")){
-					%>					
+						}else{
+						for (SearchMember t : memlist){
+								if(t.getSep().equals("회원")){
+					%>
 					<tr>
-						<td><a><input type="checkbox" name="cb" class="cb"></a></td>
+						<td><a>□</a></td>
 						<td><%=t.getMemberId()%></td>
 						<td><%=t.getMemberName()%></td>
-						<td><%=t.getGender()%></td>
-						<td><%=t.getBirthday()%></td>
-						<td><%=t.getMemberEmail()%></td>
-						<td><%=t.getMemberPhone()%></td>
-						<td><%=t.getMemAddress()%></td>
-						<td><%=t.getCategory()%></td>
-						<td><%=t.getMemberEnrolldate()%></td>
+						<td><%=t.getSep() %></td>
+						<td><%=t.getGender() %></td>
+						<td><%=t.getBirthday() %>
+						<td><%=t.getEmail()%></td>
+						<td><%=t.getPhone()%></td>
+						<td><%=t.getAddress()%></td>
+						<td><%=t.getCategory() %></td>
+						<td><%=t.getEnrolldate()%></td>
 					</tr>
 					<%
 						}
 					  }
 					}
 					%>
-				</tbody>
+			</tbody>
 			</table>
+			<div class="pageBar">
+        		<%=request.getAttribute("pageBar") %>
+        	</div>
 		</div>
 		<!-- membersearch end -->
 		<!-- 파트너조회테이블팝업 -->
@@ -197,10 +215,10 @@ div#base>table tr td{
 	        		<%=request.getAttribute("pageBar") %>
 	        	</div> --%>
 					<tr>
-						<th><input type="checkbox" name="all" class="check-all">
-						</th>
+						<th></th>
 						<th>ID</th>
 						<th>NAME</th>
+						<th>CLASSIFY</th>
 						<th>EMAIL</th>
 						<th>PHONE</th>
 						<th>ADDRESS</th>
@@ -209,25 +227,27 @@ div#base>table tr td{
 				</thead>
 				<tbody>
 					<%
-						if (searchmemlist.isEmpty()) {
+					if (ptnlist.isEmpty()) {
 					%>
 					<tr>
-						<td colspan="7">조회된 회원이 없습니다.</td>
+						<td colspan="8">조회된 회원이 없습니다.</td>
 					</tr>
 					<%
-						} else {
-						for (TotalMember t : searchmemlist) {
-							if(t.getMemberSep().equals("파트너")){
+					} else {
+						for (Member p : ptnlist) {
+							if(p.getMemberSep().equals("파트너")){
+								System.out.println("파트너 왜 도대체..."+p);
 					%>
 					
 					<tr>
-						<td><a><input type="checkbox" name="cb" class="cb"></a></td>
-						<td><%=t.getMemberId()%></td>
-						<td><%=t.getMemberName()%></td>
-						<td><%=t.getMemberEmail()%></td>
-						<td><%=t.getMemberPhone()%></td>
-						<td><%=t.getMemAddress()%></td>
-						<td><%=t.getMemberEnrolldate()%></td>
+						<td><a>□</a></td>
+						<td><%=p.getMemberId()%></td>
+						<td><%=p.getMemberName()%></td>
+						<td><%=p.getMemberSep() %></td>
+						<td><%=p.getMemberEmail()%></td>
+						<td><%=p.getMemberPhone()%></td>
+						<td><%=p.getMemAddress()%></td>
+						<td><%=p.getMemberEnrolldate()%></td>
 					</tr>
 					<%
 						}
@@ -236,27 +256,40 @@ div#base>table tr td{
 					%>
 				</tbody>
 			</table>
+			<div class="pageBar">
+        		<%=request.getAttribute("pageBar") %>
+        	</div>
 		</div>
 		<!-- 파트너끝 -->
 	</div>
 	<script>
 		function change() {
 			if ($("#memberselect").val() == 'member') {
+				$("#keyword").show();
 				$("#member").show();
 				$("#partner").hide();
 				$("#base").hide();
 				$("#sep").html("회원");
 			} else if ($("#memberselect").val() == 'partner') {
+				$("#keyword").show();
 				$("#partner").show();
-				$("#member").hide();
 				$("#base").hide();
+				$("#member").hide();
 				$("#sep").html("파트너");
-			} else {
-				alert("조회하실 회원을 선택하세요");
+			}else{
+				$("#base").show();
+				$("#partner").hide();
+				$("#member").hide();
+				$("#keyword").hide();
 			}
 		};
 
 		$(function() {
+			$("#keyword").hide();
+
+			$("#tbl-list>tbody>tr").show();
+			$("#tbl-list2>tbody>tr").show();
+			
 			$("input[name='keyword']").keyup(function(){
 				var temp="";
 				var k = $(this).val();
@@ -267,6 +300,7 @@ div#base>table tr td{
 				}
 				if($("#memberselect").val()=='partner'){
 					temp=$("#tbl-list2>tbody>tr>td:nth-child(2):contains('"+k+"')");
+					$("#member").hide();
 				}
 				$(temp).parent().show();
 				
@@ -289,19 +323,12 @@ div#base>table tr td{
 				});
 			});
 
-			//체크박스전체선택
-			$("input[type='checkbox']").each(
-		function(i) {
-			$("input[class='check-all']").click(
-		function() {
-			var chk = $(this).is(":checked");
-			if (chk) {
-				console.log($("input[name='cb']").prop("checked", true));
-			} else {
-				$("input[name='cb']").prop("checked",false);
-			}
-		});
-		});
+		
+		$('input[type="search"]').keydown(function() {
+			  if (event.keyCode === 13) {
+			    event.preventDefault();
+			  };
+			});
 		});
 	</script>
 </section>

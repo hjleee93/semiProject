@@ -25,19 +25,19 @@
    	<!-- <a class="nav-link active show" -->
             <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab1"><b>ALL AGE</b></a>
+                <a class="nav-link" data-toggle="tab" href="#tab1" style="text-decoration:none; color:#666;"}><b>ALL AGE</b></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab2"><b>10</b></a>
+                <a class="nav-link" data-toggle="tab" href="#tab2"style="text-decoration:none; color:#666;"><b>10</b></a>
               </li>
                <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab3"><b>20</b></a>
+                <a class="nav-link" data-toggle="tab" href="#tab3" style="text-decoration:none; color:#666;"><b>20</b></a>
               </li>
                <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab4"><b>30</b></a>              
+                <a class="nav-link" data-toggle="tab" href="#tab4" style="text-decoration:none; color:#666;"><b>30</b></a>              
               </li>   
                <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#tab5"><b>40</b></a>              
+                <a class="nav-link" data-toggle="tab" href="#tab5" style="text-decoration:none; color:#666;"><b>40</b></a>              
               </li>                     
             </ul>
     </div>
@@ -63,15 +63,10 @@
 		<div class="tab_container">
 	<!-- 메인 콘텐츠 영역  -->	
 
- <%			if(Target0 != null){	//전연령 타켓이 null값이 아닌경우
-%>
 	
 	    <div id="tab0" class="tab_content">
 
-				<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-				<link href='https://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
-				<link href='https://fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
-
+				
 				<div id="wrapper">
 				      <div id="slider-wrap">
 				          <ul id="slider">
@@ -135,7 +130,7 @@
    <style>
    /*GLOBALS*/
 *{margin:0; padding:0; list-style:none;}
-a{text-decoration:none; color:#666;}
+
 a:hover{color:#1bc1a3;}
 #wrapper{
 	display: inline-block;
@@ -355,18 +350,13 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
    </script>
 <!-- 메인페이지 끝 -->
 
-
+</div>
 		</div>
-		<% }else{
- 		%> 
-		<div class="plus_content">
-		<p>데이터가 존재하지 않습니다</p>
-		</div>
-		<%} %>
-		</div>
-	    </div>
+		
 <!-- 탭 버튼 화면 시작 -->
     <!-- 탭 ALL 콘텐츠 영역  -->
+    <%			if(Target0 != null){	//전연령 타켓이 null값이 아닌경우
+%>
 	    <div id="tab1" class="tab_content">
 	    	<!-- 상단 해당 스토어 설명 추가 부분-->
 	    	<div class="plus_content">
@@ -404,16 +394,27 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
  			        </div> 
 			    </div>
 	    </div>
+	    <%}else{ %>
+	  <div id="tab1" class="tab_content">
+          <!-- 상단 해당 스토어 설명 추가 부분-->
+          <div class="plus_content">
+             <div class="card-body">
+             <p>HYOLO에 등록된 업체가 없습니다.</p>
+       </div> 
+             </div>
+       </div>
+		    	<%} %>
 	    
 	   
 	
     <!-- 탭2  10대 콘텐츠 영역  -->
+    	<%if(Target1 != null){	//전연령 타켓이 null값이 아닌경우
+%>
 	    <div id="tab2" class="tab_content">
 	    	<!-- 상단 해당 스토어 설명 추가 부분-->  
 
 
- 			<%if(Target1 != null){	//전연령 타켓이 null값이 아닌경우
-%>
+ 		
 
 	    	<div class="plus_content">
 		    	<div class="card-body">
@@ -452,17 +453,23 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 	    </div>
 	    <%}else{
  	    	%> 
-	    	<div class="plus_content">
-	    	<p>데이터가 존재하지 않습니다</p>
-			</div>
+	    	<div id="tab2" class="tab_content">
+          <!-- 상단 해당 스토어 설명 추가 부분-->
+          <div class="plus_content">
+             <div class="card-body">
+             <p>HYOLO에 등록된 업체가 없습니다.</p>
+       </div> 
+             </div>
+       </div>
 			<%} %>
 
 	    
 	<!-- 탭3 20대 콘텐츠 영역  -->
-	    <div id="tab3" class="tab_content">
-	    	<!-- 상단 해당 스토어 설명 추가 부분-->
+	
 <% 			if(Target2 != null){	//전연령 타켓이 null값이 아닌경우
 	 %>
+	    <div id="tab3" class="tab_content">
+	    	<!-- 상단 해당 스토어 설명 추가 부분-->
 	    	<div class="plus_content">
 		    	<div class="card-body">
 		    	<h6>★★★★☆</h6>
@@ -497,18 +504,22 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
  			        		style="width: 200%; heigh:auto; vertical-align: middle"/>
  			        </div> 
 			    </div>
-	    
-	    <%}else{
- 	    	%> 
-	    	<div class="plus_content">
-	    	<p>데이터가 존재하지 않습니다</p>
-			</div>
-			<%} %>
-	 </div>
+	    </div>
+	   <%}else{ %>
+              <div id="tab3" class="tab_content">
+          <!-- 상단 해당 스토어 설명 추가 부분-->
+          <div class="plus_content">
+             <div class="card-body">
+             <p>HYOLO에 등록된 업체가 없습니다.</p>
+       </div> 
+             </div>
+       </div>
+	 <%} %>
 		 <!-- 탭4 30대 콘텐츠 영역  -->
-	    <div id="tab4" class="tab_content" >
-	    <% 			if(Target3 != null){	//전연령 타켓이 null값이 아닌경우
+		   <% 			if(Target3 != null){	//전연령 타켓이 null값이 아닌경우
 	 %>
+	    <div id="tab4" class="tab_content" >
+	   
 	    	<!-- 상단 해당 스토어 설명 추가 부분-->
 	    	<div class="plus_content">
 		    	<div class="card-body">
@@ -545,19 +556,24 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
  			        </div> 
 			    </div>
 			    
-	    
+	    </div>
 	
-	<%}else{
- 	    	%> 
-	    	<div class="plus_content">
-	    	<p>데이터가 존재하지 않습니다</p>
-			</div>
-			<%} %>
-</div>
+	 <%}else{ %>
+              <div id="tab4" class="tab_content">
+          <!-- 상단 해당 스토어 설명 추가 부분-->
+          <div class="plus_content">
+             <div class="card-body">
+             <p>HYOLO에 등록된 업체가 없습니다.</p>
+       </div> 
+             </div>
+       </div>
+       <%} %>
 		<!-- 탭5 40대 콘텐츠 영역  -->
-	    <div id="tab5" class="tab_content">
-	     <% 			if(Target4 != null){	//전연령 타켓이 null값이 아닌경우
+		
+		  <% 			if(Target4 != null){	//전연령 타켓이 null값이 아닌경우
 	 %>
+	    <div id="tab5" class="tab_content">
+	   
 	    	<!-- 상단 해당 스토어 설명 추가 부분-->
 	    	<div class="plus_content">
 		    	<div class="card-body">
@@ -594,18 +610,21 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
  			        </div> 
 			    </div>
 			    
-	    	
+	    	</div>
 
 	
-	<%}else{
- 	    	%>
- 	    	<div class="plus_content">
-	    	<p>데이터가 존재하지 않습니다</p>
-			</div>
-			<%} %>
+ <%}else{ %>
+              <div id="tab5" class="tab_content">
+          <!-- 상단 해당 스토어 설명 추가 부분-->
+          <div class="plus_content">
+             <div class="card-body">
+             <p>HYOLO에 등록된 업체가 없습니다.</p>
+       </div> 
+             </div>
+       </div>
 	
 	
-	
+	<%} %>
 	
 	
 	
@@ -672,10 +691,7 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 	    box-sizing: border-box;
 		box-shadow: 1px 1px 2px #999;
 	}
-	body {
-	   /*  font-family:"Malgun Gothic"; */
-	    font-size: 0.8em;
-	}
+	
 	.nav-link{
 	color:dark grey;
 	}
@@ -810,11 +826,10 @@ figure.snip1384.hover i {
 	
 	
 
-    
+
 	</div> <!--탭 콘텐츠 영역 끝  -->
 
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
         	

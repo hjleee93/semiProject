@@ -1,21 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.semi.qna.model.vo.Qna, java.util.List" %>
-<%-- <%@ page import="com.semi.qna.model.vo.*, java.util.List" %> --%>
 <%@ include file="/views/common/header.jsp"%>
-<%@ include file="/views/common/adminmenubar.jsp"%>
+
 <%
-	List<Qna> listQna =(List)request.getAttribute("list"); 
+   List<Qna> listQna =(List)request.getAttribute("list"); 
 //System.out.println("listQna in jsp: " + listQna);
-	List<Qna> search = (List)request.getAttribute("search");
-	Member MemberlogginedQna = (Member)session.getAttribute("Memberloggined");
-	int data = (Integer)request.getAttribute("totalData");
-	String type=request.getParameter("searchType");
-	String keyword=request.getParameter("searchkeyword");
-	String numPerPage=request.getParameter("numPerPage");
+   List<Qna> search = (List)request.getAttribute("search");
+   Member MemberlogginedQna = (Member)session.getAttribute("Memberloggined");
+   int data = (Integer)request.getAttribute("totalData");
+   String type=request.getParameter("searchType");
+   String keyword=request.getParameter("searchkeyword");
+   String numPerPage=request.getParameter("numPerPage");
 %>
 
 <style>
+p,input,button,tr,th,a,td{
+ font-family: 'JSDongkang-Regular';
+}
+
+#hiddenSearch{
+display:none;
+}
         table{margin-top:2%;}
         #movewrite{
             float: right;
@@ -25,8 +31,8 @@
             border: #107bb3 3px solid;
         }
         .cst-status{
-		margin:5%;
-		}
+      margin:5%;
+      }
       
 
         .cst-status h1 {
@@ -36,23 +42,23 @@
         }
    
         #pageBar{
-        	text-align:center;
-        	margin:10%;
-        	font-size:20px;
+           text-align:center;
+           margin:10%;
+           font-size:20px;
         }
         
         
         #pageBar>.num:hover{
-        	color:mediumpurple;
-        	font-weight:bolder;
-        	text-decoration:underline;
-        }	
+           color:mediumpurple;
+           font-weight:bolder;
+           text-decoration:underline;
+        }   
         div.board-header{
-        	margin-bottom:5%;
+           margin-bottom:5%;
         }
 
         div#writebtn a.meple {                      
-           background: mediumpurple;
+           background: #5873ff75 ;
             color: #fff;
             margin-left: 5px;
             -ms-display: flexbox;
@@ -73,70 +79,93 @@
             
         }
         strong{
-        	color:mediumpurple;
+           color:mediumpurple;
         }
-   		
+         
         div#search-member{display:inline-block;}
         div#search-partner{display:none;}
         div#search-title{display:none;}
     </style>
+
+<%if((MemberlogginedQna != null && MemberlogginedQna.getMemberSep().equals("관리자"))){ %>
+  <%@ include file="/views/common/adminmenubar.jsp"%>
+  
+  <%}else{ %>
+<!-- 회원 파트너 서브메뉴 -->
+
+
+  <div class=submenu style="background-color:#5873ff75 !important;">
+    <ul>
+      <!-- <li><img src="https://image.flaticon.com/icons/svg/60/60775.svg" alt="뒤로가기" height="30px" width="auto" ></li> -->
+
+      <!-- <li class="backbtn"><</li> -->
+      <li><a class="subhome" href="<%=request.getContextPath()%>/main.jsp">HOME</a></li>
+      <li><a class="subhome" href="<%=request.getContextPath()%>/notice">NOTICE</a></li>
+      <li><a class="subhome" href="<%=request.getContextPath()%>/location.jsp">LOCATION</a></li>
+
+      <li> <a
+								class="subhome" href="<%=request.getContextPath()%>/qna">Q&A</a></li>
+
+    </ul>
+  </div>
+  
+  
+  
+  
+<%} %>
+  <!-- 서브메뉴 끝 -->
 <section>
-	<div class="cst-status">
+   <div class="cst-status">
         <h1>Q&A</h1>
     </div>
-    <div class="container">
-   
-   
-<!--     <form action="board-search" method="get">
-    <select name="searchCategory">
-        <option value="1">작성자</option>
-        <option value="2">글제목</option>
-        <option value="3">글제목 + 내용</option>
-    </select>
-    <input type="text" name="searchKeyword" 
-        placeholder="키워드" required />
-    <input type="submit" value="검색" />
-</form>
-     -->
+    <div class="container"> 
+
+                
+       <div id="search-category" id="hiddenSearch">
+         <form action="<%=request.getContextPath()%>/qna/qnaSearch">
+            
+            <input type="hidden" name="searchType" value="category">
+            
+            <label><input type="radio" name="searchkeyword"    value="문의"      
+            <%=type!=null&&type.equals("category")&&keyword.equals("기타 문의")?"checked":""%>
+            <%=type!=null&&type.equals("category")&&keyword.equals("예약 문의")?"checked":""%>
+            <%=type!=null&&type.equals("category")&&keyword.equals("결제 문의")?"checked":""%>
+            <%=type!=null&&type.equals("category")&&keyword.equals("환불 문의")?"checked":""%>>ALL</label>
+            
+            <label><input type="radio" name="searchkeyword" value="예약 문의"            
+            <%=type!=null&&type.equals("category")&&keyword.equals("예약 문의")?"checked":""%>>예약 문의</label>
+            
+            <label><input type="radio" name="searchkeyword" value="결제 문의"
+            <%=type!=null&&type.equals("category")&&keyword.equals("결제 문의")?"checked":""%>>결제 문의</label>
+            
+            <label><input type="radio" name="searchkeyword" value="환불 문의"            
+            <%=type!=null&&type.equals("category")&&keyword.equals("환불 문의")?"checked":""%>>환불 문의</label>
+            
+            <label><input type="radio" name="searchkeyword" value="기타 문의"            
+            <%=type!=null&&type.equals("category")&&keyword.equals("기타 문의")?"checked":""%>>기타 문의</label>
+            
+            <script type="text/javascript">
+                  $(document).ready(function() {
+                  //라디오처럼 동작시킬 체크박스 그룹 셀렉터
+                  $('input[type="radio"][name="searchkeyword"]').click(function(){
+                  //클릭 이벤트 발생한 요소가 체크 상태인 경우
+                        if ($(this).prop('checked')) {
+                            //체크박스 그룹의 요소 전체를 체크 해제후 클릭한 요소 체크 상태지정
+                            $('input[type="radio"][name="searchkeyword"]').prop('checked', false);
+                                  $(this).prop('checked', true); 
+                          } 
+                      });
+                  });
+             </script> 
+                  
+      </form>
+      </div>
+                      
     
-            <%-- <div class="board-header">
-                <div class="board-search-form">
-                    <label for="searchType" class="hidden">검색 구분</label>
-                    
-          
-                   <select id="searchType" name="searchType" class="select">
-                        <option value="title">제목</option>
-                        <option value="content">내용</option>
-                        <option value="all">제목+내용</option>
-                    </select> 
-                    <div id="search-title">
-	                   	<form action="<%=request.getContextPath()%>qna/search">
-		                    <input type="hidden" name="searchType" value="title">
-		                    <input type="text" class="inp" name="searchkeyword" id="title" placeholder="제목"
-		                    value="<%=type!=null&&type.equals("QnaCount")?keyword:""%>">
-		                    <button type="submit" onclick="javascript:fn_se();return false;">검색버튼</button>
-	                    </form>
-                    </div>
-                    <div id="search-content">
-	                    <form action="<%=request.getContextPath()%>qna/search">
-		                    <input type="hidden" name="searchType" value="content">
-		                    <input type="text" class="inp" name="searchkeyword" id="content" placeholder="내용">
-		                    <button type="submit" onclick="javascript:fn_se();return false;">검색버튼</button>
-	                    </form>
-                    </div>
-                    <div id="search-all">
-	                    <form action="<%=request.getContextPath()%>qna/search">
-		                    <input type="hidden" name="searchType" value="all">
-		                    <input type="text" class="inp" name="searchkeyword" id="all" placeholder="제목+내용">
-		                    <button type="submit" onclick="javascript:fn_se();return false;">검색버튼</button>
-	                    </form>
-                    </div>
-                </div>
-            </div> --%>
-		
+       
             <div class="tbl-box">
                 <table class="tbl-list">
-<%--                 <span>총게시글 : <strong><%=data %></strong></span> --%>
+<%--                <span>총게시글 : <strong><%=data %></strong></span> --%>
                     <caption>Q&A</caption>
                     <thead>
                         <tr>
@@ -149,7 +178,7 @@
                         </tr>
                     </thead>
                     <%for(Qna n : listQna){ 
-                   	System.out.println("n: " + n);
+                      System.out.println("n: " + n);
                     %>
                     <tbody>
                         <tr>
@@ -168,13 +197,6 @@
                             
                             
                             <td><%=n.getQnaWriter() %></td>
-                           <%--  <td>
-								<%if(n.getQnaOriginalFileName()!=null) {%>
-								<img src="<%=request.getContextPath() %>/images/file.png" width="20" height="20"> 
-								<%}else{%> 
-								<p>첨부파일x</p>
-								<%}%>
-							</td> --%>
                             <td><%=n.getQnaDate() %></td>
                             <td><%=n.getQnaCount() %></td>                            
                         </tr>
@@ -189,35 +211,48 @@
               </div>
                         
             <%} %>
-	 	<div id="pageBar">
-				<%=request.getAttribute("pageBar") %>
-			</div>
+       <div id="pageBar">
+            <%=request.getAttribute("pageBar") %>
+         </div>
        
     </div>
 
 </section>
 <script>
-	$(function(){
-		$("#searchType").change(e => {
-			let title=$("#search-title");
-			let content=$("#search-content");
-			let all=$("#search-all");
-			
-		 /* 	title.css("display","none");
-			content.css("display","none");
-			all.css("display","none"); 
-			
-			let value=$(e.target).val();//userId, userName, gender;
-			$("#search-"+value).css("display","inline-block"); */
-		});
-		$("#searchType").change();
-		
-		$("#numPerPage").change(e => {
-			
-			$("#numperPageFrm").submit();
-		});
-		
-	})
+
+//검색창
+
+$(function(){
+   
+   $("#searchkeyword").change(e=>{
+      let member= $("#search-member");
+      let title=$("#search-title");
+      
+       member.css("display","none"); 
+      title.css("display","none");
+      
+      let value=$(e.target).val();
+      $("#search-"+value).css("display","inline-block");
+   })
+//     $("input[name='searchkeyword']").blur(function(){
+//       var k = $(this).val();
+//       $(".tbl-list>tbody>tr").hide();
+      
+         
+      
+       if($("#searchkeyword").val()=='member'){
+      var temp=$(".tbl-list>tbody>tr>td:nth-child(5n+2):contains('"+k+"')");
+      } 
+      
+      if($("#searchkeyword").val()=='title'){
+         temp=$(".tbl-list>tbody>tr>td:nth-child(5n+3):contains('"+k+"')");
+      }
+      
+      $(temp).parent().show();
+   })
+   
+});
+
 
 </script>
 

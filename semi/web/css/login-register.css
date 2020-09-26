@@ -305,7 +305,7 @@ h2.modal-title {
 
 
 
-#findAddress,#mem_findAddress {
+#findAddress2,#findAddress1,#findAddress3,#findAddress,#mem_findAddress {
   height: 46px;
   float: right;
   border: 1px solid #ced4da;

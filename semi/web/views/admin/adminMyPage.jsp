@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ page import="com.semi.common.listner.*" %>
-<%@ page import="
+<%@ page import="com.semi.qna.model.vo.*,
 	java.util.List,
 	com.semi.member.model.vo.*"%>
 <%@ include file="/views/common/header.jsp"%>
@@ -13,7 +13,10 @@
 	int connectCount = AdminLoginCheckCountListener.getConnectCount();
 	List<Store> storelist= (List) request.getAttribute("storelist");
 	int count = (Integer)request.getAttribute("waitingCount");
-
+	int qnacount =(Integer)request.getAttribute("qnacount");
+	System.out.println("storelist마이페이지"+storelist);
+	int reservationcount = (Integer)request.getAttribute("reservationcount");
+	
 %>
 <section>
 	<div class="mptitle">
@@ -24,21 +27,20 @@
 	<div class="container">
 
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/main.jsp">Home</a></li>
-			<li class="breadcrumb-item active">Admin Page</li>
+			<li class="breadcrumb-item"><a href="main.html">Home</a></li>
+			<li class="breadcrumb-item active">adminpage</li>
 		</ol>
 
 		<div class="parent" style="width: 100%;">
 			<div class="child1"
 				style="background-color: rgba(189, 189, 189, 0.119)">
-				 <img src="${pageContext.request.contextPath}/img/admin.png" height="200px" width="200px" class="mong" >
-				<!-- <img src="https://cdn.onlinewebfonts.com/svg/img_239979.png" height="200px" width="300px" class="mong"> -->
+				<img src="<%=request.getContextPath() %>/img/admin.png" height="200px" width="200px" class="mong" >
+				<!-- <img src="<img src="${pageContext.request.contextPath}/img/admin.png" height="200px" width="200px" class="mong"> -->
 				<p class="profile1">ADMIN</p>
 				<table class="profilebox">
 					<tr>
-					<!--       TODO:reservation 매핑값처리-->
 						<td id="reservationstate" class="profilebox1 menuchoice"
-							onclick="location.assign('<%=request.getContextPath()%>/admin/reservationView');">회원예약현황</td>
+							onclick="location.assign('<%=request.getContextPath()%>/rsv/reservationView');">회원예약현황</td>
 						<td id="searchmember" class="profilebox2 menuchoice"
 							onclick="searchMembers();">회원조회</td>
 					</tr>
@@ -46,13 +48,13 @@
 						<td id="storestate" class="profilebox1 menuchoice"
 							onclick="location.assign('<%=request.getContextPath()%>/admin/StoreRequestStatus');">입점현황</td>
 						<td id="searchpartner" class="profilebox2 menuchoice"
-							onclick="location.assign('<%=request.getContextPath()%>/qna/qnalist');">Q&A</td>
+							onclick="location.assign('<%=request.getContextPath()%>/qna');">Q&A</td>
 					</tr>
 					<tr>
 						<td id="qna" class="profilebox3 menuchoice"
 							onclick="location.assign('<%=request.getContextPath()%>/notice');">공지사항</td>
 						<td id="searchboard" class="menuchoice"
-							onclick="location.assign('<%=request.getContextPath()%>/admin/review');">BEST REVIEW</td>
+							onclick="location.assign('<%=request.getContextPath()%>/admin/order');">주문예약현황</td>
 						<!-- 관리자가 게시글 삭제할 수 있게 권한 /아니면 qna게시판->에서 댓글작성하는걸로 -->
 					</tr>
 				</table>
@@ -87,7 +89,7 @@
 						<td>
 							<div class="box2">
 								<p class="text3">TOTAL</p>
-								<a href="<%=request.getContextPath()%>/adminpage">
+								<a href="<%=request.getContextPath()%>/admin/adminpage">
 									<span class="minibox1"><%=connectCount%></span>
 								</a>
 								<div class="minibox2">접속자 수</div>
@@ -98,10 +100,10 @@
 						<td>
 							<div class="box3">
 								<p class="text3">RESERVATION</p>
-								<a href="rsvstatus.html">
-									<span class="minibox3">75</span>
+								<a href="<%=request.getContextPath() %>/rsv/reservationView">
+									<span class="minibox3"><%=reservationcount %></span>
 								</a>
-								<div class="minibox2">예약율(%)</div>
+								<div class="minibox2">신규 예약</div>
 							</div>
 						</td>
 					</tr>
@@ -109,8 +111,8 @@
 						<td>
 							<div class="box3">
 								<p class="text3">Q&A</p>
-								<a href="usr_qna.html"> <!-- 문의삭제/댓글달 수있게 관리자권한 -->
-									<span class="minibox4">0</span>
+								<a href="<%=request.getContextPath()%>/qna"> <!-- 문의삭제/댓글달 수있게 관리자권한 -->
+									<span class="minibox4"><%=qnacount%></span>
 								</a>
 								<div class="minibox2">신규 등록</div>
 							</div>
@@ -153,7 +155,7 @@
 							<tbody>
 								<%if (storelist.isEmpty()) {%>
 								<tr>
-									<td colspan="8">조회된 게시글이 없습니다.</td>
+									<td colspan="9">조회된 게시글이 없습니다.</td>
 								</tr>
 								<%} else {
 									  for (Store s : storelist) {
@@ -175,12 +177,15 @@
 									<td><%=s.getStoreContent() %></td>
 									<td><%=s.getStorePage() %></td>
 									<td><%=s.getStoreStatus() %></td>
+									<td><input type="hidden" name="add" id="add" value="<%=s.getStoreId()%>"></td>
 								</tr>
 								<%}
 								 }
 								}%>
 							</tbody>
 						</table>
+						<form name="requestFrm" action="" method="post">
+						</form>
 					</div>
 				</div>
 			</div>
@@ -221,6 +226,7 @@
 									<td><%=s.getStoreContent()%></td>
 									<td><%=s.getStorePage()%></td>
 									<td><%=s.getStoreStatus()%></td>
+									<td><input type="hidden" name="add" id="add1" value="<%=s.getStoreId()%>"></td>
 								</tr>
 								<%}
 								 }
@@ -271,6 +277,7 @@
 									<td><%=s.getStoreContent() %></td>
 									<td><%=s.getStorePage() %></td>
 									<td><%=s.getStoreStatus() %></td>
+									<td><input type="hidden" name="add" id="add2" value="<%=s.getStoreId()%>"></td>
 								</tr>
 								<%}
 								 }
@@ -320,6 +327,7 @@
 									<td><%=s.getStoreContent() %></td>
 									<td><%=s.getStorePage() %></td>
 									<td><%=s.getStoreStatus() %></td>
+									<td><input type="hidden" name="add" id="add3" value="<%=s.getStoreId()%>"></td>
 								</tr>
 								<%}
 								 }
@@ -348,18 +356,65 @@
  			window.open(url, 'Hyolo', 'status=no, height=' + windowH  + ', width=' + windowW  + ', left='+ left + ', top='+ top);
  		}
       $(document).ready(function () {
-       
         $("a.movestatus").parent().parent().on("click", function () {
-        	location.href = "<%=request.getContextPath()%>/admin/StoreRequestStatus"
+        	const frm = $("[name=requestFrm]");
+        	frm.append($(this).find("input:hidden"));
+        	console.log("click");
+        	const val = $("#add").val();
+        	console.log(val);
+        	const url="<%=request.getContextPath()%>/store/storeDetail?storeId="+val;
+			
+			frm.attr({
+					"action":url,
+					"method":"post",
+					
+			});
+			frm.submit();
         });
         $("a.movestatus_1").parent().parent().on("click", function () {
-        	location.href = "<%=request.getContextPath()%>/admin/StoreRequestStatus"
+        	const frm = $("[name=requestFrm]");
+        	frm.append($(this).find("input:hidden"));
+        	console.log("click");
+        	const val = $("#add1").val();
+        	console.log(val);
+        	const url="<%=request.getContextPath()%>/store/storeDetail?storeId="+val;
+			
+			frm.attr({
+					"action":url,
+					"method":"post",
+					
+			});
+			frm.submit();
         });
         $("a.movestatus_2").parent().parent().on("click", function () {
-        	location.href = "<%=request.getContextPath()%>/admin/StoreRequestStatus"
+        	const frm = $("[name=requestFrm]");
+        	frm.append($(this).find("input:hidden"));
+        	console.log("click");
+        	const val = $("#add2").val();
+        	console.log(val);
+        	const url="<%=request.getContextPath()%>/store/storeDetail?storeId="+val;
+			
+			frm.attr({
+					"action":url,
+					"method":"post",
+					
+			});
+			frm.submit();
         });
         $("a.movestatus_3").parent().parent().on("click", function () {
-        	location.href = "<%=request.getContextPath()%>/admin/StoreRequestStatus"
+        	const frm = $("[name=requestFrm]");
+        	frm.append($(this).find("input:hidden"));
+        	console.log("click");
+        	const val = $("#add3").val();
+        	console.log(val);
+        	const url="<%=request.getContextPath()%>/store/storeDetail?storeId="+val;
+			
+			frm.attr({
+					"action":url,
+					"method":"post",
+					
+			});
+			frm.submit();
         });
 
         $(".close").on('click', function () {

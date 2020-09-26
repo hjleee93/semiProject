@@ -9,6 +9,9 @@
 	
 %>
 <style>
+p,input,button,tr,th,a,td{
+ font-family: 'JSDongkang-Regular';
+}
 	.notice{
 		margin:5%;
 	}
@@ -65,8 +68,16 @@
 		}
 		.btn {
 			margin:6%;
-            
 		}
+		.colorBtn{	
+            background: lavender;
+            width:100px;
+            height:50px;
+            border-color: mediumpurple;
+            color: mediumpurple;
+            border-radius:10px;
+            font-weight:bolder;
+            }
 		#content{
 			padding-top:70px;
 			padding-bottom:70px;
@@ -126,13 +137,8 @@
     </table>
    <%if(logginedMember!=null&&(logginedMember.getMemberId().equals("admin"))){%>
    		<div class="btn">
-                <input type="button" value="수정하기" onclick="fn_modify();">
-                <input type="button" value="삭제하기" onclick="fn_delete();">
-        </div>
-    <%}else if(Memberloggined!=null&&(Memberloggined.getMemberId().equals("admin"))){ %>
-        <div class="btn">
-                <input type="button" value="수정하기" onclick="fn_modify();">
-                <input type="button" value="삭제하기" onclick="fn_delete();">
+                <input type="button" class="colorBtn" value="수정하기" onclick="fn_modify();">
+                <input type="button" class="colorBtn" value="삭제하기" onclick="fn_delete();">
         </div>
      <%} %>
         <input type="hidden" name="file" value="<%=n.getFile() %>">

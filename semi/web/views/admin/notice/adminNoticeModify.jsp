@@ -8,6 +8,9 @@
 %>
 
 <style>
+p,input,button,tr,th,a,td{
+ font-family: 'JSDongkang-Regular';
+}
 	.notice{
 		margin:5%;
 	}

@@ -17,8 +17,10 @@ System.out.println("s in jsp: " + s);
 .mptitle h1 {
 	font-family: 'S-CoreDream-8Heavy', sans-serif;
 	text-align: center;
+	margin: 50px;
 }
-
+p{
+ font-family: 'JSDongkang-Regular';}
 #image_container2, #image_container1, #image_container3 {
 	text-align: center;
 }
@@ -118,7 +120,7 @@ input[id="maxbook"] {
 }
 
 .rsvtitle {
-	width: 150px;
+	/* width: 150px; */
 }
 
 .imgdtl {
@@ -183,9 +185,12 @@ solid
 
 
 }
+
+
 table tr td {
 	padding: 10px 5px;
-	height: 300px;
+	/* height: 300px; */
+	vertical-align:top;
 }
 
 p {
@@ -221,9 +226,19 @@ p {
 	border: 1px solid #747272;
 	border-radius: 2px;
 }
-</style>
 
-<!-- TODO:css 정리해야됨 -->
+@media (max-width:991px){
+
+	table{display:block; width:100%; padding:0 2%;}
+	table tr{display:block;}
+	table tr td{display:block; width:100%;}
+	textarea{width:100% !important;}
+}
+td{
+ font-family: 'JSDongkang-Regular';
+}
+
+</style>
 
 
 <div class="mptitle">
@@ -261,7 +276,7 @@ p {
 						</td>
 						<td><input type="file" name="mainImg" id="image"
 							accept="image/*" onchange="setThumbnail(event);" />
-							<button class="pre-btn">preview</button></td>
+							
 
 						<td><div>
 								<input type="hidden" name="storeName"
@@ -285,8 +300,8 @@ p {
 					<tr>
 						<td>홍보 문구<br>
 						<small>메인페이지 슬라이드에 홍보 문구로 들어갑니다.</small></td>
-						<td><textarea name="promoText" id="promoText" cols="40"
-								rows="5" style="resize: none;"></textarea></td>
+						<td colspan="2"><textarea name="promoText" id="promoText" cols="40"
+								rows="5" style="width:90%; resize: none;"></textarea></td>
 					</tr>
 					<tr>
 						<td class="rsvtitle">예약상품 카드 이미지<span id="abc">*</span>
@@ -297,7 +312,7 @@ p {
 
 						<td><input type="file" id="image2" name="postImg"
 							accept="image/*" onchange="setThumbnail2(event);" required />
-							<button class="pre-btn">preview</button></td>
+							
 
 						<td><div>
 								<div id="image_container2">
@@ -313,7 +328,7 @@ p {
 						<td><input type="file" id="image3" name="detailImg"
 							accept="image/*" onchange="setThumbnail3(event);" />
 
-							<button class="pre-btn">preview</button></td>
+							
 						<td><div>
 								<div id="image_container3">
 									<img class="pre-img" src="http://placehold.it/750x500">
@@ -392,3 +407,5 @@ p {
 	}
 </script>
 <%@ include file="/views/common/footer.jsp"%>
+
+

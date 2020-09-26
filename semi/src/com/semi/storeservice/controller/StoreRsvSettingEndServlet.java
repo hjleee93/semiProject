@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.semi.storeservice.model.vo.StoreService;
+import com.semi.storeservice.model.vo.StoreSvc;
 import com.semi.storeservice.service.StoreServiceService;
 
 /**
@@ -37,9 +37,9 @@ public class StoreRsvSettingEndServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		StoreService ss = new StoreService();
+		StoreSvc ss = new StoreSvc();
 
-		System.out.println("여기 자체를 안가는 듯");
+		
 		
 		int monOpenTime = 0;
 		int monCloseTime = 0;
@@ -340,7 +340,7 @@ public class StoreRsvSettingEndServlet extends HttpServlet {
 		String loc = "/";
 		if (result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0 && result5 > 0 && result6 > 0 && result7 > 0) {
 			msg = "예약 서비스 등록이 완료되었습니다. 메뉴등록 페이지로 이동합니다.";
-//			loc = "/ptnstorelist";// 마이페이지로 이동
+//			
 			loc = "/store/menuUpload?storeId=" + request.getParameter("storeId");
 		} else {
 			msg = "입력하신 데이터에 오류가 발생했습니다. 입점 신청을 다시 시도해주세요";

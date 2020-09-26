@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
-<%@ include file="/views/common/adminmenubar.jsp" %>
+
 <%@ page import="com.semi.member.model.vo.Member"%>
 <%
 	Member MemberlogginedQna = (Member)session.getAttribute("Memberloggined");
@@ -217,7 +217,24 @@
             border-color: mediumpurple;
             color: #fff;
         }
+        p,input,button,tr,th,a,td{
+ font-family: 'JSDongkang-Regular';
+}
     </style>
+    <div class=submenu style="background-color:#5873ff75 !important;">
+    <ul>
+      <!-- <li><img src="https://image.flaticon.com/icons/svg/60/60775.svg" alt="뒤로가기" height="30px" width="auto" ></li> -->
+
+      <!-- <li class="backbtn"><</li> -->
+      <li><a class="subhome" href="<%=request.getContextPath()%>/main.jsp">HOME</a></li>
+      <li><a class="subhome" href="<%=request.getContextPath()%>/notice">NOTICE</a></li>
+      <li><a class="subhome" href="<%=request.getContextPath()%>/location.jsp">LOCATION</a></li>
+
+      <li> <a
+								class="subhome" href="<%=request.getContextPath()%>/qna">Q&A</a></li>
+
+    </ul>
+  </div>
     <section>
 <div class="container">
 

@@ -79,9 +79,6 @@ function closeLayer(obj) {
 }
 </script>
 
-<%if(logginedMember != null && logginedMember.getMemberSep().equals("파트너")) {%>
-
-
 <div class=submenu>
       <ul>
           <li><a class="subhome" href="<%=request.getContextPath()%>/main.jsp">HOME</a></li>
@@ -96,26 +93,6 @@ function closeLayer(obj) {
 <div class="cst-status">
 	<h1>고객 예약 현황</h1>
 </div>
-<%} else if(logginedMember != null && logginedMember.getMemberSep().equals("회원")){%>
-<div class="submenu" style="background-color: cornflowerblue;">
-	
-	
-	<ul>
-		<li><a class="subhome"
-			href="<%=request.getContextPath()%>/main.jsp">마이 페이지</a></li>
-		<li><a class="subhome" href="#">나의 예약 상황</a></li>
-		<li><a class="subhome" href="ptn_review.html">내가 쓴 리뷰</a></li>
-		<li><a class="subhome" href="ptn_qna.html">내가 한 문의</a></li>
-	</ul>
-</div>
-<div class="cst-status">
-	<h1>내가 한 예약 </h1>
-</div>
-<%}else if(logginedMember != null && logginedMember.getMemberSep().equals("관리자")) {
-	//TODO:관리자헤더추가
-%>
-
-<%} %>
 
 
 <div class="container">

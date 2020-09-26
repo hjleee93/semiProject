@@ -7,6 +7,9 @@
 	Member logginedMember = (Member) session.getAttribute("Memberloggined");
 %>
 <style>
+p,input,button,tr,th,a,td{
+ font-family: 'JSDongkang-Regular';
+}
         .notice {
             margin: 50px;
         }

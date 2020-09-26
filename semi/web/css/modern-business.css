@@ -9,6 +9,16 @@
     단일페이지에서만 사용되는건 따로 써주세요! 
  */
 /* reset css */
+
+@font-face {
+	font-family: 'JSDongkang-Regular';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/JSDongkang-RegularA1.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 ul {
 	margin-bottom: 0;
 	padding: 0

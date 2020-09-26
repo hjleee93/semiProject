@@ -88,6 +88,10 @@ if (cookie != null) {
 
 
 <style>
+
+td{
+ font-family: 'JSDongkang-Regular';
+}
 .tbl-title {
 	width: 300px;
 }
@@ -245,6 +249,7 @@ th {
 	font-family: 'S-CoreDream-8Heavy', sans-serif;
 	text-align: center;
 	margin: 50px;
+	padding-top:50px;
 }
 
 #abc {
@@ -274,6 +279,10 @@ th {
 
 label {
 	margin-bottom: 0;
+}
+
+p, td{
+ font-family: 'JSDongkang-Regular';
 }
 </style>
 
@@ -720,13 +729,13 @@ label {
 
 
 					<tr>
-						<td scope="row" class="tbl-title"><label for="locate1"
+						<td style=" width: 400px;"scope="row" class="tbl-title"><label for="locate1"
 							class="store">2. 휴무일을 지정해주세요</label></td>
-						<td>
-							<div id="mdp-demo"></div>
+						<td >
+							<div id="mdp-demo" ></div>
 
 						</td>
-						<td><textarea id="altField" value="" name="storeOff"></textarea></td>
+						<td><textarea id="altField" value="" name="storeOff" ></textarea></td>
 					</tr>
 			</tbody>
 		</table>

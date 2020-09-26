@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp" %>
-<%@ page import="com.semi.member.model.vo.Member"%>
+<%@ page import="com.semi.member.model.vo.*"%>
+
 
 <%
-//TODO: css 정리해야됨
+
+int cnt1 = (Integer)request.getAttribute("mypageCount");
+int cnt2 = (Integer)request.getAttribute("mypageCount2");
+
+
+	TotalMember t = (TotalMember)request.getAttribute("customer");
  	Member MemLoggined = (Member)session.getAttribute("Memberloggined");
 
 	Cookie[] cookies = request.getCookies();
@@ -17,6 +23,8 @@
 			}
 		}
 	}
+	
+	  int ptnNum = MemLoggined.getMemberNum(); 
 %>
 
   <style>
@@ -36,13 +44,19 @@
 
   <!-- 서브메뉴 -->
   <div class=submenu>
-      <ul>
-          <li><a class="subhome" href="<%=request.getContextPath()%>/main.jsp">HOME</a></li>
-          <li><a class="subhome" href="location.html">LOCATION</a></li>
-          <li><a class="subhome" href="customer_service.html">CUSTOMER SERVICE</a></li>
-        </ul>
-    </div>
-    
+     <ul>
+      <!-- <li><img src="https://image.flaticon.com/icons/svg/60/60775.svg" alt="뒤로가기" height="30px" width="auto" ></li> -->
+
+      <!-- <li class="backbtn"><</li> -->
+      <li><a class="subhome" href="<%=request.getContextPath()%>/main.jsp">HOME</a></li>
+      <li><a class="subhome" href="<%=request.getContextPath()%>/notice">NOTICE</a></li>
+      <li><a class="subhome" href="<%=request.getContextPath()%>/location.jsp">LOCATION</a></li>
+
+      <li> <a
+								class="subhome" href="<%=request.getContextPath()%>/qna">Q&A</a></li>
+
+    </ul>
+   </div> 
     <!-- Page Heading/Breadcrumbs -->
     <div class="mptitle"><h1>M Y P A G E</h1></div>                                                  
                                                     
@@ -55,70 +69,75 @@
         </li>
         <li class="breadcrumb-item active">mypage</li>
       </ol>
+      
 <%if(MemLoggined.getMemberSep().equals("파트너")){ %>
     <div class="parent" style="width: 100%;">
       <div class="child1" style="background-color:rgba(189, 189, 189, 0.119)">
         <img src="${pageContext.request.contextPath}/img/partner.png" height="200px" width="200px" class="mong" >
-        <p class="profile1">Hello! partner, <%=MemLoggined.getMemberId()%></p>
+        <p class="profile1">Hello! Partner <b><%=MemLoggined.getMemberId()%></b></p> 
           <table class="profilebox">
             <tr>
               <td class="profilebox1"><a href="<%=request.getContextPath()%>/views/partner/ptnRequest1.jsp">입점등록하기</a></td>
-              <td class="profilebox2"><a href="<%=request.getContextPath()%>/ptnstorelist">입점리스트 조회</a></td>
+              <td class="profilebox2"><a href="<%=request.getContextPath()%>/ptnstorelist?no=<%=ptnNum %>">입점리스트 조회</a></td>
             </tr>
             <tr>
               <td class="profilebox1"><a href="<%=request.getContextPath()%>/partner/memberView?id=<%=MemLoggined.getMemberId()%>">파트너 정보수정</a></td>
-              <td class="profilebox2"><a href="<%=request.getContextPath()%>/withdrawal">파트너 탈퇴</a></td>
+              <td class="profilebox2"><a href="<%=request.getContextPath()%>/movewith">파트너 탈퇴</a></td>
             </tr>
             <tr>
               <td class="profilebox3"><a href="">입점취소 및 해지</a></td>
-              <td><a href="<%=request.getContextPath()%>/policy">취소 및 환불규정</a></td>
+              <td><a href="">업체 정보 수정</a></td>
             </tr>
           </table>
         </div>
       <div class="child2" style="background-color: rgba(189, 189, 189, 0.119)">
 
-        <table>
+         <table>
           <tr>
-            <td rowspan="3"><div class="box1" style="width: 300px; height: 500px;">
-              <div class="line"></div><p class="text3">고객 예약현황</p>
-                <div>
-                  <span class="mar2">신규예약</span>
-                  <a href=""><marquee class="mar1" scrollamount="1" width="50" height="110" 
-                    direction="up" behavior="alternate"><%=2%></marquee></a>
-                    <span class="mar3">건</span>
-                </div>
-                <img src="${pageContext.request.contextPath}/img/quick.png" class="img01" width="240px" height="40px">
-              <div class="quick_box">
-                <ul>
-                  <li><a href="" class="quick1">판매 목록 추가 ✓</a></li>
-                  <li><a href="./ptn_review.html" class="quick2">매장 리뷰 조회 ✓</a></li>
-                  <li><a href="./ptn_qna.html" class="quick3">문의내역 확인 ✓</a></li>
-              </ul>
-              </div>
-            </td>
-            <td>
-              <div class="box2"><p class="text3">상품등록 현황</p>
-                <div class="minibox1"><%=12%></div>
-                <div class="minibox2">메뉴 수량</div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td><div class="box3"><p class="text3">MY RANK</p>
-              <div class="minibox3">★</div>
-              <div class="minibox2">고객 선호도
-              
-              <!--파트너 랭킹 모달창 -->
+	           <td rowspan="3">
+	            <div class="box1" style="width: 300px; height: 500px;">
+		              <p class="text3">고객 예약 현황</p>
+		                  <span class="mar2">신규예약</span>
+		                  <marquee class="mar1" scrollamount="2" width="50px" height="5px"
+										direction="up" behavior="alternate">0</marquee>
+		                  <span class="mar3">건</span>
+		                <img src="${pageContext.request.contextPath}/img/quick.png" class="img01" width="240px" height="45px">
+			              <div class="quick_box_white">
+			                <ul>
+				                 <li><a href="<%=request.getContextPath()%>/notice" class="quick1">공지사항 ✓</a></li>
+				                <li><a href="<%=request.getContextPath()%>/review"class="quick2">매장 리뷰 게시판 ✓</a></li>
+				                <li><a href="<%=request.getContextPath()%>/qna" class="quick3">문의 내역 게시판 ✓</a></li>
+			                </ul>
+			              </div>
+	                   </div>
+	           </td>
+	           
+	           <td>
+	              <div class="box2" class="line"><p class="text3">ALL PARTNERS</p>
+	                <div class="minibox1_cnt"><%=cnt1 %></div>
+	                <div class="minibox22">파트너 입점 수</div>
+	              </div>
+	           </td>
+         </tr>
+          
+         <tr>
+		            <td>
+		            	<div class="box3" class="line"><p class="text3">MY GRADE</p>
+			              <div class="minibox3"><small>★</small></div>
+			              <div class="minibox2">고객 선호도
+			              <a href="" data-toggle="modal" data-target="#myModal">
+							<img class="togimg" src="https://w7.pngwing.com/pngs/273/858/png-transparent-question-mark-computer-icons-exclamation-mark-desktop-question-mark-emoji-angle-text-logo.png" width="7%" height=""/></a>
+		              		</div>
+		              	</div>
+		              	
+		              	
+		      <!--파트너 랭킹 모달창 -->
               <!-- Trigger the modal with a button -->
  				<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
 				data-target="#myModal">?</button> -->
-				<a href="" data-toggle="modal" data-target="#myModal">
-					<img src="https://w7.pngwing.com/pngs/273/858/png-transparent-question-mark-computer-icons-exclamation-mark-desktop-question-mark-emoji-angle-text-logo.png" width="10" /></a>
-					<!-- https://image.flaticon.com/icons/svg/1073/1073801.svg -->
 				<!-- Modal -->
 				<div id="myModal" class="modal fade" role="dialog"> // fade는 투명 효과
 				  <div class="modal-dialog">
-				
 				    <!-- Modal content-->
 				    <div class="modal-content">
 				      <div class="modal-header">
@@ -140,7 +159,7 @@
                         </tr>
                         <tr>
                           <td class="tb2">★</td>
-                          <td class="tb2-1"><small>★★ ★★★ ★★★★</small></td>
+                          <td class="tb2-1"><small>★★  ~ ★★★★</small></td>
                           <td class="tb2">★★★★★</td>
                         </tr>
                         <tr>
@@ -155,193 +174,198 @@
                       <p class="pw_text"><small>* 1만원 미만의 구매 내역은 주문횟수로 계산되는 선정기준에 제외됩니다.</small></p>
                     </div>
 				      </div>
-				      <!-- <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				      </div> -->
 				  </div>
 				</div>
-				
-				</div>
             </td>
-            
-            <td></td>
-          </tr>
-          <tr>
-            <td><div class="box3"><p class="text3">MY TOTAL</p>
-              <div class="minibox4"><%=10%></div>
-              <div class="minibox2">누적 판매수량</div>
-            </td>
-          
-            <td></td>
-          </tr>
-        </table>
+         
+		 </tr>
+
+	          <tr>
+		            <td>
+		            	<div class="box3" class="line"><p class="text3">MY TOTAL</p>
+			              <div class="minibox4">0</div>
+			              <div class="minibox2">누적 판매수량</div>
+			             </div>
+		            </td>
+	          </tr>
+	</table>
       </div>
-    </div>
-        </div>
+      </div>
+      
       
       <%}else if(MemLoggined.getMemberSep().equals("회원")){ %>
+
       
 <!--       일반회원인경우 -->
-
 <div class="parent" style="width: 100%;">
       <div class="child1" style="background-color:rgba(189, 189, 189, 0.119)">
         <img src="${pageContext.request.contextPath}/img/customer.png" width="200px" width="200px" class="mong">
-        <p class="profile1">Hello! members, <%=MemLoggined.getMemberId()%></p>
+        <p class="profile1">Hello! Members <b><%=MemLoggined.getMemberId()%></b></p>
           <table class="profilebox">
             <tr>
-              <td class="profilebox1"><a href="<%=request.getContextPath() %>/member/memberView?id=<%=MemLoggined.getMemberNum()%>">회원정보수정</a></td>
-              <td class="profilebox2"><a href="">주문내역 조회</a></td>
+              <td class="profilebox1"><a href="<%=request.getContextPath()%>/partner/memberView?id=<%=MemLoggined.getMemberId()%>">회원정보수정</a></td>
+              <td class="profilebox2"><a href="<%=request.getContextPath()%>/policy">환불 규정 안내</a></td>
             </tr>
             <tr>
               <td class="profilebox3">
-              	<a href="<%=request.getContextPath()%>/withdrawal">회원 탈퇴</a></td>
+              	<a href="<%=request.getContextPath()%>/movewith">회원 탈퇴</a></td>
               <td>
-                <a href="<%=request.getContextPath()%>/policy">취소 및 환불규정</a>
+                <a href="<%=request.getContextPath()%>/notice">공지사항 확인</a>
           </table>
         </div>
       <div class="child2" style="background-color: rgba(189, 189, 189, 0.119)">
 
         <table>
           <tr>
-            <td rowspan="3"><div class="box1" style="width: 300px; height: 500px;">
-              <div class="line"></div><p class="text3">예약 현황</p>
-                <div>
-                  <span class="mar2">PLACE</span>
-                  <a href=""><marquee class="mar1" scrollamount="1" width="50" height="110" 
-                    direction="up" behavior="alternate">2</marquee></a>
-                    <span class="mar3">건</span>
-                </div>
-                <img src="${pageContext.request.contextPath}/img/quick.png" class="img01" width="240px" height="45px">
-                
-              <div class="quick_box">
-                <ul>
-                <li><a href="" class="quick1">장바구니 바로가기 ✓</a></li>
-                <li><a href="" class="quick2">내가 쓴 리뷰 ✓</a></li>
-                <li><a href="" class="quick3">문의내역 확인 ✓</a></li>
-              </ul>
-              </div>
-            </td>
-            <td>
-              <div class="box2"><div class="line"></div><p class="text3">RESERVATION</p>
-                <div class="minibox1">20/08/08</div>
-                <div class="minibox2">최근 예약일</div>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td><div class="box3"><div class="line"></div><p class="text3">MY GRADE</p>
-              <div class="minibox3"><small>Family</small>☻</div>
-              <div class="minibox2">나의 등급
-              
-              
-			<!--회원등급 모달창 -->
-              <!-- Trigger the modal with a button -->
- 				<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal"
-				data-target="#myModal">?</button> -->
-				<a href="" data-toggle="modal" data-target="#myModal">
-					<img src="https://w7.pngwing.com/pngs/273/858/png-transparent-question-mark-computer-icons-exclamation-mark-desktop-question-mark-emoji-angle-text-logo.png" width="10" /></a>
-					<!-- https://image.flaticon.com/icons/svg/1073/1073801.svg -->
-				<!-- Modal -->
-				<div id="myModal" class="modal fade" role="dialog"> // fade는 투명 효과
-				  <div class="modal-dialog">
-				
-				    <!-- Modal content-->
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal">x</button>
-				        <h4 class="modal-title">회원 등급 기준</h4>
-				      </div>
-				      <div class="modal-body">
-				      
-				        <p class="card-text">
-			                          최근 1개월간의 이용 내역을 반영하여 단계가 결정되면<br>
-			                          매월 1일 새로운 회원등급이 부여됩니다. (결제완료일자기준)<br>향후 단계별 및 선정기준은 변경될 수 있습니다.<br>
-                      </p>
-                      <br>
-                      <table class="gradetable">
-                        <tr>
-                          <td class="">Family</td>
-                          <td class="tb1">Gold</td>
-                          <td class="">Vip</td>
-                        </tr>
-                        <tr>
-                          <td class="tb2">☻</td>
-                          <td class="tb2-1">☻☻</td>
-                          <td class="tb2">☻☻☻</td>
-                        </tr>
-                        <tr>
-                          <td class="">신규가입<br>회원</td>
-                          <td class="tb3">월 통합 2회이상<br>구매 회원</td>
-                          <td class="">월 통합 10회이상<br>구매 회원</td>
-                        </tr>
-                      </table>
-                      <br>
-                    </div>
-                    <div class="card-footer">
-                      <p class="pw_text">* 1만원 미만의 구매 내역은 주문횟수로 계산되는 선정기준에 제외됩니다.</p>
-                    </div>
-				      </div>
-				      <!-- <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				      </div> -->
-				  </div>
-				</div>
-                
-                <!-- <button type="button" class="grade_info"><img src="https://image.flaticon.com/icons/svg/1073/1073801.svg" width="10" onclick="window.open('mypage_grade.html', 'grade', 'width=600 height=800, resizable=no')"/></button> -->
-                <!-- <a href="javascript:openModal('grade');" class="button modal-open" ><img src="https://image.flaticon.com/icons/svg/1073/1073801.svg" width="10" /></a>
-                 -->
-				<!--<div id="modal" ></div>
-                <div class="modal-con grade">
-                <div  aria-hidden="true">
-                  <div class="card h-100"> -->
+	           <td rowspan="3">
+	            <div class="box1" style="width: 300px; height: 500px;">
+		              <p class="text3">예약 현황</p>
+		                  <span class="mar2">PLACE</span>
+		                  <marquee class="mar1" scrollamount="2" width="50px" height="5px"
+										direction="up" behavior="alternate">0</marquee>
+		                  <span class="mar4">건</span>
+		                <img src="${pageContext.request.contextPath}/img/quick.png" class="img01" width="240px" height="45px">
+			              <div class="quick_box_white">
+			                <ul>
+				                <li><a href="<%=request.getContextPath()%>/views/store/storeCategory.jsp" class="quick1">스토어 예약하기  ✓</a></li>
+				                <li><a href="<%=request.getContextPath()%>/qna" class="quick2">문의 게시판  ✓</a></li>
+				                <li><a href="<%=request.getContextPath()%>/board" class="quick3">리뷰 게시판  ✓</a></li>
+			                </ul>			                
+			              </div>
+	              </div>
+	           </td>
+	           
+	           <td>
+	              <div class="box2" class="line"><p class="text3">AVAILABLE MENU</p>
+	                <div class="minibox1"><small><%=cnt2%></small></div>
+	                <div class="minibox2">예약가능 메뉴</div>
+	              </div>
+	           </td>
+         </tr>
+          
+         <tr>
+		            <td>
+		            	<div class="box3" class="line"><p class="text3">MY GRADE</p>
+			              <div class="minibox3"><small>Family</small></div>
+			              <div class="minibox2">나의 등급
+			              <a href="" data-toggle="modal" data-target="#myModal">
+							<img class="togimg" src="https://w7.pngwing.com/pngs/273/858/png-transparent-question-mark-computer-icons-exclamation-mark-desktop-question-mark-emoji-angle-text-logo.png" width="7%" height=""/></a>
+		              		</div>
+		              	</div>
+				<!--회원등급 모달창 (회원 마이페이지) -->
+					<!-- Modal -->
+					<div id="myModal" class="modal fade" role="dialog"> // fade는 투명 효과
+					  <div class="modal-dialog">
+					    <!-- Modal content-->
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal">x</button>
+					        <h4 class="modal-title">회원 등급 기준</h4>
+					      </div>
+					      <div class="modal-body">
+					        <p class="card-text">
+				                          최근 1개월간의 이용 내역을 반영하여 단계가 결정되면<br>
+				                          매월 1일 새로운 회원등급이 부여됩니다. (결제완료일자기준)<br>향후 단계별 및 선정기준은 변경될 수 있습니다.<br>
+	                      </p>
+	                      <br>
+	                      <table class="gradetable">
+	                        <tr>
+	                          <td class="">Family</td>
+	                          <td class="tb1">Gold</td>
+	                          <td class="">Vip</td>
+	                        </tr>
+	                        <tr>
+	                          <td class="tb2">☻</td>
+	                          <td class="tb2-1">☻☻</td>
+	                          <td class="tb2">☻☻☻</td>
+	                        </tr>
+	                        <tr>
+	                          <td class="">신규가입<br>회원</td>
+	                          <td class="tb3">월 통합 2회이상<br>구매 회원</td>
+	                          <td class="">월 통합 10회이상<br>구매 회원</td>
+	                        </tr>
+	                      </table>
+	                      <br>
+	                    </div>
+	                    <div class="card-footer">
+	                      <p class="pw_text">* 1만원 미만의 구매 내역은 주문횟수로 계산되는 선정기준에 제외됩니다.</p>
+	                    </div>
+					      </div>
+					  </div>
+					</div>
+		 </tr>
 
 	          <tr>
-	            <td><div class="box3"><div class="line"></div><p class="text3">MY TOTAL</p>
-	              <div class="minibox4">0</div>
-	              <div class="minibox2">누적 구매수량</div>
-	            </td></div>
+	            <td>
+	            	<div class="box3" class="line"><p class="text3">SIGN UP DATE</p>
+		              <div class="minibox4_date">20/03/11</div>
+		              <div class="minibox2">회원 가입일</div>
+		             </div>
+	            </td>
 	            <td></td>
 	          </tr>
 	        </table>
           
         </div>
 
+
       </div>
-    <%} %>  
+    <%} %> 
+    </div>
+    </body>
+      
+      <%@ include file="/views/common/footer.jsp" %>
+      
+      
       
       <style>
-      /* .cross{
-        height:100px;
-            width:100px;
-            background-color: black;
-            background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 44%, rgba(255, 255, 255, 0.3) 45%, rgba(255, 255, 255, 0.3) 55%, rgba(255, 255, 255, 0) 56%, rgba(255, 255, 255, 0) 100%);
-            background-size: 6px 6px;
-            background-repeat: repeat;
-      } */
-       .minibox1{
+      
+ 	 .minibox1{
         color: rgb(96, 114, 133);
-        font-size: 180%;
-        margin-left: 45%;
-        margin-bottom: 3%;
+        font-size: 240%;
+        margin-left: 80%;
+      }
+      .minibox1_cnt{
+        color: rgb(96, 114, 133);
+        font-size: 220%;
+        margin-left: 71%;
       }
       .minibox2{
         margin-left: 8%;
         color: gray;
+        padding-bottom:10%;
+      }
+      .minibox22{
+        margin-left: 8%;
+        color: gray;
+        padding-bottom:10%;
+      } 
+      .minibox3_star{
+        color: rgb(96, 114, 133);
+        font-size: 220%;
+        margin-left: 75%;
       }
       .minibox3{
         color: rgb(96, 114, 133);
         font-size: 220%;
-        margin-left: 75%;
+        margin-left: 58%;
       }
       .minibox4{
         color: rgb(96, 114, 133);
         font-size: 240%;
         margin-left:75%;
       }
+      .minibox4_date{
+        color: rgb(96, 114, 133);
+        font-size: 190%;
+        margin-left: 41%;
+        margin-bottom: 3%;
+      }
       .mar1{
+      	height: 100px;
         font-size: 80px;
         color: rgb(75, 75, 75);
-        margin-left: 35%;
+        margin-left: 30%;
       }
       .mar2{
         margin-left: 11%;
@@ -349,6 +373,11 @@
         color: gray;
       }
       .mar3{
+        font-size: 100%;
+        color: gray;
+      }
+      .mar4{
+      	margin-left: 7%;
         font-size: 100%;
         color: gray;
       }
@@ -377,16 +406,21 @@
         margin-left: 10%;
       }
       
+       .togimg{
+      	margin-left:2%;
+      	margin-bottom:3%;
+      }
+      
       .box1{
         margin-top: 20%;
-        margin-left: 15%;
         background-color: rgba(138, 138, 138, 0.119);
-        border-bottom-left-radius: 10px;
+        margin-left: 18%;
         border-bottom-right-radius: 10px;
         box-shadow: 2px 2px 2px #aaa;
         border-top:1px  #107bb3 solid;
-        border-top-width: 5px;
+        border-top-width: 10px;
       }
+      
       .box2{
         background-color: rgba(138, 138, 138, 0.119);
         margin-top: 22%;
@@ -396,7 +430,7 @@
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
         border-top:1px  #107bb3 solid;
-        border-top-width: 5px;        
+        border-top-width: 10px;        
         box-shadow: 2px 2px 2px #aaa;
       }
       .box3{
@@ -409,13 +443,13 @@
         border-bottom-right-radius: 10px;
         box-shadow: 2px 2px 2px #aaa;
         border-top:1px  #107bb3 solid;
-        border-top-width: 5px;
+        border-top-width: 10px;
       }
        .line{
         border:1px  #107bb3 solid;
         border-top-width: 5px;
       }
-      .quick_box{
+      .quick_box_white{
         margin-left: 11%;
         width: 79%;
         height: 220px;
@@ -436,15 +470,25 @@
         margin-left: 7%;
         color: rgb(77, 77, 77);
       }
+      .text3-2{
+        margin-top: 5%;
+        margin-left: 10%;
+        color: rgb(77, 77, 77);
+      }
+      
       .quick1,.quick2,.quick3{
         display: inline-block;
-        width:100%;
+        padding-top:10%;
+        padding-right:5%;
+        margin: 2%;
+        width:100%; 
         color: gray;
         text-align: center;
       }
       .profile1{
-        margin-top: 7%;
+        margin-top: 10%;
         text-align: center;
+        font-size: 20px;
       }
       .mong{
         box-shadow: 3px 3px grey ;
@@ -477,10 +521,10 @@
       .mptitle h1 {
         font-family: 'S-CoreDream-8Heavy', sans-serif;
         text-align: center;
-        margin:50px;
+        margin:70px;
         }
         
-         .grade_info{
+      .grade_info{
           border: none;
           background: none;
         }
@@ -520,9 +564,10 @@
        color : red;
        font-size : 12px;
        }
-
-
-      </style>
-
-</section>
-<%@ include file="/views/common/footer.jsp" %>
+       
+       p,input,button,tr,th,a,td{
+			 font-family: 'JSDongkang-Regular';
+			}
+       
+       </style>
+       

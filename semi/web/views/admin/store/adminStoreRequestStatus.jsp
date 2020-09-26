@@ -40,8 +40,8 @@
 }
 #holdreason{color:#ad9aee;border:#ad9aee 1px solid;background-color:white;}
 #holdreason:hover{background-color:#ad9aee;color:white;border:#8f7cee 1px solid;}
-#cancelreason{color:#ad9aee;border:#ad9aee 1px solid;background-color:white;}
-#cancelreason:hover{background-color:#ad9aee;color:white;border:#8f7cee 1px solid;}
+#deletebtn{color:#ad9aee;border:#ad9aee 1px solid;background-color:white;}
+#deletebtn:hover{background-color:#ad9aee;color:white;border:#8f7cee 1px solid;}
 .buttondiv {
 	float: right;
 	margin-right: 5%;
@@ -195,6 +195,14 @@ tr:hover {
 	<div id="approval" class="card margin-table approval">
 		<div class="card-body">
 			<h3 class="card-title text-center">입점완료</h3>
+			<div class="buttondiv">
+				<button type="button" class="btn btn-warning" id="holdbtn"
+					name="hold" onclick="holdBtn();">hold</button>
+				<button type="button" class="btn btn-danger" id="cancelbtn"
+					name="decline" onclick="declineBtn();">decline</button>
+				<button type="button" class="btn btn-info" id="deletebtn"
+					name="remove" onclick="removeBtn();">delete</button>
+			</div>
 			<div class="table-responsive">
 			<form name="acceptFrm" action="" method="post">
 				<table class="table" id="tablesuccess">
@@ -221,7 +229,7 @@ tr:hover {
                 					if(s.getStoreStatus().equals("ACCEPT")){
               				%>
 						<tr>
-							<td><input type="checkbox" name="cb" class="cb2"></td>
+							<td><input type="checkbox" name="cb2" class="cb1"></td>
 							<td><%=s.getStoreName() %></td>
 							<td><%=s.getStoreDtlCtgry() %></td>
 							<td><%=s.getStorePhone() %></td>
@@ -229,6 +237,9 @@ tr:hover {
 							<td><%=s.getStoreContent() %></td>
 							<td><%=s.getStorePage() %></td>
 							<td><%=s.getStoreStatus() %></td>
+							<td>
+								<input type="hidden" name="storeId" value="<%=s.getStoreId() %>">
+							</td>
 						</tr>
 						<%}
            				 } 
@@ -246,7 +257,12 @@ tr:hover {
 		<div class="card-body">
 			<h3 class="card-title text-center">입점보류</h3>
 			<div class="buttondiv">
-				<button type="button" class="btn btn-info" id="holdreason">Message</button>
+				<button type="submit" class="btn btn-success" id="approvalbtn"
+					name="accept" onclick="acceptBtn();">accept</button>
+				<button type="button" class="btn btn-danger" id="cancelbtn"
+					name="decline" onclick="declineBtn();">decline</button>
+				<button type="button" class="btn btn-info" id="deletebtn"
+					name="remove" onclick="removeBtn();">delete</button>
 			</div>
 			<div class="table-responsive">
 			<form name="holdFrm" action="" method="post">
@@ -274,7 +290,7 @@ tr:hover {
                 					if(s.getStoreStatus().equals("HOLD")){
               				%>
 						<tr>
-							<td><input type="checkbox" name="cb" class="cb3"></td>
+							<td><input type="checkbox" name="cb3" class="cb1"></td>
 							<td><%=s.getStoreName() %></td>
 							<td><%=s.getStoreDtlCtgry() %></td>
 							<td><%=s.getStorePhone() %></td>
@@ -282,6 +298,9 @@ tr:hover {
 							<td><%=s.getStoreContent() %></td>
 							<td><%=s.getStorePage() %></td>
 							<td><%=s.getStoreStatus() %></td>
+							<td>
+								<input type="hidden" name="storeId" value="<%=s.getStoreId() %>">
+							</td>
 						</tr>
 						<%}
            				 } 
@@ -299,7 +318,12 @@ tr:hover {
 		<div class="card-body">
 			<h3 class="card-title text-center">입점취소</h3>
 			<div class="buttondiv">
-				<button type="button" class="btn btn-info" id="cancelreason">Message</button>
+				<button type="submit" class="btn btn-success" id="approvalbtn"
+					name="accept" onclick="acceptBtn();">accept</button>
+				<button type="button" class="btn btn-warning" id="holdbtn"
+					name="hold" onclick="holdBtn();">hold</button>
+				<button type="button" class="btn btn-info" id="deletebtn"
+					name="remove" onclick="removeBtn();">delete</button>
 			</div>
 			<div class="table-responsive">
 			<form name="cancelFrm" action="" method="post">
@@ -327,7 +351,7 @@ tr:hover {
                 					if(s.getStoreStatus().equals("DECLINE")){
               				%>
 						<tr>
-							<td><input type="checkbox" name="cb" class="cb4"></td>
+							<td><input type="checkbox" name="cb4" class="cb1"></td>
 							<td><%=s.getStoreName() %></td>
 							<td><%=s.getStoreDtlCtgry() %></td>
 							<td><%=s.getStorePhone() %></td>
@@ -335,6 +359,9 @@ tr:hover {
 							<td><%=s.getStoreContent() %></td>
 							<td><%=s.getStorePage() %></td>
 							<td><%=s.getStoreStatus() %></td>
+							<td>
+								<input type="hidden" name="storeId" value="<%=s.getStoreId() %>">
+							</td>
 						</tr>
 						<%}
            				 } 
@@ -428,7 +455,23 @@ tr:hover {
 			}
 			
 			};
-       
+			function removeBtn(){
+				if(confirm('해당업체의 리스트를 삭제하시겠습니까?')){
+					if($("input:checkbox[class='cb1']").is(":checked")){
+		    	   const frm = $("[name=requestFrm]");
+					const url="<%=request.getContextPath()%>/admin/store/remove";
+				
+					frm.attr({
+							"action":url,
+							"method":"post",
+					});
+					frm.submit();
+					}else{
+						alert("업체를 선택해주세요.");
+					}
+				}
+				
+				};
         $(document).ready(function () {
         	$("input:checkbox[class='cb1']").click(function(){
         		 const frm = $("[name=requestFrm]");
@@ -458,7 +501,7 @@ tr:hover {
 
        
 
-        //사유버튼 prompt?
+  <%--       //사유버튼 prompt?
         $("#holdreason").click(function(){ 
             prompt("보류사유를 작성해주세요","서류불충분으로 인해 보류되었습니다.");
             if(prompt!=null){
@@ -467,7 +510,7 @@ tr:hover {
         });
         $("#cancelreason").click(function(){
           prompt("취소사유를 작성해주세요","조건에 해당하지 않습니다. 신청해주셔서 감사합니다.");
-        })
+        }) --%>
 
        
       </script>

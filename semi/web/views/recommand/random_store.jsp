@@ -7,19 +7,19 @@
 
 
 <%
-	Store randomcafe = new StoreRandomService().selectRandomStore();
-	Store randompub = new StoreRandomService().selectRandomPub();
-	Store randomres = new StoreRandomService().selectRandomRes();
+   Store randomcafe = new StoreRandomService().selectRandomStore();
+   Store randompub = new StoreRandomService().selectRandomPub();
+   Store randomres = new StoreRandomService().selectRandomRes();
 %>
     
     
     <div id="top">
-	<br>
-    	당신의 관심사를 선택하세요
+   <br>
+       당신의 관심사를 선택하세요
     <br>
     <h2>TODAY'S RANDOM PICK !</h2> 
     <br>
-   	<!-- <a class="nav-link active show" -->
+      <!-- <a class="nav-link active show" -->
             <ul class="nav nav-tabs">
               <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#tab1"><b>CAFE</b></a>
@@ -35,15 +35,15 @@
     
     <style>
     #top {
-		 width: 100%;
-		 text-align: center;
-		 display: inline-block;
-		 }
-	.nav-tabs{
-		margin-top:3%;
-		margin-left:10%;
-		margin-right:10%;
-		}
+       width: 100%;
+       text-align: center;
+       display: inline-block;
+       }
+   .nav-tabs{
+      margin-top:3%;
+      margin-left:10%;
+      margin-right:10%;
+      }
     </style>
 
 
@@ -51,74 +51,74 @@
 
     <div id="container"> 
     
-	<!-- 탭 콘텐츠 영역  -->
-		<div class="tab_container">
-	<!-- 메인 콘텐츠 영역  -->	
-	    <div id="tab0" class="tab_content">
+   <!-- 탭 콘텐츠 영역  -->
+      <div class="tab_container">
+   <!-- 메인 콘텐츠 영역  -->   
+       <div id="tab0" class="tab_content">
 
-				<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-				<link href='https://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
-				<link href='https://fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
+            <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+            <link href='https://fonts.googleapis.com/css?family=Anton' rel='stylesheet' type='text/css'>
+            <link href='https://fonts.googleapis.com/css?family=Neucha' rel='stylesheet' type='text/css'>
 
-				<div id="wrapper">
-				      <div id="slider-wrap">
-				          <ul id="slider">
-				             <li>
-				                <div>
-				                    <h3> </h3>
-				                    <span> </span>
-				                </div>                
-				<img src="https://cdn.eyesmag.com/content/uploads/sliderImages/2020/06/12/blue-bottle-cafe-gwanghwamun-03-82d2ff56-3544-46c1-9fa7-ee5651376f15.jpg?text= ">
-				             </li>
-				             
-				             <li>
-				                <div>
-				                    <h3> </h3>
-				                    <span> </span>
-				                </div>
-				<img src="https://i0.wp.com/baristanews.co.kr/wp-content/uploads/2017/07/2015-09-22-ParamountCoffeeProject-001.0.0-696x392.jpg?fit=696%2C392?text= ">
-				             </li>
-				             
-				             <li>
-				                <div>
-				                    <h3> </h3>
-				                    <span> </span>
-				                </div>
-				<img src="https://t1.daumcdn.net/cfile/tistory/245F9C3F5419AB3A32?text= ">
-				             </li>
-				             
-				            <!--  <li>
-				                <div>
-				                    <h3>Slide #4</h3>
-				                    <span>Sub-title #4</span>
-				                </div>
-				<img src="https://fakeimg.pl/350x200/0A6E0A/000?text= ">
-				             </li> -->
-				             
-				<!--              <li>
-				                <div>
-				                    <h3>Slide #5</h3>
-				                    <span>Sub-title #5</span>
-				                </div>
-				<img src="https://fakeimg.pl/350x200/0064CD/000?text=55555">
-				             </li>
-				              -->
-				             
-				          </ul>
-				          
-				           <!--controls-->
-				          <div class="btns" id="next"><i class="fa fa-arrow-right"></i></div>
-				          <div class="btns" id="previous"><i class="fa fa-arrow-left"></i></div>
-				          <div id="counter"></div>
-				          
-				          <div id="pagination-wrap">
-				            <ul>
-				            </ul>
-				          </div>
-				          <!--controls-->  
-				                 
-				      </div>
-				   </div>
+            <div id="wrapper">
+                  <div id="slider-wrap">
+                      <ul id="slider">
+                         <li>
+                            <div>
+                                <h3> </h3>
+                                <span> </span>
+                            </div>                
+            <img src="https://cdn.eyesmag.com/content/uploads/sliderImages/2020/06/12/blue-bottle-cafe-gwanghwamun-03-82d2ff56-3544-46c1-9fa7-ee5651376f15.jpg?text= ">
+                         </li>
+                         
+                         <li>
+                            <div>
+                                <h3> </h3>
+                                <span> </span>
+                            </div>
+            <img src="https://i0.wp.com/baristanews.co.kr/wp-content/uploads/2017/07/2015-09-22-ParamountCoffeeProject-001.0.0-696x392.jpg?fit=696%2C392?text= ">
+                         </li>
+                         
+                         <li>
+                            <div>
+                                <h3> </h3>
+                                <span> </span>
+                            </div>
+            <img src="https://t1.daumcdn.net/cfile/tistory/245F9C3F5419AB3A32?text= ">
+                         </li>
+                         
+                        <!--  <li>
+                            <div>
+                                <h3>Slide #4</h3>
+                                <span>Sub-title #4</span>
+                            </div>
+            <img src="https://fakeimg.pl/350x200/0A6E0A/000?text= ">
+                         </li> -->
+                         
+            <!--              <li>
+                            <div>
+                                <h3>Slide #5</h3>
+                                <span>Sub-title #5</span>
+                            </div>
+            <img src="https://fakeimg.pl/350x200/0064CD/000?text=55555">
+                         </li>
+                          -->
+                         
+                      </ul>
+                      
+                       <!--controls-->
+                      <div class="btns" id="next"><i class="fa fa-arrow-right"></i></div>
+                      <div class="btns" id="previous"><i class="fa fa-arrow-left"></i></div>
+                      <div id="counter"></div>
+                      
+                      <div id="pagination-wrap">
+                        <ul>
+                        </ul>
+                      </div>
+                      <!--controls-->  
+                             
+                  </div>
+               </div>
    
    <style>
    /*GLOBALS*/
@@ -128,7 +128,7 @@ a:hover{color:#1bc1a3;}
 
 
 #wrapper{
-	display: inline-block;
+   display: inline-block;
     margin:25px auto;
     height:400px;
     position:relative;
@@ -375,198 +375,198 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 <!-- 메인페이지 끝 -->
 
 
-		</div>
-	    </div>
+      </div>
+       </div>
 <!-- 탭 버튼 화면 시작 -->
     <!-- 탭1 콘텐츠 영역  -->
-	    <div id="tab1" class="tab_content">
-	    	<!-- 상단 해당 스토어 설명 추가 부분-->
-	    	<div class="plus_content">
-		    	<div class="card-body">
-		    	<h6>★★★★☆</h6>
-		            <h4 class="card-title">
-		            <%=randomcafe.getStoreName()%>&nbsp;&nbsp;
-			     	<button class="btn btn-primary">바로 예약하기</button>
-		            </h4>
-		            <p class="card-text">
-		           	커피전문점 카페 <%=randomcafe.getStoreName()%> 에서 잔잔한 음악과 함께 크리미한 커피로 좋은 기운을 느끼고 가세요.
-		           	<br><small>홈페이지</small> : <%=randomcafe.getStorePage() %> <small>전화번호 : <%=randomcafe.getStorePhone() %></small> 
-		            </p>
-	          	</div>
-	    	</div>
-	    	<!-- 스토어 이미지 영역 시작 -->
-	      		<div class="parent">
- 			        <div class="first" >
- 			        	<img src="https://fastly.4sqi.net/img/general/600x600/213211_WFOC4fCCjnhLe-poxWalcrB3KpBFswHVBkprDLAwkhU.jpg"
- 			        		style="width: 150%; heigh:auto; vertical-align: middle" />
- 			        </div> 
- 			        <div class="second">
-							<figure class="snip1384">
-							  <img src="https://post-phinf.pstatic.net/MjAxODExMTVfNTMg/MDAxNTQyMjQ1ODk2ODM5.PVIXR7G_y8Q33q3fvGoyeH0XXqfoEp5ENl8isfUbhWQg.ysI1OYX58CepfbHSx-sTMPIoWhROTIrfytP_OIo6Gjsg.JPEG/%EC%BA%90%EC%B9%98%EC%B9%B4%ED%8E%98_%EC%82%AC%EC%A7%84015%2820181029%29.JPG?type=w1200">
-							  <figcaption>
-							    <h3><%=randomcafe.getStoreContent()%></h3>
-							    <p><%=randomcafe.getStoreAddress()%> <%=randomcafe.getStoreDtlAddr()%> <%=randomcafe.getStoreExtraAddr()%></p><i class="ion-ios-arrow-right"></i>
-							  </figcaption>
-							  <a href="#"></a>
-							</figure>
- 			        </div>
- 			        <div class="third">
- 			        	<img src="https://t1.daumcdn.net/cfile/tistory/9918633E5D45467406"
- 			        		style="width: 200%; heigh:auto; vertical-align: middle"/>
- 			        </div> 
-			    </div>
-	    </div>
-	    
-	    
+       <div id="tab1" class="tab_content">
+          <!-- 상단 해당 스토어 설명 추가 부분-->
+          <div class="plus_content">
+             <div class="card-body">
+             <h6>★★★★☆</h6>
+                  <h4 class="card-title">
+                  <%=randomcafe.getStoreName()%>&nbsp;&nbsp;
+                 <button class="btn btn-primary" onClick="location.href='http://rclass.iptime.org:9999/20AM_HYOLO/views/store/storeCategory.jsp'">바로 예약하기</button>
+                  </h4>
+                  <p class="card-text">
+                    커피전문점 카페 <%=randomcafe.getStoreName()%> 에서 잔잔한 음악과 함께 크리미한 커피로 좋은 기운을 느끼고 가세요.
+                    <br><small>홈페이지</small> : <%=randomcafe.getStorePage() %> <small>전화번호 : <%=randomcafe.getStorePhone() %></small> 
+                  </p>
+                </div>
+          </div>
+          <!-- 스토어 이미지 영역 시작 -->
+               <div class="parent">
+                  <div class="first" >
+                     <img src="https://lh3.googleusercontent.com/proxy/mYSjpentC_kWq2hi72kKEkcFMqAMLsJjUGeXuWhdsRuFJJxvIDen0U7Q8zr_EzLKFKR91GnvrOv4TnxihZZckCaWX_na7oexXkrhSGtjOtY68hEKGJsAipJcTVbfYzdPEA"
+                        style="width: 150%; heigh:auto; vertical-align: middle" />
+                  </div> 
+                  <div class="second">
+                     <figure class="snip1384">
+                       <img src="https://post-phinf.pstatic.net/MjAxODExMTVfNTMg/MDAxNTQyMjQ1ODk2ODM5.PVIXR7G_y8Q33q3fvGoyeH0XXqfoEp5ENl8isfUbhWQg.ysI1OYX58CepfbHSx-sTMPIoWhROTIrfytP_OIo6Gjsg.JPEG/%EC%BA%90%EC%B9%98%EC%B9%B4%ED%8E%98_%EC%82%AC%EC%A7%84015%2820181029%29.JPG?type=w1200">
+                       <figcaption>
+                         <h3><%=randomcafe.getStoreContent()%></h3>
+                         <p><%=randomcafe.getStoreAddress()%> <%=randomcafe.getStoreDtlAddr()%> <%=randomcafe.getStoreExtraAddr()%></p><i class="ion-ios-arrow-right"></i>
+                       </figcaption>
+                       <a href="#"></a>
+                     </figure>
+                  </div>
+                  <div class="third">
+                     <img src="https://t1.daumcdn.net/cfile/tistory/9918633E5D45467406"
+                        style="width: 200%; heigh:auto; vertical-align: middle"/>
+                  </div> 
+             </div>
+       </div>
+       
+       
     <!-- 탭2 콘텐츠 영역  -->
-	    <div id="tab2" class="tab_content">
-	    	<!-- 상단 해당 스토어 설명 추가 부분-->
-	    	<div class="plus_content">
-		    	<div class="card-body">
-		    	<h6>★★★★★</h6>
-		            <h4 class="card-title"> 
-		             <%=randompub.getStoreName()%>&nbsp;&nbsp;
-		             <button class="btn btn-primary">바로 예약하기</button>
-		            </h4>
-		            <p class="card-text">
-		           	분위기를 만끽하면서 술을 마시고 싶다면 <%=randompub.getStoreName() %>를 방문하세요, 합리적인 가격과 맛을 즐길 수 있습니다.
-		           	<br><small>홈페이지</small> : <%=randompub.getStorePage() %> <small>전화번호 : <%=randompub.getStorePhone() %></small>
-		            </p>
-	          	</div>
-	    	</div>
-	    	<!-- 스토어 이미지 영역 시작 -->
-	      		<div class="parent">
- 			        <div class="first" >
- 			        	<img src="https://fastly.4sqi.net/img/general/600x600/213211_WFOC4fCCjnhLe-poxWalcrB3KpBFswHVBkprDLAwkhU.jpg"
- 			        		style="width: 150%; heigh:auto; vertical-align: middle" />
- 			        </div> 
- 			        <div class="second">
-							<figure class="snip1384">
-							  <img src="https://post-phinf.pstatic.net/MjAxODExMTVfNTMg/MDAxNTQyMjQ1ODk2ODM5.PVIXR7G_y8Q33q3fvGoyeH0XXqfoEp5ENl8isfUbhWQg.ysI1OYX58CepfbHSx-sTMPIoWhROTIrfytP_OIo6Gjsg.JPEG/%EC%BA%90%EC%B9%98%EC%B9%B4%ED%8E%98_%EC%82%AC%EC%A7%84015%2820181029%29.JPG?type=w1200">
-							  <figcaption>
-							    <h3><%=randompub.getStoreContent() %></h3>
-							    <p><%=randompub.getStoreAddress()%> <%=randompub.getStoreDtlAddr()%> <%=randompub.getStoreExtraAddr()%></p><i class="ion-ios-arrow-right"></i>
-							  </figcaption>
-							  <a href="#"></a>
-							</figure>
- 			        </div>
- 			        <div class="third">
- 			        	<img src="https://t1.daumcdn.net/cfile/tistory/9918633E5D45467406"
- 			        		style="width: 200%; heigh:auto; vertical-align: middle"/>
- 			        </div> 
-			    </div>
-	    </div>
-	    
-	<!-- 탭3 콘텐츠 영역  -->
-	    <div id="tab3" class="tab_content">
-	    	<!-- 상단 해당 스토어 설명 추가 부분-->
-	    	<div class="plus_content">
-		    	<div class="card-body">
-		    	<h6>★★★★☆</h6>
-					<h4 class="card-title"> 
-		            <%=randomres.getStoreName()%>&nbsp;&nbsp;
-		            <button class="btn btn-primary">바로 예약하기</button>
-		            </h4>
-		            <p class="card-text">
-		           	감각적인 인테리어와 매력적인 외관을 가진 곳 <%=randomres.getStoreName() %>에서 멋진 데이트와 식사를 제공합니다.
-		           	<br><small>홈페이지</small> : <%=randomres.getStorePage() %> <small>전화번호 : <%=randomres.getStorePhone() %></small>
-		            </p>
-	          	</div>
-	    	</div>
-	    	<!-- 스토어 이미지 영역 시작 -->
-	      		<div class="parent">
- 			        <div class="first" >
- 			        	<img src="https://fastly.4sqi.net/img/general/600x600/213211_WFOC4fCCjnhLe-poxWalcrB3KpBFswHVBkprDLAwkhU.jpg"
- 			        		style="width: 150%; heigh:auto; vertical-align: middle" />
- 			        </div> 
- 			        <div class="second">
-							<figure class="snip1384">
-							  <img src="https://post-phinf.pstatic.net/MjAxODExMTVfNTMg/MDAxNTQyMjQ1ODk2ODM5.PVIXR7G_y8Q33q3fvGoyeH0XXqfoEp5ENl8isfUbhWQg.ysI1OYX58CepfbHSx-sTMPIoWhROTIrfytP_OIo6Gjsg.JPEG/%EC%BA%90%EC%B9%98%EC%B9%B4%ED%8E%98_%EC%82%AC%EC%A7%84015%2820181029%29.JPG?type=w1200">
-							  <figcaption>
-							  <h3><%=randomres.getStoreContent() %></h3>
-							  <p><%=randomres.getStoreAddress()%> <%=randomres.getStoreDtlAddr()%> <%=randomres.getStoreExtraAddr()%></p><i class="ion-ios-arrow-right"></i>
-							  </figcaption>
-							  <a href="#"></a>
-							</figure>
- 			        </div>
- 			        <div class="third">
- 			        	<img src="https://t1.daumcdn.net/cfile/tistory/9918633E5D45467406"
- 			        		style="width: 200%; heigh:auto; vertical-align: middle"/>
- 			        </div> 
-			    </div>
-	    </div>
+       <div id="tab2" class="tab_content">
+          <!-- 상단 해당 스토어 설명 추가 부분-->
+          <div class="plus_content">
+             <div class="card-body">
+             <h6>★★★★★</h6>
+                  <h4 class="card-title"> 
+                   <%=randompub.getStoreName()%>&nbsp;&nbsp;
+                   <button class="btn btn-primary" onClick="location.href='http://rclass.iptime.org:9999/20AM_HYOLO/views/store/storeCategory.jsp'">바로 예약하기</button>
+                  </h4>
+                  <p class="card-text">
+                    분위기를 만끽하면서 술을 마시고 싶다면 <%=randompub.getStoreName() %>를 방문하세요, 합리적인 가격과 맛을 즐길 수 있습니다.
+                    <br><small>홈페이지</small> : <%=randompub.getStorePage() %> <small>전화번호 : <%=randompub.getStorePhone() %></small>
+                  </p>
+                </div>
+          </div>
+          <!-- 스토어 이미지 영역 시작 -->
+               <div class="parent">
+                  <div class="first" >
+                     <img src="https://cdn.crowdpic.net/list-thumb/thumb_l_6CDFE131D5BEE7FFBBC188BB6C1CC04E.jpg"
+                        style="width: 150%; heigh:auto; vertical-align: middle" />
+                  </div> 
+                  <div class="second">
+                     <figure class="snip1384">
+                       <img src="https://t1.daumcdn.net/cfile/tistory/9989BF3E5EBDFF4C06">
+                       <figcaption>
+                         <h3><%=randompub.getStoreContent() %></h3>
+                         <p><%=randompub.getStoreAddress()%> <%=randompub.getStoreDtlAddr()%> <%=randompub.getStoreExtraAddr()%></p><i class="ion-ios-arrow-right"></i>
+                       </figcaption>
+                       <a href="#"></a>
+                     </figure>
+                  </div>
+                  <div class="third">
+                     <img src="https://i1.daumcdn.net/thumb/C500x500/?fname=https://t1.daumcdn.net/cfile/tistory/999B8F4F5CB2E61F23"
+                        style="width: 200%; heigh:auto; vertical-align: middle"/>
+                  </div> 
+             </div>
+       </div>
+       
+   <!-- 탭3 콘텐츠 영역  -->
+       <div id="tab3" class="tab_content">
+          <!-- 상단 해당 스토어 설명 추가 부분-->
+          <div class="plus_content">
+             <div class="card-body">
+             <h6>★★★★☆</h6>
+               <h4 class="card-title"> 
+                  <%=randomres.getStoreName()%>&nbsp;&nbsp;
+                  <button class="btn btn-primary" onClick="location.href='http://rclass.iptime.org:9999/20AM_HYOLO/views/store/storeCategory.jsp'">바로 예약하기</button>
+                  </h4>
+                  <p class="card-text">
+                    감각적인 인테리어와 매력적인 외관을 가진 곳 <%=randomres.getStoreName() %>에서 멋진 데이트와 식사를 제공합니다.
+                    <br><small>홈페이지</small> : <%=randomres.getStorePage() %> <small>전화번호 : <%=randomres.getStorePhone() %></small>
+                  </p>
+                </div>
+          </div>
+          <!-- 스토어 이미지 영역 시작 -->
+               <div class="parent">
+                  <div class="first" >
+                     <img src="https://img.lovepik.com/photo/50155/0952.jpg_wh860.jpg"
+                        style="width: 150%; heigh:auto; vertical-align: middle" />
+                  </div> 
+                  <div class="second">
+                     <figure class="snip1384">
+                       <img src="https://post-phinf.pstatic.net/MjAxODA2MjBfMjc0/MDAxNTI5NDcyNjE4NTE5.lC08u1l1KyS-TtfcCbhNEXprbGXdM5vbChcDPjki8W0g.ByKAgZ-ASZzOhAy0UHA3Mjt9XjVbqNgiUoQU1FReCS0g.PNG/15289641271962.png?type=w1200">
+                       <figcaption>
+                       <h3><%=randomres.getStoreContent() %></h3>
+                       <p><%=randomres.getStoreAddress()%> <%=randomres.getStoreDtlAddr()%> <%=randomres.getStoreExtraAddr()%></p><i class="ion-ios-arrow-right"></i>
+                       </figcaption>
+                       <a href="#"></a>
+                     </figure>
+                  </div>
+                  <div class="third">
+                     <img src="https://images.pexels.com/photos/4669285/pexels-photo-4669285.jpeg?cs=srgb&dl=pexels-denys-gromov-4669285.jpg&fm=jpg"
+                        style="width: 200%; heigh:auto; vertical-align: middle"/>
+                  </div> 
+             </div>
+       </div>
 
-	
-	<style type="text/css">
-	
-	.tab_content{
-	/* border:1px red solid; */
-	height:800px;
-	}
-	.plus_content{
-	height:120px;
-	width:57%;
-	margin:15px;
-	margin-left:9.5%;
-	text-align:left;
-	margin-bottom:3%;
-	}
-	
-	/* 메인페이지 효과 */
-	.first_main{
-	  background-image: url('https://img.freepik.com/free-vector/abstract-pastel-rainbow-gradient-background-ecology-concept-for-your-graphic-design_29865-1420.jpg?size=626&ext=jpg');
-	  background-size: 100%;
-	  height: 350px;
-	  text-align: center;
-	  padding-top: 150px;
-	  color: white;
-	  font-size:155px;
-	  overflow: hidden;
-	    	    
-	    
-	}
-	
-	.parent{
-	    width: 80%;
-	    height: 600px;
-	    margin: 20px auto;
-	}
-	.first{
-		overflow: hidden;
-	    float: left;
-	    width:27%;
-	    height:60%;
-	    box-sizing: border-box;
-	    box-shadow: 1px 1px 2px #999;
-	}
-	.second{
-/* 	    border: 1px solid green; */
-	    float: left;
-	    margin-left: 2%;
-	    width:42%;
-	    height:60%;
-	    box-sizing: border-box;
-	    box-shadow: 1px 1px 2px #999;
-	}
-	.third{
-		overflow: hidden;
-	    float: right;
-	    width:27%;
-	    height:60%;
-	    box-sizing: border-box;
-		box-shadow: 1px 1px 2px #999;
-	}
-	body {
-	   /*  font-family:"Malgun Gothic"; */
-	    font-size: 0.8em;
-	}
-	.nav-link{
-	color:dark grey;
-	}
-	</style>
-	
-	<!-- 중간 호버 효과 스타일 -->
-	<style>
+   
+   <style type="text/css">
+   
+   .tab_content{
+   /* border:1px red solid; */
+   height:800px;
+   }
+   .plus_content{
+   height:120px;
+   width:57%;
+   margin:15px;
+   margin-left:9.5%;
+   text-align:left;
+   margin-bottom:3%;
+   }
+   
+   /* 메인페이지 효과 */
+   .first_main{
+     background-image: url('https://img.freepik.com/free-vector/abstract-pastel-rainbow-gradient-background-ecology-concept-for-your-graphic-design_29865-1420.jpg?size=626&ext=jpg');
+     background-size: 100%;
+     height: 350px;
+     text-align: center;
+     padding-top: 150px;
+     color: white;
+     font-size:155px;
+     overflow: hidden;
+              
+       
+   }
+   
+   .parent{
+       width: 80%;
+       height: 600px;
+       margin: 20px auto;
+   }
+   .first{
+      overflow: hidden;
+       float: left;
+       width:27%;
+       height:60%;
+       box-sizing: border-box;
+       box-shadow: 1px 1px 2px #999;
+   }
+   .second{
+/*        border: 1px solid green; */
+       float: left;
+       margin-left: 2%;
+       width:42%;
+       height:60%;
+       box-sizing: border-box;
+       box-shadow: 1px 1px 2px #999;
+   }
+   .third{
+      overflow: hidden;
+       float: right;
+       width:27%;
+       height:60%;
+       box-sizing: border-box;
+      box-shadow: 1px 1px 2px #999;
+   }
+   body {
+      /*  font-family:"Malgun Gothic"; */
+       font-size: 0.8em;
+   }
+   .nav-link{
+   color:dark grey;
+   }
+   </style>
+   
+   <!-- 중간 호버 효과 스타일 -->
+   <style>
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,700);
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
 figure.snip1384 {
@@ -678,31 +678,31 @@ figure.snip1384.hover i {
   transform: translate(0px, 0px);
   opacity: 1;
 }
-	</style>
+   </style>
 
-	<script>
-	/* Demo purposes only */
-	$(".hover").mouseleave(
-	  function () {
-	    $(this).removeClass("hover");
-	  }
-	);
-	</script>
-	
-	
-	
-	
-	
+   <script>
+   /* Demo purposes only */
+   $(".hover").mouseleave(
+     function () {
+       $(this).removeClass("hover");
+     }
+   );
+   </script>
+   
+   
+   
+   
+   
 
     
-	</div> <!--탭 콘텐츠 영역 끝  -->
+   </div> <!--탭 콘텐츠 영역 끝  -->
 </div> <!-- wrapper div 닫음 -->
 
 
     
     <script type="text/javascript">
         $(document).ready(function() {
-        	
+           
             //When page loads...
             $(".tab_content").hide(); //Hide all content
             $("ul.nav-tabs li:first").addClass("active").show(); //Activate first tab

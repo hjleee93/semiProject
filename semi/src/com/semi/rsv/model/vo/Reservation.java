@@ -1,5 +1,7 @@
 package com.semi.rsv.model.vo;
 
+import java.sql.Date;
+
 import com.semi.member.model.vo.TotalMember;
 import com.semi.store.model.vo.Store;
 
@@ -12,8 +14,18 @@ public class Reservation {
 	private String rsvRequire;
 	private int paymentCode;
 	private int rsvPpl;
+	private Date payDate;
 
 	
+	public Date getPayDate() {
+		return payDate;
+	}
+
+
+	public void setPayDate(Date payDate) {
+		this.payDate = payDate;
+	}
+
 	public Store store;
 	public TotalMember tm;
 		
@@ -40,11 +52,13 @@ public class Reservation {
 	public Reservation() {}
 
 
+
+
 	@Override
 	public String toString() {
 		return "Reservation [rsvCode=" + rsvCode + ", customerNum=" + customerNum + ", storeId=" + storeId
 				+ ", rsvDate=" + rsvDate + ", rsvTime=" + rsvTime + ", rsvRequire=" + rsvRequire + ", paymentCode="
-				+ paymentCode + ", rsvPpl=" + rsvPpl + "]";
+				+ paymentCode + ", rsvPpl=" + rsvPpl + ", payDate=" + payDate + ", store=" + store + ", tm=" + tm + "]";
 	}
 
 
@@ -58,8 +72,10 @@ public class Reservation {
 	}
 
 
+	
+
 	public Reservation(int rsvCode, int customerNum, int storeId, String rsvDate, int rsvTime, String rsvRequire,
-			int paymentCode, int rsvPpl) {
+			int paymentCode, int rsvPpl, Date payDate, Store store, TotalMember tm) {
 		super();
 		this.rsvCode = rsvCode;
 		this.customerNum = customerNum;
@@ -69,6 +85,9 @@ public class Reservation {
 		this.rsvRequire = rsvRequire;
 		this.paymentCode = paymentCode;
 		this.rsvPpl = rsvPpl;
+		this.payDate = payDate;
+		this.store = store;
+		this.tm = tm;
 	}
 
 

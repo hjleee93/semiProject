@@ -21,16 +21,21 @@
 								<input name="<%=inputId%>" id="inputId" type="hidden" value="<%=inputId%>">
 								<input name="<%=userPhone1%>" id="userPhone1" type="hidden" value="<%=userPhone1%>">
 							<%if(inputId !=null){ %>
-							<table>
+							<table style="width:100%;">
 							<tr>
 							<td>변경 할 비밀 번호를 입력하세요 : </td>
-							<td><input type="password" name="updatedId" id="updatedId" required="required" onchange="pwRequired()"></td>
-							<td><span class="span" id="pwRequired"></span></td>
+							</tr>
+							
+							<tr><td><input type="password" name="updatedId" id="updatedId" required="required" onchange="pwRequired()" style="border:1px solid #ededed; border-radius:2px"></td></tr>
+							<tr><td style="padding:10px 0"><span class="span" id="pwRequired"></span></td></tr>
+							<tr>
+							<td>비밀 번호를 확인헤주세요: </td> </tr>
+							<tr>
+								<td><input type="password" name="checkedId" id="checkedId" required="required" onchange="pswCheck1()" style="border:1px solid #ededed; border-radius:2px"></td>
+							
 							</tr>
 							<tr>
-							<td>비밀 번호를 확인헤주세요: </td> 
-							<td><input type="password" name="checkedId" id="checkedId" required="required" onchange="pswCheck1()"></td>
-							<td><span
+								<td style="padding:10px 0"><span
 												class="span" id="pswCheck1"></span></td>
 							</tr>
 							</table>
@@ -124,3 +129,5 @@
 				}
 				
 				</script>
+
+

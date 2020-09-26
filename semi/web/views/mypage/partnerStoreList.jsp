@@ -12,7 +12,7 @@
 	<ul>
 		<li><a class="subhome"
 			href="<%=request.getContextPath()%>/main.jsp">HOME</a></li>
-		<li><a class="subhome" href="<%=request.getContextPath()%>/rsv/reservationView">고객예약현황</a></li>
+		<li><a class="subhome" href="#">고객예약현황</a></li>
 		<li><a class="subhome" href="ptn_review.html">리뷰관리</a></li>
 		<li><a class="subhome" href="ptn_qna.html">문의관리</a></li>
 	</ul>
@@ -21,64 +21,41 @@
 
 <!-- 본문 시작-->
 <div class="cst-status">
-	<h1>입점 리스트</h1>
+	<h1>입점 리스트 현황</h1>
 </div>
 
 
 <div class="container">
-	<form id="bbsVO" name="bbsVO" action="partBbs.do" method="post">
+	
 
-		<input type="hidden" id="pageMode" name="pageMode" value="List">
-		<input type="hidden" id="pageIndex" name="pageIndex" value="1">
-		<input type="hidden" id="nttId" name="nttId" value=""> <input
-			type="hidden" id="nttNo" name="nttNo" value="0"> <input
-			type="hidden" id="nowNum" name="nowNum">
-
-		<div class="board-header">
-			<p class="cnt">
-		<!-- 		총 게시물 : <strong>21</strong> -->
-			</p>
-			<div class="board-search-form">
-				<label for="searchCondition" class="hidden">검색 구분</label> <select
-					id="searchCondition" name="searchCondition" class="select">
-					<option value="sj">제목</option>
-					<option value="cn">내용</option>
-					<option value="all">제목+내용</option>
-				</select> <label for="searchWord" class="hidden">검색어 입력란</label> <input
-					type="text" class="inp" name="searchWord" id="searchWord"
-					title="검색어 입력" value="">
-				<button type="button" onclick="javascript:fn_se();return false;">검색버튼</button>
-			</div>
-		</div>
 		
 	<section>
 		<div class="tbl-box">
 			<table class="tbl-list">
 
 					<tr>
-					<th scope="col">NO</th>
+					<th scope="col">분류</th>
 						<th scope="col">업체명</th>
 						<th scope="col" style="width:30%">승인여부</th>
 					</tr>
 			         <%
 			         
-			         if(listStore.isEmpty()){ 
+			         if(listStore == null){ 
 			         %>
 			            <tr>
 							<td colspan="2">
-								조회된 게시글이 없습니다!
+								등록된 입점 리스트가 없습니다!
 							</td>
 						</tr>
 					<%}else{
 						for(Store s : listStore){ 
 							
 							System.out.println("s in list jsp: " + s);
-						
 					%>
 					<tr>
-					<td><%=s.getStoreNumber() %></td>
+					<td><%=s.getStoreDtlCtgry()%></td>
 						<td >
-							<a href="" style="display: inline-block;"><%=s.getStoreName() %></a>
+							<a  style="display: inline-block;"><%=s.getStoreName() %></a>
 						</td>
 						<%if(s.getStoreStatus().equals("WAITING")){ %>
 						<td>
@@ -86,7 +63,7 @@
 						</td>
 						<%}else if(s.getStoreStatus().equals("ACCEPT")){ %>
 						<td>
-							<p class="btn btn-success" onclick="location='<%=request.getContextPath()%>/store/storeInfoUpdate?storeId=<%=s.getStoreId() %>'" ><%=s.getStoreStatus() %></p>
+							<p class="btn btn-success" onclick="location='<%=request.getContextPath()%>/store/storeInfoUpdate?storeId=<%=s.getStoreId()%>'" ><%=s.getStoreStatus() %></p>
 						</td>
 						<%}else if(s.getStoreStatus().equals("DECLINE")){ %>
 						<td>
@@ -101,35 +78,37 @@
 					}}
 						%>	
 					 </tr>
-         
-			           
-					   
 			       </table>
+			       <div class="mm"></div>
+			       
 			   </div>
 			 </section>
 
- 		 	<div class="board-bottom board-view-btn">
-		     <div class="pageBar" id="pageBar"> 
-		      <a href="javascript:void(0)" class="on" title="선택됨"></a>&nbsp;
-		      <a href="?cPage=1"onclick="fn_list(1);return false; " title="페이지로 이동">1</a>&nbsp;
-		      <a href="?cPage=2"onclick="fn_list(2);return false; " title="페이지로 이동">2</a>&nbsp; 
-		       <a href="?cPage=3"onclick="fn_list(3);return false; " title="페이지로 이동">3</a>&nbsp; 
-		     </div>
 		     
-<%-- 		<div id="pageBar">
-			<%=request.getAttribute("pageBar") %>
-		</div> --%>
+<!-- 	 		<div id="pageBar" class="paging"> -->
+<%-- 				<%=request.getAttribute("pageBar") %> --%>
+<!-- 			</div> -->
 		     
-		     
-		     
-	</form>
+		   
 	<!-- 본문 끝 -->
 
 
 	<!-- /.container -->
 </div>
-</div>
+
 <style>
+
+.mm{
+	margin:20%;
+}
+
+
+#pageBar{
+	       text-align:center;
+	       margin:10%;
+	       font-size:20px;
+		}	
+		    
 .cst-status {
 	margin: 50px;
 }
@@ -185,6 +164,9 @@ p.btn{
 
 width:100px;
 color:white;
+}
+p,input,button,tr,th,a,td{
+ font-family: 'JSDongkang-Regular';
 }
 </style>
 

@@ -3,15 +3,28 @@
 <%@ include file="/views/common/header.jsp"%>
 
 <style>
+.mptitle {
+	margin: 50px;
+}
+
+    .mptitle h1 {
+	font-family: 'S-CoreDream-8Heavy', sans-serif;
+	text-align: center;
+	    margin: 50px;
+    padding-top: 35px;
+}
+    h3, p, a{
+     font-family: 'JSDongkang-Regular';
+    }
 .row:last-child{
 margin-bottom: 30px;}
 </style>
 
 <div class="container">
 
-    <!-- Page Heading/Breadcrumbs -->
-    <h1 class="mt-4 mb-3">전체 매장 리스트</h1>
-
+    <div class="mptitle">
+    <h1 class="mt-4 mb-3">HYOLO에 등록된 업체 카테고리</h1>
+</div>
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
         <a href="<%=request.getContextPath()%>/main.jsp">Home</a>
@@ -78,23 +91,23 @@ margin-bottom: 30px;}
     <hr>
 
     <!-- Project Four -->
-    <div class="row">
+<!--     <div class="row"> -->
 
-      <div class="col-md-7">
-        <a href="#">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
-        </a>
-      </div>
-      <div class="col-md-5">
-        <h3>Project Four</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, quidem, consectetur, officia rem
-          officiis illum aliquam perspiciatis aspernatur quod modi hic nemo qui soluta aut eius fugit quam in suscipit?
-        </p>
-        <a class="btn btn-primary" href="#">View Project
-          <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
-      </div>
-    </div>
+<!--       <div class="col-md-7"> -->
+<!--         <a href="#"> -->
+<!--           <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt=""> -->
+<!--         </a> -->
+<!--       </div> -->
+<!--       <div class="col-md-5"> -->
+<!--         <h3>Project Four</h3> -->
+<!--         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, quidem, consectetur, officia rem -->
+<!--           officiis illum aliquam perspiciatis aspernatur quod modi hic nemo qui soluta aut eius fugit quam in suscipit? -->
+<!--         </p> -->
+<!--         <a class="btn btn-primary" href="#">View Project -->
+<!--           <span class="glyphicon glyphicon-chevron-right"></span> -->
+<!--         </a> -->
+<!--       </div> -->
+<!--     </div> -->
     <!-- /.row -->
 
    </div>

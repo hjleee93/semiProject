@@ -7,6 +7,7 @@
 		<li><a class="subhome"
 			href="<%=request.getContextPath()%>/main.jsp">HOME</a></li>
 		<li><a class="subhome" href="./purchase_history.html">주문내역 조회</a></li>
+		<li><a class="subhome" href="./purchase_history.html">주문내역 조회</a></li>
 		<li><a class="subhome" href="cart.html.html">장바구니</a></li>
 		<li><a class="subhome" href="#">작성한 리뷰 확인</a></li>
 		<li><a class="subhome" href="<%=request.getContextPath()%>/userQna.jsp">작성한 문의 확인</a></li>

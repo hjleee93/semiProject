@@ -13,7 +13,7 @@ import com.semi.store.service.StoreService;
 /**
  * Servlet implementation class StoreRsvSettingServlet
  */
-@WebServlet("/storeService/storeRsvSetting") //ok
+@WebServlet("/storeService/storeRsvAjaxSetting") //ok
 public class StoreRsvSettingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,7 +38,7 @@ public class StoreRsvSettingServlet extends HttpServlet {
 		
 		request.setAttribute("store",s);
 		
-		request.getRequestDispatcher("/views/partner/ptnRequest3.jsp")
+		request.getRequestDispatcher("/views/partner/ptnRequest3Ajax.jsp")
 		.forward(request,response);
 	}
 

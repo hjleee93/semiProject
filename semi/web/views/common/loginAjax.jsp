@@ -16,20 +16,22 @@
 <div class="box" id="foundId">
 					<div class="content searchPwdBox" style="">
 						<div class="form">
-							<form>
+							<form style="margin-top:45px;">
 							<%if(foundId!=null){ %>
-							<p>입력하신 이름은
-							<%=userName %>이고 <%=userName %>님의 전화번호는 <%=userPhone %>입니다.</p>
-							회원님의 아이디는 <%=foundId %>
+							<p style="line-height:1.7; text-align:center;">입력하신 이름은
+							<strong><%=userName %></strong>이고<br>
+							<%=userName %>님의 전화번호는 <strong><%=userPhone %></strong>입니다.</p>
+							<p style="margin-bottom:45px; font-size:20px; text-align:center;">회원님의 아이디는 <span style="color:#0691ff; font-weight:bold"><%=foundId %></span></p>
 							<input class="btn btn-default btn-login"
 									id="loginBtn" type="submit" value="확인">
 							<%}else{ %>
 							<p>회원님의 정보를 찾을 수 없습니다.</p>
-							<input class="btn btn-default btn-login"
-									id="loginBtn" type="submit" value="확인">
+							<input class="btn btn-default btn-login" 
+									id="loginBtn" type="submit" value="확인" >
 							<%} %>
 							</form>
 						</div>
 
 					</div>
 				</div>
+

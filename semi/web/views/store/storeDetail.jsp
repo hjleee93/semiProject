@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.semi.storeservice.model.vo.StoreService"%>
+<%@ page import="com.semi.storeservice.model.vo.StoreSvc"%>
 <%@ page import="com.semi.storeservice.service.StoreServiceService"%>
 <%@ page import="com.semi.store.model.vo.*"%>
 <%@ page import="com.semi.store.service.*"%>
 <%
-
-
 	Store s = (Store) request.getAttribute("store");
 
 int storeId = s.getStoreId();
@@ -37,7 +35,7 @@ System.out.println("객체x");
 
 
 
-List<StoreService> serviceList = new StoreServiceService().selectService(storeId, ptnNum);
+List<StoreSvc> serviceList = new StoreServiceService().selectService(storeId, ptnNum);
 
 
 request.setAttribute("serviceList", serviceList);
@@ -46,11 +44,6 @@ request.setAttribute("serviceList", serviceList);
 
 
 System.out.println("logginedMember: " + logginedMember);
-
-
-
-
-
 %>
 <%@ include file="/views/common/header.jsp"%>
 <script>
@@ -118,6 +111,45 @@ System.out.println("logginedMember: " + logginedMember);
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <style>
+
+
+#selectedDt{
+border: 0;
+    border-bottom: 1px solid #e74c50;
+}
+.ppl-dl{
+width:169px;
+}
+
+.btn .btn-info{
+
+background-color: #0000ef57; 
+border-color:#0000ef57;
+}
+.btn .btn-danger{
+background-color: #bb8dd8dd;
+    border: 1px solid #bb8dd8dd;
+    border-radius: 5px;
+    width: 150px;
+    height: 50px;
+}
+
+.time-btn{
+text-align: center;}
+
+.break-tm-ds{
+    margin-top: 17px;
+    border-bottom: 1px solid dimgray;
+    padding-bottom: 10px;
+    border-top: 1px solid dimgray;
+    padding-top: 10px;
+    text-align: center;
+}
+#selectedDt{
+border: 0;
+    border-bottom: 1px solid #e74c50;
+}
+
 
 .inactive-date{
 text-decoration:line-through
@@ -238,9 +270,34 @@ textarea {
 #detailView {
 	text-align: center;
 }
+
+#calendar{
+	display:inline-block;
+	float:left;
+	margin-right:30px;
+}
+#calendar tr td{
+	padding:16px;
+
+}
+#bookingTime{
+	display:inline-block;
+	width:50%;
+	float:left;
+}
+#bookingTime tr td{
+	width:100%;
+	padding:10px 0;
+}
+
+#bookingTime form{
+	margin-top:15px;
+}
+
 </style>
 
 <div class="mptitle">
+
 	<h1>
 		<%=s.getStoreName()%></h1>
 </div>
@@ -258,12 +315,12 @@ textarea {
 	<div class="row">
 
 		<div class="col-md-6">
-			<img class="img-fluid" src="http://placehold.it/750x500" alt="">
+			<img class="img-fluid" src="<%=request.getContextPath()%>/img/store/<%=s.getStorePostImg()%>" alt="">
 		</div>
 
 		<div class="col-md-6 d-flex flex-column">
-			<h3 class="my-3"><%=s.getStoreName()%></h3>
-			<p style="flex: 1"><%=s.getStoreContent()%></p>
+			
+			<p style="width:100%; padding-left:15px;"><%=s.getStoreContent()%></p>
 			<table>
 			<tr>
 			<p>오픈시간</p>
@@ -271,32 +328,31 @@ textarea {
 			
 			
 <%
-if(serviceList.size() != 0){
-	
-		for(StoreService ss : serviceList){
-		
-			String closeArr =String.valueOf(ss.getCloseTime());
-			String openArr = String.valueOf(ss.getOpenTime());
-			String startArr =String.valueOf(ss.getBreakStart());
-			String endArr = String.valueOf(ss.getBreakEnd());
-			
-			if(closeArr.length() ==3){
-				closeArr = "0" + closeArr;
-			}
-			if(openArr.length() ==3){
-				openArr = "0" + openArr;
-				
-			}
-			if(startArr.length() ==3){
-				startArr = "0" + startArr;
-				
-			}
-			if(endArr.length() ==3){
-				endArr = "0" + endArr;
-				
-			}
-			
-		%>
+							if(serviceList.size() != 0){
+							
+								for(StoreSvc ss : serviceList){
+								
+							String closeArr =String.valueOf(ss.getCloseTime());
+							String openArr = String.valueOf(ss.getOpenTime());
+							String startArr =String.valueOf(ss.getBreakStart());
+							String endArr = String.valueOf(ss.getBreakEnd());
+							
+							if(closeArr.length() ==3){
+								closeArr = "0" + closeArr;
+							}
+							if(openArr.length() ==3){
+								openArr = "0" + openArr;
+								
+							}
+							if(startArr.length() ==3){
+								startArr = "0" + startArr;
+								
+							}
+							if(endArr.length() ==3){
+								endArr = "0" + endArr;
+								
+							}
+						%>
 		<tr>
 			<td><%=ss.getStoreDay()%> : </td>
 			<% if(ss.getOpenTime() == 0){%>
@@ -321,15 +377,16 @@ if(serviceList.size() != 0){
 		
 			</table>
 
-
-			<div style="display: flex;">
+</div>
+			<div style="padding-left:15px;">
 			<%if(logginedMember.getMemberId()!= null) {
 			if(logginedMember.getMemberSep().equals("회원")){
 			%>
-				<div style="width: 50%">
-					<h5 align="center">예약할 날짜를 선택하세요</h5>
-					<p>오늘 날짜 이후로 선택해주세요</p>
+				<div style="padding-right: 15px;width: 100%;text-align: left;margin-top: 30px;">
 
+					<h5 align="center" style="text-align:left;">예약할 날짜를 선택하세요</h5>
+					<p style="text-align:left;">오늘 날짜 이후로 선택해주세요</p>
+</div>
 					<table id="calendar" border="3" align="center">
 						<tr>
 							
@@ -348,30 +405,33 @@ if(serviceList.size() != 0){
 							<td align="center"><font color="blue">토</td>
 						</tr>
 					</table>
-				</div>
+				
 				
 				
 				<table>
 					<tr>
 						<td>선택한 날짜:</td>
-						<td id="selectedDate">
-							<!-- 						<input id="" type="text" readonly> -->
-						</td>
-					</tr>
-				</table>	
-					<div id="bookingTime">
+						<td id="selectedDate"></td></tr>
+				</table>
+							<div id="bookingTime">
 					
 					
 					</div>
+						
+						
+					
 				
 					
 				<%}}
 			if(logginedMember.getMemberId() != null){
 				if((logginedMember.getMemberSep().equals("파트너"))){
 				%>
-				<div style="width: 50%">
-				<p>파트너로 가입하신 회원님들은 예약 시스템을 이용할 수 없습니다. <a class="nav-link " data-toggle="modal"
-						href="javascript:void(0)" onclick="openRegisterModal();"style="display:inline-block">회원으로 가입</a>해주세요</p>
+				<div style="display: flex;padding-right: 15px;width: 100%;text-align: right;margin-top: 60px">
+
+				<p>파트너로 가입하신 회원님들은 예약 시스템을 이용할 수 없습니다. 
+				<a class="nav-link " data-toggle="modal"
+						href="javascript:void(0)" onclick="openRegisterModal();"
+						sstyle="display:inline-block">회원으로 가입</a>해주세요</p>
 				
 				</div>
 				<%}}if(logginedMember.getMemberId() != null){ 
@@ -388,7 +448,7 @@ if(serviceList.size() != 0){
 			<%}		
 					%>
 				
-		</div>
+		
 		</div>
 
 	</div>

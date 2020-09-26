@@ -3,7 +3,12 @@
 <%@ include file="/views/common/header.jsp"%>
 
 
+
 <style>
+
+p {
+font-family: 'JSDongkang-Regular';
+}
 .rsvlayout {
 	width: 49%;
 	border: 1px solid #d5d5d5;
@@ -20,7 +25,9 @@
 	border-radius: 5px;
 	margin-bottom: 20px;
 }
-
+input{
+font-family: 'JSDongkang-Regular';
+}
 .rsvtype {
 	margin-bottom: 20px;
 	padding-top: 20px;
@@ -110,6 +117,7 @@
 	background-color: royalblue;
 	color: white;
 	margin-left: 20px;
+	
 }
 
 .stepmenu td {
@@ -168,7 +176,10 @@
 .mptitle h1 {
 	font-family: 'S-CoreDream-8Heavy', sans-serif;
 	text-align: center;
+	    margin: 50px;
+    padding-top: 35px;
 }
+
 
 #datepicker {
 	border: none;
@@ -242,6 +253,7 @@ td.active.day p#active {
 	font-size: 16px;
 	color: #000;
 	border: 1px solid #ddd;
+	
 }
 
 .board-view-btn input:hover {
@@ -250,6 +262,7 @@ td.active.day p#active {
 #right{font-size: 12px;
 margin-left: 10px;
 margin-bottom: 0;
+font-family: 'JSDongkang-Regular';
 }
 .board-view-btn input.gray {
 	background: #666666;
@@ -280,6 +293,7 @@ margin-bottom: 0;
 }
 
 th {
+
 	border-style: groove;
 	text-align: center;
 }
@@ -336,6 +350,7 @@ margin-bottom: 10px;
 margin-top: 10px;
     margin-left: 0;
     padding: 0;
+    font-family: 'JSDongkang-Regular';
 }
 
 #mem_findAddress{
@@ -357,6 +372,9 @@ width: 221px;
     width: 98%;
 }
 
+tr{
+font-family: 'JSDongkang-Regular';
+}
 
 @media (max-width:768px){
   .rsvlayout{width:100% !important;
@@ -371,19 +389,14 @@ td{padding: 2% 0;}
 #source{display: block;
     width: 98%;}
     #storePage{width:98%;}
+h4{
+font-family: 'JSDongkang-Regular';
+text-align:center;}
 
 </style>
 
 
 
-<div class="submenu">
-	<ul>
-		<li><a class="subhome"
-			href="<%=request.getContextPath()%>/main.jsp">HOME</a></li>
-		<li><a class="subhome" href="location.html">서브메뉴1</a></li>
-		<li><a class="subhome" href="customer_service.html">세브메뉴2</a></li>
-	</ul>
-</div>
 
 <div class="mptitle">
 	<h1>입점 신청서</h1>
@@ -391,7 +404,7 @@ td{padding: 2% 0;}
 
 <div class="container">
 
-<form name="storeEnrollForm" action="<%=request.getContextPath() %>/storeEnrollEnd" method="post" id="StoreEnrollForm">
+<form name="storeEnrollForm" action="<%=request.getContextPath() %>/ptn/storeEnrollEnd" method="post" id="StoreEnrollForm">
 	<div class="div_wrap col-12 row d-flex m-0 p-0">
 		<div class="rsvlayout">
 			<p class="rsvtype">운영하고자 하는 서비스에 적합한 예약유형을 선택해주세요.</p>
@@ -419,18 +432,7 @@ td{padding: 2% 0;}
 						인원으로 예약을 받는 카페에 적합한 예약유형입니다.</p></label>
 			</div>
 
-			<div class="border-bottom">
-			
-				<h4 class="rsvheader">볼거리</h4>
-				<label for="rsvradio2"><input type="radio" name="ra"
-					class="theater" id="rsvradio2" onclick="ctgry_fn();">일반예매
-					<p class="rsvdetail">일반적인 하루단위 공연,전시,행사,축제등에 적합한예매유형입니다.</p></label> <label
-					for="rsvradio3"><input type="radio" name="ra"
-					class="theater" id="rsvradio3" onclick="ctgry_fn();">회차별예매
-					<p class="rsvdetail">하루에 복수의 회차를 갖는 공연,전시,행사 ,축제등에 적합한 예매
-						유형입니다.</p></label>
-
-			</div>
+		
 
 			<div >
 			
@@ -574,7 +576,7 @@ td{padding: 2% 0;}
 					
 						<td class="tb-title"><span id="abc">*</span>월 매출
 						</td>
-						<td><select size="1" id="sz" form="storeEnrollForm" name="storeProfit" required>
+						<td><select size="1" id="sz"name="storeProfit" required>
 								<option value="0">미 응답</option>
 								<option value="1">3000만원이하</option>
 								<option value="2">3000만원 - 6000만원</option>
@@ -586,7 +588,7 @@ td{padding: 2% 0;}
 					
 						<td class="tb-title"><span id="abc">*</span>타겟 층</td>
 						
-						<td><select size="1" id="target" form="storeEnrollForm" name="storeTarget" required>
+						<td><select size="1" id="target" name="storeTarget" required>
 								<option value="0">전 연령</option>
 								<option value="1">10대</option>
 								<option value="2">20대</option>

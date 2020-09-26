@@ -63,6 +63,7 @@
 
 
 <style>
+
 .box22 p, h4.title, p.content, div.bot {
 	text-align: center;
 }

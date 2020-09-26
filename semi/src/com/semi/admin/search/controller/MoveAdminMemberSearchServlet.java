@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.semi.admin.service.AdminService;
-import com.semi.member.model.vo.TotalMember;
+import com.semi.member.model.vo.Member;
+import com.semi.member.model.vo.SearchMember;
 
 /**
  * Servlet implementation class TestAdminMemberSearchServlet
@@ -40,19 +41,25 @@ public class MoveAdminMemberSearchServlet extends HttpServlet {
 		}catch(NumberFormatException e) {
 			page=1;
 		}
-		int numPerPage=5;
+		int numPerPage=10;
 		
 		
-		List<TotalMember> list = new AdminService().selectTotalMemberList(page,numPerPage);
-//		List<TotalMember> clist = new AdminService().selectPartnerList(page, numPerPage);
+//		List<TotalMember> list = new AdminService().selectMemberList(page,numPerPage);
+		List<Member> ptnlist = new AdminService().selectMemberList(page,numPerPage);//totalmember 파트너
+		List<SearchMember> memlist = new AdminService().selectTotalList(page, numPerPage);//join 회원
 		
 		int totalData = new AdminService().selectMemberCount();
 		int totalPage=(int)(Math.ceil((double)totalData/numPerPage));
 		
 		
+//		System.out.println( "list: " + list);
+		System.out.println( "totalData: " + totalData);
+		
 		int pageBarSize = 5;
 		int pageNo=((page-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
+		
+		
 		
 		String pageBar = "";
 		if(pageNo==1) {
@@ -73,10 +80,12 @@ public class MoveAdminMemberSearchServlet extends HttpServlet {
 		}else {
 			pageBar+="<a href='"+request.getContextPath()+"/admin/search/member?page="+(pageNo)+"'> ▶ </a>";
 		}
-	
+//	System.out.println("searchmemlistttttttt"+list);
 		
-		request.setAttribute("searchmemlist", list);
-//		request.setAttribute("searchptnlist", clist);
+		
+//		request.setAttribute("searchctmlist", customer);
+		request.setAttribute("memlist", memlist);
+		request.setAttribute("ptnlist", ptnlist);
 		request.setAttribute("pageBar", pageBar);
 		
 		request.getRequestDispatcher("/views/admin/search/MemberSearch.jsp").forward(request, response);

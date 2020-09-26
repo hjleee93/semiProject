@@ -76,6 +76,26 @@ public class StoreService {
 		return count;
 	}
 	
+	public List<Store> selectStoreListByPartner(int ptnId){
+		Connection conn = getConnection();
+		System.out.println("ptnId in service: " + ptnId);
+		List<Store> storeList = dao.selectStoreListByPartner(conn,ptnId);
+		System.out.println("list in service: " + storeList);
+		close(conn);
+		return storeList;
+	}
+
+//	public int updateStoreDetailImg(String pText, String dImg, String pImg, String mImg) {
+//		Connection conn=getConnection();
+//		int result=dao.updatePassword(conn,pText,dImg,pImg,mImg);
+//		if(result>0) commit(conn);
+//		else rollback(conn);
+//		close(conn);
+//		return result;
+//	}
+	
+	
+	
 	
 
 }

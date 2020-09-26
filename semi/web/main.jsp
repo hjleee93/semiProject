@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.semi.store.model.vo.Store"%>
 <%@ page import="com.semi.member.model.vo.Member"%>
-<%@ page import="com.semi.store.service.StoreService"%>
+<%@ page import="com.semi.store.service.*"%>
+<%@ page import="com.semi.storeservice.service.*"%>
+<%@ page import="com.semi.storeservice.model.vo.*"%>
 <%@ page import="com.semi.store.model.dao.StoreDao"%>
 <%@ page import="java.util.List"%>
 
@@ -9,9 +11,13 @@
 	//메인시작! 
 List<Store> list = new StoreService().selectStoreList();
 
+
+
+
+
 request.setAttribute("store", list);
 
-System.out.println("list in main : " + list);
+
 
 Member logginedMember = (Member) session.getAttribute("Memberloggined"); //로그인한 멤버 세션
 
@@ -96,6 +102,11 @@ if (cookies != null) {
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <style>
+
+
+p, input, button, a, h4{
+font-family: 'JSDongkang-Regular';
+}
 #category, #datepicker {
 	width: 30%;
 	height: 45px;
@@ -131,7 +142,8 @@ if (cookies != null) {
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownPortfolio">
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/location.jsp">LOCATION</a> <a
+								href="<%=request.getContextPath()%>/location.jsp">LOCATION</a>
+								 <a
 								class="dropdown-item" href="<%=request.getContextPath()%>/qna">Q&A</a>
 						</div></li>
 
@@ -146,8 +158,6 @@ if (cookies != null) {
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/views/recommand/ageStore.jsp">연령별 추천</a>
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/views/regional/RegionalList.jsp">지역별
-								추천</a> <a class="dropdown-item"
 								href="<%=request.getContextPath()%>/random">랜덤 추천</a>
 						</div></li>
 
@@ -181,6 +191,7 @@ if (cookies != null) {
 						//파트너인 경우
 						System.out.println("logginedMember: " + logginedMember.getMemberSep());
 					%>
+					
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -188,10 +199,9 @@ if (cookies != null) {
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownPages">
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/views/mypage/mypage_partner.jsp">MY
+								href="<%=request.getContextPath()%>/partnerpage?no=<%=logginedMember.getMemberNum()%>">MY
 								PAGE</a> <a class="dropdown-item" href="purchase_history.html">MY
-								BOOKING</a> <a class="dropdown-item" href="./usr_review.html">MY
-								REVIEW</a> <a class="dropdown-item" href="./usr_review.html">FAQ</a>
+								BOOKING</a>  <a class="dropdown-item" href="<%=request.getContextPath()%>/qna">QNA</a>
 						</div></li>
 					<li class="nav-item"><a class="nav-link " data-toggle="modal"
 						href="javascript:void(0)"
@@ -202,17 +212,16 @@ if (cookies != null) {
 						//회원인 경우
 					%>
 
-					<li class="nav-item dropdown"><a
+						<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdownPages"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							MY PAGE </a>
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownPages">
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/views/mypage/mypage_partner.jsp">MY
+								href="<%=request.getContextPath()%>/partnerpage?no=<%=logginedMember.getMemberNum()%>">MY
 								PAGE</a> <a class="dropdown-item" href="purchase_history.html">MY
-								BOOKING</a> <a class="dropdown-item" href="<%=request.getContextPath()%>/review/reviewList">MY
-								REVIEW</a> <a class="dropdown-item" href="./usr_review.html">FAQ</a>
+								BOOKING</a>  <a class="dropdown-item" href="<%=request.getContextPath()%>/qna">QNA</a>
 						</div></li>
 					<li class="nav-item"><a class="nav-link " data-toggle="modal"
 						href="javascript:void(0)"
@@ -238,10 +247,8 @@ if (cookies != null) {
 							<a class="dropdown-item"
 								href="<%=request.getContextPath()%>/admin/StoreRequestStatus">입점현황</a>
 							<a class="dropdown-item"
-								href="<%=request.getContextPath()%>/notice">공지사항</a> <a
-								class="dropdown-item"
-								href="<%=request.getContextPath()%>/admin/review">BEST
-								REVIEW</a>
+								href="<%=request.getContextPath()%>/notice">공지사항</a>
+							<a class="dropdown-item" href="<%=request.getContextPath() %>/admin/order">주문현황</a>
 						</div></li>
 					<li class="nav-item"><a class="nav-link " data-toggle="modal"
 						href="javascript:void(0)"
@@ -269,32 +276,38 @@ if (cookies != null) {
 			</ol>
 			<div class="carousel-inner" role="listbox">
 
-				<!-- Slide One - Set the background image for this slide in the line below -->
-				<div class="carousel-item active"
-					style="background-image: url('https://cdn.pixabay.com/photo/2016/11/29/12/54/bar-1869656_1280.jpg')">
-					<div class="carousel-caption d-none d-md-block">
-						<%-- 						<h3><%=(list.get(1)).getStoreName()%></h3> --%>
-						<p>한줄소개</p>
-					</div>
-				</div>
+				
+				
+				
+				
 				<!-- Slide Two - Set the background image for this slide in the line below -->
 
-				<div class="carousel-item"
-					style="background-image: url('https://cdn.pixabay.com/photo/2016/01/19/15/05/coffee-shop-1149155_1280.jpg')">
+				<div class="carousel-item active" 
+					style="height: 768px;background-image: url('https://cdn.pixabay.com/photo/2016/01/19/15/05/coffee-shop-1149155_1280.jpg')">
 					<div class="carousel-caption d-none d-md-block">
-						<h3>랜덤추천</h3>
-						<p>This is a description for the second slide.</p>
+						<h3>HYOLO</h3>
+						<p>HYOLO에 방문하신 걸 환영합니다.</p>
 					</div>
 				</div>
 
-				<!-- Slide Three - Set the background image for this slide in the line below -->
+				
+				
+				
+				<%for(Store s: list) {
+					if(list != null){
+					if(s.getStoreMainImg() != null){
+				%>
 				<div class="carousel-item"
-					style="background-image: url('http://placehold.it/1900x1080')">
+					style="height: 768px;background-image: url('<%=request.getContextPath()%>/img/store/<%=s.getStoreMainImg()%>')">
 					<div class="carousel-caption d-none d-md-block">
-						<h3>사용자 선호도</h3>
-						<p>This is a description for the third slide.</p>
+						<a style="
+    color: white;
+" href="<%=request.getContextPath()%>/store/storeDetail?storeId=<%=s.getStoreId()%>"><h3><%=s.getStoreName() %></h3></a>
+						<p><%=s.getStoreContent() %></p>
 					</div>
 				</div>
+				
+				<%}}} %>
 
 
 			</div>
@@ -315,10 +328,12 @@ if (cookies != null) {
 
 		<!-- 예약선택창 -->
 		<div id="formselection">
-			<form action="" method="POST">
+			<form action="<%=request.getContextPath()%>/reco" method="POST">
+			
+			<input type="hidden" name="storeId" value=>
 				<label id="datelabel" for="datepicker">날짜</label> <input
-					id="datepicker" placeholder="DATE" required autocomplete="off">
-				<select id="category">
+					name="datepicker" id="datepicker" placeholder="DATE" required autocomplete="off">
+				<select id="category" name="category">
 					<option value="cafe" selected>카페</option>
 					<option value="pub">술집</option>
 					<option value="restaurant">음식점</option>
@@ -328,7 +343,8 @@ if (cookies != null) {
 			</form>
 		</div>
 
-		<h1 class="my-4">무슨 기준 추천?</h1>
+		<h1 style="text-align:center; margin-top:40px; margin-bottom:40px; 
+font-family: 'S-CoreDream-8Heavy', sans-serif;">HYOLO에 가장 최근에 등록된 PLACE를 둘러보세요!</h1>
 
 		<!-- Marketing Icons Section -->
 		<div class="row">
@@ -370,16 +386,14 @@ if (cookies != null) {
 		</div>
 		<!-- /.row -->
 
-		<!-- Portfolio Section -->
-		<h2>위치 기반 추천</h2>
+<!-- 		<!-- Portfolio Section --> 
+<!-- 		<h2>위치 기반 추천</h2> -->
 
 
 
 
 
 
-
-	</div>
 
 
 	<script>
@@ -420,5 +434,6 @@ if (cookies != null) {
 
 	</div>
 	<%@ include file="views/common/login.jsp"%>
+	</div>
 	</div>
 	<%@ include file="views/common/footer.jsp"%>
