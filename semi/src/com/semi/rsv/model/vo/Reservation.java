@@ -1,6 +1,7 @@
 package com.semi.rsv.model.vo;
 
-import java.sql.Date;
+import com.semi.member.model.vo.TotalMember;
+import com.semi.store.model.vo.Store;
 
 public class Reservation {
 	private int rsvCode;
@@ -11,6 +12,32 @@ public class Reservation {
 	private String rsvRequire;
 	private int paymentCode;
 	private int rsvPpl;
+<<<<<<< HEAD
+=======
+	
+	public Store getStore() {
+		return store;
+	}
+
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
+
+	public TotalMember getTm() {
+		return tm;
+	}
+
+
+	public void setTm(TotalMember tm) {
+		this.tm = tm;
+	}
+
+	public Store store;
+	public TotalMember tm;
+	
+>>>>>>> refs/heads/dev
 	
 	public Reservation() {}
 

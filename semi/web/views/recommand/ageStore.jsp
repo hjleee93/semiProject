@@ -62,11 +62,17 @@
 	<!-- 탭 콘텐츠 영역  -->
 		<div class="tab_container">
 	<!-- 메인 콘텐츠 영역  -->	
+<<<<<<< HEAD
 
 
  <%			if(Target0 != null){	//전연령 타켓이 null값이 아닌경우
 %>
 
+=======
+<%-- 	<%if(Target0.getStoreId() != 0){ //store 아이디가 존재하거나 --%>
+ <%			if(Target0 != null){	//전연령 타켓이 null값이 아닌경우
+%>
+>>>>>>> refs/heads/dev
 	
 	    <div id="tab0" class="tab_content">
 
@@ -139,8 +145,6 @@
 *{margin:0; padding:0; list-style:none;}
 a{text-decoration:none; color:#666;}
 a:hover{color:#1bc1a3;}
-
-
 #wrapper{
 	display: inline-block;
     margin:25px auto;
@@ -151,14 +155,12 @@ a:hover{color:#1bc1a3;}
     transform:translateX(-50%);
     text-shadow:rgba(0,0,0,0.1) 2px 2px 0px;
 }
-
 #slider-wrap{
     width:800px;
     height:400px;
     position:relative;
     overflow:hidden;
 }
-
 #slider-wrap ul#slider{
     width:100%;
     height:100%;
@@ -167,36 +169,29 @@ a:hover{color:#1bc1a3;}
     top:0;
     left:0;     
 }
-
 #slider-wrap ul#slider li{
     float:left;
     position:relative;
     width:800px;
     height:400px;   
 }
-
 #slider-wrap ul#slider li > div{
     position:absolute;
     top:20px;
     left:35px;  
 }
-
 #slider-wrap ul#slider li > div h3{
     font-size:36px;
     text-transform:uppercase;   
 }
-
 #slider-wrap ul#slider li > div span{
     font-size:21px;
 }
-
 #slider-wrap ul#slider li img{
     display:block;
     width:100%;
   height: 100%;
 }
-
-
 /*btns*/
 .btns{
     position:absolute;
@@ -222,11 +217,9 @@ a:hover{color:#1bc1a3;}
     -ms-transition: all 0.15s ease;
     transition: all 0.15s ease;
 }
-
 .btns:hover{
     background:rgba(0,0,0,0.3); 
 }
-
 #next{right:-50px; border-radius:7px 0px 0px 7px;}
 #previous{left:-50px; border-radius:0px 7px 7px 7px;}
 #counter{
@@ -235,11 +228,8 @@ a:hover{color:#1bc1a3;}
     width:auto;
     position:absolute;
 }
-
 #slider-wrap.active #next{right:0px;}
 #slider-wrap.active #previous{left:0px;}
-
-
 /*bar*/
 #pagination-wrap{
     min-width:20px;
@@ -250,11 +240,9 @@ a:hover{color:#1bc1a3;}
     position:relative;
     text-align:center;
 }
-
 #pagination-wrap ul {
     width:100%;
 }
-
 #pagination-wrap ul li{
     margin: 0 4px;
     display: inline-block;
@@ -268,7 +256,6 @@ a:hover{color:#1bc1a3;}
   
   
 }
-
 #pagination-wrap ul li.active{
   width:12px;
   height:12px;
@@ -276,17 +263,9 @@ a:hover{color:#1bc1a3;}
     opacity:1;
     box-shadow:rgba(0,0,0,0.1) 1px 1px 0px; 
 }
-
-
-
-
 /*Header*/
 h1, h2{text-shadow:none; text-align:center;}
 h1{ color: #666; text-transform:uppercase;  font-size:36px;}
-
-
-
-
 /*ANIMATION*/
 #slider-wrap ul, #pagination-wrap ul li{
     -webkit-transition: all 0.2s cubic-bezier(1,.01,.32,1);
@@ -305,8 +284,6 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
    var totalSlides = $('#slider-wrap ul li').length;
    //get the slide width
    var sliderWidth = $('#slider-wrap').width();
-
-
    $(document).ready(function(){
        /*****************
         BUILD THE SLIDER
@@ -331,7 +308,6 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
        
        //for each slide 
        $.each($('#slider-wrap ul li'), function() { 
-
           //create a pagination
           var li = document.createElement('li');
           $('#pagination-wrap ul').append(li);    
@@ -380,7 +356,6 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
    function countSlides(){
        $('#counter').html(pos+1 + ' / ' + totalSlides);
    }
-
    function pagination(){
        $('#pagination-wrap ul li').removeClass('active');
        $('#pagination-wrap ul li:eq('+pos+')').addClass('active');
@@ -390,7 +365,10 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 
 
 		</div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/heads/dev
 		<% }else{
  		%> 
 		<div class="plus_content">
@@ -398,7 +376,10 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 		</div>
 		<%} %>
 		</div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/heads/dev
 	    </div>
 <!-- 탭 버튼 화면 시작 -->
     <!-- 탭 ALL 콘텐츠 영역  -->
@@ -446,11 +427,17 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 	    <div id="tab2" class="tab_content">
 	    	<!-- 상단 해당 스토어 설명 추가 부분-->  
 	    	  	
+<<<<<<< HEAD
 
 
  			<%if(Target1 != null){	//전연령 타켓이 null값이 아닌경우
 %>
 
+=======
+<%-- 	    	 	<%if(Target1.getStoreId() != 0){ //store 아이디가 존재하거나 --%>
+ 			<%if(Target1 != null){	//전연령 타켓이 null값이 아닌경우
+%>
+>>>>>>> refs/heads/dev
 		
 	    	<div class="plus_content">
 		    	<div class="card-body">
@@ -487,7 +474,10 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
  			        </div> 
 			    </div>
 	    </div>	    
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/heads/dev
 	    <%}else{
  	    	%> 
 	    	<div class="plus_content">
@@ -500,10 +490,15 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 	    <div id="tab3" class="tab_content">
 	    	<!-- 상단 해당 스토어 설명 추가 부분-->
 <%-- 	    		<%if(Target2.getStoreId() != 0){ //store 아이디가 존재하거나 --%>
+<<<<<<< HEAD
 
 <% 			if(Target2 != null){	//전연령 타켓이 null값이 아닌경우
 	 %>
 
+=======
+<% 			if(Target2 != null){	//전연령 타켓이 null값이 아닌경우
+	 %>
+>>>>>>> refs/heads/dev
 	    	<div class="plus_content">
 		    	<div class="card-body">
 		    	<h6>★★★★☆</h6>
@@ -538,7 +533,10 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
  			        		style="width: 200%; heigh:auto; vertical-align: middle"/>
  			        </div> 
 			    </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/heads/dev
 	    
 	    <%}else{
  	    	%> 
@@ -547,7 +545,10 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 			</div>
 			<%} %>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/heads/dev
 	 </div>
 		 <!-- 탭4 30대 콘텐츠 영역  -->
 	    <div id="tab4" class="tab_content" >
@@ -866,19 +867,15 @@ figure.snip1384.hover i {
             $(".tab_content").hide(); //Hide all content
             $("ul.nav-tabs li:first").addClass("active").show(); //Activate first tab
             $(".tab_content:first").show(); //Show first tab content
-
             //On Click Event
             $("ul.nav-tabs li").click(function() {
-
                 $("ul.nav-tabs li").removeClass("active"); //Remove any "active" class
                 $(this).addClass("active"); //Add "active" class to selected tab
                 $(".tab_content").hide(); //Hide all tab content
-
                 var activeTab = $(this).find("a").attr("href"); //Find the href attribute value to identify the active tab + content
                 $(activeTab).fadeIn(); //Fade in the active ID content
                 return false;
             });
-
         });
     </script>
 

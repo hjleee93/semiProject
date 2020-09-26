@@ -9,6 +9,7 @@
 	PartnerMember Partnerloggined = (PartnerMember)session.getAttribute("Partnerloggined");
 	List<QnaComment> qnaComment=(List)request.getAttribute("list");
 	
+
 %>
 <style>
 
@@ -165,7 +166,7 @@
     
     
     
-    	<tr>
+    		<tr>
  				<th colspan="1" class="btn">
 					<%if(MemberlogginedQna!=null&&(MemberlogginedQna.getMemberId().equals(n.getQnaWriter())
 							||MemberlogginedQna.getMemberId().equals("admin"))){ %>
@@ -220,7 +221,10 @@
 		    		<td>
 		    			<%if(MemberlogginedQna.getMemberId().equals(bc.getQnaCommentWriter())
 		    					||MemberlogginedQna.getMemberId().equals("admin")){ %>
-		    				<button class="btn-delete" value="<%=bc.getQnaCommentNo()%>">삭제</button>
+		    				
+		   
+		    		 <button type="button" onclick="btn_delete();" >삭제</button> 
+		    			
 		    			<%} %>
 		    		</td>
 		    	</tr>
@@ -242,14 +246,13 @@
 	    				$("#MemberId").focus();
 	    			}
 	    		});
-	    		});
-	    		//답글에 대한 클릭이벤트설정
+	    	});
+	    		<%-- //답글에 대한 클릭이벤트설정
 	    		$(".btn-reply").click(e => { 
 	    			<%if(Memberloggined!=null){%>
 	    				let tr=$("<tr>");
 	    				let form=$(".comment-editor>form").clone();
 	    				form.find("textarea").attr("rows","1");
-	    				form.find("[name=qnaCommentLevel]").val("2");
 	    				form.find("[name=qnaCommentRef]").val(e.target.value);
 	    				form.find("button").addClass("btn-insert2")
 	    				let td=$("<td>").attr("colspan","2");
@@ -260,7 +263,7 @@
 						$(e.target).off("click");//이벤트제거
 	    			<%}%>
 	    		});
-	    		
+	    		 --%>
 	    	
 	    </script>
  
@@ -276,8 +279,8 @@
 		if(confirm("삭제하시겠습니까?")){
 			location.replace('<%=request.getContextPath()%>/qna/deleteQna?no=<%=n.getQnaNo()%>');			
 		}	
-		
 	}
+	
 	
 	
 	function fn_modify(){
@@ -288,11 +291,33 @@
 			 "method":"post",
 		 });
 		 frm.submit();
-	}
+	};
+	
+	
+	
+	
+	function btn_delete(){
+		if(confirm("삭제하시겠습니까?")){
+			<%for(QnaComment bc : qnaComment) {
+				if(MemberlogginedQna.getMemberId().equals(bc.getQnaCommentWriter())
+		    					||MemberlogginedQna.getMemberId().equals("admin")){ 
+					System.out.println("comment jsp :"+bc.getQnaCommentNo());
+		    					%>
+		    
+			location.replace('<%=request.getContextPath()%>/qna/qnaCommentDelete?no=<%=bc.getQnaCommentNo()%>');
+			<%}
+			}%>
+		
+		}	
+	};
+	
+	
 	
 </script>
 
 </section>
+
+
 
 <%@ include file="/views/common/footer.jsp"%>
 

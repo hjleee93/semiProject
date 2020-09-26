@@ -38,13 +38,16 @@ public class QnaDetailViewServlet extends HttpServlet {
 		int no = Integer.parseInt(request.getParameter("no"));
 		
 		Qna n = new QnaService().selectQnaOne(no);
+		
+		System.out.println("servlet qna :"+no);
 		List<QnaComment> list=new QnaService().selectQnaCommentList(no);
 		
 		System.out.println("n in service: " + n);
 		System.out.println("list in service: " + list);
 		request.setAttribute("list", list);
 		request.setAttribute("qna", n);
-		
+//		request.setAttribute("",);
+	
 		request.getRequestDispatcher("/views/qna/qnaView.jsp").forward(request, response);
 	}
 

@@ -2,12 +2,46 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/views/common/header.jsp"%>
 
+<%@ page import="com.semi.rsv.model.vo.Reservation"%>
+<%@ page import="com.semi.rsv.service.ReservationService"%>
+
+
+<%
+	Member logginedMember = (Member) session.getAttribute("Memberloggined"); //로그인한 멤버 세션
+
+	int ptnNum = logginedMember.getMemberNum();
+	System.out.println("ptnNum: " + ptnNum);
+	List<Reservation> rsvList = new ReservationService().selectReservation(ptnNum);
+	System.out.println("menu object: " + rsvList);
+	
+	request.setAttribute("reservaiton", rsvList);
+	
+	System.out.println("rsvList" + rsvList);
+	
+
+Cookie[] cookies = request.getCookies();
+String saveId = null;
+if (cookies != null) {
+	for (Cookie c : cookies) {
+		if (c.getName().equals("saveId")) {
+	saveId = c.getValue();
+	break;
+		}
+	}
+}
+%>
+<script>
+function closeLayer(obj) {
+	$(obj).parent().parent().hide();
+}
+</script>
 <div class="submenu" style="background-color: cornflowerblue;">
-	<!-- 관리자용 서브헤더 색깔 다르게 설정 -->
+	
+	
 	<ul>
 		<li><a class="subhome"
 			href="<%=request.getContextPath()%>/main.jsp">HOME</a></li>
-		<li><a class="subhome" href="#">고객예약현황</a></li>
+		<li><a class="subhome" href="#">나의 예약 상황</a></li>
 		<li><a class="subhome" href="ptn_review.html">리뷰관리</a></li>
 		<li><a class="subhome" href="ptn_qna.html">문의관리</a></li>
 	</ul>
@@ -62,36 +96,25 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>21</td>
-						<td class="al"><span>아웃백 스테이크 하우스 </span></a></td>
-						<td><span>이현정정</span></td>
-						<td>2020-09-14</td>
-						<td>3:00pm</td>
-						<td>010-1234-1234</td>
-						<td>3</td>
-						<td><a class="Select">없어요</a>
-							<div class="popupLayer">
-								<div>
-
-									<span onClick="closeLayer(this)"
-										style="cursor: pointer; font-size: 1.5em; padding-right: 10px;"
-										title="닫기">X</span>
-								</div>
-								클릭하였을때 나오는곳
-							</div></td>
-
-					</tr>
+					
+					<%for(Reservation r : rsvList){ %>
 					<tr>
 						<td>20</td>
-						<td class="al"><span>아웃백 스테이크 하우스 </span></a></td>
-						<td><span>이현정정</span></td>
-						<td>2020-09-14</td>
-						<td>3:00pm</td>
-						<td>010-1234-1234</td>
-						<td>3</td>
-						<td><a class="Select">없어요</a>
-							<div id="divView">dfdf</div>
+						
+						
+						<td class="al"><span><%=r.getStore().getStoreName()%> </span></a></td>
+						<td><span><%=r.getTm().getMemberName() %></span></td>
+						<td><%=r.getRsvDate() %></td>
+						<td><%=r.getRsvTime() %></td>
+						<td><%= r.getTm().getMemberPhone()%></td>
+						<td><%=r.getRsvPpl() %></td>
+						<%if(r.getRsvRequire() == null ) { %>
+						<td>요구사항 없음</td>
+						
+							
+							<%}else{ %>
+							<td><a class="Select">클릭하세요</a>
+							<div id="divView"></div>
 							<div class="popupLayer">
 								<div>
 
@@ -99,15 +122,18 @@
 										style="cursor: pointer; font-size: 1.5em; padding-right: 10px;"
 										title="닫기">X</span>
 								</div>
-								클릭하였을때 나오는곳
+								<%=r.getRsvRequire() %>
 							</div></td>
+							<%} %>
 
 					</tr>
-
+<%} %>
 				</tbody>
 			</table>
 		</div>
-
+<div id="pageBar">
+				<%=request.getAttribute("pageBar") %>
+			</div>
 
 		<div class="board-bottom board-view-btn">
 			<div class="paging">
@@ -178,9 +204,7 @@ a.Select:hover {
 <script>
 	$(function() {
 
-		function closeLayer(obj) {
-			$(obj).parent().parent().hide();
-		}
+		
 
 		$('.Select').click(function(e) {
 			var sWidth = window.innerWidth;
