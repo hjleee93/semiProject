@@ -31,8 +31,7 @@
 		<div class="parent" style="width: 100%;">
 			<div class="child1"
 				style="background-color: rgba(189, 189, 189, 0.119)">
-				<img src="http://placehold.it/200x200" height="200px" width="200px"
-					class="mong">
+				 <img src="${pageContext.request.contextPath}/img/admin.png" height="200px" width="200px" class="mong" >
 				<!-- <img src="https://cdn.onlinewebfonts.com/svg/img_239979.png" height="200px" width="300px" class="mong"> -->
 				<p class="profile1">ADMIN</p>
 				<table class="profilebox">

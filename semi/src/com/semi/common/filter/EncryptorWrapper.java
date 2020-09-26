@@ -23,13 +23,25 @@ public class EncryptorWrapper extends HttpServletRequestWrapper {
 			String pw = super.getParameter(name);
 			System.out.println("encrytor: " + pw);
 			String encPw=getSha512(pw);
-			System.out.println("encrytor: " + encPw);
-			returnValue=encPw;
+			returnValue=encPw;		
+			
+		}else if(name.equals("pw2")){
+			String pw2 = super.getParameter(name);
+			String encPtnPw=getSha512(pw2);
+			returnValue=encPtnPw;
+		}else if(name.equals("updatedPwd")){
+			String updatedPwd = super.getParameter(name);
+			System.out.println("encrytor: " + updatedPwd);
+			String encPtnPw1=getSha512(updatedPwd);
+			returnValue=encPtnPw1;
 		}else {
 			returnValue=super.getParameter(name);
 		}
+		
 		return returnValue;
 	}
+	
+	
 	
 	private String getSha512(String value) {
 		String encPwd=null;//암호화한 값 보관

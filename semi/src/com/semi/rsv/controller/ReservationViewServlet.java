@@ -16,13 +16,13 @@ import com.semi.rsv.service.ReservationService;
  * Servlet implementation class ReservationViewServelt
  */
 @WebServlet("/rsv/reservationView")
-public class ReservationViewServelt extends HttpServlet {
+public class ReservationViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReservationViewServelt() {
+    public ReservationViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,6 +31,8 @@ public class ReservationViewServelt extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		int cPage;
 		try {
 			cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -39,20 +41,22 @@ public class ReservationViewServelt extends HttpServlet {
 		}
 		int numPerPage=5;
 		
+		int totalData = new ReservationService().selectRsvCount();
+		int totalPage = (int)(Math.ceil((double)totalData/numPerPage));
+		
+		
 		List<Reservation> rsvList = new ReservationService().selectAllReservation(cPage, numPerPage);
 		
 		
 		
 		
-		
+		String pageBar = "";
 		int pageBarSize=5;
-		int totalData = new ReservationService().selectRsvCount();
-		int totalPage = (int)(Math.ceil((double)totalData/numPerPage));
 		
 		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
 		
-		String pageBar = "";
+		
 		if(pageNo==1) {
 			pageBar="<span> ◀ </span>";
 		}else {
@@ -62,7 +66,7 @@ public class ReservationViewServelt extends HttpServlet {
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)){
 			if(pageNo==cPage) {
-				pageBar+="<span>"+pageNo+"</span>";
+				pageBar+="<a>"+pageNo+"</a>";
 			}else {
 				pageBar+="<a href='"+request.getContextPath()+"/rsv/reservationView?page="+(pageNo)+"'>"+pageNo+"</a>";
 			}
@@ -70,15 +74,21 @@ public class ReservationViewServelt extends HttpServlet {
 		}
 		
 		if(pageNo>totalPage) { 
-				pageBar+="<span> ▶ </span>";
+				pageBar+="<span> < </span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()+"/rsv/reservationView?page="+(pageNo)+"'> ▶ </a>";
+			pageBar+="<a href='"+request.getContextPath()+"/rsv/reservationView?page="+(pageNo)+"'> > </a>";
 		}
+		
+		
 		request.setAttribute("totalData", totalData);
-		request.setAttribute("storelist", rsvList);
+		request.setAttribute("rsvList", rsvList);
 		request.setAttribute("pageBar", pageBar);
 		
-		System.out.println(rsvList +" : " +pageBar);
+		
+		System.out.println("pageBar" + pageBar);
+		System.out.println("rsvList" + rsvList);
+		System.out.println("totalData" + totalData);
+		
 		request.getRequestDispatcher("/views/partner/ptnRsvView.jsp").forward(request, response);
 	}
 

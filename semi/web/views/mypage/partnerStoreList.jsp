@@ -12,7 +12,7 @@
 	<ul>
 		<li><a class="subhome"
 			href="<%=request.getContextPath()%>/main.jsp">HOME</a></li>
-		<li><a class="subhome" href="#">고객예약현황</a></li>
+		<li><a class="subhome" href="<%=request.getContextPath()%>/rsv/reservationView">고객예약현황</a></li>
 		<li><a class="subhome" href="ptn_review.html">리뷰관리</a></li>
 		<li><a class="subhome" href="ptn_qna.html">문의관리</a></li>
 	</ul>

@@ -6,6 +6,7 @@ import static com.semi.common.JDBCTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +21,7 @@ import com.semi.member.model.vo.TotalMember;
 
 
 public class MemberDao {
+	
 
 	private Properties prop = new Properties();
 	
@@ -360,4 +362,109 @@ public class MemberDao {
 		}return ctmresult;
 	}
 
+	
+	//멤버 아이디 중복확인
+
+	public Member selectMember(Connection conn, String userId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("checkId"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=inputData(rs);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return m;	
+	}
+	
+	private Member inputData(ResultSet rs) {
+		Member m=new Member();
+		try {
+
+			m.setMemberNum(rs.getInt(1));
+			m.setMemberId(rs.getString(2));
+			m.setMemberName(rs.getString(3));
+			m.setMemberSep(rs.getString(4));
+			m.setMemberPw(rs.getString(5));
+			m.setMemberEmail(rs.getString(6));
+			m.setMemberPhone(rs.getString(7));
+			m.setMemPostcode(rs.getString(8));
+			m.setMemAddress(rs.getString(9));
+			m.setMemDetailAddress(rs.getString(10));
+			m.setMemExtraAddress(rs.getString(11));
+			m.setMemberEnrolldate(rs.getDate(12));
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return m;
+	}
+	
+	public Member selectMember2(Connection conn, String userId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("checkId"));
+			pstmt.setString(1, userId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=inputData(rs);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return m;	
+	}
+
+	public String foundId(Connection conn, String userName, String userPhone) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String foundId = null;
+		
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("findId"));
+			pstmt.setString(1, userName);
+			pstmt.setString(2, userPhone);
+			System.out.println("id in dao: " + userName + ": " + userPhone);
+			rs=pstmt.executeQuery();
+			while(rs.next()){
+				foundId = rs.getString("MEMBER_ID");
+			   }
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return foundId;
+	}
+
+	public int updatePwd(Connection conn, String inputId, String updatedPwd, String userPhone1) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updatePwd"));
+			pstmt.setString(1, updatedPwd);
+			pstmt.setString(2, inputId);
+			pstmt.setString(3, userPhone1);
+			
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
+	
+	
 }

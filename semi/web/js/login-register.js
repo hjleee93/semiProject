@@ -287,8 +287,8 @@ function shakeModal(){
 function removeCheck() {
 
     if (confirm("취소버튼을 누르셧습니다. 작성하신 내용은 저장되지않습니다.") == true){   
-
-         location.href='main_final.html'
+    		history.go(-1);     
+     //    location.href='main_final.html'
     }else{ 
         return false;
    
@@ -307,4 +307,3 @@ function removeCheck() {
        
         }
     }
-

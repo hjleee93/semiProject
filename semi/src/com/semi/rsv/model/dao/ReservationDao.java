@@ -6,13 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-
-
-
-
-
-
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,7 +23,7 @@ public class ReservationDao {
 
 	public ReservationDao() {
 		try {
-			System.out.println("예약 dao실행");
+		
 			String fileName = StoreDao.class.getResource("/sql/reservation_sql.properties").getPath();
 			
 			System.out.println("fileName" + fileName);
@@ -56,8 +49,6 @@ public class ReservationDao {
 			pstmt.setString(5, r.getRsvRequire());
 			pstmt.setInt(6,r.getRsvPpl());
 			
-			System.out.println("예약" + r);
-			
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -69,7 +60,11 @@ public class ReservationDao {
 
 	}
 
+<<<<<<< HEAD
+	public List<Reservation> selecetReservation(Connection conn, int ptnNum,int cPage, int numPerPage) {
+=======
 	public List<Reservation> selecetReservation(Connection conn, int ptnNum) {
+>>>>>>> branch 'master' of https://github.com/hjleee93/semiProject.git
 		System.out.println("ptn in dao: " +ptnNum);
 		
 		PreparedStatement pstmt = null;
@@ -82,8 +77,11 @@ public class ReservationDao {
 		try {
 			
 			pstmt = conn.prepareStatement(prop.getProperty("selectReservation"));
-			pstmt.setInt(1, ptnNum);
 			
+			
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			pstmt.setInt(3, ptnNum);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -133,13 +131,13 @@ public class ReservationDao {
 				Store store = new Store();
 				TotalMember tm =new TotalMember();
 				
-				store.setStoreName(rs.getString(2));
-				tm.setMemberName(rs.getString(3));
-				r.setRsvDate(rs.getString(4));
-				r.setRsvTime(rs.getInt(5));
-				tm.setMemberPhone(rs.getString(6));
-				r.setRsvPpl(rs.getInt(7));
-				r.setRsvRequire(rs.getString(8));
+				store.setStoreName(rs.getString("storename"));
+				tm.setMemberName(rs.getString("member_name"));
+				r.setRsvDate(rs.getString("resevation_date"));
+				r.setRsvTime(rs.getInt("reservation_time"));
+				tm.setMemberPhone(rs.getString("member_phone"));
+				r.setRsvPpl(rs.getInt("rsv_ppl"));
+				r.setRsvRequire(rs.getString("reservation_requiry"));
 				
 				r.setStore(store);
 				r.setTm(tm);
@@ -175,4 +173,60 @@ public class ReservationDao {
 			close(pstmt);
 		}return count;
 	}
+<<<<<<< HEAD
+
+
+	public List<Reservation> selectPtnReservation(Connection conn, int storeId, int cPage, int numPerPage) {
+System.out.println("storeId in dao: " +storeId);
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+	
+		List<Reservation> list = new ArrayList();
+		
+		System.out.println();
+		
+		try {
+			
+			pstmt = conn.prepareStatement(prop.getProperty("selectReservation"));
+			
+			
+			pstmt.setInt(1, (cPage-1)*numPerPage+1);
+			pstmt.setInt(2, cPage*numPerPage);
+			pstmt.setInt(3, storeId);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Reservation r = new Reservation();
+				Store store = new Store();
+				TotalMember tm =new TotalMember();
+				
+				store.setStoreName(rs.getString(1));
+				tm.setMemberName(rs.getString(2));
+				r.setRsvDate(rs.getString(3));
+				r.setRsvTime(rs.getInt(4));
+				tm.setMemberPhone(rs.getString(5));
+				r.setRsvPpl(rs.getInt(6));
+				r.setRsvRequire(rs.getString(7));
+				
+				r.setStore(store);
+				r.setTm(tm);
+				
+			
+								
+				list.add(r);
+				
+			}
+			
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+=======
+>>>>>>> branch 'master' of https://github.com/hjleee93/semiProject.git
 }

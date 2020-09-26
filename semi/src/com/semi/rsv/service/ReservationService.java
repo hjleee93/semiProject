@@ -17,7 +17,6 @@ public class ReservationService {
 	private ReservationDao dao = new ReservationDao();
 	
 	public int insertReservation(Reservation r) {
-
 		Connection conn=getConnection();
 		int result=dao.insertStoreReservation(conn,r);
 		if(result>0) commit(conn);
@@ -25,10 +24,15 @@ public class ReservationService {
 		close(conn);
 		return result;
 	}
-	
-	public List<Reservation> selectReservation(int ptnNum){
+	public List<Reservation> selectPtnReservation(int storeId,int cPage, int numPerPage){
 		Connection conn=getConnection();
-		List<Reservation> list = dao.selecetReservation(conn,ptnNum);
+		List<Reservation> list = dao.selectPtnReservation(conn,storeId,cPage, numPerPage);
+		close(conn);
+		return list;	
+	}
+	public List<Reservation> selectReservation(int ptnNum,int cPage, int numPerPage){
+		Connection conn=getConnection();
+		List<Reservation> list = dao.selecetReservation(conn,ptnNum,cPage, numPerPage);
 		close(conn);
 		return list;	
 	}
