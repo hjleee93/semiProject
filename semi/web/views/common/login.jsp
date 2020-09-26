@@ -52,7 +52,7 @@
 
 
 				<!--  pattern="^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$" oninvalid="this.setCustomValidity('ex) 01012341004')" -->
-				<div class="box" id="fonundId">
+				<div class="box" id=foundId>
 					<div class="content searchIdBox" style="display: none;">
 						<div class="form">
 							<form method="post" name="searchID" action=""
@@ -64,24 +64,44 @@
 									class="btn btn-default btn-login" type="button"
 									id="searchIdBtn" value="SEARCH"
 									onclick="acyncMovePage('<%=request.getContextPath()%>/views/common/loginAjax.jsp'); ">
-								<%-- <ul class="showId">
-		                   <span id="showId"> 회원님의 아이디는</span><%=m.getMemberId() %>      
-		            </ul> --%>
-
+								
 							</form>
 						</div>
 
 					</div>
 				</div>
 
-				<script>
-					//TODO:아이디찾기ajax 
+				
+				<!----------------------------- PW찾기 --------------------------->
+				<!--             TODO:업뎃으루하기~~~ -->
+				<div class="box" id="foundPw">
+					<div class="content searchPwdBox" style="display: none;">
+						<div class="form">
+							<form method="post" name="searchPW" action=""
+								accept-charset="UTF-8" onsubmit="return validate();">
+								<input id="findId" class="form-control" type="text"
+									placeholder="USER ID" name="findId" required>
+								<input id="userPhone1" class="form-control" type="tel"
+									placeholder="USER PHONE" name="userPhone1" required> <input
+									class="btn btn-default btn-login" id="searchPwBtn"
+									type="button" value="SEARCH" onclick="acyncMovePage1('<%=request.getContextPath()%>/views/common/loginAjax2.jsp'); ">
+							</form>
+
+						</div>
+
+					</div>
+				</div>
+
+<script>
+					
 					function acyncMovePage(url) {
 						var userName;
 						var userPhone;
-
+						
 						userName = $('#searchId_name').val();
 						userPhone = $('#searchId_phone').val();
+						
+						
 
 						var ajaxOption = {
 							url : url,
@@ -89,7 +109,9 @@
 							dataType : "html",
 							data : {
 								"userName" : userName,
-								"userPhone" : userPhone,
+								"userPhone" : userPhone
+								
+								
 							},
 							success : function(data) {
 								console.log("Succeeded to pass");
@@ -98,37 +120,46 @@
 
 						$.ajax(ajaxOption).done(function(data) {
 
-							$('#fonundId').children().remove();
+							$('#foundId').children().remove();
 
-							$('#fonundId').html(data);
+							$('#foundId').html(data);
+						});
+					}
+					
+					
+					
+					
+					function acyncMovePage1(url) {
+					
+						var userId;
+						var userPhone1;
+						
+							userId = $('#findId').val();							
+							userPhone1 = $('#userPhone1').val();
+							
+							console.log("id: " + userId +":" + userPhone1);
+						var ajaxOption = {
+							url : url,
+							type : "POST",
+							dataType : "html",
+							data : {
+								"userId":userId,
+								"userPhone1":userPhone1
+								
+							},
+							success : function(data) {
+								console.log("Succeeded to pass");
+							}
+						}
+
+						$.ajax(ajaxOption).done(function(data) {
+
+							$('#foundPw').children().remove();
+
+							$('#foundPw').html(data);
 						});
 					}
 				</script>
-				<!----------------------------- PW찾기 --------------------------->
-				<!--             TODO:업뎃으루하기~~~ -->
-				<div class="box" id="foundId">
-					<div class="content searchPwdBox" style="display: none;">
-						<div class="form">
-							<form method="post" name="searchPW" action=""
-								accept-charset="UTF-8" onsubmit="return validate();">
-								<input id="searchPw_id" class="form-control" type="text"
-									placeholder="USER ID" name="findPw" required
-									pattern="^[a-z][a-zA-Z0-9]{4,15}$"
-									oninput="this.setCustomValidity('아이디 작성 형식은 영문·숫자 4~15자리입니다.')">
-								<input id="searchPw_phone" class="form-control" type="tel"
-									placeholder="USER PHONE" name="findPw" required
-									pattern="^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$"
-									oninput="this.setCustomValidity('ex) 01012341004')"> <input
-									class="btn btn-default btn-login" id="searchPwBtn"
-									type="submit" value="SEARCH" onclick="fn_openPw();">
-							</form>
-
-						</div>
-
-					</div>
-				</div>
-
-
 				<div class="box">
 					<div class="content foundId" style="display: none;">
 						<div class="form">

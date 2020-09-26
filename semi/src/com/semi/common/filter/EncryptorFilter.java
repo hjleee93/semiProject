@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Servlet Filter implementation class EncryptorFilter
  */
-@WebFilter(servletNames = { "modiPartner" , "modiMember" ,"/login" , "login" , "signup" , "signUpPtn" })
+@WebFilter(filterName ="MemberPwdUpdateServlet", servletNames = { "modiPartner" , "modiMember" ,"/login" , "login" , "signup" , "signUpPtn","/signuppartner" ,"/pwdUpdate","pwdUpdate"})
+
 public class EncryptorFilter implements Filter {
 
     /**

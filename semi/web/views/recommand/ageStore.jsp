@@ -357,7 +357,6 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 
 
 		</div>
-
 		<% }else{
  		%> 
 		<div class="plus_content">
@@ -365,7 +364,6 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 		</div>
 		<%} %>
 		</div>
-
 	    </div>
 <!-- 탭 버튼 화면 시작 -->
     <!-- 탭 ALL 콘텐츠 영역  -->
@@ -412,11 +410,11 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
     <!-- 탭2  10대 콘텐츠 영역  -->
 	    <div id="tab2" class="tab_content">
 	    	<!-- 상단 해당 스토어 설명 추가 부분-->  
-	
+
+
  			<%if(Target1 != null){	//전연령 타켓이 null값이 아닌경우
 %>
 
-		
 	    	<div class="plus_content">
 		    	<div class="card-body">
 		    	<h6>★★★★★</h6>
@@ -451,7 +449,7 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
  			        		style="width: 200%; heigh:auto; vertical-align: middle"/>
  			        </div> 
 			    </div>
-	    </div>	    
+	    </div>
 	    <%}else{
  	    	%> 
 	    	<div class="plus_content">
@@ -463,10 +461,8 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 	<!-- 탭3 20대 콘텐츠 영역  -->
 	    <div id="tab3" class="tab_content">
 	    	<!-- 상단 해당 스토어 설명 추가 부분-->
-
 <% 			if(Target2 != null){	//전연령 타켓이 null값이 아닌경우
 	 %>
-
 	    	<div class="plus_content">
 		    	<div class="card-body">
 		    	<h6>★★★★☆</h6>
@@ -501,7 +497,6 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
  			        		style="width: 200%; heigh:auto; vertical-align: middle"/>
  			        </div> 
 			    </div>
-
 	    
 	    <%}else{
  	    	%> 
@@ -509,7 +504,6 @@ h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 	    	<p>데이터가 존재하지 않습니다</p>
 			</div>
 			<%} %>
-
 	 </div>
 		 <!-- 탭4 30대 콘텐츠 영역  -->
 	    <div id="tab4" class="tab_content" >

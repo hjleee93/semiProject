@@ -12,11 +12,11 @@ public class Reservation {
 	private String rsvRequire;
 	private int paymentCode;
 	private int rsvPpl;
+
 	
 	public Store store;
 	public TotalMember tm;
-	
-	
+		
 	public Store getStore() {
 		return store;
 	}
@@ -36,7 +36,7 @@ public class Reservation {
 		this.tm = tm;
 	}
 
-
+	
 	public Reservation() {}
 
 

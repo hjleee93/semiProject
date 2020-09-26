@@ -328,6 +328,7 @@ if(serviceList.size() != 0){
 			%>
 				<div style="width: 50%">
 					<h5 align="center">예약할 날짜를 선택하세요</h5>
+					<p>오늘 날짜 이후로 선택해주세요</p>
 
 					<table id="calendar" border="3" align="center">
 						<tr>
@@ -719,17 +720,12 @@ if(serviceList.size() != 0){
 			
 			if (today.getFullYear() == date.getFullYear()
 					&& today.getMonth() == date.getMonth()
-					&& i == date.getDate()) {
+					&& i == date.getDate()) { //오늘날짜 
 				
 				
 				cell.bgColor = "violet";
 				}
-			//TODO:날짜 비교 다시하기
-			if (today.getFullYear() >= date.getFullYear()
-					
- 					&& today.getMonth() >= date.getMonth()
- 					&& i >= date.getDate()
-					) {
+			
 				console.log( date.getFullYear());
 // 				cell.bgColor = "#FAF58C";
 				cell.setAttribute("onclick", "getDate(this);");
@@ -744,9 +740,7 @@ if(serviceList.size() != 0){
 					
 				}
 				
-			}else{
-				cell.setAttribute("class","inactive-date");
-			}
+			
 			
 		}
 	};

@@ -15,7 +15,7 @@ import com.semi.member.model.vo.TotalMember;
 /**
  * Servlet implementation class PartnerSignUpServlet
  */
-@WebServlet(name="signUpPtn",urlPatterns="/signuppartner")
+@WebServlet(name="signUpPtn", urlPatterns="/signuppartner")
 public class PartnerSignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
