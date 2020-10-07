@@ -15,7 +15,7 @@ Trend에 맞춰 현재의 행복을 즐기는 사람들을 위해
 
 [live demo](http://rclass.iptime.org:9999/20AM_HYOLO/)
 
-### Built With
+## Built With
 <h4>Back-end/Server</h4>
 
 * JSP/Servlet
@@ -34,7 +34,7 @@ Trend에 맞춰 현재의 행복을 즐기는 사람들을 위해
 
 
 
-### Contributors
+## Contributors
 
 * 경은지
 * 김민지
