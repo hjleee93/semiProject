@@ -36,7 +36,6 @@ function searchPwdBox(){
     $('.loginBox').fadeOut('fast',function(){
         $('.searchPwdBox').fadeIn('fast');
         $('.login-footer').fadeOut('fast',function(){
-            $('.register-footer').fadeIn('fast');
         });
         $('.modal-title').html('Search PW');
     }); 
@@ -46,6 +45,16 @@ function searchPwdBox(){
 
 
 function showLoginForm(){
+	
+	$('#foundId .content .searchPwdBox').fadeOut('fast',function(){
+        $('.loginBox').fadeIn('fast');
+        $('.register-footer').fadeOut('fast',function(){
+       	 
+           $('.login-footer').fadeIn('fast');    
+       	 
+        }); 
+        $('.modal-title').html('Login');
+    });
     $('#loginModal .registerBox').fadeOut('fast',function(){
         $('.loginBox').fadeIn('fast');
         $('.register-footer').fadeOut('fast',function(){
@@ -154,48 +163,6 @@ function removeCheck() {
         }
     };
     
-    
-//function Fn_searchId(){
-//	if ($("#searchId_name").val().length == 0) {
-//        alert("이름을 입력하세요");
-//        return false;
-//    }
-//	
-//    if ($("#searchId_phone").val().length == 0) {
-//        alert("전화번호를 입력하세요");
-//    if($("#id").length<4){
-//    	alert("")
-//    }
-//    return;
-//	}
-//};
-//	
-//    function Fn_searchPw(){
-//		
-//    if ($("#searchPw_id").val().length == 0) {
-//        alert("아이디를 입력하세요");
-//        $("#searchPw_id").focus();
-//        return false;
-//	}
-//    if ($("#searchPw_phone").val().length == 0) {
-//        alert("전화번호를 입력하세요");
-//        return false;
-//	}
-//    return;
-//    };
-//  
-//$(function(){
-//	var namecheck="^[가-힝]{2,4}$"
-//	var phonecheck="^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$";
-//	var idcheck="^[a-z][a-zA-Z0-9]{4,15}$";
-//	  if(!idcheck.test($("#searchPw_id").val())){
-//		  $("#searchPw_id").val("");
-//	    }
-//	    if(!phonecheck.test($("#searchPw_phone").val())){
-//	    	alert("숫자형식으로 입력하셔야합니다.");
-//	    }
-//		
-//});
 
 function showLoginForm(){
     $('#loginModal .registerBox').fadeOut('fast',function(){
@@ -233,7 +200,6 @@ function searchIdForm(){
     $('.loginBox').fadeOut('fast',function(){
         $('.searchIdBox').fadeIn('fast');
         $('.login-footer').fadeOut('fast',function(){
-            $('.register-footer').fadeIn('fast');
         });
         $('.modal-title').html('Search ID');
     }); 

@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" %>
 		
-<!-- 로그인이벤트는 따로 분리했습니다. 아마 일부게시판에만 사용될 것 같아요
-	사용해야된다면 푸터 include 한 부분 위쪽편으로 써주시면 됩니다. 그리고 include 하고 다서 </div>로 닫아주세요-->
  <!-- 로그인 modal html -->
     <div class="modal fade login" id="loginModal" data-backdrop="static" data-keyboard="false">
       <div class="modal-dialog login animated">
@@ -31,7 +29,6 @@
                 <div class="form loginBox">
                 
                   <form method="post" action="<%=request.getContextPath()%>/login" accept-charset="UTF-8">
-<!--    TODO:id값 중복이라 일단 바꿔둘게요 -->
                     <input id="partner_em" class="form-control" type="text" placeholder="Email" name="id">
                     <input id="partner_pw" class="form-control" type="password" placeholder="Password" name="pw">
                     <input class="btn btn-default btn-login" id="loginBtn" type="submit" value="Login" >
@@ -40,7 +37,8 @@
                 </div>
                 
               </div>
-            </div>  <!-- AJAX 시작! -->
+            </div> 
+             <!-- AJAX 시작! -->
             <!----------------------------- ID찾기 --------------------------->
             
             <div class="box" id=foundId>
@@ -153,7 +151,7 @@
             </script>
             
 
-<!-- AJAX 끝! 해주세여 ㄱㄱ!-->
+<!-- AJAX 끝! -->
             
             
            

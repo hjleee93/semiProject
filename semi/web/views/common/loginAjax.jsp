@@ -13,7 +13,7 @@
     
     String foundId = new MemberService().foundId(userName, userPhone);
     %>
-<div class="box" id="foundId">
+
 					<div class="content searchPwdBox" style="">
 						<div class="form">
 							<form style="margin-top:45px;">
@@ -33,5 +33,5 @@
 						</div>
 
 					</div>
-				</div>
+				
 
