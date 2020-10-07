@@ -1,7 +1,12 @@
 # HYOLO
+2020년 소비트렌드인 횰로. <br>
+횰로는 나홀로와 욜로(YOLO)가 합쳐진 말로 ‘나’의 현재 행복을 우선시하는 소비트렌드입니다. <br>
+Trend에 맞춰 현재의 행복을 즐기는 사람들을 위해
+핫플레이스들을 원하는 지역, 키워드로 검색하여 바로 예약,관리 할 수 있는 
+핫플레이스 예약사이트를 제작해보았습니다.
 
 
-
+![main](https://user-images.githubusercontent.com/71309720/95305119-8602b700-08c0-11eb-9e2a-14fb976111fe.png)
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
@@ -13,7 +18,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![MainImg](./img/main.png)
+
 
 There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
 
