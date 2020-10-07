@@ -9,12 +9,6 @@ Trend에 맞춰 현재의 행복을 즐기는 사람들을 위해
 
 ![main](https://user-images.githubusercontent.com/71309720/95305119-8602b700-08c0-11eb-9e2a-14fb976111fe.png)
 
-## Table of Contents
-
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [Contributors](#contributors)
-
 
 
 ## About The Project
