@@ -25,6 +25,13 @@ public class StoreService {
 		return list;
 	}
 	
+	public List<Store> selectStoreMainImg(){
+		Connection conn = getConnection();
+		List<Store> list = dao.selectStoreMainImg(conn);
+		close(conn);
+		return list;
+	}
+	
 	public List<Store> selectAllStoreList(int cPage, int numPerpage){
 		
 		Connection conn = getConnection();

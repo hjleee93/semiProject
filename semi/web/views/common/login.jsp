@@ -12,19 +12,6 @@
           <div class="modal-body">
             <div class="box">
               <div class="content">
-                <div class="social">
-                  <img class="circle naver" src="<%=request.getContextPath()%>\img\Green.PNG" width="80" height="80">
-              
-                    <img class="circle kakao" src="<%=request.getContextPath()%>\img\kakao.jpg" width="80" height="80">
-              
-                    <img class="circle google" src="<%=request.getContextPath()%>\img\google.jpg" width="80" height="80">
-                </div>
-                <div class="division">
-                  <div class="line l"></div>
-                  <span>or</span>
-                  <div class="line r"></div>
-                </div>
-                <div class="error"></div>
                 
                 <div class="form loginBox">
                 

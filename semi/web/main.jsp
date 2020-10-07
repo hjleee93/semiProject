@@ -10,14 +10,8 @@
 <%
 	//메인시작! 
 List<Store> list = new StoreService().selectStoreList();
-
-
-
-
-
+List<Store> mainImgList = new StoreService().selectStoreMainImg();
 request.setAttribute("store", list);
-
-
 
 Member logginedMember = (Member) session.getAttribute("Memberloggined"); //로그인한 멤버 세션
 
@@ -146,8 +140,6 @@ font-family: 'JSDongkang-Regular';
 								 <a
 								class="dropdown-item" href="<%=request.getContextPath()%>/qna">Q&A</a>
 						</div></li>
-
-<!--       TODO:링크수정 -->
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" href="#"
 						id="navbarDropdownPortfolio" data-toggle="dropdown"
@@ -265,45 +257,33 @@ font-family: 'JSDongkang-Regular';
 	</nav>
 
 	<header>
-		<!-- 	회원 관심사에서 랜덤으로 추천 -->
+	
 		<div id="carouselExampleIndicators" class="carousel slide"
 			data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#carouselExampleIndicators" data-slide-to="0"
-					class="active"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-			</ol>
 			<div class="carousel-inner" role="listbox">
-
-				
-				
-				
-				
-				<!-- Slide Two - Set the background image for this slide in the line below -->
-
+<!-- 				슬라이드 첫번째 사진 통일 -->
 				<div class="carousel-item active" 
 					style="height: 768px;background-image: url('https://cdn.pixabay.com/photo/2016/01/19/15/05/coffee-shop-1149155_1280.jpg')">
 					<div class="carousel-caption d-none d-md-block">
 						<h3>HYOLO</h3>
-						<p>HYOLO에 방문하신 걸 환영합니다.</p>
+						<p>HYOLO에 방문하신 걸 환영합니다.</p> 
 					</div>
 				</div>
 
 				
 				
 				
-				<%for(Store s: list) {
+				<%for(int i = 0; i < 3; i++){//메인이미지 3개 출력
 					if(list != null){
-					if(s.getStoreMainImg() != null){
+						//메인이미지가 null이 아닌경우
+					if( mainImgList.get(i).getStoreMainImg() != null ){
 				%>
 				<div class="carousel-item"
-					style="height: 768px;background-image: url('<%=request.getContextPath()%>/img/store/<%=s.getStoreMainImg()%>')">
+					style="height: 768px;background-image: url('<%=request.getContextPath()%>/img/store/<%= mainImgList.get(i).getStoreMainImg()%>')">
 					<div class="carousel-caption d-none d-md-block">
-						<a style="
-    color: white;
-" href="<%=request.getContextPath()%>/store/storeDetail?storeId=<%=s.getStoreId()%>"><h3><%=s.getStoreName() %></h3></a>
-						<p><%=s.getStoreContent() %></p>
+						<a style=" color: white;"
+							 href="<%=request.getContextPath()%>/store/storeDetail?storeId=<%= mainImgList.get(i).getStoreId()%>"><h3><%= mainImgList.get(i).getStoreName() %></h3></a>
+						<p><%= mainImgList.get(i).getStoreContent() %></p>
 					</div>
 				</div>
 				

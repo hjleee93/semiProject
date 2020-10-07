@@ -317,5 +317,28 @@ public class StoreDao {
 		}
 		return list;
 	}
+
+	public List<Store> selectStoreMainImg(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Store> list = new ArrayList();
+
+		try {
+			pstmt = conn.prepareStatement(prop.getProperty("selectStoreMainImg"));		
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Store store = new Store();				
+				
+				store.setStoreMainImg(rs.getString("main_img"));
+				list.add(store);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
 	
 }
