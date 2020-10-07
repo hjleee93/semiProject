@@ -22,8 +22,15 @@ Trend에 맞춰 현재의 행복을 즐기는 사람들을 위해
 [live demo](http://rclass.iptime.org:9999/20AM_HYOLO/)
 
 ### Built With
+<h4>Back-end/Server</h4>
 
 * JSP/Servlet
+* [JDK 8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
+* [Oracle DB 11g](https://www.oracle.com/database/technologies/112010-win64soft.html)
+* [Apache Tomcat 8.5](https://tomcat.apache.org/download-80.cgi)
+
+<h4>Front-end</h4>
+
 * [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 * [Ajax](https://api.jquery.com/jquery.ajax/)
 * [Bootstrap](https://getbootstrap.com)
