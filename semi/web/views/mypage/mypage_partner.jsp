@@ -86,7 +86,7 @@ int cnt2 = (Integer)request.getAttribute("mypageCount2");
             </tr>
             <tr>
               <td class="profilebox3"><a href="">입점취소 및 해지</a></td>
-              <td><a href="">업체 정보 수정</a></td>
+              <td><a href="<%=request.getContextPath()%>/store/storeDetailSelect?ptnId=<%=MemLoggined.getMemberNum()%>">업체 정보 수정</a></td>
             </tr>
           </table>
         </div>

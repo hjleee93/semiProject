@@ -84,10 +84,11 @@ public class StoreDetailUpdateServlet extends HttpServlet {
 			String loc="/";
 			
 			request.setAttribute("storeId",storeId);
-			System.out.println("s in 3" + s);
+			request.setAttribute("ptnId", ptnId);
+			
 			if(result>0) {
 				msg="이미지 업데이트가 완료되었습니다.";
-				loc="/partnerpage?no=" + storeId; //ok
+				loc="/store/storeDetailSelect?ptnId=" +ptnId; //ok
 			}else {
 				msg="이미지 업데이트에 실패했습니다. 관리자에게 문의해주시거나 다시 한 번 시도해주세요.";
 				loc="/store/storeDetailSelect?ptnId=" + storeId;
