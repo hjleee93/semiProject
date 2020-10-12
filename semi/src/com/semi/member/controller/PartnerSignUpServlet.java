@@ -46,7 +46,7 @@ public class PartnerSignUpServlet extends HttpServlet {
 		m.setMemAddress(request.getParameter("partner_address"));
 		m.setMemDetailAddress(request.getParameter("partner_detailAddress"));
 		m.setMemExtraAddress(request.getParameter("partner_extraAddress"));
-		
+		System.out.println("m: " + m);
 		int result=new MemberService().insertPartner(m);
 		
 		TotalMember m1=new TotalMember();

@@ -152,16 +152,7 @@ function removeCheck() {
 
 
 
-    function joinCheck() {
-
-        if (confirm("회원가입이 완료되었습니다. ") == true){   
-              
-            document.removefrm.submit();
-        }else{
-            return false;
-       
-        }
-    };
+    
     
 
 function showLoginForm(){

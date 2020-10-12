@@ -498,8 +498,8 @@
          
               <!-- 전송 버튼 -->
               <div class="btn_wrap d-flex justify-content-center">
-                <input type="submit" class="btn btn-outline-success" value="JOIN"  onclick="joinCheck();">&nbsp;
-                <input type="reset" class="btn btn-outline-success" value="CANCEL" onclick="removeCheck();"> 
+                <input type="submit" class="btn btn-outline-success" value="JOIN" ">&nbsp;
+                <input type="reset" class="btn btn-outline-success" value="CANCEL"> 
               </div>
                </form>
                
