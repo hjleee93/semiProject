@@ -74,13 +74,25 @@ System.out.println("storeList : " + storeList);
 %>
 
 <style>
+
+section a:hover{
+cursor: pointer;
+}
+.selectStore{
+ font-family: 'JSDongkang-Regular';
+height: 50px;
+    text-align: center;
+    font-size: 20px;
+}
 .mptitle {
 	margin: 50px;
 }
 
 .mptitle h1 {
-	font-family: 'S-CoreDream-8Heavy', sans-serif;
-	text-align: center;
+    font-family: 'S-CoreDream-8Heavy', sans-serif;
+    text-align: center;
+    margin: 50px;
+    padding-top: 35px;
 }
 
 .box {
@@ -91,6 +103,7 @@ System.out.println("storeList : " + storeList);
 }
 
 section.special, article.special {
+  font-family: 'JSDongkang-Regular';
 	text-align: center;
 }
 
@@ -139,8 +152,229 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .\34 u {
-	width: 50%;
+	width: 33.3%;
 }
+
+
+p{
+ font-family: 'JSDongkang-Regular';}
+#image_container2, #image_container1, #image_container3 {
+	text-align: center;
+}
+
+li[id="information"] {
+	list-style: none;
+	display: inline;
+	margin-right: 10%;
+	font-size: 20px;
+	background-color: royalblue;
+	color: white;
+}
+
+span[id="counting"] {
+	color: royalblue;
+	margin: 5px;
+}
+
+span[id="counting1"] {
+	color: royalblue;
+	margin: 5px;
+}
+
+span[id="counting3"] {
+	color: royalblue;
+	margin: 5px;
+}
+
+textarea[id="source"] {
+	width: 100%;
+	resize: none;
+}
+
+#apply, #cancel {
+	border: 0;
+	background-color: unset;
+	color: white;
+}
+
+input[id="cancel"] {
+	margin-left: 1700px;
+}
+
+input[id="minbook"] {
+	height: 30px;
+}
+
+input[id="maxbook"] {
+	height: 30px;
+}
+
+.board-view-btn {
+	margin: 40px 0 80px 0;
+	-ms-display: flexbox;
+	display: flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	height: auto;
+}
+
+.board-view-btn input {
+	margin-left: 5px;
+	-ms-display: flexbox;
+	display: flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	cursor: pointer;
+	justify-content: center;
+	align-items: center;
+	width: 60px;
+	height: 30px;
+	overflow: hidden;
+	font-size: 16px;
+	color: #000;
+	border: 1px solid #ddd;
+}
+
+.board-view-btn input:hover {
+	text-decoration: underline;
+}
+
+.board-view-btn input.gray {
+	background: #666666;
+	border-color: #666666;
+	color: #fff;
+}
+
+.board-view-btn input.blue {
+	background: #107bb3;
+	border-color: #107bb3;
+	color: #fff;
+}
+
+.rsvtitle {
+	/* width: 150px; */
+}
+
+.imgdtl {
+	font-size: 12px;
+}
+
+.stepmenu {
+	height: 70px;
+	width: 100%;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.stepmenu td {
+	text-align: center;
+	background-color: #e4e4e4;
+	margin-left: 20px;
+}
+
+.rsvtype {
+	margin-bottom: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #d5d5d5;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 5px;
+}
+
+.rsvlayout {
+	border: 1px solid #d5d5d5;
+	border-radius: 5px
+}
+
+.rsvlayout div {
+	padding: 0 0;
+}
+
+#abc {
+	color: red;
+}
+
+table
+ 
+tr
+:not
+ 
+(
+:last-child
+ 
+){
+border-bottom
+:
+ 
+1
+px
+ 
+solid
+ 
+#ededed
+;
+
+
+}
+
+
+table tr td {
+	padding: 10px 5px;
+	/* height: 300px; */
+	vertical-align:top;
+}
+
+p {
+	margin-bottom: 0;
+}
+
+#right {
+	font-size: 12px;
+}
+
+#td2 {
+	border: 1px white;
+	text-align: center;
+	background-color: royalblue;
+	color: white;
+	margin-left: 20px;
+}
+
+.preview-img {
+	width: 100%;
+	margin-left: 0px;
+}
+
+.pre-img {
+	width: 400px;
+	height: 300px;
+}
+
+.pre-btn {
+	margin-top: 20px;
+	width: 84.39px;
+	height: 30px;
+	border: 1px solid #747272;
+	border-radius: 2px;
+}
+
+@media (max-width:991px){
+
+	table{display:block; width:100%; padding:0 2%;}
+	table tr{display:block;}
+	table tr td{display:block; width:100%;}
+	textarea{width:100% !important;}
+}
+td{
+ font-family: 'JSDongkang-Regular';
+}
+
 </style>
 
 <div class="mptitle">
@@ -149,7 +383,9 @@ h1, h2, h3, h4, h5, h6 {
 
 <div class="container" id="ajaxContainer">
 
-<select id="selectedStore" >
+<div class="selectStore">
+<span>수정할 업체 선택 : </span>
+		<select id="selectedStore" >
 			<% if(storeList != null){
 				
 				for(Store s: storeList){%>
@@ -158,7 +394,8 @@ h1, h2, h3, h4, h5, h6 {
 					<%}%>
 					
 
-				</select>
+		</select>
+		</div>
 	<div class="row">
 	
 	
@@ -166,19 +403,18 @@ h1, h2, h3, h4, h5, h6 {
 			<section class="special box">
 				<i class="icon  major"></i> 
 								<h3>
-					<a  onclick="acyncMovePage('<%=request.getContextPath()%>/views/store/updateStoreDetailAjax.jsp')">사이트에
-						사용할 이미지 업데이트 </a>
+					<a  onclick="acyncMovePage('<%=request.getContextPath()%>/views/store/updateStoreDetailAjax.jsp')">이미지 업데이트 </a>
 				</h3>
-				<p>사이트에 사용하고 싶은 이미지 업데이트를 하실 수 있습니다.</p>
+				<p>사이트에 사용하고 싶은 이미지를 업데이트 하실 수 있습니다.</p>
 			</section>
 		</div>
 		<div class="4u">
 			<section class="special box">
 				<i class="icon  major"></i> 
 								<h3>
-					<a  onclick="acyncMovePage('<%=request.getContextPath()%>/views/store/updateStoreDetailAjax.jsp')">제공할 메뉴/티켓 설정하기 </a>
+					<a  onclick="acyncMovePage('<%=request.getContextPath()%>/views/store/updateStoreDetailAjax.jsp')">판매 메뉴/티켓 설정하기 </a>
 				</h3>
-				<p>사이트에 사용하고 싶은 이미지 업데이트를 하실 수 있습니다.</p>
+				<p>판매할 메뉴 혹은 티켓을 설정하실 수 있습니다.</p>
 			</section>
 		</div>
 		
@@ -191,7 +427,7 @@ h1, h2, h3, h4, h5, h6 {
 						onclick="acyncMovePage1('<%=request.getContextPath()%>/storeService/updateStoreRsvSetting')">예약
 						서비스 제공 업데이트</a>
 				</h3>
-				<p>예약 서비스를 제공하지 않거나 업데이트 하고 싶은 경우 사용하 실 수 있습니다.</p>
+				<p>예약 서비스를 설정하실 수 있습니다.</p>
 			</section>
 		</div>
 		
