@@ -67,7 +67,7 @@ public class StoreMenuUploadEndServlet extends HttpServlet {
 			if(result>0) {
 				msg="메뉴가 등록되었습니다. 마이페이지로 이동합니다.";
 				
-				loc="/ptnstorelist"; 
+				loc="/partnerpage?no=" + ptnId;
 			}else {
 				msg="메뉴등록에 실패했습니다. 관리자에게 문의해주시거나 다시 한 번 시도해주세요.";
 				loc="/store/menuUpload?storeId=" + storeId;

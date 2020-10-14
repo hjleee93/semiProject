@@ -36,18 +36,18 @@ public class StoreMenuUploadServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		
-		int storeId = Integer.parseInt(request.getParameter("storeId"));//잘가져옴
+		int storeId = Integer.parseInt(request.getParameter("selectedStoreId"));//잘가져옴
 		
-
-		System.out.println("storeId in servlet: " + storeId);
+		//System.out.println("storeId in servlet: " + storeId);
 		
 		Store s = new StoreService().selectStoreDtl(storeId);
 		
 		System.out.println("서블릿 store: "+ s);
 		
-		request.setAttribute("StoreMenu", s);
 		
-		request.getRequestDispatcher("/views/partner/menuUpload.jsp")
+		request.setAttribute("StoreMenu", s);
+		//ajax
+		request.getRequestDispatcher("/views/store/menuUploadAjax.jsp")
 		.forward(request,response);
 	}
 

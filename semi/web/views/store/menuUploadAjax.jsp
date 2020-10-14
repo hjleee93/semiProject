@@ -12,12 +12,12 @@
 <%
 
 
-int storeId = Integer.parseInt(request.getParameter("storeId"));
+//int storeId = Integer.parseInt(request.getParameter("storeId"));
 // int storeId = (Integer)request.getAttribute("storeId");
-System.out.println("storeId: " + storeId);
- 	
-Store s = new StoreService().selectStoreDtl(storeId);
+//System.out.println("storeId: " + storeId);
 
+//Store s = new StoreService().selectStoreDtl(storeId);
+Store s = (Store) request.getAttribute("StoreMenu");
 Member sessionMember = (Member) session.getAttribute("Memberloggined"); //로그인한 멤버 세션 저장
 int ptnNum = sessionMember.getMemberNum();
 %>
@@ -241,7 +241,7 @@ p {
 
 	<form action="<%=request.getContextPath()%>/store/menuUploadEnd"
 		name="uploadFile" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="storeId" value="<%=storeId%>">
+		<input type="hidden" name="storeId" value="<%=s.getStoreId() %>">
 		<input type="hidden" name="ptnId" value="<%=ptnNum%>">
 		<table id="tbl" class="tbl-list tb2">
 			<thead>

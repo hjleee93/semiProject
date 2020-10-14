@@ -363,6 +363,194 @@ p {
 	border: 1px solid #747272;
 	border-radius: 2px;
 }
+#image_container2, #image_container1, #image_container3 {
+	text-align: center;
+}
+
+li[id="information"] {
+	list-style: none;
+	display: inline;
+	margin-right: 10%;
+	font-size: 20px;
+	background-color: royalblue;
+	color: white;
+}
+
+span[id="counting"] {
+	color: royalblue;
+	margin: 5px;
+}
+
+span[id="counting1"] {
+	color: royalblue;
+	margin: 5px;
+}
+
+span[id="counting3"] {
+	color: royalblue;
+	margin: 5px;
+}
+
+textarea[id="source"] {
+	width: 100%;
+	resize: none;
+}
+
+#apply, #cancel {
+	border: 0;
+	background-color: unset;
+	color: white;
+}
+
+input[id="cancel"] {
+	margin-left: 1700px;
+}
+
+input[id="minbook"] {
+	height: 30px;
+}
+
+input[id="maxbook"] {
+	height: 30px;
+}
+
+.board-view-btn {
+	margin: 40px 0 80px 0;
+	-ms-display: flexbox;
+	display: flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	height: auto;
+}
+
+.board-view-btn input {
+	margin-left: 5px;
+	-ms-display: flexbox;
+	display: flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	cursor: pointer;
+	justify-content: center;
+	align-items: center;
+	width: 60px;
+	height: 30px;
+	overflow: hidden;
+	font-size: 16px;
+	color: #000;
+	border: 1px solid #ddd;
+}
+
+.board-view-btn input:hover {
+	text-decoration: underline;
+}
+
+.board-view-btn input.gray {
+	background: #666666;
+	border-color: #666666;
+	color: #fff;
+}
+
+.board-view-btn input.blue {
+	background: #107bb3;
+	border-color: #107bb3;
+	color: #fff;
+}
+
+.rsvtitle {
+	width: 150px;
+}
+
+.imgdtl {
+	font-size: 12px;
+}
+
+.stepmenu {
+	height: 70px;
+	width: 100%;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.stepmenu td {
+	text-align: center;
+	background-color: #e4e4e4;
+	margin-left: 20px;
+}
+
+.rsvtype {
+	margin-bottom: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #d5d5d5;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 5px;
+}
+
+.rsvlayout {
+	border: 1px solid #d5d5d5;
+	border-radius: 5px
+}
+
+.rsvlayout div {
+	padding: 0 0;
+}
+
+#abc {
+	color: red;
+}
+
+table tr:not(:last-child){
+border-bottom: 1px solid #ededed;
+}
+
+table tr td {
+	padding: 10px 5px;
+	height: 300px;
+}
+
+p {
+	margin-bottom: 0;
+}
+
+#right {
+	font-size: 12px;
+}
+
+#td2 {
+	border: 1px white;
+	text-align: center;
+	background-color: royalblue;
+	color: white;
+	margin-left: 20px;
+}
+
+.preview-img {
+	width: 100%;
+	margin-left: 0px;
+}
+
+.pre-img {
+	width: 400px;
+	height: 300px;
+}
+
+.pre-btn {
+	margin-top: 20px;
+	width: 84.39px;
+	height: 30px;
+	border: 1px solid #747272;
+	border-radius: 2px;
+}
+
+.tbl-list.tb2 tr td:first-child{
+	text-align:left;
+	vertical-align:top;
 
 @media (max-width:991px){
 
@@ -412,7 +600,7 @@ td{
 			<section class="special box">
 				<i class="icon  major"></i> 
 								<h3>
-					<a  onclick="acyncMovePage('<%=request.getContextPath()%>/views/store/updateStoreDetailAjax.jsp')">판매 메뉴/티켓 설정하기 </a>
+					<a  onclick="acyncMovePage2('<%=request.getContextPath()%>/store/menuUpload')">판매 메뉴/티켓 설정하기 </a>
 				</h3>
 				<p>판매할 메뉴 혹은 티켓을 설정하실 수 있습니다.</p>
 			</section>
@@ -499,6 +687,33 @@ function acyncMovePage1(url) {
 }
 
 
+function acyncMovePage2(url) {
+	selectedStore= $("#selectedStore option:selected").val();
+	console.log(selectedStore);
+
+		var ajaxOption = {
+		url : url,
+		
+		type : "POST",
+		dataType : "html",
+		
+		data:{
+			"selectedStoreId":selectedStore
+			
+			
+			},
+		success:function(data){
+			console.log("pass data to ptnRequest4.jsp");}
+		}
+
+	$.ajax(ajaxOption).done(function(data) {
+		
+		$('#ajaxContainer').children().remove();
+		
+		$('#ajaxContainer').html(data);
+	});
+	
+}
 
 	
 </script>

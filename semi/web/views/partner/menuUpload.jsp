@@ -165,28 +165,10 @@ input[id="maxbook"] {
 	color: red;
 }
 
-table
- 
-tr
-:not
- 
-(
-:last-child
- 
-){
-border-bottom
-:
- 
-1
-px
- 
-solid
- 
-#ededed
-;
-
-
+table tr:not(:last-child){
+border-bottom: 1px solid #ededed;
 }
+
 table tr td {
 	padding: 10px 5px;
 	height: 300px;

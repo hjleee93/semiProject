@@ -290,7 +290,7 @@ public class StoreDao {
 		try {
 			
 			
-			pstmt = conn.prepareStatement("select * from store s, totalmember tm where ptn_num = seq_member_num and seq_member_num=?");
+			pstmt = conn.prepareStatement("select * from store s, totalmember tm where ptn_num = seq_member_num and seq_member_num=? and join_status='ACCEPT'");
 			
 			pstmt.setInt(1, ptnId);
 			System.out.println(prop.getProperty("selectStoreListByPartner"));
