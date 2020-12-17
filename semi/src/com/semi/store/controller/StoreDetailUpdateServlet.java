@@ -15,7 +15,7 @@ import com.semi.store.service.StoreService;
 /**
  * Servlet implementation class StoreDetailUpdateServlet
  */
-@WebServlet("/store/storeDetailUpdate") //ok
+@WebServlet("/store/storeDtlSelectUpdate") //ok
 public class StoreDetailUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -88,7 +88,7 @@ public class StoreDetailUpdateServlet extends HttpServlet {
 			
 			if(result>0) {
 				msg="이미지 업데이트가 완료되었습니다.";
-				loc="/store/storeDetailSelect?ptnId=" +ptnId; //ok
+				loc="/partnerpage?no=" +ptnId; //이미지/예약/티켓 설정 서블릿으로
 			}else {
 				msg="이미지 업데이트에 실패했습니다. 관리자에게 문의해주시거나 다시 한 번 시도해주세요.";
 				loc="/store/storeDetailSelect?ptnId=" + storeId;
