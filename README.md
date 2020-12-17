@@ -13,7 +13,8 @@
 
 ## About The Project
 
-[live demo](http://rclass.iptime.org:9999/20AM_HYOLO/)
+[live demo](http://rclass.iptime.org:9999/20AM_HYOLO/) : 배포용 사이트로 연결됩니다.
+[Database](https://www.erdcloud.com/d/ejvmXvkF99puXPvYR) : ERD 클라우드로 연결됩니다.
 
 ## Built With
 <h4>Back-end/Server</h4>
