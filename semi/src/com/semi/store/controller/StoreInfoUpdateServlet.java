@@ -13,6 +13,7 @@ import com.semi.store.service.StoreService;
 /**
  * Servlet implementation class StoreInfoUpdateServlet
  */
+//이미지 업데이트 서블릿
 @WebServlet("/store/storeInfoUpdate")
 public class StoreInfoUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

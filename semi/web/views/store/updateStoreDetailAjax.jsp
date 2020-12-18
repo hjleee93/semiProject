@@ -20,7 +20,7 @@ System.out.println("ajax: " + selectedStore);
 
 %>
 
-<form action="<%=request.getContextPath()%>/store/storeDetailUpdate"
+<form action="<%=request.getContextPath()%>/store/storeDtlSelectUpdate"
 		name="uploadFile" method="post" enctype="multipart/form-data">
 
 

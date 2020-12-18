@@ -511,10 +511,6 @@
           </div>
            <div class="modal-footer">
                <div class="forgot login-footer">
-                  <div>
-                     <label for="saveId"><input id="saveId" type="checkbox"
-                        name="saveId">Stay signed in</label>
-                  </div>
                   <span>Looking to <a href="javascript: showRegisterForm();">create
                         an account</a> ?
                   </span><br> <span>Forgot <a
